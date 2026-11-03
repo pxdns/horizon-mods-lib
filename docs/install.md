@@ -4,6 +4,27 @@ Native mods are built into your game, so installing one means building one. The 
 30 minutes; later builds are faster ([Horizon's native mods guide](https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md)
 has the measured numbers).
 
+## The quick way: all of them at once
+
+One download has every mod, unpacked and ready to build:
+
+```sh
+curl -LO https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip
+curl -LO https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip.sha256
+sha256sum -c horizon-mods-all.zip.sha256
+unzip horizon-mods-all.zip -d horizon-mods && cd horizon-mods
+./install.sh MyInstance          # Windows: powershell -ExecutionPolicy Bypass -File install.ps1 MyInstance
+```
+
+`install.sh` asks you to type `yes` (these are native mods: source compiled into your game, running with your rights) and then runs
+`horizon-launcher native-build ./mods --instance MyInstance --trust-native-code`. The zip is rebuilt on every change to a mod, so the link above is
+always the newest. The `README.txt` inside lists what is in it, and says how to leave a mod out: delete its folder under `mods/` before you build.
+
+Two pairs overlap, so use one of each: `zoomify` and `simple-zoom` both ask for a zoom (the first to answer wins), and `freelook` and `freecam` both take over mouse look and
+the camera. Everything in the zip was checked together on one Horizon commit.
+
+Want only some? Use the steps below.
+
 ## 1. Get the `.hnmod`
 
 Every mod has a GitHub release named `<project>-v<version>` with the `.hnmod` and its SHA-256 next to it. Download both and

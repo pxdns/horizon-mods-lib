@@ -257,7 +257,7 @@ def pages():
 <p class="lede rise" style="--delay:120ms">Horizon is a rewrite of Minecraft: Java in Rust, and its mods are not plugins: they are source that gets merged into the
 game and compiled with it. This is a library of them. {n} are done, each one a tiny project with its own tests, its own
 release and a file you can read in five minutes.</p>
-<div class="btns rise" style="--delay:180ms"><a class="btn primary" href="mods/index.html">See the mods</a><a class="btn" href="docs/install.html">Install one</a><a class="btn" href="from-fabric.html">How a Fabric mod becomes Rust</a></div>
+<div class="btns rise" style="--delay:180ms"><a class="btn primary" href="https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip">Download all {n} mods</a><a class="btn" href="mods/index.html">See the mods</a><a class="btn" href="docs/install.html">Install guide</a><a class="btn" href="from-fabric.html">How a Fabric mod becomes Rust</a></div>
 <div class="stats rise" style="--delay:260ms">
 <div class="stat"><b>{n}</b><span>mods shipped</span></div>
 <div class="stat"><b>{tests}</b><span>unit tests across them</span></div>

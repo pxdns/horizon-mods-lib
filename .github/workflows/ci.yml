@@ -46,3 +46,5 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev libudev-dev libwayland-dev libxkbcommon-dev pkg-config
       - name: Apply all mods on Horizon and cargo check
         run: python3 tools/mods.py check all
+      - name: The all-in-one bundle builds
+        run: python3 tools/mods.py bundle all

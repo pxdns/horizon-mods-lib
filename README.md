@@ -7,6 +7,11 @@ popular Fabric mods**, one small tested project per mod, each released automatic
 
 **Docs:** [docs/](docs/introduction.md) · [Catalogue of 186 mods](MODS.md) · [Modules](MODULES.md)
 
+## Download everything
+
+One zip with **all the mods**, unpacked, plus an install script: [`horizon-mods-all.zip`](https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip) (rebuilt on every change). Unzip it and run `./install.sh MyInstance`
+(or `install.ps1` on Windows); [the install guide](docs/install.md) has the details and the two pairs that overlap.
+
 ## The mods
 
 | Project | What it does | Ported from |

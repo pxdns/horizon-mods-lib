@@ -6,6 +6,7 @@ Adapted from horizon-rust/horizon-mods' native/tools/native.py (MIT), with one m
     python3 tools/mods.py check fps-display          # apply on the pinned Horizon, cargo check the game
     python3 tools/mods.py check all                  # every mod applied together, as a player's set is
     python3 tools/mods.py package zoomify            # target/<id>-<version>.hnmod, plus its SHA-256 on stdout
+    python3 tools/mods.py bundle all                 # target/horizon-mods-all.zip: every mod unpacked + install scripts
     python3 tools/mods.py version zoomify            # the mod's version
     python3 tools/mods.py list                       # every project
     --horizon REV   build on another Horizon commit (`latest` = the newest Nightly) instead of compatibility.json.
@@ -192,10 +193,8 @@ def cargo(stage_dir, action):
     return TARGET / "cargo" / "fast"
 
 
-def package(m):
-    """A deterministic .hnmod: horizon-native.json, the bundle's .rs and .toml files (its crates' too) and the mod's
-    LICENSE as mixins/<id>/LICENSE, so the licence's notice travels with the sources (Horizon's bundle reader
-    accepts LICENSE* files there)."""
+def bundle_files(m):
+    """The files of a mod's bundle: horizon-native.json, the bundle's .rs and .toml files and the mod's LICENSE."""
     manifest = {"schema": 1, "id": m.id, "version": m.version, "game": m.compat["game"],
                 "horizon": m.compat["horizon_revision"], "mixins": m.compat["horizon_mixins_revision"]}
     if m.compat.get("hooks") is not None:
@@ -211,21 +210,117 @@ def package(m):
     licence = m.root / "LICENSE"
     if licence.is_file():
         files.setdefault(f"mixins/{m.id}/LICENSE", licence.read_bytes())
-    out = TARGET / f"{m.id}-{m.version}.hnmod"
-    TARGET.mkdir(exist_ok=True)
+    return files
+
+
+def write_zip(out, files):
+    """A deterministic zip: sorted entries, fixed timestamps."""
+    out.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(out, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for name, content in sorted(files.items()):
             info = zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
-            info.external_attr = 0o100644 << 16
+            info.external_attr = (0o100755 if name.endswith(".sh") else 0o100644) << 16
             archive.writestr(info, content)
+
+
+def package(m):
+    """A deterministic .hnmod (Horizon's bundle reader accepts LICENSE* files next to the sources)."""
+    out = TARGET / f"{m.id}-{m.version}.hnmod"
+    write_zip(out, bundle_files(m))
     print(json.dumps({"file": str(out), "size": out.stat().st_size,
+                      "sha256": hashlib.sha256(out.read_bytes()).hexdigest()}, indent=2))
+
+
+BUNDLE_README = """horizon-mods-lib: every mod in one download
+============================================
+
+{count} native mods for Horizon {game}, each unpacked in mods/<id>/ (a bundle of Rust source you can read first).
+
+Install
+-------
+1. Read what you are about to build. Native mods are native code with your rights; Horizon's launcher asks you to trust them.
+2. Linux or macOS:   ./install.sh [INSTANCE-NAME]
+   Windows:          powershell -ExecutionPolicy Bypass -File install.ps1 [INSTANCE-NAME]
+   Or by hand:       horizon-launcher native-build ./mods [--instance NAME] --trust-native-code
+3. The first build downloads Rust and takes 20 to 30 minutes. Switch each mod on or off in the game under Options > Mods.
+
+Mods that overlap (build them together, use one at a time)
+----------------------------------------------------------
+- zoomify and simple-zoom both ask the game for a zoom: the first one that answers wins.
+- freelook and freecam both take over mouse look and the render camera: use one at a time.
+- To leave a mod out, delete its folder under mods/ before building.
+
+What is in it
+-------------
+{lines}
+
+All mods were checked together on Horizon {horizon} with horizon-mixins {mixins} (the modded game type-checks).
+Mods marked [pinned] hook Horizon's own functions and only build on that commit.
+Source, docs and licences: https://github.com/pxdns/horizon-mods-lib  (MIT; mod icons and names belong to their authors)
+"""
+
+INSTALL_SH = """#!/bin/sh
+# Builds every mod in ./mods into a Horizon game with the launcher's native-build.
+set -eu
+here=$(cd "$(dirname "$0")" && pwd)
+instance="${1:-}"
+echo "These are native mods: source code that is compiled into your game and runs with your rights."
+echo "Read mods/<id>/mixins/<id>/runtime.rs first if you want to know what each one does."
+printf 'Type yes to build them: '
+read -r answer
+[ "$answer" = yes ] || { echo "Not built."; exit 1; }
+if [ -n "$instance" ]; then
+  exec horizon-launcher native-build "$here/mods" --instance "$instance" --trust-native-code
+else
+  exec horizon-launcher native-build "$here/mods" --trust-native-code
+fi
+"""
+
+INSTALL_PS1 = """# Builds every mod in .\\mods into a Horizon game with the launcher's native-build.
+param([string]$Instance = "")
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+Write-Host "These are native mods: source code that is compiled into your game and runs with your rights."
+Write-Host "Read mods\\<id>\\mixins\\<id>\\runtime.rs first if you want to know what each one does."
+$answer = Read-Host "Type yes to build them"
+if ($answer -ne "yes") { Write-Host "Not built."; exit 1 }
+if ($Instance -ne "") {
+  horizon-launcher native-build "$here\\mods" --instance $Instance --trust-native-code
+} else {
+  horizon-launcher native-build "$here\\mods" --trust-native-code
+}
+"""
+
+
+def bundle(mods):
+    """One zip with every mod unpacked under mods/<id>/, plus a README and install scripts (target/horizon-mods-all.zip)."""
+    revisions = {m.compat["horizon_revision"] for m in mods}
+    mixins = {m.compat["horizon_mixins_revision"] for m in mods}
+    if len(revisions) != 1 or len(mixins) != 1:
+        sys.exit("the mods were tested on different Horizon or horizon-mixins commits")
+    horizon, mixin = revisions.pop(), mixins.pop()
+    files = {}
+    lines = []
+    for m in mods:
+        for name, content in bundle_files(m).items():
+            files[f"mods/{m.id}/{name}"] = content
+        desc = m.root.joinpath("Cargo.toml").read_text()
+        description = re.search(r'^description = "([^"]*)"', desc, re.M)
+        pinned = " [pinned]" if m.compat.get("hooks") is None else ""
+        lines.append(f"- {m.id} {m.version}{pinned}: {description.group(1) if description else ''}")
+    files["README.txt"] = BUNDLE_README.format(count=len(mods), game=mods[0].compat["game"], lines="\n".join(lines),
+                                                horizon=horizon[:7], mixins=mixin[:7]).encode()
+    files["install.sh"] = INSTALL_SH.encode()
+    files["install.ps1"] = INSTALL_PS1.encode()
+    out = TARGET / "horizon-mods-all.zip"
+    write_zip(out, files)
+    print(json.dumps({"file": str(out), "mods": [m.id for m in mods], "size": out.stat().st_size,
                       "sha256": hashlib.sha256(out.read_bytes()).hexdigest()}, indent=2))
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("action", choices=["check", "build", "package", "version", "list"])
+    parser.add_argument("action", choices=["check", "build", "package", "bundle", "version", "list"])
     parser.add_argument("mods", nargs="*", help="folders of mods/ (`all`: every one)")
     parser.add_argument("--horizon", help="a Horizon commit, `latest` (newest Nightly) or a tag (default: the mods' own)")
     args = parser.parse_args()
@@ -239,6 +334,9 @@ def main():
     if args.action == "package":
         for m in mods:
             package(m)
+        return
+    if args.action == "bundle":
+        bundle(mods)
         return
     if args.action == "version":
         for m in mods:

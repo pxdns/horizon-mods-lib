@@ -1,0 +1,80 @@
+# Publishes every mod in one download: the rolling release `all-mods` with horizon-mods-all.zip.
+#
+# Each push to main that touches a mod rebuilds the zip (tools/mods.py bundle all), moves the `all-mods` tag to that commit
+# and replaces the release's files, so https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip
+# is always the newest build of all of them. The per-mod releases (release-<mod>.yml) are unchanged.
+name: release all mods
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/**"
+      - "tools/mods.py"
+      - ".github/workflows/release-all.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-all
+  cancel-in-progress: true
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Rust
+        run: rustup toolchain install stable --profile minimal
+
+      - name: Test every mod's logic
+        run: |
+          for m in mods/*/; do
+            (cd "$m" && cargo test --locked --quiet)
+          done
+
+      - name: Build the zip
+        id: build
+        run: |
+          python3 tools/mods.py bundle all | tee bundle.json
+          sha=$(python3 -c 'import json; print(json.load(open("bundle.json"))["sha256"])')
+          count=$(python3 -c 'import json; print(len(json.load(open("bundle.json"))["mods"]))')
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          printf '%s  horizon-mods-all.zip\n' "$sha" > target/horizon-mods-all.zip.sha256
+          {
+            echo "Every native mod of horizon-mods-lib in one download: **$count mods**, each unpacked in \`mods/<id>/\`, with \`install.sh\` and \`install.ps1\`."
+            echo
+            echo "Unzip, then run \`./install.sh [instance]\` (or \`install.ps1\` on Windows), or build by hand:"
+            echo
+            echo "    horizon-launcher native-build ./mods --instance NAME --trust-native-code"
+            echo
+            echo "Built from commit ${GITHUB_SHA::7}. SHA-256 \`$sha\`. Native mods are source that is compiled into your game and run with your rights: read them first."
+            echo "zoomify/simple-zoom and freelook/freecam overlap; the README in the zip says how to leave one out."
+          } > notes.md
+
+      - name: Upload the zip as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: horizon-mods-all
+          path: |
+            target/horizon-mods-all.zip
+            target/horizon-mods-all.zip.sha256
+
+      - name: Update the rolling release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git tag -f all-mods "$GITHUB_SHA"
+          git push -f origin refs/tags/all-mods
+          gh release view all-mods >/dev/null 2>&1 || gh release create all-mods --verify-tag --latest=false \
+            --title "All mods (latest build)" --notes-file notes.md
+          gh release edit all-mods --notes-file notes.md --title "All mods (latest build, ${{ steps.build.outputs.count }} mods)"
+          gh release upload all-mods target/horizon-mods-all.zip target/horizon-mods-all.zip.sha256 --clobber

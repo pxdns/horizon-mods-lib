@@ -24,6 +24,20 @@
 <p>Native mods are built into your game, so installing one means building one. The first build downloads Rust and can take 20 to
 30 minutes; later builds are faster (<a href="https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md">Horizon's native mods guide</a>
 has the measured numbers).</p>
+<h2 id="the-quick-way-all-of-them-at-once">The quick way: all of them at once</h2>
+<p>One download has every mod, unpacked and ready to build:</p>
+<pre><code class="language-sh">curl -LO https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip
+curl -LO https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip.sha256
+sha256sum -c horizon-mods-all.zip.sha256
+unzip horizon-mods-all.zip -d horizon-mods &amp;&amp; cd horizon-mods
+./install.sh MyInstance          # Windows: powershell -ExecutionPolicy Bypass -File install.ps1 MyInstance
+</code></pre>
+<p><code>install.sh</code> asks you to type <code>yes</code> (these are native mods: source compiled into your game, running with your rights) and then runs
+<code>horizon-launcher native-build ./mods --instance MyInstance --trust-native-code</code>. The zip is rebuilt on every change to a mod, so the link above is
+always the newest. The <code>README.txt</code> inside lists what is in it, and says how to leave a mod out: delete its folder under <code>mods/</code> before you build.</p>
+<p>Two pairs overlap, so use one of each: <code>zoomify</code> and <code>simple-zoom</code> both ask for a zoom (the first to answer wins), and <code>freelook</code> and <code>freecam</code> both take over mouse look and
+the camera. Everything in the zip was checked together on one Horizon commit.</p>
+<p>Want only some? Use the steps below.</p>
 <h2 id="1-get-the-hnmod">1. Get the <code>.hnmod</code></h2>
 <p>Every mod has a GitHub release named <code>&lt;project&gt;-v&lt;version&gt;</code> with the <code>.hnmod</code> and its SHA-256 next to it. Download both and
 check the hash:</p>
@@ -53,7 +67,7 @@ repository's <code>MOD-POLICY.md</code> before doing so.</p>
 <nav class="pager" aria-label="Previous and next"><a class="prev" href="introduction.html"><small>Previous</small>Introduction</a><a class="next" href="build.html"><small>Next</small>Build from source</a></nav>
 <p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/docs/install.md">Edit this page on GitHub</a></p>
 </main>
-<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#1-get-the-hnmod">1. Get the .hnmod</a><a class="" href="#2-unpack-it">2. Unpack it</a><a class="" href="#3-build-it-into-your-game">3. Build it into your game</a><a class="" href="#4-switch-it-on">4. Switch it on</a><a class="" href="#getting-it-into-the-launchers-browser">Getting it into the launcher&#x27;s browser</a></aside>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#the-quick-way-all-of-them-at-once">The quick way: all of them at once</a><a class="" href="#1-get-the-hnmod">1. Get the .hnmod</a><a class="" href="#2-unpack-it">2. Unpack it</a><a class="" href="#3-build-it-into-your-game">3. Build it into your game</a><a class="" href="#4-switch-it-on">4. Switch it on</a><a class="" href="#getting-it-into-the-launchers-browser">Getting it into the launcher&#x27;s browser</a></aside>
 </div>
 <footer class="site"><div class="wrap">
 <div class="cols">

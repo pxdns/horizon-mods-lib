@@ -31,6 +31,6 @@ That has consequences, and this library is built around them:
 
 ## Where to go next
 
-1. [Install a mod](install.md) if you want to play with one.
+1. [Install a mod](install.md), or all of them in one go, if you want to play with them.
 2. [Build from source](build.md) if you want to change one.
 3. [Anatomy of a mod](anatomy.md) and [Hook points](hook-points.md) if you want to write the next one.
