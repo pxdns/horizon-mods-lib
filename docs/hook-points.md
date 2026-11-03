@@ -42,6 +42,13 @@ Four mods go one step further and use horizon-mixins' **cancellable HEAD** hooks
 All four are pinned to the commit they were checked on. One thing mixins cannot do: rewrite a function that uses `?` or closures except with a HEAD hook, which is why
 InvMove (it needs a change inside Horizon's tick function) is not ported.
 
+## Chat and tooltips
+
+Chat and tooltips are Horizon's own code too. `chat-notify`, `more-chat-history` and `chat-animation` put their module in Horizon's chat file (`crates/horizon-client-render/src/chat.rs`) and hook
+`Chat::add_message` (before the original, and, for `more-chat-history`, instead of it with a longer limit), `Chat::add_lines` (a constant modified) and `Chat::layout` (rebuilt with a slide). `durability-tooltip`
+adds a RETURN modifier to `stack_tooltip`. A mod that wants the chat module's state from the game crate reaches it through `horizon_client::chat`. A hook that replaces a function copies the original's
+steps, so it needs the same re-check as the others when Horizon changes that function.
+
 ## What the hook points cannot do yet
 
 No inventory, effects, incoming chat, camera, input injection or world data beyond the player's position. That is the reason

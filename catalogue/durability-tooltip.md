@@ -2,13 +2,15 @@
 
 ![Durability Tooltip icon](../assets/icons/catalogue/durability-tooltip.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `see project` - **26.3 build:** `durabilitytooltip-1.2.0-fabric-mc26.3` - [Modrinth](https://modrinth.com/mod/durability-tooltip)
+**Status:** Ported - **Upstream licence:** `see project` - **26.3 build:** `durabilitytooltip-1.2.0-fabric-mc26.3` - [Modrinth](https://modrinth.com/mod/durability-tooltip)
+
+**Project:** [`durability-tooltip`](../mods/durability-tooltip/) - [docs](../docs/mods/durability-tooltip.md)
 
 ## Where it stands
 
-Needs inventory, effect or item data that the hook points do not give a mod yet.
+Durability Tooltip (raw-hook port: returns from stack_tooltip)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

@@ -1,0 +1,31 @@
+# Releases the More Chat History native mod (more-chat-history/) as more_chat_history-<version>.hnmod.
+#
+# Bump `version` in mods/more-chat-history/mixins/more_chat_history/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `more-chat-history-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release more-chat-history
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/more-chat-history/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-more-chat-history.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: more-chat-history
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

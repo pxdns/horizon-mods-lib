@@ -1,0 +1,68 @@
+[mod]
+id = "chat_animation"
+version = "1.0.0"
+priority = 100
+
+# The commit it was tested on. It hooks functions that are not Horizon's stable hook points, so it only builds on this commit.
+[compatibility]
+horizon_revision = "ba6344a59cb9e755b730dcf02285fc0d33b97d3c"
+
+[[module]]
+id = "runtime"
+file = "crates/horizon-client-render/src/chat.rs"
+name = "lib_chat_animation"
+source = "runtime.rs"
+visibility = "pub"
+
+[[injection]]
+id = "layout"
+kind = "HEAD"
+cancellable = true
+target = "horizon_client_render::chat::Chat::layout"
+helper = "layout.rs"
+bindings = [
+  { name = "chat", ty = "&Chat", value = "&*self" },
+  { name = "height", ty = "i32", value = "height" },
+  { name = "ticks", ty = "u64", value = "ticks" },
+  { name = "focused", ty = "bool", value = "focused" },
+]
+
+[[injection]]
+id = "list"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_mods"
+helper = "list.rs"
+bindings = [
+  { name = "mods", ty = "&mut Vec<crate::game::native_hooks::NativeMod>", value = "&mut *mods" },
+]
+
+[[injection]]
+id = "settings"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_settings"
+helper = "settings.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "mod_id", ty = "&str", value = "mod_id" },
+  { name = "buttons", ty = "&mut Vec<String>", value = "&mut *buttons" },
+]
+
+[[injection]]
+id = "click"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_settings_click"
+helper = "click.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "mod_id", ty = "&str", value = "mod_id" },
+  { name = "button", ty = "usize", value = "button" },
+]
+
+[[injection]]
+id = "tick"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_tick"
+helper = "tick.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+]

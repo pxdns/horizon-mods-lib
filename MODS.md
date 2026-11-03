@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **14** ported · **5** partly ported · **3** built into horizon · **30** needs a hook point · **30** pack or asset · **31** engine or server · **28** library · **45** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **18** ported · **5** partly ported · **3** built into horizon · **26** needs a hook point · **30** pack or asset · **31** engine or server · **28** library · **45** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -25,15 +25,19 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (14)
+## Ported (18)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [BetterHurtCam](catalogue/betterhurtcam.md) | [betterhurtcam](https://modrinth.com/mod/betterhurtcam) | `MIT License` | `betterhurtcam-fabric-1.15.0+mc26.3` | Ported ([`better-hurt-cam`](mods/better-hurt-cam/)) | Better Hurt Cam (raw-hook port: camera bob and hurt tilt) |
+| [Chat Animation [Smooth Chat]](catalogue/chatanimation.md) | [chatanimation](https://modrinth.com/mod/chatanimation) | `MIT License` | `chatanimation-fabric-1.3.3+mc26.3` | Ported ([`chat-animation`](mods/chat-animation/)) | Chat Animation (raw-hook port: rebuilds Chat::layout) |
+| [Chat Notify](catalogue/chatnotify.md) | [chatnotify](https://modrinth.com/mod/chatnotify) | `Apache License 2.0` | `chatnotify-fabric-3.104.0+26.3` | Ported ([`chat-notify`](mods/chat-notify/)) | Chat Notify (raw-hook port: hooks Chat::add_message) |
+| [Durability Tooltip](catalogue/durability-tooltip.md) | [durability-tooltip](https://modrinth.com/mod/durability-tooltip) | `see project` | `durabilitytooltip-1.2.0-fabric-mc26.3` | Ported ([`durability-tooltip`](mods/durability-tooltip/)) | Durability Tooltip (raw-hook port: returns from stack_tooltip) |
 | [FPS - Display](catalogue/fpsdisplay.md) | [fpsdisplay](https://modrinth.com/mod/fpsdisplay) | `GNU Lesser General Public License v3.0 only` | `fpsdisplay-5.2.0+26.3` | Ported ([`fps-display`](mods/fps-display/)) | FPS Display |
 | [Freecam](catalogue/freecam.md) | [freecam](https://modrinth.com/mod/freecam) | `MIT` | `1.5.0-alpha.2` | Ported ([`freecam`](mods/freecam/)) | Freecam (raw-hook port: detached camera) |
 | [Freelook](catalogue/freelook.md) | [freelook](https://modrinth.com/mod/freelook) | `GNU Affero General Public License v3.0 only` | `freelook-1.4.4` | Ported ([`freelook`](mods/freelook/)) | Freelook (raw-hook port: mouse look and render camera) |
 | [Key Overlay](catalogue/keyoverlay.md) | [keyoverlay](https://modrinth.com/mod/keyoverlay) | `see project` | `KeyOverlay-26.3` | Ported ([`key-overlay`](mods/key-overlay/)) | Key Overlay |
+| [More Chat History](catalogue/morechathistory.md) | [morechathistory](https://modrinth.com/mod/morechathistory) | `Creative Commons Zero v1.0 Universal` | `2.0.0` | Ported ([`more-chat-history`](mods/more-chat-history/)) | More Chat History (raw-hook port: raises the chat limits) |
 | [Pick Up Notifier](catalogue/pick-up-notifier.md) | [pick-up-notifier](https://modrinth.com/mod/pick-up-notifier) | `Mozilla Public License 2.0` | `pickupnotifier-v26.3.0-mc26.3.x+fabric` | Ported ([`pick-up-notifier`](mods/pick-up-notifier/)) | Pick Up Notifier (raw-hook port: watches the inventory) |
 | [PotionCounter](catalogue/potioncounter.md) | [potioncounter](https://modrinth.com/mod/potioncounter) | `MIT License` | `potioncounter-fabric-1.12.1+mc26.3` | Ported ([`potion-counter`](mods/potion-counter/)) | Potion Counter (raw-hook port: reads the inventory) |
 | [Simple Zoom](catalogue/zoom-simple.md) | [zoom-simple](https://modrinth.com/mod/zoom-simple) | `MIT License` | `simplezoom-fabric-26.3-1.4.0` | Ported ([`simple-zoom`](mods/simple-zoom/)) | Simple Zoom |
@@ -62,7 +66,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Gamma Utils (Fullbright)](catalogue/gamma-utils.md) | [gamma-utils](https://modrinth.com/mod/gamma-utils) | `GNU Lesser General Public License v3.0 only` | `Gamma-Utils-Fabric-3.2.0+mc26.3` | Built into Horizon | Horizon has a Fullbright extra of its own. |
 | [Mouse Tweaks](catalogue/mouse-tweaks.md) | [mouse-tweaks](https://modrinth.com/mod/mouse-tweaks) | `BSD 3-Clause "New" or "Revised" License` | `MouseTweaks-fabric-mc26.3-2.31` | Built into Horizon | Horizon ships Mouse Tweaks as one of its own extras (Options > Extras). |
 
-## Needs a hook point (30)
+## Needs a hook point (26)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -71,22 +75,18 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Better Mount HUD](catalogue/better-mount-hud.md) | [better-mount-hud](https://modrinth.com/mod/better-mount-hud) | `GNU General Public License v3.0 only` | `bettermounthud-1.2.6` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [Better Statistics Screen](catalogue/better-stats.md) | [better-stats](https://modrinth.com/mod/better-stats) | `see project` | `betterstats-5.6.0-beta.1+fn-26.3` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [BetterGrassify](catalogue/bettergrassify.md) | [bettergrassify](https://modrinth.com/mod/bettergrassify) | `Apache-2.0` | `1.8.8+fabric.26.3` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
-| [Chat Animation [Smooth Chat]](catalogue/chatanimation.md) | [chatanimation](https://modrinth.com/mod/chatanimation) | `MIT License` | `chatanimation-fabric-1.3.3+mc26.3` | Needs a hook point | Needs incoming-chat or screen hooks that Horizon does not expose yet. |
 | [Chat Heads](catalogue/chat-heads.md) | [chat-heads](https://modrinth.com/mod/chat-heads) | `Mozilla Public License 2.0` | `chat_heads-1.2.9-fabric-26.3` | Needs a hook point | Needs incoming-chat or screen hooks that Horizon does not expose yet. |
-| [Chat Notify](catalogue/chatnotify.md) | [chatnotify](https://modrinth.com/mod/chatnotify) | `Apache License 2.0` | `chatnotify-fabric-3.104.0+26.3` | Needs a hook point | Needs incoming-chat or screen hooks that Horizon does not expose yet. |
 | [Clumps](catalogue/clumps.md) | [clumps](https://modrinth.com/mod/clumps) | `MIT License` | `Clumps-fabric-26.3-26.3.2` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [Combat Hitboxes](catalogue/combat-hitboxes.md) | [combat-hitboxes](https://modrinth.com/mod/combat-hitboxes) | `Apache License 2.0` | `combat-hitbox-1.0.11` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [Controlling](catalogue/controlling.md) | [controlling](https://modrinth.com/mod/controlling) | `MIT License` | `26.3.3` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [Crafting Tweaks](catalogue/crafting-tweaks.md) | [crafting-tweaks](https://modrinth.com/mod/crafting-tweaks) | `see project` | `craftingtweaks-fabric-26.3-26.3.0.1` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [Crosshair Indicator](catalogue/crosshair-indicator.md) | [crosshair-indicator](https://modrinth.com/mod/crosshair-indicator) | `Creative Commons Zero v1.0 Universal` | `crosshairindicator-1.0.3` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
-| [Durability Tooltip](catalogue/durability-tooltip.md) | [durability-tooltip](https://modrinth.com/mod/durability-tooltip) | `see project` | `durabilitytooltip-1.2.0-fabric-mc26.3` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [Entity Crosshair](catalogue/entitycrosshair.md) | [entitycrosshair](https://modrinth.com/mod/entitycrosshair) | `GNU General Public License v3.0 or later` | `EntityCrosshair-2.3.0-26.3+_fabric` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [InvMove](catalogue/invmove.md) | [invmove](https://modrinth.com/mod/invmove) | `LGPL-3.0-only` | `0.9.6+26.3-fabric` | Needs a hook point | Needs the player's movement keys read while a screen is open. That read sits in Horizon's tick function, which uses `?` and closures, and horizon-mixins refuses to rewrite such a function (only HEAD hooks are allowed there). |
 | [Item Highlighter](catalogue/item-highlighter.md) | [item-highlighter](https://modrinth.com/mod/item-highlighter) | `CC-BY-NC-ND-4.0` | `1.2.3` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [Litematica](catalogue/litematica.md) | [litematica](https://modrinth.com/mod/litematica) | `GNU Lesser General Public License v3.0 only` | `litematica-fabric-26.3-0.29.0` | Needs a hook point | Needs a screen or world-data hook point. |
 | [Marlow's Crystal Optimizer](catalogue/marlow-crystal-optimizer.md) | [marlow-crystal-optimizer](https://modrinth.com/mod/marlow-crystal-optimizer) | `MIT License` | `Marlow Crystal Optimizer` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [Mod Menu](catalogue/modmenu.md) | [modmenu](https://modrinth.com/mod/modmenu) | `MIT License` | `modmenu-21.0.0` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
-| [More Chat History](catalogue/morechathistory.md) | [morechathistory](https://modrinth.com/mod/morechathistory) | `Creative Commons Zero v1.0 Universal` | `2.0.0` | Needs a hook point | Needs incoming-chat or screen hooks that Horizon does not expose yet. |
 | [Multi Key Bindings](catalogue/multi-key-bindings.md) | [multi-key-bindings](https://modrinth.com/mod/multi-key-bindings) | `GNU General Public License v3.0 only` | `multi-key-bindings-1.3.5+26.3` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Needs a hook point | Needs incoming-chat or screen hooks that Horizon does not expose yet. |
 | [Pearl Optimizer](catalogue/pearl-optimizer.md) | [pearl_optimizer](https://modrinth.com/mod/pearl_optimizer) | `see project` | `PearlOptimizer-26.1-26.3` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |

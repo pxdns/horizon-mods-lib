@@ -30,6 +30,10 @@ popular Fabric mods**, one small tested project per mod, each released automatic
 | [`freecam`](mods/freecam) | Detach the camera and fly it (hooks mouse look, the camera and held keys) | Freecam |
 | [`snappy-tappy`](mods/snappy-tappy) | The last of two opposite keys pressed wins | SnappyTappy |
 | [`better-hurt-cam`](mods/better-hurt-cam) | Weaker hit shake, no death tilt | BetterHurtCam |
+| [`more-chat-history`](mods/more-chat-history) | Chat keeps 100 to 2000 lines (hooks Horizon's chat) | More Chat History |
+| [`chat-notify`](mods/chat-notify) | A sound when a message says your name (hooks Horizon's chat) | Chat Notify |
+| [`chat-animation`](mods/chat-animation) | New chat lines slide up into place (rebuilds the chat layout) | Chat Animation |
+| [`durability-tooltip`](mods/durability-tooltip) | A Durability line on tools, weapons and armor tooltips | Durability Tooltip |
 
 Each folder is a complete project (`runtime.rs` with unit tests, a `horizon-mixin.toml`, pins, licence, README) and has its own
 workflow: bump its `version` on `main` and `release-<project>.yml` tests, packages and publishes `<project>-v<version>` with the `.hnmod`
@@ -43,9 +47,9 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 ## Status, honestly
 
-All 19 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
+All 23 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
 game type-checks with warnings denied. CI cannot play the game through a window, so none has been exercised in a live session by CI.
-30 of the 186 catalogued mods are still waiting on hook points Horizon does not have yet; 3 more are built into Horizon already. See [the hook-point notes](docs/hook-points.md). Ten of the 19 read or hook Horizon's own internals and are pinned to one Horizon commit.
+26 of the 186 catalogued mods are still waiting on hook points Horizon does not have yet; 3 more are built into Horizon already. See [the hook-point notes](docs/hook-points.md). Fourteen of the 23 read or hook Horizon's own internals and are pinned to one Horizon commit.
 
 ## Credits, licensing, takedowns
 

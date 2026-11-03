@@ -2,13 +2,15 @@
 
 ![Chat Animation [Smooth Chat] icon](../assets/icons/catalogue/chatanimation.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `chatanimation-fabric-1.3.3+mc26.3` - [Modrinth](https://modrinth.com/mod/chatanimation)
+**Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `chatanimation-fabric-1.3.3+mc26.3` - [Modrinth](https://modrinth.com/mod/chatanimation)
+
+**Project:** [`chat-animation`](../mods/chat-animation/) - [docs](../docs/mods/chat-animation.md)
 
 ## Where it stands
 
-Needs incoming-chat or screen hooks that Horizon does not expose yet.
+Chat Animation (raw-hook port: rebuilds Chat::layout)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

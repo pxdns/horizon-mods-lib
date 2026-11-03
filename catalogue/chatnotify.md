@@ -2,13 +2,15 @@
 
 ![Chat Notify icon](../assets/icons/catalogue/chatnotify.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `Apache License 2.0` - **26.3 build:** `chatnotify-fabric-3.104.0+26.3` - [Modrinth](https://modrinth.com/mod/chatnotify)
+**Status:** Ported - **Upstream licence:** `Apache License 2.0` - **26.3 build:** `chatnotify-fabric-3.104.0+26.3` - [Modrinth](https://modrinth.com/mod/chatnotify)
+
+**Project:** [`chat-notify`](../mods/chat-notify/) - [docs](../docs/mods/chat-notify.md)
 
 ## Where it stands
 
-Needs incoming-chat or screen hooks that Horizon does not expose yet.
+Chat Notify (raw-hook port: hooks Chat::add_message)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

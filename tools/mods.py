@@ -134,6 +134,9 @@ def stage(mods, revision):
         if need is not None and (api is None or api < need):
             sys.exit(f"Horizon {revision[:7]} has native hook points v{api}, {m.id} needs v{need}.")
     key = "+".join(m.id for m in mods)
+    if len(key) > 120:
+        # Folder names top out at 255 bytes: name a big set by its size and a hash of its ids.
+        key = f"{len(mods)}-mods-{hashlib.sha1(key.encode()).hexdigest()[:12]}"
     # As the launcher does for mods on the hook points: pin the copies to the commit they build on.
     bundles = TARGET / "mods" / key
     shutil.rmtree(bundles, ignore_errors=True)

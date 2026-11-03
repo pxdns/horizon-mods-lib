@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-chat-notify"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Plays a sound when someone says your name in chat."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/chat_notify/runtime.rs"
+
+[workspace]

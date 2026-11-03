@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-more-chat-history"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Chat remembers up to 2000 lines instead of 100, so you can scroll back through a long conversation."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/more_chat_history/runtime.rs"
+
+[workspace]

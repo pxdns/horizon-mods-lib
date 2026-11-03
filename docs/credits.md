@@ -39,6 +39,10 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`freecam`](mods/freecam.md) | Freecam (freecam) | see the upstream project |
 | [`snappy-tappy`](mods/snappy-tappy.md) | SnappyTappy (SnappyTappy) | see the upstream project |
 | [`better-hurt-cam`](mods/better-hurt-cam.md) | BetterHurtCam (betterhurtcam), and the death-tilt part of No Death Animation | see the upstream projects |
+| [`more-chat-history`](mods/more-chat-history.md) | More Chat History (morechathistory) | see the upstream project |
+| [`chat-notify`](mods/chat-notify.md) | Chat Notify (chatnotify) | see the upstream project |
+| [`chat-animation`](mods/chat-animation.md) | Chat Animation [Smooth Chat] (chatanimation) | see the upstream project |
+| [`durability-tooltip`](mods/durability-tooltip.md) | Durability Tooltip (durabilitytooltip) | see the upstream project |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.
