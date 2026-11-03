@@ -80,6 +80,7 @@ pub fn forget_options() {
 }
 /// Translucent black box, white text with a shadow, as Horizon's own HUD extras.
 pub const BACKGROUND: u32 = 0x7800_0000;
+#[allow(dead_code)]
 pub const INK: u32 = 0xFF_FFFF;
 
 use std::cell::Cell as StateCell;

@@ -4,7 +4,7 @@
 
 Your speed, the way you face and your dimension in a corner of the screen, in the spirit of MiniHUD's info lines.
 
-**Version** 1.0.0 · **Game** 26.3 · **Hook-point API** 1 · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/info-hud) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=info-hud)
+**Version** 1.0.0 · **Game** 26.3 · **Hook-point API 1** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/info-hud) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=info-hud)
 
 ## Use it
 

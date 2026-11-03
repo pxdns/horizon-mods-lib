@@ -29,6 +29,12 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`zoomify`](mods/zoomify.md) | Zoomify (zoomify) | see the upstream project |
 | [`simple-zoom`](mods/simple-zoom.md) | Simple Zoom (simplezoom) | see the upstream project |
 | [`waypoints`](mods/waypoints.md) | Xaero's Minimap and World Map (waypoints idea) | independent implementation, no upstream code |
+| [`armor-hud`](mods/armor-hud.md) | uku's Armor HUD and Detail Armor Bar Reconstructed | see the upstream projects |
+| [`potion-counter`](mods/potion-counter.md) | PotionCounter (potioncounter) | see the upstream project |
+| [`totem-counter`](mods/totem-counter.md) | TotemCounter (totemcounter) | see the upstream project |
+| [`effect-timer`](mods/effect-timer.md) | Status Effect Timer and Status Effect Bars | see the upstream projects |
+| [`apple-skin`](mods/apple-skin.md) | AppleSkin (appleskin) | The Unlicense |
+| [`pick-up-notifier`](mods/pick-up-notifier.md) | Pick Up Notifier (pickupnotifier) | see the upstream project |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

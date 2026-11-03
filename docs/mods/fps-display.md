@@ -4,7 +4,7 @@
 
 Frames per second in a corner of the screen, coloured by how smooth they are.
 
-**Version** 1.0.0 · **Game** 26.3 · **Hook-point API** 1 · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/fps-display) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=fps-display)
+**Version** 1.0.0 · **Game** 26.3 · **Hook-point API 1** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/fps-display) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=fps-display)
 
 ## Use it
 

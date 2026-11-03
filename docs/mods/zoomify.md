@@ -4,7 +4,7 @@
 
 Hold a key to zoom in, turn the wheel to zoom further, with smooth easing and slower turning.
 
-**Version** 1.0.0 · **Game** 26.3 · **Hook-point API** 1 · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/zoomify) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=zoomify)
+**Version** 1.0.0 · **Game** 26.3 · **Hook-point API 1** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/zoomify) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=zoomify)
 
 ## Use it
 

@@ -1,0 +1,31 @@
+# Releases the Totem Counter native mod (totem-counter/) as totem_counter-<version>.hnmod.
+#
+# Bump `version` in mods/totem-counter/mixins/totem_counter/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `totem-counter-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release totem-counter
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/totem-counter/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-totem-counter.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: totem-counter
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

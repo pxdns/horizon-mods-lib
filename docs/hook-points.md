@@ -26,6 +26,14 @@ added; each addition raises `NATIVE_HOOKS_API` (3 at the commit these projects w
 `native_player` (position, yaw, pitch, dimension), `native_frame_rate`, `native_clicks`, `native_mapping`, `native_mod_key`,
 `native_chat`, `native_data_dir`, `native_setting`, `native_set_setting`, and the item and recipe helpers of API 2.
 
+## Reading the game's own state
+
+Some mods here (`armor-hud`, `potion-counter`, `totem-counter`, `effect-timer`, `apple-skin`, `pick-up-notifier`) still hang on the stable
+`native_hud` and `native_tick` hook points, but they read what those hooks do not hand over: the inventory, armor slots, active effects and food,
+straight from Horizon's `Game` struct. horizon-mixins puts a mod's helpers inside Horizon's `game` module, where those private fields are visible. That works, and
+`tools/mods.py check` proves it compiles against the pinned commit, but it is **not covered by the hook-point contract**: if Horizon renames a field, these mods
+stop compiling and must be updated. For that reason they carry no `hooks` entry in `compatibility.json`, only the Horizon commit they were tested on.
+
 ## What the hook points cannot do yet
 
 No inventory, effects, incoming chat, camera, input injection or world data beyond the player's position. That is the reason

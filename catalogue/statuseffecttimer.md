@@ -2,13 +2,15 @@
 
 ![Status Effect Timer icon](../assets/icons/catalogue/statuseffecttimer.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `statuseffecttimer-2.0.0+26.3` - [Modrinth](https://modrinth.com/mod/statuseffecttimer)
+**Status:** Ported - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `statuseffecttimer-2.0.0+26.3` - [Modrinth](https://modrinth.com/mod/statuseffecttimer)
+
+**Project:** [`effect-timer`](../mods/effect-timer/) - [docs](../docs/mods/effect-timer.md)
 
 ## Where it stands
 
-Needs inventory, effect or item data that the hook points do not give a mod yet.
+Effect Timer (raw-hook port: reads the active effects)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

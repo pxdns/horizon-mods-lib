@@ -4,7 +4,7 @@
 
 Shows W, A, S, D, jump and the mouse buttons on screen and lights the ones you hold.
 
-**Version** 1.0.0 · **Game** 26.3 · **Hook-point API** 1 · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/key-overlay) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=key-overlay)
+**Version** 1.0.0 · **Game** 26.3 · **Hook-point API 1** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/key-overlay) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=key-overlay)
 
 ## Use it
 

@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mod: [fps-display, sprint-indicator, key-overlay, cps-counter, info-hud, custom-hud, zoomify, simple-zoom, waypoints]
+        mod: [fps-display, sprint-indicator, key-overlay, cps-counter, info-hud, custom-hud, zoomify, simple-zoom, waypoints, armor-hud, potion-counter, totem-counter, effect-timer, apple-skin, pick-up-notifier]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

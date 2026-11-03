@@ -4,7 +4,7 @@
 
 Name places with /wp, list them, and track one: its distance and direction show on screen.
 
-**Version** 1.0.0 · **Game** 26.3 · **Hook-point API** 1 · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/waypoints) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=waypoints)
+**Version** 1.0.0 · **Game** 26.3 · **Hook-point API 1** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/waypoints) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=waypoints)
 
 ## Use it
 

@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **5** ported · **2** partly ported · **44** needs a hook point · **31** pack or asset · **31** engine or server · **28** library · **45** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **10** ported · **5** partly ported · **36** needs a hook point · **31** pack or asset · **31** engine or server · **28** library · **45** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -24,29 +24,36 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (5)
+## Ported (10)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [FPS - Display](catalogue/fpsdisplay.md) | [fpsdisplay](https://modrinth.com/mod/fpsdisplay) | `GNU Lesser General Public License v3.0 only` | `fpsdisplay-5.2.0+26.3` | Ported ([`fps-display`](mods/fps-display/)) | FPS Display |
 | [Key Overlay](catalogue/keyoverlay.md) | [keyoverlay](https://modrinth.com/mod/keyoverlay) | `see project` | `KeyOverlay-26.3` | Ported ([`key-overlay`](mods/key-overlay/)) | Key Overlay |
+| [Pick Up Notifier](catalogue/pick-up-notifier.md) | [pick-up-notifier](https://modrinth.com/mod/pick-up-notifier) | `Mozilla Public License 2.0` | `pickupnotifier-v26.3.0-mc26.3.x+fabric` | Ported ([`pick-up-notifier`](mods/pick-up-notifier/)) | Pick Up Notifier (raw-hook port: watches the inventory) |
+| [PotionCounter](catalogue/potioncounter.md) | [potioncounter](https://modrinth.com/mod/potioncounter) | `MIT License` | `potioncounter-fabric-1.12.1+mc26.3` | Ported ([`potion-counter`](mods/potion-counter/)) | Potion Counter (raw-hook port: reads the inventory) |
 | [Simple Zoom](catalogue/zoom-simple.md) | [zoom-simple](https://modrinth.com/mod/zoom-simple) | `MIT License` | `simplezoom-fabric-26.3-1.4.0` | Ported ([`simple-zoom`](mods/simple-zoom/)) | Simple Zoom |
 | [Sprint Indicator](catalogue/sprint-indicator.md) | [sprint-indicator](https://modrinth.com/mod/sprint-indicator) | `MIT License` | `sprintindicator-fabric-2.1.0+26.3` | Ported ([`sprint-indicator`](mods/sprint-indicator/)) | Sprint Indicator |
+| [Status Effect Timer](catalogue/statuseffecttimer.md) | [statuseffecttimer](https://modrinth.com/mod/statuseffecttimer) | `GNU Lesser General Public License v3.0 only` | `statuseffecttimer-2.0.0+26.3` | Ported ([`effect-timer`](mods/effect-timer/)) | Effect Timer (raw-hook port: reads the active effects) |
+| [TotemCounter](catalogue/totemcounter.md) | [totemcounter](https://modrinth.com/mod/totemcounter) | `MIT License` | `totemcounter-fabric-1.14.0+mc26.3` | Ported ([`totem-counter`](mods/totem-counter/)) | Totem Counter (raw-hook port: reads the inventory) |
+| [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (2)
+## Partly ported (5)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
+| [AppleSkin](catalogue/appleskin.md) | [appleskin](https://modrinth.com/mod/appleskin) | `The Unlicense` | `appleskin-fabric-mc26.3-3.0.10` | Partly ported ([`apple-skin`](mods/apple-skin/)) | The numbers and the held-food preview as text; the overlays on the bars need a draw hook. |
+| [Detail Armor Bar Reconstructed](catalogue/detail-armor-bar-reconstructed.md) | [detail-armor-bar-reconstructed](https://modrinth.com/mod/detail-armor-bar-reconstructed) | `MIT License` | `DetailArmorBarReconstructed-5.3.2-26.3-fabric` | Partly ported ([`armor-hud`](mods/armor-hud/)) | Armor pieces and durability as text; the detailed bar needs a draw hook. |
+| [Status Effect Bars](catalogue/status-effect-bars.md) | [status-effect-bars](https://modrinth.com/mod/status-effect-bars) | `GNU Lesser General Public License v3.0 only` | `status-effect-bars-1.0.12` | Partly ported ([`effect-timer`](mods/effect-timer/)) | The timer text only; the duration bars under the icons need a draw hook. |
 | [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`waypoints`](mods/waypoints/)) | Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap. |
 | [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`waypoints`](mods/waypoints/)) | Only the waypoints idea; there is no map screen hook yet. |
 
-## Needs a hook point (44)
+## Needs a hook point (36)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [[ETF] Entity Texture Features](catalogue/entitytexturefeatures.md) | [entitytexturefeatures](https://modrinth.com/mod/entitytexturefeatures) | `GNU Lesser General Public License v3.0 only` | `7.2.5-fabric-26.3` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
-| [AppleSkin](catalogue/appleskin.md) | [appleskin](https://modrinth.com/mod/appleskin) | `The Unlicense` | `appleskin-fabric-mc26.3-3.0.10` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [Auth Me](catalogue/auth-me.md) | [auth-me](https://modrinth.com/mod/auth-me) | `MIT License` | `authme-fabric-9.3.0+26.3` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [Better Mount HUD](catalogue/better-mount-hud.md) | [better-mount-hud](https://modrinth.com/mod/better-mount-hud) | `GNU General Public License v3.0 only` | `bettermounthud-1.2.6` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [Better Statistics Screen](catalogue/better-stats.md) | [better-stats](https://modrinth.com/mod/better-stats) | `see project` | `betterstats-5.6.0-beta.1+fn-26.3` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
@@ -60,7 +67,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Controlling](catalogue/controlling.md) | [controlling](https://modrinth.com/mod/controlling) | `MIT License` | `26.3.3` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [Crafting Tweaks](catalogue/crafting-tweaks.md) | [crafting-tweaks](https://modrinth.com/mod/crafting-tweaks) | `see project` | `craftingtweaks-fabric-26.3-26.3.0.1` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [Crosshair Indicator](catalogue/crosshair-indicator.md) | [crosshair-indicator](https://modrinth.com/mod/crosshair-indicator) | `Creative Commons Zero v1.0 Universal` | `crosshairindicator-1.0.3` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
-| [Detail Armor Bar Reconstructed](catalogue/detail-armor-bar-reconstructed.md) | [detail-armor-bar-reconstructed](https://modrinth.com/mod/detail-armor-bar-reconstructed) | `MIT License` | `DetailArmorBarReconstructed-5.3.2-26.3-fabric` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [Durability Tooltip](catalogue/durability-tooltip.md) | [durability-tooltip](https://modrinth.com/mod/durability-tooltip) | `see project` | `durabilitytooltip-1.2.0-fabric-mc26.3` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [Entity Crosshair](catalogue/entitycrosshair.md) | [entitycrosshair](https://modrinth.com/mod/entitycrosshair) | `GNU General Public License v3.0 or later` | `EntityCrosshair-2.3.0-26.3+_fabric` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [Freecam](catalogue/freecam.md) | [freecam](https://modrinth.com/mod/freecam) | `MIT` | `1.5.0-alpha.2` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
@@ -76,18 +82,12 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Multi Key Bindings](catalogue/multi-key-bindings.md) | [multi-key-bindings](https://modrinth.com/mod/multi-key-bindings) | `GNU General Public License v3.0 only` | `multi-key-bindings-1.3.5+26.3` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Needs a hook point | Needs incoming-chat or screen hooks that Horizon does not expose yet. |
 | [Pearl Optimizer](catalogue/pearl-optimizer.md) | [pearl_optimizer](https://modrinth.com/mod/pearl_optimizer) | `see project` | `PearlOptimizer-26.1-26.3` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
-| [Pick Up Notifier](catalogue/pick-up-notifier.md) | [pick-up-notifier](https://modrinth.com/mod/pick-up-notifier) | `Mozilla Public License 2.0` | `pickupnotifier-v26.3.0-mc26.3.x+fabric` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [Ping View](catalogue/ping-view.md) | [ping-view](https://modrinth.com/mod/ping-view) | `MIT License` | `pingview-fabric-1.6` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
-| [PotionCounter](catalogue/potioncounter.md) | [potioncounter](https://modrinth.com/mod/potioncounter) | `MIT License` | `potioncounter-fabric-1.12.1+mc26.3` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [ScalableLux](catalogue/scalablelux.md) | [scalablelux](https://modrinth.com/mod/scalablelux) | `GNU Lesser General Public License v3.0 only` | `ScalableLux-fabric-mc26.3-0.3.0-alpha.0.6-all` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [Search Stats](catalogue/searchstats.md) | [searchstats](https://modrinth.com/mod/searchstats) | `Apache License 2.0` | `searchstats-fabric-1.103.0+26.2` | Needs a hook point | Needs a hook point Horizon does not have yet (the current hook points are listed in the docs). |
 | [Shulker Box Tooltip](catalogue/shulkerboxtooltip.md) | [shulkerboxtooltip](https://modrinth.com/mod/shulkerboxtooltip) | `MIT License` | `shulkerboxtooltip-fabric-5.4.2+26.3` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [SnappyTappy](catalogue/snappytappy.md) | [snappytappy](https://modrinth.com/mod/snappytappy) | `MIT` | `26.3` | Needs a hook point | Needs input or camera hooks that Horizon does not expose yet. |
-| [Status Effect Bars](catalogue/status-effect-bars.md) | [status-effect-bars](https://modrinth.com/mod/status-effect-bars) | `GNU Lesser General Public License v3.0 only` | `status-effect-bars-1.0.12` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
-| [Status Effect Timer](catalogue/statuseffecttimer.md) | [statuseffecttimer](https://modrinth.com/mod/statuseffecttimer) | `GNU Lesser General Public License v3.0 only` | `statuseffecttimer-2.0.0+26.3` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Needs a hook point | Needs a screen or world-data hook point. |
-| [TotemCounter](catalogue/totemcounter.md) | [totemcounter](https://modrinth.com/mod/totemcounter) | `MIT License` | `totemcounter-fabric-1.14.0+mc26.3` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
-| [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Needs a hook point | Needs inventory, effect or item data that the hook points do not give a mod yet. |
 | [VisualKeys](catalogue/visualkeys.md) | [visualkeys](https://modrinth.com/mod/visualkeys) | `see project` | `VisualKeys-0.0.11+26.3` | Needs a hook point | Needs incoming-chat or screen hooks that Horizon does not expose yet. |
 
 ## Pack or asset (31)

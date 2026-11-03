@@ -20,6 +20,12 @@ popular Fabric mods**, one small tested project per mod, each released automatic
 | [`zoomify`](mods/zoomify) | Hold to zoom, wheel to zoom further, smooth | Zoomify |
 | [`simple-zoom`](mods/simple-zoom) | Press to zoom, press again to leave | Simple Zoom |
 | [`waypoints`](mods/waypoints) | `/wp` named places and a tracked readout | Xaero's Minimap and World Map (waypoints idea) |
+| [`armor-hud`](mods/armor-hud) | Worn armor and durability left (reads game state) | uku's Armor HUD, Detail Armor Bar |
+| [`potion-counter`](mods/potion-counter) | Potions, splash and lingering carried (reads game state) | PotionCounter |
+| [`totem-counter`](mods/totem-counter) | Totems carried, red at zero (reads game state) | TotemCounter |
+| [`effect-timer`](mods/effect-timer) | Active effects with time left (reads game state) | Status Effect Timer |
+| [`apple-skin`](mods/apple-skin) | Hunger, saturation, held-food preview as text (reads game state) | AppleSkin |
+| [`pick-up-notifier`](mods/pick-up-notifier) | +3 Cobblestone on pickup (reads game state) | Pick Up Notifier |
 
 Each folder is a complete project (`runtime.rs` with unit tests, a `horizon-mixin.toml`, pins, licence, README) and has its own
 workflow: bump its `version` on `main` and `release-<project>.yml` tests, packages and publishes `<project>-v<version>` with the `.hnmod`
@@ -33,9 +39,9 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 ## Status, honestly
 
-All nine mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
+All 15 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
 game type-checks with warnings denied. CI cannot play the game through a window, so none has been exercised in a live session by CI.
-44 of the 186 catalogued mods are waiting on hook points Horizon does not have yet; see the [roadmap](docs/hook-points.md).
+36 of the 186 catalogued mods are still waiting on hook points Horizon does not have yet; see [the hook-point notes](docs/hook-points.md). Six of the 15 read Horizon's own game state and are pinned to one Horizon commit.
 
 ## Credits, licensing, takedowns
 

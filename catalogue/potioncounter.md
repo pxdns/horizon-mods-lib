@@ -2,13 +2,15 @@
 
 ![PotionCounter icon](../assets/icons/catalogue/potioncounter.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `potioncounter-fabric-1.12.1+mc26.3` - [Modrinth](https://modrinth.com/mod/potioncounter)
+**Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `potioncounter-fabric-1.12.1+mc26.3` - [Modrinth](https://modrinth.com/mod/potioncounter)
+
+**Project:** [`potion-counter`](../mods/potion-counter/) - [docs](../docs/mods/potion-counter.md)
 
 ## Where it stands
 
-Needs inventory, effect or item data that the hook points do not give a mod yet.
+Potion Counter (raw-hook port: reads the inventory)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

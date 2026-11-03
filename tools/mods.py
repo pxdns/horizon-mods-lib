@@ -130,8 +130,9 @@ def stage(mods, revision):
     api = hooks_api(tree)
     # Hook points are only ever added: any later version has the ones these mods hook.
     for m in mods:
-        if api is None or api < m.compat["hooks"]:
-            sys.exit(f"Horizon {revision[:7]} has native hook points v{api}, {m.id} needs v{m.compat['hooks']}.")
+        need = m.compat.get("hooks")
+        if need is not None and (api is None or api < need):
+            sys.exit(f"Horizon {revision[:7]} has native hook points v{api}, {m.id} needs v{need}.")
     key = "+".join(m.id for m in mods)
     # As the launcher does for mods on the hook points: pin the copies to the commit they build on.
     bundles = TARGET / "mods" / key
@@ -193,8 +194,9 @@ def package(m):
     LICENSE as mixins/<id>/LICENSE, so the licence's notice travels with the sources (Horizon's bundle reader
     accepts LICENSE* files there)."""
     manifest = {"schema": 1, "id": m.id, "version": m.version, "game": m.compat["game"],
-                "horizon": m.compat["horizon_revision"], "mixins": m.compat["horizon_mixins_revision"],
-                "hooks": m.compat["hooks"]}
+                "horizon": m.compat["horizon_revision"], "mixins": m.compat["horizon_mixins_revision"]}
+    if m.compat.get("hooks") is not None:
+        manifest["hooks"] = m.compat["hooks"]
     pinned = m.manifest.get("compatibility", {}).get("horizon_revision")
     if pinned != m.compat["horizon_revision"]:
         sys.exit(f"{m.id}: horizon-mixin.toml pins {pinned}, compatibility.json {m.compat['horizon_revision']}")
@@ -242,8 +244,10 @@ def main():
     if args.horizon is None:
         # Mods on the hook points build on any Horizon with the hook points they need, as the launcher builds
         # them: the commit of the mods that need the most has them all (stage checks each mod's need).
-        newest = max(m.compat["hooks"] for m in mods)
-        revs = {m.compat["horizon_revision"] for m in mods if m.compat["hooks"] == newest}
+        # Mods that read game state (no "hooks") are pinned to their commit; they decide it.
+        pinned = [m for m in mods if m.compat.get("hooks") is None] or mods
+        newest = max(m.compat.get("hooks") or 0 for m in pinned)
+        revs = {m.compat["horizon_revision"] for m in pinned if (m.compat.get("hooks") or 0) == newest}
         if len(revs) != 1:
             sys.exit(f"the mods were tested on different Horizons {sorted(revs)}: pass --horizon")
         revision = revs.pop()

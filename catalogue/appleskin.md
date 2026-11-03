@@ -2,13 +2,15 @@
 
 ![AppleSkin icon](../assets/icons/catalogue/appleskin.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `The Unlicense` - **26.3 build:** `appleskin-fabric-mc26.3-3.0.10` - [Modrinth](https://modrinth.com/mod/appleskin)
+**Status:** Partly ported - **Upstream licence:** `The Unlicense` - **26.3 build:** `appleskin-fabric-mc26.3-3.0.10` - [Modrinth](https://modrinth.com/mod/appleskin)
+
+**Project:** [`apple-skin`](../mods/apple-skin/) - [docs](../docs/mods/apple-skin.md)
 
 ## Where it stands
 
-Needs inventory, effect or item data that the hook points do not give a mod yet.
+The numbers and the held-food preview as text; the overlays on the bars need a draw hook.
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

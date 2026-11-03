@@ -4,7 +4,7 @@
 
 One box with the lines you pick: FPS, coordinates, facing and clicks per second, on the side you choose.
 
-**Version** 1.0.0 · **Game** 26.3 · **Hook-point API** 1 · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/custom-hud) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=custom-hud)
+**Version** 1.0.0 · **Game** 26.3 · **Hook-point API 1** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/custom-hud) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=custom-hud)
 
 ## Use it
 

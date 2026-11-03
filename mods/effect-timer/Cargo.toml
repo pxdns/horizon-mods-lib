@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-effect-timer"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Your active potion effects and how long each has left, red in the last ten seconds."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/effect_timer/runtime.rs"
+
+[workspace]

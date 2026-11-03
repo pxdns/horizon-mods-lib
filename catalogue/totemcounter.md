@@ -2,13 +2,15 @@
 
 ![TotemCounter icon](../assets/icons/catalogue/totemcounter.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `totemcounter-fabric-1.14.0+mc26.3` - [Modrinth](https://modrinth.com/mod/totemcounter)
+**Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `totemcounter-fabric-1.14.0+mc26.3` - [Modrinth](https://modrinth.com/mod/totemcounter)
+
+**Project:** [`totem-counter`](../mods/totem-counter/) - [docs](../docs/mods/totem-counter.md)
 
 ## Where it stands
 
-Needs inventory, effect or item data that the hook points do not give a mod yet.
+Totem Counter (raw-hook port: reads the inventory)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

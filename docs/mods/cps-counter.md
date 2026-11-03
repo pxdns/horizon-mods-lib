@@ -4,7 +4,7 @@
 
 Your clicks per second in a corner of the screen.
 
-**Version** 1.0.0 · **Game** 26.3 · **Hook-point API** 1 · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/cps-counter) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=cps-counter)
+**Version** 1.0.0 · **Game** 26.3 · **Hook-point API 1** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/cps-counter) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=cps-counter)
 
 ## Use it
 
