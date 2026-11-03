@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mod catalogue · horizon-mods-lib</title>
-<meta name="description" content="Mod catalogue Every mod in the Tempest project&#x27;s cross-pack matrix ( docs/MOD-MATRIX.md in pxdns/patcher ): 186 mods , 10 ported · 5 partly ported · 3">
+<meta name="description" content="Mod catalogue Every mod in the Tempest project&#x27;s cross-pack matrix ( docs/MOD-MATRIX.md in pxdns/patcher ): 186 mods , 14 ported · 5 partly ported · 3">
 <meta name="theme-color" content="#100a1f">
 <link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/site.css">
@@ -17,12 +17,12 @@
 <a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
 </div></header>
 <div class="docs">
-<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html">Introduction</a><a href="install.html">Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><a href="mods/armor-hud.html">Armor HUD</a><a href="mods/potion-counter.html">Potion Counter</a><a href="mods/totem-counter.html">Totem Counter</a><a href="mods/effect-timer.html">Effect Timer</a><a href="mods/apple-skin.html">Apple Skin</a><a href="mods/pick-up-notifier.html">Pick Up Notifier</a><h5>Reference</h5><a href="hook-points.html">Hook points</a><a href="anatomy.html">Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html" aria-current=page>Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html">Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html">Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
+<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html">Introduction</a><a href="install.html">Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><a href="mods/armor-hud.html">Armor HUD</a><a href="mods/potion-counter.html">Potion Counter</a><a href="mods/totem-counter.html">Totem Counter</a><a href="mods/effect-timer.html">Effect Timer</a><a href="mods/apple-skin.html">Apple Skin</a><a href="mods/pick-up-notifier.html">Pick Up Notifier</a><a href="mods/freelook.html">Freelook</a><a href="mods/freecam.html">Freecam</a><a href="mods/snappy-tappy.html">Snappy Tappy</a><a href="mods/better-hurt-cam.html">Better Hurt Cam</a><h5>Reference</h5><a href="hook-points.html">Hook points</a><a href="anatomy.html">Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html" aria-current=page>Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html">Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html">Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
 <main class="doc">
 <div class="crumbs"><a href="introduction.html">Docs</a> / Catalogue</div>
 <h1 id="mod-catalogue">Mod catalogue</h1>
 <p>Every mod in the Tempest project's cross-pack matrix (<a href="https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md"><code>docs/MOD-MATRIX.md</code></a>
-in <code>pxdns/patcher</code>): <strong>186 mods</strong>, <strong>10</strong> ported · <strong>5</strong> partly ported · <strong>36</strong> needs a hook point · <strong>31</strong> pack or asset · <strong>31</strong> engine or server · <strong>28</strong> library · <strong>45</strong> no 26.3 build.</p>
+in <code>pxdns/patcher</code>): <strong>186 mods</strong>, <strong>14</strong> ported · <strong>5</strong> partly ported · <strong>3</strong> built into horizon · <strong>30</strong> needs a hook point · <strong>30</strong> pack or asset · <strong>31</strong> engine or server · <strong>28</strong> library · <strong>45</strong> no 26.3 build.</p>
 <p>Horizon implements Minecraft <strong>26.3</strong>, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's <a href="hook-points.html">native hook points</a> expose (frame, tick, HUD, key, wheel, command, zoom,
 minimap, mods list, settings and the world lifecycle, plus the item panel and recipes), which is why most Fabric mods that
@@ -44,6 +44,10 @@ nothing is marked ported unless a project in <a href="https://github.com/pxdns/h
 <tr>
 <td>Partly ported</td>
 <td>Only the part the hook points allow is in a project</td>
+</tr>
+<tr>
+<td>Built into Horizon</td>
+<td>Horizon ships it as one of its own extras</td>
 </tr>
 <tr>
 <td>Needs a hook point</td>
@@ -69,7 +73,7 @@ nothing is marked ported unless a project in <a href="https://github.com/pxdns/h
 </table>
 <p>Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.</p>
-<h2 id="ported-10">Ported (10)</h2>
+<h2 id="ported-14">Ported (14)</h2>
 <table>
 <thead>
 <tr>
@@ -83,12 +87,36 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 </thead>
 <tbody>
 <tr>
+<td><a href="../catalogue/betterhurtcam.html">BetterHurtCam</a></td>
+<td><a href="https://modrinth.com/mod/betterhurtcam">betterhurtcam</a></td>
+<td><code>MIT License</code></td>
+<td><code>betterhurtcam-fabric-1.15.0+mc26.3</code></td>
+<td>Ported (<a href="mods/better-hurt-cam.html"><code>better-hurt-cam</code></a>)</td>
+<td>Better Hurt Cam (raw-hook port: camera bob and hurt tilt)</td>
+</tr>
+<tr>
 <td><a href="../catalogue/fpsdisplay.html">FPS - Display</a></td>
 <td><a href="https://modrinth.com/mod/fpsdisplay">fpsdisplay</a></td>
 <td><code>GNU Lesser General Public License v3.0 only</code></td>
 <td><code>fpsdisplay-5.2.0+26.3</code></td>
 <td>Ported (<a href="mods/fps-display.html"><code>fps-display</code></a>)</td>
 <td>FPS Display</td>
+</tr>
+<tr>
+<td><a href="../catalogue/freecam.html">Freecam</a></td>
+<td><a href="https://modrinth.com/mod/freecam">freecam</a></td>
+<td><code>MIT</code></td>
+<td><code>1.5.0-alpha.2</code></td>
+<td>Ported (<a href="mods/freecam.html"><code>freecam</code></a>)</td>
+<td>Freecam (raw-hook port: detached camera)</td>
+</tr>
+<tr>
+<td><a href="../catalogue/freelook.html">Freelook</a></td>
+<td><a href="https://modrinth.com/mod/freelook">freelook</a></td>
+<td><code>GNU Affero General Public License v3.0 only</code></td>
+<td><code>freelook-1.4.4</code></td>
+<td>Ported (<a href="mods/freelook.html"><code>freelook</code></a>)</td>
+<td>Freelook (raw-hook port: mouse look and render camera)</td>
 </tr>
 <tr>
 <td><a href="../catalogue/keyoverlay.html">Key Overlay</a></td>
@@ -121,6 +149,14 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td><code>simplezoom-fabric-26.3-1.4.0</code></td>
 <td>Ported (<a href="mods/simple-zoom.html"><code>simple-zoom</code></a>)</td>
 <td>Simple Zoom</td>
+</tr>
+<tr>
+<td><a href="../catalogue/snappytappy.html">SnappyTappy</a></td>
+<td><a href="https://modrinth.com/mod/snappytappy">snappytappy</a></td>
+<td><code>MIT</code></td>
+<td><code>26.3</code></td>
+<td>Ported (<a href="mods/snappy-tappy.html"><code>snappy-tappy</code></a>)</td>
+<td>Snappy Tappy (raw-hook port: held-key set)</td>
 </tr>
 <tr>
 <td><a href="../catalogue/sprint-indicator.html">Sprint Indicator</a></td>
@@ -219,7 +255,46 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 </tr>
 </tbody>
 </table>
-<h2 id="needs-a-hook-point-36">Needs a hook point (36)</h2>
+<h2 id="built-into-horizon-3">Built into Horizon (3)</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Modrinth</th>
+<th>Upstream licence</th>
+<th>26.3 build</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../catalogue/clientsort.html">Client Sort</a></td>
+<td><a href="https://modrinth.com/mod/clientsort">clientsort</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>clientsort-fabric-3.104.0+26.3</code></td>
+<td>Built into Horizon</td>
+<td>Horizon ships Client Sort as one of its own extras (sort key in Extras).</td>
+</tr>
+<tr>
+<td><a href="../catalogue/gamma-utils.html">Gamma Utils (Fullbright)</a></td>
+<td><a href="https://modrinth.com/mod/gamma-utils">gamma-utils</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>Gamma-Utils-Fabric-3.2.0+mc26.3</code></td>
+<td>Built into Horizon</td>
+<td>Horizon has a Fullbright extra of its own.</td>
+</tr>
+<tr>
+<td><a href="../catalogue/mouse-tweaks.html">Mouse Tweaks</a></td>
+<td><a href="https://modrinth.com/mod/mouse-tweaks">mouse-tweaks</a></td>
+<td><code>BSD 3-Clause "New" or "Revised" License</code></td>
+<td><code>MouseTweaks-fabric-mc26.3-2.31</code></td>
+<td>Built into Horizon</td>
+<td>Horizon ships Mouse Tweaks as one of its own extras (Options &gt; Extras).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="needs-a-hook-point-30">Needs a hook point (30)</h2>
 <table>
 <thead>
 <tr>
@@ -297,14 +372,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td>Needs incoming-chat or screen hooks that Horizon does not expose yet.</td>
 </tr>
 <tr>
-<td><a href="../catalogue/clientsort.html">Client Sort</a></td>
-<td><a href="https://modrinth.com/mod/clientsort">clientsort</a></td>
-<td><code>Apache License 2.0</code></td>
-<td><code>clientsort-fabric-3.104.0+26.3</code></td>
-<td>Needs a hook point</td>
-<td>Needs input or camera hooks that Horizon does not expose yet.</td>
-</tr>
-<tr>
 <td><a href="../catalogue/clumps.html">Clumps</a></td>
 <td><a href="https://modrinth.com/mod/clumps">clumps</a></td>
 <td><code>MIT License</code></td>
@@ -361,36 +428,12 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td>Needs input or camera hooks that Horizon does not expose yet.</td>
 </tr>
 <tr>
-<td><a href="../catalogue/freecam.html">Freecam</a></td>
-<td><a href="https://modrinth.com/mod/freecam">freecam</a></td>
-<td><code>MIT</code></td>
-<td><code>1.5.0-alpha.2</code></td>
-<td>Needs a hook point</td>
-<td>Needs input or camera hooks that Horizon does not expose yet.</td>
-</tr>
-<tr>
-<td><a href="../catalogue/freelook.html">Freelook</a></td>
-<td><a href="https://modrinth.com/mod/freelook">freelook</a></td>
-<td><code>GNU Affero General Public License v3.0 only</code></td>
-<td><code>freelook-1.4.4</code></td>
-<td>Needs a hook point</td>
-<td>Needs input or camera hooks that Horizon does not expose yet.</td>
-</tr>
-<tr>
-<td><a href="../catalogue/gamma-utils.html">Gamma Utils (Fullbright)</a></td>
-<td><a href="https://modrinth.com/mod/gamma-utils">gamma-utils</a></td>
-<td><code>GNU Lesser General Public License v3.0 only</code></td>
-<td><code>Gamma-Utils-Fabric-3.2.0+mc26.3</code></td>
-<td>Needs a hook point</td>
-<td>Needs input or camera hooks that Horizon does not expose yet.</td>
-</tr>
-<tr>
 <td><a href="../catalogue/invmove.html">InvMove</a></td>
 <td><a href="https://modrinth.com/mod/invmove">invmove</a></td>
 <td><code>LGPL-3.0-only</code></td>
 <td><code>0.9.6+26.3-fabric</code></td>
 <td>Needs a hook point</td>
-<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+<td>Needs the player's movement keys read while a screen is open. That read sits in Horizon's tick function, which uses <code>?</code> and closures, and horizon-mixins refuses to rewrite such a function (only HEAD hooks are allowed there).</td>
 </tr>
 <tr>
 <td><a href="../catalogue/item-highlighter.html">Item Highlighter</a></td>
@@ -431,14 +474,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td><code>2.0.0</code></td>
 <td>Needs a hook point</td>
 <td>Needs incoming-chat or screen hooks that Horizon does not expose yet.</td>
-</tr>
-<tr>
-<td><a href="../catalogue/mouse-tweaks.html">Mouse Tweaks</a></td>
-<td><a href="https://modrinth.com/mod/mouse-tweaks">mouse-tweaks</a></td>
-<td><code>BSD 3-Clause "New" or "Revised" License</code></td>
-<td><code>MouseTweaks-fabric-mc26.3-2.31</code></td>
-<td>Needs a hook point</td>
-<td>Needs input or camera hooks that Horizon does not expose yet.</td>
 </tr>
 <tr>
 <td><a href="../catalogue/multi-key-bindings.html">Multi Key Bindings</a></td>
@@ -497,14 +532,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
 </tr>
 <tr>
-<td><a href="../catalogue/snappytappy.html">SnappyTappy</a></td>
-<td><a href="https://modrinth.com/mod/snappytappy">snappytappy</a></td>
-<td><code>MIT</code></td>
-<td><code>26.3</code></td>
-<td>Needs a hook point</td>
-<td>Needs input or camera hooks that Horizon does not expose yet.</td>
-</tr>
-<tr>
 <td><a href="../catalogue/tiers.html">Tiers</a></td>
 <td><a href="https://modrinth.com/mod/tiers">tiers</a></td>
 <td><code>GNU General Public License v3.0 only</code></td>
@@ -522,7 +549,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 </tr>
 </tbody>
 </table>
-<h2 id="pack-or-asset-31">Pack or asset (31)</h2>
+<h2 id="pack-or-asset-30">Pack or asset (30)</h2>
 <table>
 <thead>
 <tr>
@@ -548,14 +575,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td><a href="https://modrinth.com/mod/anchoroptimizer">anchoroptimizer</a></td>
 <td><code>see project</code></td>
 <td><code>AnchorOptimizer-26.3</code></td>
-<td>Pack or asset</td>
-<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
-</tr>
-<tr>
-<td><a href="../catalogue/betterhurtcam.html">BetterHurtCam</a></td>
-<td><a href="https://modrinth.com/mod/betterhurtcam">betterhurtcam</a></td>
-<td><code>MIT License</code></td>
-<td><code>betterhurtcam-fabric-1.15.0+mc26.3</code></td>
 <td>Pack or asset</td>
 <td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
 </tr>
@@ -1665,7 +1684,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <nav class="pager" aria-label="Previous and next"><a class="prev" href="compatibility.html"><small>Previous</small>Compatibility</a><a class="next" href="modules.html"><small>Next</small>Modules and Horizon</a></nav>
 <p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/MODS.md">Edit this page on GitHub</a></p>
 </main>
-<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#status">Status</a><a class="" href="#ported-10">Ported (10)</a><a class="" href="#partly-ported-5">Partly ported (5)</a><a class="" href="#needs-a-hook-point-36">Needs a hook point (36)</a><a class="" href="#pack-or-asset-31">Pack or asset (31)</a><a class="" href="#engine-or-server-31">Engine or server (31)</a><a class="" href="#library-28">Library (28)</a><a class="" href="#no-263-build-45">No 26.3 build (45)</a></aside>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#status">Status</a><a class="" href="#ported-14">Ported (14)</a><a class="" href="#partly-ported-5">Partly ported (5)</a><a class="" href="#built-into-horizon-3">Built into Horizon (3)</a><a class="" href="#needs-a-hook-point-30">Needs a hook point (30)</a><a class="" href="#pack-or-asset-30">Pack or asset (30)</a><a class="" href="#engine-or-server-31">Engine or server (31)</a><a class="" href="#library-28">Library (28)</a><a class="" href="#no-263-build-45">No 26.3 build (45)</a></aside>
 </div>
 <footer class="site"><div class="wrap">
 <div class="cols">

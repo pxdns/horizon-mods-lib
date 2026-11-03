@@ -2,13 +2,15 @@
 
 ![Freecam icon](../assets/icons/catalogue/freecam.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT` - **26.3 build:** `1.5.0-alpha.2` - [Modrinth](https://modrinth.com/mod/freecam)
+**Status:** Ported - **Upstream licence:** `MIT` - **26.3 build:** `1.5.0-alpha.2` - [Modrinth](https://modrinth.com/mod/freecam)
+
+**Project:** [`freecam`](../mods/freecam/) - [docs](../docs/mods/freecam.md)
 
 ## Where it stands
 
-Needs input or camera hooks that Horizon does not expose yet.
+Freecam (raw-hook port: detached camera)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

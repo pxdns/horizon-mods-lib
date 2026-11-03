@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-snappy-tappy"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "When you hold two opposite movement keys, the one pressed last wins, so you switch direction at once."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/snappy_tappy/runtime.rs"
+
+[workspace]

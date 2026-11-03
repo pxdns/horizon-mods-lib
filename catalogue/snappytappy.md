@@ -2,13 +2,15 @@
 
 ![SnappyTappy icon](../assets/icons/catalogue/snappytappy.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT` - **26.3 build:** `26.3` - [Modrinth](https://modrinth.com/mod/snappytappy)
+**Status:** Ported - **Upstream licence:** `MIT` - **26.3 build:** `26.3` - [Modrinth](https://modrinth.com/mod/snappytappy)
+
+**Project:** [`snappy-tappy`](../mods/snappy-tappy/) - [docs](../docs/mods/snappy-tappy.md)
 
 ## Where it stands
 
-Needs input or camera hooks that Horizon does not expose yet.
+Snappy Tappy (raw-hook port: held-key set)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

@@ -35,6 +35,10 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`effect-timer`](mods/effect-timer.md) | Status Effect Timer and Status Effect Bars | see the upstream projects |
 | [`apple-skin`](mods/apple-skin.md) | AppleSkin (appleskin) | The Unlicense |
 | [`pick-up-notifier`](mods/pick-up-notifier.md) | Pick Up Notifier (pickupnotifier) | see the upstream project |
+| [`freelook`](mods/freelook.md) | Freelook (freelook) | see the upstream project |
+| [`freecam`](mods/freecam.md) | Freecam (freecam) | see the upstream project |
+| [`snappy-tappy`](mods/snappy-tappy.md) | SnappyTappy (SnappyTappy) | see the upstream project |
+| [`better-hurt-cam`](mods/better-hurt-cam.md) | BetterHurtCam (betterhurtcam), and the death-tilt part of No Death Animation | see the upstream projects |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

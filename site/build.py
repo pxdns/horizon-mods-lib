@@ -40,7 +40,8 @@ def project(slug):
 
 PROJECTS = [project(p.name) for p in sorted((ROOT / "mods").iterdir()) if (p / "compatibility.json").is_file()]
 ORDER = ["fps-display", "sprint-indicator", "key-overlay", "cps-counter", "info-hud", "custom-hud", "zoomify", "simple-zoom", "waypoints",
-         "armor-hud", "potion-counter", "totem-counter", "effect-timer", "apple-skin", "pick-up-notifier"]
+         "armor-hud", "potion-counter", "totem-counter", "effect-timer", "apple-skin", "pick-up-notifier",
+         "freelook", "freecam", "snappy-tappy", "better-hurt-cam"]
 PROJECTS.sort(key=lambda p: ORDER.index(p["slug"]) if p["slug"] in ORDER else 99)
 
 DOC_NAV = [

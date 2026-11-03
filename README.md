@@ -26,6 +26,10 @@ popular Fabric mods**, one small tested project per mod, each released automatic
 | [`effect-timer`](mods/effect-timer) | Active effects with time left (reads game state) | Status Effect Timer |
 | [`apple-skin`](mods/apple-skin) | Hunger, saturation, held-food preview as text (reads game state) | AppleSkin |
 | [`pick-up-notifier`](mods/pick-up-notifier) | +3 Cobblestone on pickup (reads game state) | Pick Up Notifier |
+| [`freelook`](mods/freelook) | Hold Left Alt and look around without turning (hooks mouse look and the camera) | Freelook |
+| [`freecam`](mods/freecam) | Detach the camera and fly it (hooks mouse look, the camera and held keys) | Freecam |
+| [`snappy-tappy`](mods/snappy-tappy) | The last of two opposite keys pressed wins | SnappyTappy |
+| [`better-hurt-cam`](mods/better-hurt-cam) | Weaker hit shake, no death tilt | BetterHurtCam |
 
 Each folder is a complete project (`runtime.rs` with unit tests, a `horizon-mixin.toml`, pins, licence, README) and has its own
 workflow: bump its `version` on `main` and `release-<project>.yml` tests, packages and publishes `<project>-v<version>` with the `.hnmod`
@@ -39,9 +43,9 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 ## Status, honestly
 
-All 15 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
+All 19 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
 game type-checks with warnings denied. CI cannot play the game through a window, so none has been exercised in a live session by CI.
-36 of the 186 catalogued mods are still waiting on hook points Horizon does not have yet; see [the hook-point notes](docs/hook-points.md). Six of the 15 read Horizon's own game state and are pinned to one Horizon commit.
+30 of the 186 catalogued mods are still waiting on hook points Horizon does not have yet; 3 more are built into Horizon already. See [the hook-point notes](docs/hook-points.md). Ten of the 19 read or hook Horizon's own internals and are pinned to one Horizon commit.
 
 ## Credits, licensing, takedowns
 

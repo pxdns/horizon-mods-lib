@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-freecam"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Detach the camera and fly it around while your player stands still."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/freecam/runtime.rs"
+
+[workspace]

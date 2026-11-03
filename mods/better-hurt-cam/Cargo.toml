@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-better-hurt-cam"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Tone the camera shake down when you are hit, and switch the death tilt off."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/better_hurt_cam/runtime.rs"
+
+[workspace]

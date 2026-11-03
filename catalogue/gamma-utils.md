@@ -2,13 +2,13 @@
 
 ![Gamma Utils (Fullbright) icon](../assets/icons/catalogue/gamma-utils.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `Gamma-Utils-Fabric-3.2.0+mc26.3` - [Modrinth](https://modrinth.com/mod/gamma-utils)
+**Status:** Built into Horizon - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `Gamma-Utils-Fabric-3.2.0+mc26.3` - [Modrinth](https://modrinth.com/mod/gamma-utils)
 
 ## Where it stands
 
-Needs input or camera hooks that Horizon does not expose yet.
+Horizon has a Fullbright extra of its own.
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Horizon already does this itself, so a mod would only duplicate it.
 
 ## Credit
 

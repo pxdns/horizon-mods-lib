@@ -28,11 +28,19 @@ added; each addition raises `NATIVE_HOOKS_API` (3 at the commit these projects w
 
 ## Reading the game's own state
 
-Some mods here (`armor-hud`, `potion-counter`, `totem-counter`, `effect-timer`, `apple-skin`, `pick-up-notifier`) still hang on the stable
+Some mods here (`armor-hud`, `potion-counter`, `totem-counter`, `effect-timer`, `apple-skin`, `pick-up-notifier`) hang on the stable
 `native_hud` and `native_tick` hook points, but they read what those hooks do not hand over: the inventory, armor slots, active effects and food,
 straight from Horizon's `Game` struct. horizon-mixins puts a mod's helpers inside Horizon's `game` module, where those private fields are visible. That works, and
 `tools/mods.py check` proves it compiles against the pinned commit, but it is **not covered by the hook-point contract**: if Horizon renames a field, these mods
 stop compiling and must be updated. For that reason they carry no `hooks` entry in `compatibility.json`, only the Horizon commit they were tested on.
+
+## Hooking Horizon's own functions
+
+Four mods go one step further and use horizon-mixins' **cancellable HEAD** hooks on functions that are not hook points at all: `freelook` and `freecam` on
+`perspective::turn_player` (the mouse turns the view, not the player) and `perspective::camera_view` (the camera the frame renders from, run again with the mod's own angles);
+`better-hurt-cam` on `fov::bob_matrix` (the hurt and bob pose, rebuilt with a weaker tilt); and `snappy-tappy` and `freecam` edit the game's held-key set before movement is read.
+All four are pinned to the commit they were checked on. One thing mixins cannot do: rewrite a function that uses `?` or closures except with a HEAD hook, which is why
+InvMove (it needs a change inside Horizon's tick function) is not ported.
 
 ## What the hook points cannot do yet
 

@@ -2,13 +2,15 @@
 
 ![BetterHurtCam icon](../assets/icons/catalogue/betterhurtcam.png)
 
-**Status:** Pack or asset - **Upstream licence:** `MIT License` - **26.3 build:** `betterhurtcam-fabric-1.15.0+mc26.3` - [Modrinth](https://modrinth.com/mod/betterhurtcam)
+**Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `betterhurtcam-fabric-1.15.0+mc26.3` - [Modrinth](https://modrinth.com/mod/betterhurtcam)
+
+**Project:** [`better-hurt-cam`](../mods/better-hurt-cam/) - [docs](../docs/mods/better-hurt-cam.md)
 
 ## Where it stands
 
-Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.
+Better Hurt Cam (raw-hook port: camera bob and hurt tilt)
 
-This is a resource pack, shader, theme or model asset. The Horizon registry lists those as packs, not native mods, so there is no Rust to write.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

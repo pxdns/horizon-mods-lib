@@ -2,13 +2,15 @@
 
 ![Freelook icon](../assets/icons/catalogue/freelook.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `GNU Affero General Public License v3.0 only` - **26.3 build:** `freelook-1.4.4` - [Modrinth](https://modrinth.com/mod/freelook)
+**Status:** Ported - **Upstream licence:** `GNU Affero General Public License v3.0 only` - **26.3 build:** `freelook-1.4.4` - [Modrinth](https://modrinth.com/mod/freelook)
+
+**Project:** [`freelook`](../mods/freelook/) - [docs](../docs/mods/freelook.md)
 
 ## Where it stands
 
-Needs input or camera hooks that Horizon does not expose yet.
+Freelook (raw-hook port: mouse look and render camera)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 
