@@ -1,6 +1,6 @@
 # e4mc
 
-![e4mc placeholder icon](../assets/icons/catalogue/e4mc.svg)
+![e4mc icon](../assets/icons/catalogue/e4mc.png)
 
 **Status:** Engine or server - **Upstream licence:** `MIT License` - **26.3 build:** `6.2.3-fabric-modern` - [Modrinth](https://modrinth.com/mod/e4mc)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-e4mc belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+e4mc belongs to vgskye; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by vgskye, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

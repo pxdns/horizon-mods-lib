@@ -1,6 +1,6 @@
 # Nvidium
 
-![Nvidium placeholder icon](../assets/icons/catalogue/nvidium.svg)
+![Nvidium icon](../assets/icons/catalogue/nvidium.png)
 
 **Status:** Engine or server - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `nvidium-0.4.4-beta7-26.3` - [Modrinth](https://modrinth.com/mod/nvidium)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Nvidium belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Nvidium belongs to cortex, drouarb; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by cortex, drouarb, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

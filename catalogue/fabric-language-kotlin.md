@@ -1,6 +1,6 @@
 # Fabric Language Kotlin
 
-![Fabric Language Kotlin placeholder icon](../assets/icons/catalogue/fabric-language-kotlin.svg)
+![Fabric Language Kotlin icon](../assets/icons/catalogue/fabric-language-kotlin.png)
 
 **Status:** Library - **Upstream licence:** `Apache License 2.0` - **26.3 build:** `fabric-language-kotlin-1.14.1+kotlin.2.4.20` - [Modrinth](https://modrinth.com/mod/fabric-language-kotlin)
 
@@ -12,5 +12,5 @@ This is a library that other Fabric mods load. Native Horizon mods are self-cont
 
 ## Credit
 
-Fabric Language Kotlin belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Fabric Language Kotlin belongs to Player7457, modmuss50; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Player7457, modmuss50, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

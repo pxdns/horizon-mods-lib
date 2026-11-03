@@ -8,8 +8,8 @@ shows its own warning before it builds one; that warning applies here.
   associated with Mojang or Microsoft; neither is this library.
 - *Horizon* and the Horizon logo belong to the Horizon project. The site here copies the layout of playhorizon.dev; it uses no
   Horizon logo files, and no Minecraft logo or wordmark appears anywhere.
-- Names of other mods (Zoomify, Key Overlay, Xaero's Minimap…) belong to their authors and are used only to say what a port is a port
-  of.
+- Names and icons of other mods (Zoomify, Key Overlay, Xaero's Minimap…) belong to their authors and are used only to say what a port is a port
+  of. Icons are the mods' own, credited on each page, and removed on request.
 - GitHub, Modrinth and Discord are mentioned as plain text and links, without their logos.
 
 The mods come with no warranty, as the [MIT licence](licensing.md) says: *"the software is provided as is"*.

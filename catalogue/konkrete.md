@@ -1,6 +1,6 @@
 # Konkrete
 
-![Konkrete placeholder icon](../assets/icons/catalogue/konkrete.svg)
+![Konkrete icon](../assets/icons/catalogue/konkrete.png)
 
 **Status:** Library - **Upstream licence:** `Apache License 2.0` - **26.3 build:** `konkrete_fabric_1.11.1_MC_26.3` - [Modrinth](https://modrinth.com/mod/konkrete)
 
@@ -12,5 +12,5 @@ This is a library that other Fabric mods load. Native Horizon mods are self-cont
 
 ## Credit
 
-Konkrete belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Konkrete belongs to Keksuccino; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Keksuccino, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -1,6 +1,6 @@
 # Fast IP Ping
 
-![Fast IP Ping placeholder icon](../assets/icons/catalogue/fast-ip-ping.svg)
+![Fast IP Ping icon](../assets/icons/catalogue/fast-ip-ping.png)
 
 **Status:** Engine or server - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `fast-ip-ping-v1.0.12-mc26.3` - [Modrinth](https://modrinth.com/mod/fast-ip-ping)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Fast IP Ping belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Fast IP Ping belongs to fallen-breath; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by fallen-breath, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

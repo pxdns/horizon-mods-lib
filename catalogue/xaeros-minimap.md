@@ -1,6 +1,6 @@
 # Xaero's Minimap
 
-![Xaero's Minimap placeholder icon](../assets/icons/catalogue/xaeros-minimap.svg)
+![Xaero's Minimap icon](../assets/icons/catalogue/xaeros-minimap.png)
 
 **Status:** Partly ported - **Upstream licence:** `see project` - **26.3 build:** `xaerominimap-fabric-26.3-26.5.3` - [Modrinth](https://modrinth.com/mod/xaeros-minimap)
 
@@ -14,5 +14,5 @@ Only part of this fits the hook points; see the project for what is in and what 
 
 ## Credit
 
-Xaero's Minimap belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Xaero's Minimap belongs to thexaero; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by thexaero, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

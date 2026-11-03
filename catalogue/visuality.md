@@ -1,6 +1,6 @@
 # Visuality
 
-![Visuality placeholder icon](../assets/icons/catalogue/visuality.svg)
+![Visuality icon](../assets/icons/catalogue/visuality.png)
 
 **Status:** Pack or asset - **Upstream licence:** `MIT License` - **26.3 build:** `visuality-0.7.15+26.3` - [Modrinth](https://modrinth.com/mod/visuality)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-Visuality belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Visuality belongs to PinkGoosik; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by PinkGoosik, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -1,6 +1,6 @@
 # EclipseUI
 
-![EclipseUI placeholder icon](../assets/icons/catalogue/eclipseui.svg)
+![EclipseUI icon](../assets/icons/catalogue/eclipseui.png)
 
 **Status:** Pack or asset - **Upstream licence:** `MIT License` - **26.3 build:** `EclipseUI-fabric-1.0.5-fabric-26.3` - [Modrinth](https://modrinth.com/mod/eclipseui)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-EclipseUI belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+EclipseUI belongs to Coredex; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Coredex, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

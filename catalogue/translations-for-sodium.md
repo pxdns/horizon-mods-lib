@@ -1,6 +1,6 @@
 # Translations for Sodium
 
-![Translations for Sodium placeholder icon](../assets/icons/catalogue/translations-for-sodium.svg)
+![Translations for Sodium icon](../assets/icons/catalogue/translations-for-sodium.png)
 
 **Status:** Engine or server - **Upstream licence:** `Creative Commons Zero v1.0 Universal` - **26.3 build:** `SodiumTranslations` - [Modrinth](https://modrinth.com/mod/translations-for-sodium)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Translations for Sodium belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Translations for Sodium belongs to FlashyReese, robotkoer; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by FlashyReese, robotkoer, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

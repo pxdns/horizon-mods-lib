@@ -1,6 +1,6 @@
 # LibJF
 
-![LibJF placeholder icon](../assets/icons/catalogue/libjf.svg)
+![LibJF icon](../assets/icons/catalogue/libjf.png)
 
 **Status:** Library - **Upstream licence:** `GNU Lesser General Public License v3.0 or later` - **26.3 build:** `libjf-26.3.1` - [Modrinth](https://modrinth.com/mod/libjf)
 
@@ -12,5 +12,5 @@ This is a library that other Fabric mods load. Native Horizon mods are self-cont
 
 ## Credit
 
-LibJF belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+LibJF belongs to JFronny; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by JFronny, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -1,6 +1,6 @@
 # Auth Me
 
-![Auth Me placeholder icon](../assets/icons/catalogue/auth-me.svg)
+![Auth Me icon](../assets/icons/catalogue/auth-me.png)
 
 **Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `authme-fabric-9.3.0+26.3` - [Modrinth](https://modrinth.com/mod/auth-me)
 
@@ -12,5 +12,5 @@ A port needs data or a hook that Horizon's stable hook points do not give a mod.
 
 ## Credit
 
-Auth Me belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Auth Me belongs to axieum; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by axieum, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

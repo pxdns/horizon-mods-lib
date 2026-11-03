@@ -1,6 +1,6 @@
 # FPS - Display
 
-![FPS - Display placeholder icon](../assets/icons/catalogue/fpsdisplay.svg)
+![FPS - Display icon](../assets/icons/catalogue/fpsdisplay.png)
 
 **Status:** Ported - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `fpsdisplay-5.2.0+26.3` - [Modrinth](https://modrinth.com/mod/fpsdisplay)
 
@@ -14,5 +14,5 @@ Ported: a project in this repository re-implements it.
 
 ## Credit
 
-FPS - Display belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+FPS - Display belongs to Grayray75; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Grayray75, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -1,6 +1,6 @@
 # Default Dark Mode
 
-![Default Dark Mode placeholder icon](../assets/icons/catalogue/default-dark-mode.svg)
+![Default Dark Mode icon](../assets/icons/catalogue/default-dark-mode.png)
 
 **Status:** Pack or asset - **Upstream licence:** `Creative Commons Attribution Non Commercial Share Alike 4.0 International` - **26.3 build:** `Default-Dark-Mode-26.3-2026.9.0` - [Modrinth](https://modrinth.com/mod/default-dark-mode)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-Default Dark Mode belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Default Dark Mode belongs to nebulr; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by nebulr, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

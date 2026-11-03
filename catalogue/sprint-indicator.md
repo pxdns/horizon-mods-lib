@@ -1,6 +1,6 @@
 # Sprint Indicator
 
-![Sprint Indicator placeholder icon](../assets/icons/catalogue/sprint-indicator.svg)
+![Sprint Indicator icon](../assets/icons/catalogue/sprint-indicator.png)
 
 **Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `sprintindicator-fabric-2.1.0+26.3` - [Modrinth](https://modrinth.com/mod/sprint-indicator)
 
@@ -14,5 +14,5 @@ Ported: a project in this repository re-implements it.
 
 ## Credit
 
-Sprint Indicator belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Sprint Indicator belongs to Roundaround; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Roundaround, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

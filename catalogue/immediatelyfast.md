@@ -1,6 +1,6 @@
 # ImmediatelyFast
 
-![ImmediatelyFast placeholder icon](../assets/icons/catalogue/immediatelyfast.svg)
+![ImmediatelyFast icon](../assets/icons/catalogue/immediatelyfast.png)
 
 **Status:** Engine or server - **Upstream licence:** `GNU Lesser General Public License v3.0 or later` - **26.3 build:** `1.17.1+26.3-fabric` - [Modrinth](https://modrinth.com/mod/immediatelyfast)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-ImmediatelyFast belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+ImmediatelyFast belongs to RaphiMC; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by RaphiMC, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -1,6 +1,6 @@
 # adventure-platform-mod
 
-![adventure-platform-mod placeholder icon](../assets/icons/catalogue/adventure-platform-mod.svg)
+![adventure-platform-mod icon](../assets/icons/catalogue/adventure-platform-mod.png)
 
 **Status:** Library - **Upstream licence:** `MIT License` - **26.3 build:** `adventure-platform-fabric-7.2.0` - [Modrinth](https://modrinth.com/mod/adventure-platform-mod)
 
@@ -12,5 +12,5 @@ This is a library that other Fabric mods load. Native Horizon mods are self-cont
 
 ## Credit
 
-adventure-platform-mod belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+adventure-platform-mod belongs to papermc, jpenilla, zml2008; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by papermc, jpenilla, zml2008, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

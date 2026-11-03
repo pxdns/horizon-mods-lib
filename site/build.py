@@ -378,7 +378,7 @@ are about what you see and press.</p>
 <div class="card"><h3>Source, not binaries</h3><p>A <code>.hnmod</code> holds Rust and TOML. Read it before you build it; the launcher validates it without running anything.</p></div>
 <div class="card"><h3>Pinned and reproducible</h3><p>Exact Horizon and horizon-mixins commits in every project. The package is deterministic: same commit, same SHA-256, published beside the file.</p></div>
 <div class="card"><h3>Clean-room ports</h3><p>Written from behaviour. No upstream code, art or text, and the <a href="docs/credits.html">credits</a> name every original and its licence.</p></div>
-<div class="card"><h3>Original icons</h3><p>Each mod's icon is drawn for this library. No upstream logo is bundled or hot-linked.</p></div>
+<div class="card"><h3>Icons, credited</h3><p>Catalogue icons are each mod's own, from Modrinth, named to their authors on every page and gone on request. The nine projects have their own drawn icons.</p></div>
 <div class="card"><h3>Nothing phones home</h3><p>No network access in any mod, no dependencies, no analytics on this site, no third-party fonts or scripts.</p></div>
 <div class="card"><h3>A way to say stop</h3><p>If something here is yours and should not be, the <a href="docs/dmca.html">DMCA page</a> says how to ask, and what happens next.</p></div>
 </div>
@@ -421,12 +421,12 @@ def everything():
         page = m["page"]
         target = f'docs/mods/{m["project"]}.html' if m["project"] else f"catalogue/{page}.html"
         cards += (f'<a class="card" data-status="{m["status"]}" data-name="{html.escape(m["name"].lower())}" href="{target}">'
-                  f'<img src="assets/icons/{m["project"] and (m["project"] + ".svg") or ("catalogue/" + page + ".svg")}" alt="" width="48" height="48">'
+                  f'<img src="assets/icons/{m["icon"]}" alt="" width="48" height="48">'
                   f'<h3>{html.escape(m["name"])}</h3><p>{html.escape(DATA["labels"][m["status"]])}</p></a>')
     body = f'''<main><section class="hero" style="padding-bottom:1.5rem"><div class="wrap">
 <span class="eyebrow">The whole list</span>
 <h1 class="big" style="max-width:22ch">All {TOTAL} mods, <span class="text-accent">and where each stands.</span></h1>
-<p class="lede">Every mod in the Tempest cross-pack matrix has a page. The ones with a green ring are ported; the rest say exactly why not yet.</p>
+<p class="lede">Every mod in the Tempest cross-pack matrix has a page. Ported ones open their project; the rest say exactly why not yet. Icons are each mod's own, credited on its page.</p>
 <div class="filters" id="grid-filters">{chips}<input id="grid-text" type="search" placeholder="Filter by name" aria-label="Filter mods"><span class="count" id="grid-count"></span></div>
 </div></section>
 <section class="block" style="border:0;padding-top:0"><div class="wrap"><div class="grid" id="grid">{cards}</div></div></section></main>'''

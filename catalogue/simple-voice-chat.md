@@ -1,6 +1,6 @@
 # Simple Voice Chat
 
-![Simple Voice Chat placeholder icon](../assets/icons/catalogue/simple-voice-chat.svg)
+![Simple Voice Chat icon](../assets/icons/catalogue/simple-voice-chat.png)
 
 **Status:** Engine or server - **Upstream licence:** `see project` - **26.3 build:** `voicechat-fabric-2.6.24+26.3` - [Modrinth](https://modrinth.com/mod/simple-voice-chat)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Simple Voice Chat belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Simple Voice Chat belongs to BreadLoaf, Stridey, henkelmax; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by BreadLoaf, Stridey, henkelmax, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

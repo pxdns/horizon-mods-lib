@@ -1,6 +1,6 @@
 # BetterHurtCam
 
-![BetterHurtCam placeholder icon](../assets/icons/catalogue/betterhurtcam.svg)
+![BetterHurtCam icon](../assets/icons/catalogue/betterhurtcam.png)
 
 **Status:** Pack or asset - **Upstream licence:** `MIT License` - **26.3 build:** `betterhurtcam-fabric-1.15.0+mc26.3` - [Modrinth](https://modrinth.com/mod/betterhurtcam)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-BetterHurtCam belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+BetterHurtCam belongs to uku; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by uku, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

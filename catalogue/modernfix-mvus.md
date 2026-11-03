@@ -1,6 +1,6 @@
 # ModernFix-mVUS
 
-![ModernFix-mVUS placeholder icon](../assets/icons/catalogue/modernfix-mvus.svg)
+![ModernFix-mVUS icon](../assets/icons/catalogue/modernfix-mvus.png)
 
 **Status:** Engine or server - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `modernfix-5.27.20-build.1` - [Modrinth](https://modrinth.com/mod/modernfix-mvus)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-ModernFix-mVUS belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+ModernFix-mVUS belongs to Coredex; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Coredex, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

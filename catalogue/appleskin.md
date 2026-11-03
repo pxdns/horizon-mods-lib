@@ -1,6 +1,6 @@
 # AppleSkin
 
-![AppleSkin placeholder icon](../assets/icons/catalogue/appleskin.svg)
+![AppleSkin icon](../assets/icons/catalogue/appleskin.png)
 
 **Status:** Needs a hook point - **Upstream licence:** `The Unlicense` - **26.3 build:** `appleskin-fabric-mc26.3-3.0.10` - [Modrinth](https://modrinth.com/mod/appleskin)
 
@@ -12,5 +12,5 @@ A port needs data or a hook that Horizon's stable hook points do not give a mod.
 
 ## Credit
 
-AppleSkin belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+AppleSkin belongs to squeek502; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by squeek502, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

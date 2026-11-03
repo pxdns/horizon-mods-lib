@@ -1,6 +1,6 @@
 # Emissive Trims
 
-![Emissive Trims placeholder icon](../assets/icons/catalogue/emissive-trims.svg)
+![Emissive Trims icon](../assets/icons/catalogue/emissive-trims.png)
 
 **Status:** Pack or asset - **Upstream licence:** `Creative Commons Attribution 4.0 International` - **26.3 build:** `Emissive Trims v1.6` - [Modrinth](https://modrinth.com/mod/emissive-trims)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-Emissive Trims belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Emissive Trims belongs to Bluebird; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Bluebird, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

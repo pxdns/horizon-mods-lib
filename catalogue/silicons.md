@@ -1,6 +1,6 @@
 # Silicon
 
-![Silicon placeholder icon](../assets/icons/catalogue/silicons.svg)
+![Silicon icon](../assets/icons/catalogue/silicons.png)
 
 **Status:** Engine or server - **Upstream licence:** `MIT License` - **26.3 build:** `Silicon-1.21.X-26.3` - [Modrinth](https://modrinth.com/mod/silicons)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Silicon belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Silicon belongs to cutebow; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by cutebow, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

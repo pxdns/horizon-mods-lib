@@ -1,6 +1,6 @@
 # Concurrent Chunk Management Engine (Fabric)
 
-![Concurrent Chunk Management Engine (Fabric) placeholder icon](../assets/icons/catalogue/c2me-fabric.svg)
+![Concurrent Chunk Management Engine (Fabric) icon](../assets/icons/catalogue/c2me-fabric.png)
 
 **Status:** Engine or server - **Upstream licence:** `MIT License` - **26.3 build:** `c2me-fabric-mc26.3-0.4.2-alpha.0.88` - [Modrinth](https://modrinth.com/mod/c2me-fabric)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Concurrent Chunk Management Engine (Fabric) belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Concurrent Chunk Management Engine (Fabric) belongs to duplexsystem, ishland; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by duplexsystem, ishland, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

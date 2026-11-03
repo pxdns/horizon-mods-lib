@@ -1,6 +1,6 @@
 # No Chat Reports
 
-![No Chat Reports placeholder icon](../assets/icons/catalogue/no-chat-reports.svg)
+![No Chat Reports icon](../assets/icons/catalogue/no-chat-reports.png)
 
 **Status:** Needs a hook point - **Upstream licence:** `Do What The F*ck You Want To Public License` - **26.3 build:** `NoChatReports-FABRIC-26.3-v2.21.0` - [Modrinth](https://modrinth.com/mod/no-chat-reports)
 
@@ -12,5 +12,5 @@ A port needs data or a hook that Horizon's stable hook points do not give a mod.
 
 ## Credit
 
-No Chat Reports belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+No Chat Reports belongs to robotkoer, Aizistral; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by robotkoer, Aizistral, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

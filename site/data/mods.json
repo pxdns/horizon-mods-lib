@@ -28,7 +28,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "entitytexturefeatures"
+   "page": "entitytexturefeatures",
+   "icon": "catalogue/entitytexturefeatures.png"
   },
   {
    "name": "adventure-platform-mod",
@@ -40,7 +41,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "adventure-platform-mod"
+   "page": "adventure-platform-mod",
+   "icon": "catalogue/adventure-platform-mod.png"
   },
   {
    "name": "Alternate Current",
@@ -52,7 +54,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "alternate-current"
+   "page": "alternate-current",
+   "icon": "catalogue/alternate-current.png"
   },
   {
    "name": "Anchor Optimizer",
@@ -64,7 +67,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "anchoroptimizer"
+   "page": "anchoroptimizer",
+   "icon": "catalogue/anchoroptimizer.png"
   },
   {
    "name": "AppleSkin",
@@ -76,7 +80,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "appleskin"
+   "page": "appleskin",
+   "icon": "catalogue/appleskin.png"
   },
   {
    "name": "Auth Me",
@@ -88,7 +93,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "auth-me"
+   "page": "auth-me",
+   "icon": "catalogue/auth-me.png"
   },
   {
    "name": "BadOptimizations",
@@ -100,7 +106,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "badoptimizations"
+   "page": "badoptimizations",
+   "icon": "catalogue/badoptimizations.svg"
   },
   {
    "name": "Balm",
@@ -112,7 +119,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "balm"
+   "page": "balm",
+   "icon": "catalogue/balm.png"
   },
   {
    "name": "Better Hitboxes",
@@ -124,7 +132,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "betterhitboxes"
+   "page": "betterhitboxes",
+   "icon": "catalogue/betterhitboxes.png"
   },
   {
    "name": "Better Statistics Screen",
@@ -136,7 +145,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "better-stats"
+   "page": "better-stats",
+   "icon": "catalogue/better-stats.png"
   },
   {
    "name": "Better Compatibility Checker",
@@ -148,7 +158,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "better-compatibility-checker"
+   "page": "better-compatibility-checker",
+   "icon": "catalogue/better-compatibility-checker.png"
   },
   {
    "name": "BetterF3",
@@ -160,7 +171,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "betterf3"
+   "page": "betterf3",
+   "icon": "catalogue/betterf3.png"
   },
   {
    "name": "BetterGrassify",
@@ -172,7 +184,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "bettergrassify"
+   "page": "bettergrassify",
+   "icon": "catalogue/bettergrassify.png"
   },
   {
    "name": "BetterHurtCam",
@@ -184,7 +197,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "betterhurtcam"
+   "page": "betterhurtcam",
+   "icon": "catalogue/betterhurtcam.png"
   },
   {
    "name": "Better Mount HUD",
@@ -196,7 +210,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "better-mount-hud"
+   "page": "better-mount-hud",
+   "icon": "catalogue/better-mount-hud.png"
   },
   {
    "name": "Block Outline Customizer",
@@ -208,7 +223,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "block-outline-customizer"
+   "page": "block-outline-customizer",
+   "icon": "catalogue/block-outline-customizer.png"
   },
   {
    "name": "Bobby",
@@ -220,7 +236,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "bobby"
+   "page": "bobby",
+   "icon": "catalogue/bobby.png"
   },
   {
    "name": "Bookshelf",
@@ -232,7 +249,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "bookshelf-lib"
+   "page": "bookshelf-lib",
+   "icon": "catalogue/bookshelf-lib.png"
   },
   {
    "name": "Capes",
@@ -244,7 +262,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "capes"
+   "page": "capes",
+   "icon": "catalogue/capes.png"
   },
   {
    "name": "Centered Crosshair",
@@ -256,7 +275,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "centered-crosshair"
+   "page": "centered-crosshair",
+   "icon": "catalogue/centered-crosshair.png"
   },
   {
    "name": "Chat Animation [Smooth Chat]",
@@ -268,7 +288,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
-   "page": "chatanimation"
+   "page": "chatanimation",
+   "icon": "catalogue/chatanimation.png"
   },
   {
    "name": "Chat Heads",
@@ -280,7 +301,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
-   "page": "chat-heads"
+   "page": "chat-heads",
+   "icon": "catalogue/chat-heads.png"
   },
   {
    "name": "Chat Notify",
@@ -292,7 +314,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
-   "page": "chatnotify"
+   "page": "chatnotify",
+   "icon": "catalogue/chatnotify.png"
   },
   {
    "name": "Chat Patches",
@@ -304,7 +327,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "chatpatches"
+   "page": "chatpatches",
+   "icon": "catalogue/chatpatches.png"
   },
   {
    "name": "CIT Resewn",
@@ -316,7 +340,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "cit-resewn"
+   "page": "cit-resewn",
+   "icon": "catalogue/cit-resewn.png"
   },
   {
    "name": "Clear Water/Lava/PowderSnow",
@@ -328,7 +353,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "clear-waterlavapowdersnow"
+   "page": "clear-waterlavapowdersnow",
+   "icon": "catalogue/clear-waterlavapowdersnow.png"
   },
   {
    "name": "Client Sort",
@@ -340,7 +366,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "clientsort"
+   "page": "clientsort",
+   "icon": "catalogue/clientsort.png"
   },
   {
    "name": "Client Tweaks",
@@ -352,7 +379,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "client-tweaks"
+   "page": "client-tweaks",
+   "icon": "catalogue/client-tweaks.png"
   },
   {
    "name": "Cloth Config API",
@@ -364,7 +392,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "cloth-config"
+   "page": "cloth-config",
+   "icon": "catalogue/cloth-config.png"
   },
   {
    "name": "Clumps",
@@ -376,7 +405,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "clumps"
+   "page": "clumps",
+   "icon": "catalogue/clumps.png"
   },
   {
    "name": "Cobweb Outline",
@@ -388,7 +418,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "cobweb-outline"
+   "page": "cobweb-outline",
+   "icon": "catalogue/cobweb-outline.png"
   },
   {
    "name": "Collective",
@@ -400,7 +431,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "collective"
+   "page": "collective",
+   "icon": "catalogue/collective.png"
   },
   {
    "name": "Combat Hitboxes",
@@ -412,7 +444,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "combat-hitboxes"
+   "page": "combat-hitboxes",
+   "icon": "catalogue/combat-hitboxes.png"
   },
   {
    "name": "Complementary Shaders - Unbound",
@@ -424,7 +457,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "complementary-unbound"
+   "page": "complementary-unbound",
+   "icon": "catalogue/complementary-unbound.png"
   },
   {
    "name": "Compose Multiplatform",
@@ -436,7 +470,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "compose-multiplatform"
+   "page": "compose-multiplatform",
+   "icon": "catalogue/compose-multiplatform.svg"
   },
   {
    "name": "Concurrent Chunk Management Engine (Fabric)",
@@ -448,7 +483,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "c2me-fabric"
+   "page": "c2me-fabric",
+   "icon": "catalogue/c2me-fabric.png"
   },
   {
    "name": "Consumable Optimizer",
@@ -460,7 +496,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "consumableoptimizer"
+   "page": "consumableoptimizer",
+   "icon": "catalogue/consumableoptimizer.png"
   },
   {
    "name": "Continuity",
@@ -472,7 +509,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "continuity"
+   "page": "continuity",
+   "icon": "catalogue/continuity.png"
   },
   {
    "name": "Controlling",
@@ -484,7 +522,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "controlling"
+   "page": "controlling",
+   "icon": "catalogue/controlling.png"
   },
   {
    "name": "Crafting Tweaks",
@@ -496,7 +535,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "crafting-tweaks"
+   "page": "crafting-tweaks",
+   "icon": "catalogue/crafting-tweaks.png"
   },
   {
    "name": "Crash Assistant",
@@ -508,7 +548,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "crash-assistant"
+   "page": "crash-assistant",
+   "icon": "catalogue/crash-assistant.png"
   },
   {
    "name": "Crosshair Addons Public",
@@ -520,7 +561,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "crosshair-addons-public"
+   "page": "crosshair-addons-public",
+   "icon": "catalogue/crosshair-addons-public.png"
   },
   {
    "name": "Crosshair Indicator",
@@ -532,7 +574,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "crosshair-indicator"
+   "page": "crosshair-indicator",
+   "icon": "catalogue/crosshair-indicator.png"
   },
   {
    "name": "Crystal Speed",
@@ -544,7 +587,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "crystal-speed"
+   "page": "crystal-speed",
+   "icon": "catalogue/crystal-speed.png"
   },
   {
    "name": "Custom Glint",
@@ -556,7 +600,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "custom-glint"
+   "page": "custom-glint",
+   "icon": "catalogue/custom-glint.png"
   },
   {
    "name": "Custom Shield Scale",
@@ -568,7 +613,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "shieldscale"
+   "page": "shieldscale",
+   "icon": "catalogue/shieldscale.png"
   },
   {
    "name": "Cubes Without Borders",
@@ -580,7 +626,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "cubes-without-borders"
+   "page": "cubes-without-borders",
+   "icon": "catalogue/cubes-without-borders.png"
   },
   {
    "name": "Dark Loading Screen",
@@ -592,7 +639,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "dark-loading-screen"
+   "page": "dark-loading-screen",
+   "icon": "catalogue/dark-loading-screen.png"
   },
   {
    "name": "Debugify",
@@ -604,7 +652,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "debugify"
+   "page": "debugify",
+   "icon": "catalogue/debugify.png"
   },
   {
    "name": "Default Dark Mode",
@@ -616,7 +665,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "default-dark-mode"
+   "page": "default-dark-mode",
+   "icon": "catalogue/default-dark-mode.png"
   },
   {
    "name": "Default Dark Mode: Expansion",
@@ -628,7 +678,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "default-dark-mode-expansion"
+   "page": "default-dark-mode-expansion",
+   "icon": "catalogue/default-dark-mode-expansion.png"
   },
   {
    "name": "Detail Armor Bar Reconstructed",
@@ -640,7 +691,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "detail-armor-bar-reconstructed"
+   "page": "detail-armor-bar-reconstructed",
+   "icon": "catalogue/detail-armor-bar-reconstructed.png"
   },
   {
    "name": "Durability Tooltip",
@@ -652,7 +704,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "durability-tooltip"
+   "page": "durability-tooltip",
+   "icon": "catalogue/durability-tooltip.png"
   },
   {
    "name": "Dynamic FPS",
@@ -664,7 +717,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "dynamic-fps"
+   "page": "dynamic-fps",
+   "icon": "catalogue/dynamic-fps.png"
   },
   {
    "name": "e4mc",
@@ -676,7 +730,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "e4mc"
+   "page": "e4mc",
+   "icon": "catalogue/e4mc.png"
   },
   {
    "name": "Eating Animation",
@@ -688,7 +743,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "eating-animation-resourcepack"
+   "page": "eating-animation-resourcepack",
+   "icon": "catalogue/eating-animation-resourcepack.png"
   },
   {
    "name": "EclipseUI",
@@ -700,7 +756,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "eclipseui"
+   "page": "eclipseui",
+   "icon": "catalogue/eclipseui.png"
   },
   {
    "name": "Emissive Trims",
@@ -712,7 +769,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "emissive-trims"
+   "page": "emissive-trims",
+   "icon": "catalogue/emissive-trims.png"
   },
   {
    "name": "Enchantment Descriptions",
@@ -724,7 +782,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "enchantment-descriptions"
+   "page": "enchantment-descriptions",
+   "icon": "catalogue/enchantment-descriptions.png"
   },
   {
    "name": "Enchantment Insights",
@@ -736,7 +795,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "enchantment-insights"
+   "page": "enchantment-insights",
+   "icon": "catalogue/enchantment-insights.png"
   },
   {
    "name": "Enhanced Block Entities",
@@ -748,7 +808,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "ebe"
+   "page": "ebe",
+   "icon": "catalogue/ebe.png"
   },
   {
    "name": "Entity Culling",
@@ -760,7 +821,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "entityculling"
+   "page": "entityculling",
+   "icon": "catalogue/entityculling.png"
   },
   {
    "name": "[EMF] Entity Model Features",
@@ -772,7 +834,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "entity-model-features"
+   "page": "entity-model-features",
+   "icon": "catalogue/entity-model-features.png"
   },
   {
    "name": "Entity Crosshair",
@@ -784,7 +847,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "entitycrosshair"
+   "page": "entitycrosshair",
+   "icon": "catalogue/entitycrosshair.png"
   },
   {
    "name": "Essential Mod",
@@ -796,7 +860,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "essential"
+   "page": "essential",
+   "icon": "catalogue/essential.png"
   },
   {
    "name": "F5 Split",
@@ -808,7 +873,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "f5-split"
+   "page": "f5-split",
+   "icon": "catalogue/f5-split.svg"
   },
   {
    "name": "Fabric API",
@@ -820,7 +886,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "fabric-api"
+   "page": "fabric-api",
+   "icon": "catalogue/fabric-api.png"
   },
   {
    "name": "Carpet",
@@ -832,7 +899,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "carpet"
+   "page": "carpet",
+   "icon": "catalogue/carpet.png"
   },
   {
    "name": "Fabric Language Kotlin",
@@ -844,7 +912,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "fabric-language-kotlin"
+   "page": "fabric-language-kotlin",
+   "icon": "catalogue/fabric-language-kotlin.png"
   },
   {
    "name": "Fast IP Ping",
@@ -856,7 +925,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "fast-ip-ping"
+   "page": "fast-ip-ping",
+   "icon": "catalogue/fast-ip-ping.png"
   },
   {
    "name": "FastQuit",
@@ -868,7 +938,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "fastquit"
+   "page": "fastquit",
+   "icon": "catalogue/fastquit.png"
   },
   {
    "name": "FerriteCore",
@@ -880,7 +951,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "ferrite-core"
+   "page": "ferrite-core",
+   "icon": "catalogue/ferrite-core.png"
   },
   {
    "name": "Forge Config API Port",
@@ -892,7 +964,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "forge-config-api-port"
+   "page": "forge-config-api-port",
+   "icon": "catalogue/forge-config-api-port.png"
   },
   {
    "name": "FPS - Display",
@@ -904,7 +977,8 @@
    "status": "ported",
    "project": "fps-display",
    "note": "FPS Display",
-   "page": "fpsdisplay"
+   "page": "fpsdisplay",
+   "icon": "catalogue/fpsdisplay.png"
   },
   {
    "name": "Freecam",
@@ -916,7 +990,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "freecam"
+   "page": "freecam",
+   "icon": "catalogue/freecam.png"
   },
   {
    "name": "Freelook",
@@ -928,7 +1003,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "freelook"
+   "page": "freelook",
+   "icon": "catalogue/freelook.png"
   },
   {
    "name": "Fullbright",
@@ -940,7 +1016,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "fullbright"
+   "page": "fullbright",
+   "icon": "catalogue/fullbright.png"
   },
   {
    "name": "Fzzy Config",
@@ -952,7 +1029,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "fzzy-config"
+   "page": "fzzy-config",
+   "icon": "catalogue/fzzy-config.png"
   },
   {
    "name": "Gamma Utils (Fullbright)",
@@ -964,7 +1042,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "gamma-utils"
+   "page": "gamma-utils",
+   "icon": "catalogue/gamma-utils.png"
   },
   {
    "name": "Glow Trims",
@@ -976,7 +1055,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "glow-trims"
+   "page": "glow-trims",
+   "icon": "catalogue/glow-trims.png"
   },
   {
    "name": "HeroBot",
@@ -988,7 +1068,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "herobot"
+   "page": "herobot",
+   "icon": "catalogue/herobot.png"
   },
   {
    "name": "HUD Manager",
@@ -1000,7 +1081,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "hud-manager"
+   "page": "hud-manager",
+   "icon": "catalogue/hud-manager.png"
   },
   {
    "name": "ImmediatelyFast",
@@ -1012,7 +1094,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "immediatelyfast"
+   "page": "immediatelyfast",
+   "icon": "catalogue/immediatelyfast.png"
   },
   {
    "name": "Inventory Totem",
@@ -1024,7 +1107,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "inventory-totem"
+   "page": "inventory-totem",
+   "icon": "catalogue/inventory-totem.png"
   },
   {
    "name": "InvMove",
@@ -1036,7 +1120,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "invmove"
+   "page": "invmove",
+   "icon": "catalogue/invmove.png"
   },
   {
    "name": "Iris Shaders",
@@ -1048,7 +1133,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "iris"
+   "page": "iris",
+   "icon": "catalogue/iris.png"
   },
   {
    "name": "Item Highlighter",
@@ -1060,7 +1146,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "item-highlighter"
+   "page": "item-highlighter",
+   "icon": "catalogue/item-highlighter.png"
   },
   {
    "name": "Item Scale",
@@ -1072,7 +1159,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "itemscale"
+   "page": "itemscale",
+   "icon": "catalogue/itemscale.png"
   },
   {
    "name": "Key Overlay",
@@ -1084,7 +1172,8 @@
    "status": "ported",
    "project": "key-overlay",
    "note": "Key Overlay",
-   "page": "keyoverlay"
+   "page": "keyoverlay",
+   "icon": "catalogue/keyoverlay.png"
   },
   {
    "name": "Konkrete",
@@ -1096,7 +1185,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "konkrete"
+   "page": "konkrete",
+   "icon": "catalogue/konkrete.png"
   },
   {
    "name": "Krypton",
@@ -1108,7 +1198,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "krypton"
+   "page": "krypton",
+   "icon": "catalogue/krypton.png"
   },
   {
    "name": "LambDynamicLights - Dynamic Lights",
@@ -1120,7 +1211,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "lambdynamiclights"
+   "page": "lambdynamiclights",
+   "icon": "catalogue/lambdynamiclights.png"
   },
   {
    "name": "Language Reload",
@@ -1132,7 +1224,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "language-reload"
+   "page": "language-reload",
+   "icon": "catalogue/language-reload.png"
   },
   {
    "name": "LibJF",
@@ -1144,7 +1237,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "libjf"
+   "page": "libjf",
+   "icon": "catalogue/libjf.png"
   },
   {
    "name": "Litematica",
@@ -1156,7 +1250,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a screen or world-data hook point.",
-   "page": "litematica"
+   "page": "litematica",
+   "icon": "catalogue/litematica.png"
   },
   {
    "name": "Lithium",
@@ -1168,7 +1263,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "lithium"
+   "page": "lithium",
+   "icon": "catalogue/lithium.png"
   },
   {
    "name": "Low Fire",
@@ -1180,7 +1276,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "low-fire-pack"
+   "page": "low-fire-pack",
+   "icon": "catalogue/low-fire-pack.png"
   },
   {
    "name": "Low Shield",
@@ -1192,7 +1289,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "low-shield-pack"
+   "page": "low-shield-pack",
+   "icon": "catalogue/low-shield-pack.png"
   },
   {
    "name": "Mace Optimizer",
@@ -1204,7 +1302,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "mace-optimizer"
+   "page": "mace-optimizer",
+   "icon": "catalogue/mace-optimizer.png"
   },
   {
    "name": "MaLiLib",
@@ -1216,7 +1315,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "malilib"
+   "page": "malilib",
+   "icon": "catalogue/malilib.png"
   },
   {
    "name": "Marlow's Crystal Optimizer",
@@ -1228,7 +1328,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "marlow-crystal-optimizer"
+   "page": "marlow-crystal-optimizer",
+   "icon": "catalogue/marlow-crystal-optimizer.png"
   },
   {
    "name": "Memory Leak Fix",
@@ -1240,7 +1341,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "memoryleakfix"
+   "page": "memoryleakfix",
+   "icon": "catalogue/memoryleakfix.png"
   },
   {
    "name": "MidnightLib",
@@ -1252,7 +1354,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "midnightlib"
+   "page": "midnightlib",
+   "icon": "catalogue/midnightlib.png"
   },
   {
    "name": "Miniature Shader",
@@ -1264,7 +1367,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "miniature-shader"
+   "page": "miniature-shader",
+   "icon": "catalogue/miniature-shader.png"
   },
   {
    "name": "MiniHUD",
@@ -1276,7 +1380,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "minihud"
+   "page": "minihud",
+   "icon": "catalogue/minihud.png"
   },
   {
    "name": "Model Gap Fix",
@@ -1288,7 +1393,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "modelfix"
+   "page": "modelfix",
+   "icon": "catalogue/modelfix.png"
   },
   {
    "name": "ModernFix-mVUS",
@@ -1300,7 +1406,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "modernfix-mvus"
+   "page": "modernfix-mvus",
+   "icon": "catalogue/modernfix-mvus.png"
   },
   {
    "name": "Mod Menu",
@@ -1312,7 +1419,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "modmenu"
+   "page": "modmenu",
+   "icon": "catalogue/modmenu.png"
   },
   {
    "name": "More Chat History",
@@ -1324,7 +1432,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
-   "page": "morechathistory"
+   "page": "morechathistory",
+   "icon": "catalogue/morechathistory.png"
   },
   {
    "name": "More Culling",
@@ -1336,7 +1445,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "moreculling"
+   "page": "moreculling",
+   "icon": "catalogue/moreculling.png"
   },
   {
    "name": "Mouse Tweaks",
@@ -1348,7 +1458,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "mouse-tweaks"
+   "page": "mouse-tweaks",
+   "icon": "catalogue/mouse-tweaks.png"
   },
   {
    "name": "Multi Key Bindings",
@@ -1360,7 +1471,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "multi-key-bindings"
+   "page": "multi-key-bindings",
+   "icon": "catalogue/multi-key-bindings.png"
   },
   {
    "name": "No Death Animation",
@@ -1372,7 +1484,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "no-death-animation"
+   "page": "no-death-animation",
+   "icon": "catalogue/no-death-animation.png"
   },
   {
    "name": "No Chat Reports",
@@ -1384,7 +1497,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
-   "page": "no-chat-reports"
+   "page": "no-chat-reports",
+   "icon": "catalogue/no-chat-reports.png"
   },
   {
    "name": "No Fog",
@@ -1396,7 +1510,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "clear-fog"
+   "page": "clear-fog",
+   "icon": "catalogue/clear-fog.png"
   },
   {
    "name": "NoisiumForked",
@@ -1408,7 +1523,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "noisiumforked"
+   "page": "noisiumforked",
+   "icon": "catalogue/noisiumforked.png"
   },
   {
    "name": "Not Enough Animations",
@@ -1420,7 +1536,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "not-enough-animations"
+   "page": "not-enough-animations",
+   "icon": "catalogue/not-enough-animations.png"
   },
   {
    "name": "Noxesium",
@@ -1432,7 +1549,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "noxesium"
+   "page": "noxesium",
+   "icon": "catalogue/noxesium.png"
   },
   {
    "name": "Nvidium",
@@ -1444,7 +1562,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "nvidium"
+   "page": "nvidium",
+   "icon": "catalogue/nvidium.png"
   },
   {
    "name": "OneConfig",
@@ -1456,7 +1575,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "oneconfig"
+   "page": "oneconfig",
+   "icon": "catalogue/oneconfig.png"
   },
   {
    "name": "Packet Fixer",
@@ -1468,7 +1588,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "packet-fixer"
+   "page": "packet-fixer",
+   "icon": "catalogue/packet-fixer.png"
   },
   {
    "name": "Particle Core",
@@ -1480,7 +1601,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "particle-core"
+   "page": "particle-core",
+   "icon": "catalogue/particle-core.png"
   },
   {
    "name": "Particle Rain",
@@ -1492,7 +1614,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "particle-rain"
+   "page": "particle-rain",
+   "icon": "catalogue/particle-rain.png"
   },
   {
    "name": "Pearl Optimizer",
@@ -1504,7 +1627,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "pearl-optimizer"
+   "page": "pearl-optimizer",
+   "icon": "catalogue/pearl-optimizer.png"
   },
   {
    "name": "Pick Up Notifier",
@@ -1516,7 +1640,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "pick-up-notifier"
+   "page": "pick-up-notifier",
+   "icon": "catalogue/pick-up-notifier.png"
   },
   {
    "name": "Ping View",
@@ -1528,7 +1653,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "ping-view"
+   "page": "ping-view",
+   "icon": "catalogue/ping-view.png"
   },
   {
    "name": "PotionCounter",
@@ -1540,7 +1666,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "potioncounter"
+   "page": "potioncounter",
+   "icon": "catalogue/potioncounter.png"
   },
   {
    "name": "Prickle",
@@ -1552,7 +1679,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "prickle"
+   "page": "prickle",
+   "icon": "catalogue/prickle.png"
   },
   {
    "name": "Puzzle",
@@ -1564,7 +1692,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "puzzle"
+   "page": "puzzle",
+   "icon": "catalogue/puzzle.png"
   },
   {
    "name": "Puzzles Lib",
@@ -1576,7 +1705,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "puzzles-lib"
+   "page": "puzzles-lib",
+   "icon": "catalogue/puzzles-lib.png"
   },
   {
    "name": "Real Arrow Tip",
@@ -1588,7 +1718,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "real-arrow-tip"
+   "page": "real-arrow-tip",
+   "icon": "catalogue/real-arrow-tip.png"
   },
   {
    "name": "Red Trapped Chests",
@@ -1600,7 +1731,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "red-trapped-chests"
+   "page": "red-trapped-chests",
+   "icon": "catalogue/red-trapped-chests.png"
   },
   {
    "name": "Reese's Sodium Options",
@@ -1612,7 +1744,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "reeses-sodium-options"
+   "page": "reeses-sodium-options",
+   "icon": "catalogue/reeses-sodium-options.png"
   },
   {
    "name": "Reflex AntiLag",
@@ -1624,7 +1757,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "reflex-antilag"
+   "page": "reflex-antilag",
+   "icon": "catalogue/reflex-antilag.png"
   },
   {
    "name": "Remove Reloading Screen",
@@ -1636,7 +1770,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "rrls"
+   "page": "rrls",
+   "icon": "catalogue/rrls.png"
   },
   {
    "name": "Resourcify",
@@ -1648,7 +1783,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "resourcify"
+   "page": "resourcify",
+   "icon": "catalogue/resourcify.png"
   },
   {
    "name": "ScalableLux",
@@ -1660,7 +1796,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "scalablelux"
+   "page": "scalablelux",
+   "icon": "catalogue/scalablelux.png"
   },
   {
    "name": "Searchables",
@@ -1672,7 +1809,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "searchables"
+   "page": "searchables",
+   "icon": "catalogue/searchables.png"
   },
   {
    "name": "Search Stats",
@@ -1684,7 +1822,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
-   "page": "searchstats"
+   "page": "searchstats",
+   "icon": "catalogue/searchstats.png"
   },
   {
    "name": "ServerCore",
@@ -1696,7 +1835,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "servercore"
+   "page": "servercore",
+   "icon": "catalogue/servercore.png"
   },
   {
    "name": "Shield Fixes",
@@ -1708,7 +1848,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "complete-shield-fixes"
+   "page": "complete-shield-fixes",
+   "icon": "catalogue/complete-shield-fixes.png"
   },
   {
    "name": "Shield Statuses",
@@ -1720,7 +1861,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "shield-statuses"
+   "page": "shield-statuses",
+   "icon": "catalogue/shield-statuses.png"
   },
   {
    "name": "Short Swords",
@@ -1732,7 +1874,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "short-swords-pack"
+   "page": "short-swords-pack",
+   "icon": "catalogue/short-swords-pack.png"
   },
   {
    "name": "Shulker Box Tooltip",
@@ -1744,7 +1887,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "shulkerboxtooltip"
+   "page": "shulkerboxtooltip",
+   "icon": "catalogue/shulkerboxtooltip.png"
   },
   {
    "name": "Silicon",
@@ -1756,7 +1900,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "silicons"
+   "page": "silicons",
+   "icon": "catalogue/silicons.png"
   },
   {
    "name": "Simple Zoom",
@@ -1768,7 +1913,8 @@
    "status": "ported",
    "project": "simple-zoom",
    "note": "Simple Zoom",
-   "page": "zoom-simple"
+   "page": "zoom-simple",
+   "icon": "catalogue/zoom-simple.png"
   },
   {
    "name": "3D Skin Layers",
@@ -1780,7 +1926,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "3dskinlayers"
+   "page": "3dskinlayers",
+   "icon": "catalogue/3dskinlayers.png"
   },
   {
    "name": "Skyboxify",
@@ -1792,7 +1939,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "skyboxify"
+   "page": "skyboxify",
+   "icon": "catalogue/skyboxify.png"
   },
   {
    "name": "Slyde",
@@ -1804,7 +1952,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "slyde"
+   "page": "slyde",
+   "icon": "catalogue/slyde.png"
   },
   {
    "name": "SnappyTappy",
@@ -1816,7 +1965,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs input or camera hooks that Horizon does not expose yet.",
-   "page": "snappytappy"
+   "page": "snappytappy",
+   "icon": "catalogue/snappytappy.png"
   },
   {
    "name": "Sodium",
@@ -1828,7 +1978,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "sodium"
+   "page": "sodium",
+   "icon": "catalogue/sodium.png"
   },
   {
    "name": "Sodium Extra",
@@ -1840,7 +1991,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "sodium-extra"
+   "page": "sodium-extra",
+   "icon": "catalogue/sodium-extra.png"
   },
   {
    "name": "Sodium Shadowy Path Blocks (SSPB)",
@@ -1852,7 +2004,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "sodium-shadowy-path-blocks"
+   "page": "sodium-shadowy-path-blocks",
+   "icon": "catalogue/sodium-shadowy-path-blocks.png"
   },
   {
    "name": "Translations for Sodium",
@@ -1864,7 +2017,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "translations-for-sodium"
+   "page": "translations-for-sodium",
+   "icon": "catalogue/translations-for-sodium.png"
   },
   {
    "name": "spark",
@@ -1876,7 +2030,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "spark"
+   "page": "spark",
+   "icon": "catalogue/spark.png"
   },
   {
    "name": "Sprint Indicator",
@@ -1888,7 +2043,8 @@
    "status": "ported",
    "project": "sprint-indicator",
    "note": "Sprint Indicator",
-   "page": "sprint-indicator"
+   "page": "sprint-indicator",
+   "icon": "catalogue/sprint-indicator.png"
   },
   {
    "name": "Status Effect Bars",
@@ -1900,7 +2056,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "status-effect-bars"
+   "page": "status-effect-bars",
+   "icon": "catalogue/status-effect-bars.png"
   },
   {
    "name": "Status Effect Timer",
@@ -1912,7 +2069,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "statuseffecttimer"
+   "page": "statuseffecttimer",
+   "icon": "catalogue/statuseffecttimer.png"
   },
   {
    "name": "SuperMartijn642's Config Lib",
@@ -1924,7 +2082,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "supermartijn642s-config-lib"
+   "page": "supermartijn642s-config-lib",
+   "icon": "catalogue/supermartijn642s-config-lib.png"
   },
   {
    "name": "TCDCommons API",
@@ -1936,7 +2095,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "tcdcommons"
+   "page": "tcdcommons",
+   "icon": "catalogue/tcdcommons.png"
   },
   {
    "name": "Text Placeholder API",
@@ -1948,7 +2108,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "placeholder-api"
+   "page": "placeholder-api",
+   "icon": "catalogue/placeholder-api.png"
   },
   {
    "name": "Tiers",
@@ -1960,7 +2121,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs a screen or world-data hook point.",
-   "page": "tiers"
+   "page": "tiers",
+   "icon": "catalogue/tiers.png"
   },
   {
    "name": "ToolTipFix",
@@ -1972,7 +2134,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "tooltipfix"
+   "page": "tooltipfix",
+   "icon": "catalogue/tooltipfix.png"
   },
   {
    "name": "TotemCounter",
@@ -1984,7 +2147,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "totemcounter"
+   "page": "totemcounter",
+   "icon": "catalogue/totemcounter.png"
   },
   {
    "name": "Totem Tweaks",
@@ -1996,7 +2160,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "cpvp"
+   "page": "cpvp",
+   "icon": "catalogue/cpvp.png"
   },
   {
    "name": "Tweakeroo",
@@ -2008,7 +2173,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "tweakeroo"
+   "page": "tweakeroo",
+   "icon": "catalogue/tweakeroo.png"
   },
   {
    "name": "ukulib",
@@ -2020,7 +2186,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "ukulib"
+   "page": "ukulib",
+   "icon": "catalogue/ukulib.png"
   },
   {
    "name": "uku's Armor HUD",
@@ -2032,7 +2199,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs inventory, effect or item data that the hook points do not give a mod yet.",
-   "page": "ukus-armor-hud"
+   "page": "ukus-armor-hud",
+   "icon": "catalogue/ukus-armor-hud.png"
   },
   {
    "name": "Unique Dark",
@@ -2044,7 +2212,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "unique-dark"
+   "page": "unique-dark",
+   "icon": "catalogue/unique-dark.png"
   },
   {
    "name": "Visual: Armor Trims",
@@ -2056,7 +2225,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "visual-armor-trims"
+   "page": "visual-armor-trims",
+   "icon": "catalogue/visual-armor-trims.png"
   },
   {
    "name": "Visuality",
@@ -2068,7 +2238,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "visuality"
+   "page": "visuality",
+   "icon": "catalogue/visuality.png"
   },
   {
    "name": "VisualKeys",
@@ -2080,7 +2251,8 @@
    "status": "hook",
    "project": "",
    "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
-   "page": "visualkeys"
+   "page": "visualkeys",
+   "icon": "catalogue/visualkeys.png"
   },
   {
    "name": "Very Many Players (Fabric)",
@@ -2092,7 +2264,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "vmp-fabric"
+   "page": "vmp-fabric",
+   "icon": "catalogue/vmp-fabric.png"
   },
   {
    "name": "Simple Voice Chat",
@@ -2104,7 +2277,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "simple-voice-chat"
+   "page": "simple-voice-chat",
+   "icon": "catalogue/simple-voice-chat.png"
   },
   {
    "name": "voxy",
@@ -2116,7 +2290,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "voxy"
+   "page": "voxy",
+   "icon": "catalogue/voxy.png"
   },
   {
    "name": "VulkanMod",
@@ -2128,7 +2303,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "vulkanmod"
+   "page": "vulkanmod",
+   "icon": "catalogue/vulkanmod.png"
   },
   {
    "name": "WalksyLib",
@@ -2140,7 +2316,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "walksylib"
+   "page": "walksylib",
+   "icon": "catalogue/walksylib.png"
   },
   {
    "name": "Wavey Capes",
@@ -2152,7 +2329,8 @@
    "status": "pack",
    "project": "",
    "note": "Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.",
-   "page": "wavey-capes"
+   "page": "wavey-capes",
+   "icon": "catalogue/wavey-capes.png"
   },
   {
    "name": "Xaero's Minimap",
@@ -2164,7 +2342,8 @@
    "status": "partial",
    "project": "waypoints",
    "note": "Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap.",
-   "page": "xaeros-minimap"
+   "page": "xaeros-minimap",
+   "icon": "catalogue/xaeros-minimap.png"
   },
   {
    "name": "Xaero's World Map",
@@ -2176,7 +2355,8 @@
    "status": "partial",
    "project": "waypoints",
    "note": "Only the waypoints idea; there is no map screen hook yet.",
-   "page": "xaeros-world-map"
+   "page": "xaeros-world-map",
+   "icon": "catalogue/xaeros-world-map.png"
   },
   {
    "name": "Xp Bottle Optimizer",
@@ -2188,7 +2368,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "xp-bottle-optimizer"
+   "page": "xp-bottle-optimizer",
+   "icon": "catalogue/xp-bottle-optimizer.png"
   },
   {
    "name": "YetAnotherConfigLib (YACL)",
@@ -2200,7 +2381,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "yacl"
+   "page": "yacl",
+   "icon": "catalogue/yacl.png"
   },
   {
    "name": "Your Options Shall Be Respected (YOSBR)",
@@ -2212,7 +2394,8 @@
    "status": "no-263",
    "project": "",
    "note": "No Fabric build for 26.3, the game version Horizon implements.",
-   "page": "yosbr"
+   "page": "yosbr",
+   "icon": "catalogue/yosbr.png"
   },
   {
    "name": "ZConfig",
@@ -2224,7 +2407,8 @@
    "status": "library",
    "project": "",
    "note": "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.",
-   "page": "zconfig"
+   "page": "zconfig",
+   "icon": "catalogue/zconfig.png"
   },
   {
    "name": "Fast Noise",
@@ -2236,7 +2420,8 @@
    "status": "engine",
    "project": "",
    "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
-   "page": "zfastnoise"
+   "page": "zfastnoise",
+   "icon": "catalogue/zfastnoise.png"
   },
   {
    "name": "Zoomify (Zoom)",
@@ -2248,7 +2433,8 @@
    "status": "ported",
    "project": "zoomify",
    "note": "Zoomify",
-   "page": "zoomify"
+   "page": "zoomify",
+   "icon": "catalogue/zoomify.png"
   }
  ]
 }

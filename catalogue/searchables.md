@@ -1,6 +1,6 @@
 # Searchables
 
-![Searchables placeholder icon](../assets/icons/catalogue/searchables.svg)
+![Searchables icon](../assets/icons/catalogue/searchables.png)
 
 **Status:** No 26.3 build - **Upstream licence:** `MIT License` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/searchables)
 
@@ -12,5 +12,5 @@ The upstream project has no build for Minecraft 26.3, the version Horizon implem
 
 ## Credit
 
-Searchables belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Searchables belongs to jaredlll08; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by jaredlll08, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

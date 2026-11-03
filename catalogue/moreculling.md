@@ -1,6 +1,6 @@
 # More Culling
 
-![More Culling placeholder icon](../assets/icons/catalogue/moreculling.svg)
+![More Culling icon](../assets/icons/catalogue/moreculling.png)
 
 **Status:** Engine or server - **Upstream licence:** `GNU General Public License v3.0 only` - **26.3 build:** `moreculling-fabric-26.3-1.9.0-beta.1` - [Modrinth](https://modrinth.com/mod/moreculling)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-More Culling belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+More Culling belongs to 1Foxy2, FX; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by 1Foxy2, FX, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -1,6 +1,6 @@
 # Crash Assistant
 
-![Crash Assistant placeholder icon](../assets/icons/catalogue/crash-assistant.svg)
+![Crash Assistant icon](../assets/icons/catalogue/crash-assistant.png)
 
 **Status:** Engine or server - **Upstream licence:** `see project` - **26.3 build:** `CrashAssistant-fabric-26.2-26.3-1.11.14` - [Modrinth](https://modrinth.com/mod/crash-assistant)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Crash Assistant belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Crash Assistant belongs to KostromDan; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by KostromDan, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

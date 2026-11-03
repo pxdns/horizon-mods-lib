@@ -1,6 +1,6 @@
 # Puzzles Lib
 
-![Puzzles Lib placeholder icon](../assets/icons/catalogue/puzzles-lib.svg)
+![Puzzles Lib icon](../assets/icons/catalogue/puzzles-lib.png)
 
 **Status:** Library - **Upstream licence:** `Mozilla Public License 2.0` - **26.3 build:** `puzzleslib-v26.3.4-mc26.3.x+fabric` - [Modrinth](https://modrinth.com/mod/puzzles-lib)
 
@@ -12,5 +12,5 @@ This is a library that other Fabric mods load. Native Horizon mods are self-cont
 
 ## Credit
 
-Puzzles Lib belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Puzzles Lib belongs to Fuzs; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Fuzs, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

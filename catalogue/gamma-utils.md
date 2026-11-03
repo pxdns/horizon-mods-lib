@@ -1,6 +1,6 @@
 # Gamma Utils (Fullbright)
 
-![Gamma Utils (Fullbright) placeholder icon](../assets/icons/catalogue/gamma-utils.svg)
+![Gamma Utils (Fullbright) icon](../assets/icons/catalogue/gamma-utils.png)
 
 **Status:** Needs a hook point - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `Gamma-Utils-Fabric-3.2.0+mc26.3` - [Modrinth](https://modrinth.com/mod/gamma-utils)
 
@@ -12,5 +12,5 @@ A port needs data or a hook that Horizon's stable hook points do not give a mod.
 
 ## Credit
 
-Gamma Utils (Fullbright) belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Gamma Utils (Fullbright) belongs to Sjouwer; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Sjouwer, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -1,6 +1,6 @@
 # Complementary Shaders - Unbound
 
-![Complementary Shaders - Unbound placeholder icon](../assets/icons/catalogue/complementary-unbound.svg)
+![Complementary Shaders - Unbound icon](../assets/icons/catalogue/complementary-unbound.png)
 
 **Status:** Pack or asset - **Upstream licence:** `see project` - **26.3 build:** `ComplementaryUnbound_r5.9.3` - [Modrinth](https://modrinth.com/mod/complementary-unbound)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-Complementary Shaders - Unbound belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Complementary Shaders - Unbound belongs to EminGT; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by EminGT, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

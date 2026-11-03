@@ -1,6 +1,6 @@
 # Clear Water/Lava/PowderSnow
 
-![Clear Water/Lava/PowderSnow placeholder icon](../assets/icons/catalogue/clear-waterlavapowdersnow.svg)
+![Clear Water/Lava/PowderSnow icon](../assets/icons/catalogue/clear-waterlavapowdersnow.png)
 
 **Status:** Pack or asset - **Upstream licence:** `see project` - **26.3 build:** `ClearWaterLava-Fabric-26.3` - [Modrinth](https://modrinth.com/mod/clear-waterlavapowdersnow)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-Clear Water/Lava/PowderSnow belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Clear Water/Lava/PowderSnow belongs to n8-M4x; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by n8-M4x, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -1,6 +1,6 @@
 # Shield Statuses
 
-![Shield Statuses placeholder icon](../assets/icons/catalogue/shield-statuses.svg)
+![Shield Statuses icon](../assets/icons/catalogue/shield-statuses.png)
 
 **Status:** No 26.3 build - **Upstream licence:** `MIT License` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/shield-statuses)
 
@@ -12,5 +12,5 @@ The upstream project has no build for Minecraft 26.3, the version Horizon implem
 
 ## Credit
 
-Shield Statuses belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Shield Statuses belongs to Walksy, OutcastMaya; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Walksy, OutcastMaya, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

@@ -29,5 +29,6 @@ here.** Minecraft is a trademark of Mojang Synergies AB. See [Trademarks](tradem
 | `tools/mods.py` (adapted from horizon-mods) | MIT, Ludovic Marie and the Horizon contributors |
 | Project layout and `horizon-mixin.toml` shape (from the template) | MIT, levzzz5154 and the Horizon contributors |
 | Python `markdown` (site build only, not shipped) | BSD-3-Clause |
+| Upstream mod icons in `assets/icons/catalogue/` | Their authors' terms, not MIT; shown for identification, removed on request |
 
 Bundled fonts: none. The Rust crates in the mod projects: none; every `Cargo.toml` has no dependencies.

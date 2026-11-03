@@ -1,6 +1,6 @@
 # Iris Shaders
 
-![Iris Shaders placeholder icon](../assets/icons/catalogue/iris.svg)
+![Iris Shaders icon](../assets/icons/catalogue/iris.png)
 
 **Status:** Engine or server - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `iris-fabric-1.11.6+mc26.3`; `iris-fabric-1.11.7+mc26.3` - [Modrinth](https://modrinth.com/mod/iris)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Iris Shaders belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Iris Shaders belongs to IMS, coderbot; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by IMS, coderbot, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

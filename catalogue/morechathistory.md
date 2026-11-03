@@ -1,6 +1,6 @@
 # More Chat History
 
-![More Chat History placeholder icon](../assets/icons/catalogue/morechathistory.svg)
+![More Chat History icon](../assets/icons/catalogue/morechathistory.png)
 
 **Status:** Needs a hook point - **Upstream licence:** `Creative Commons Zero v1.0 Universal` - **26.3 build:** `2.0.0` - [Modrinth](https://modrinth.com/mod/morechathistory)
 
@@ -12,5 +12,5 @@ A port needs data or a hook that Horizon's stable hook points do not give a mod.
 
 ## Credit
 
-More Chat History belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+More Chat History belongs to JackFred; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by JackFred, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

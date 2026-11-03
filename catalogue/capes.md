@@ -1,6 +1,6 @@
 # Capes
 
-![Capes placeholder icon](../assets/icons/catalogue/capes.svg)
+![Capes icon](../assets/icons/catalogue/capes.png)
 
 **Status:** Pack or asset - **Upstream licence:** `GNU Lesser General Public License v2.1 only` - **26.3 build:** `capes-1.5.10+26.3` - [Modrinth](https://modrinth.com/mod/capes)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-Capes belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Capes belongs to caelthecolher; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by caelthecolher, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

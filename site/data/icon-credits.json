@@ -1,0 +1,1907 @@
+{
+ "BVzZfTc1": {
+  "title": "[ETF] Entity Texture Features",
+  "slug": "entitytexturefeatures",
+  "authors": [
+   "Traben"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "entitytexturefeatures.png"
+ },
+ "O5VsIpQY": {
+  "title": "adventure-platform-mod",
+  "slug": "adventure-platform-mod",
+  "authors": [
+   "papermc",
+   "jpenilla",
+   "zml2008"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "adventure-platform-mod.png"
+ },
+ "r0v8vy1s": {
+  "title": "Alternate Current",
+  "slug": "alternate-current",
+  "authors": [
+   "Space Walker"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "alternate-current.png"
+ },
+ "Lpf6Rujk": {
+  "title": "Anchor Optimizer",
+  "slug": "anchoroptimizer",
+  "authors": [
+   "cutebow",
+   "bowcute"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "anchoroptimizer.png"
+ },
+ "EsAfCjCV": {
+  "title": "AppleSkin",
+  "slug": "appleskin",
+  "authors": [
+   "squeek502"
+  ],
+  "licence": "Unlicense",
+  "icon": true,
+  "file": "appleskin.png"
+ },
+ "yjgIrBjZ": {
+  "title": "Auth Me",
+  "slug": "auth-me",
+  "authors": [
+   "axieum"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "auth-me.png"
+ },
+ "g96Z4WVZ": {
+  "title": "BadOptimizations",
+  "slug": "badoptimizations",
+  "authors": [
+   "thosea"
+  ],
+  "licence": "MIT",
+  "icon": false
+ },
+ "MBAkmtvl": {
+  "title": "Balm",
+  "slug": "balm",
+  "authors": [
+   "BlayTheNinth"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "balm.png"
+ },
+ "zqU1uktf": {
+  "title": "Better Hitboxes",
+  "slug": "betterhitboxes",
+  "authors": [
+   "Jonnite"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "betterhitboxes.png"
+ },
+ "n6PXGAoM": {
+  "title": "Better Statistics Screen",
+  "slug": "better-stats",
+  "authors": [
+   "TheCSDev"
+  ],
+  "licence": "LicenseRef-Better-Statistics-Screen-License",
+  "icon": true,
+  "file": "better-stats.png"
+ },
+ "KJhXPbHQ": {
+  "title": "Better Compatibility Checker",
+  "slug": "better-compatibility-checker",
+  "authors": [
+   "Nanite",
+   "Gaz492"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "better-compatibility-checker.png"
+ },
+ "8shC1gFX": {
+  "title": "BetterF3",
+  "slug": "betterf3",
+  "authors": [
+   "TreyRuffy",
+   "cominixo"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "betterf3.png"
+ },
+ "m5T5xmUy": {
+  "title": "BetterGrassify",
+  "slug": "bettergrassify",
+  "authors": [
+   "UltimatChamp",
+   "JayemCeekay"
+  ],
+  "licence": "Apache-2.0",
+  "icon": true,
+  "file": "bettergrassify.png"
+ },
+ "o4y0N2hu": {
+  "title": "BetterHurtCam",
+  "slug": "betterhurtcam",
+  "authors": [
+   "uku"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "betterhurtcam.png"
+ },
+ "kqJFAPU9": {
+  "title": "Better Mount HUD",
+  "slug": "better-mount-hud",
+  "authors": [
+   "Lortseam"
+  ],
+  "licence": "GPL-3.0-only",
+  "icon": true,
+  "file": "better-mount-hud.png"
+ },
+ "izMzA6Lo": {
+  "title": "Block Outline Customizer",
+  "slug": "block-outline-customizer",
+  "authors": [
+   "Anomz"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "block-outline-customizer.png"
+ },
+ "M08ruV16": {
+  "title": "Bobby",
+  "slug": "bobby",
+  "authors": [
+   "Johni0702"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "bobby.png"
+ },
+ "uy4Cnpcm": {
+  "title": "Bookshelf",
+  "slug": "bookshelf-lib",
+  "authors": [
+   "Darkhax"
+  ],
+  "licence": "LGPL-2.1-only",
+  "icon": true,
+  "file": "bookshelf-lib.png"
+ },
+ "89Wsn8GD": {
+  "title": "Capes",
+  "slug": "capes",
+  "authors": [
+   "caelthecolher"
+  ],
+  "licence": "LGPL-2.1-only",
+  "icon": true,
+  "file": "capes.png"
+ },
+ "xUTHly0N": {
+  "title": "Centered Crosshair",
+  "slug": "centered-crosshair",
+  "authors": [
+   "JustAlittleWolf"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "centered-crosshair.png"
+ },
+ "DnNYdJsx": {
+  "title": "Chat Animation [Smooth Chat]",
+  "slug": "chatanimation",
+  "authors": [
+   "Ezzenix"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "chatanimation.png"
+ },
+ "Wb5oqrBJ": {
+  "title": "Chat Heads",
+  "slug": "chat-heads",
+  "authors": [
+   "Fourmisain",
+   "dzwdz"
+  ],
+  "licence": "MPL-2.0",
+  "icon": true,
+  "file": "chat-heads.png"
+ },
+ "Iudurxl8": {
+  "title": "Chat Notify",
+  "slug": "chatnotify",
+  "authors": [
+   "NotRyken"
+  ],
+  "licence": "Apache-2.0",
+  "icon": true,
+  "file": "chatnotify.png"
+ },
+ "MOqt4Z5n": {
+  "title": "Chat Patches",
+  "slug": "chatpatches",
+  "authors": [
+   "OBro1961"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "chatpatches.png"
+ },
+ "otVJckYQ": {
+  "title": "CIT Resewn",
+  "slug": "cit-resewn",
+  "authors": [
+   "shsupercm"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "cit-resewn.png"
+ },
+ "UFRJve4V": {
+  "title": "Clear Water/Lava/PowderSnow",
+  "slug": "clear-waterlavapowdersnow",
+  "authors": [
+   "n8-M4x"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "clear-waterlavapowdersnow.png"
+ },
+ "K0AkAin6": {
+  "title": "Client Sort",
+  "slug": "clientsort",
+  "authors": [
+   "NotRyken"
+  ],
+  "licence": "Apache-2.0",
+  "icon": true,
+  "file": "clientsort.png"
+ },
+ "vPNqo58Q": {
+  "title": "Client Tweaks",
+  "slug": "client-tweaks",
+  "authors": [
+   "BlayTheNinth"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "client-tweaks.png"
+ },
+ "9s6osm5g": {
+  "title": "Cloth Config API",
+  "slug": "cloth-config",
+  "authors": [
+   "shedaniel"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "cloth-config.png"
+ },
+ "Wnxd13zP": {
+  "title": "Clumps",
+  "slug": "clumps",
+  "authors": [
+   "jaredlll08"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "clumps.png"
+ },
+ "akF2aZYV": {
+  "title": "Cobweb Outline",
+  "slug": "cobweb-outline",
+  "authors": [
+   "GAMER_TIGE99"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "cobweb-outline.png"
+ },
+ "e0M1UDsY": {
+  "title": "Collective",
+  "slug": "collective",
+  "authors": [
+   "Serilum"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "collective.png"
+ },
+ "geGZinIB": {
+  "title": "Combat Hitboxes",
+  "slug": "combat-hitboxes",
+  "authors": [
+   "sootysplash"
+  ],
+  "licence": "Apache-2.0",
+  "icon": true,
+  "file": "combat-hitboxes.png"
+ },
+ "R6NEzAwj": {
+  "title": "Complementary Shaders - Unbound",
+  "slug": "complementary-unbound",
+  "authors": [
+   "EminGT"
+  ],
+  "licence": "LicenseRef-Custom",
+  "icon": true,
+  "file": "complementary-unbound.png"
+ },
+ "eHe8QhtD": {
+  "title": "Compose Multiplatform",
+  "slug": "compose-multiplatform",
+  "authors": [
+   "Wyvest"
+  ],
+  "licence": "Apache-2.0",
+  "icon": false
+ },
+ "VSNURh3q": {
+  "title": "Concurrent Chunk Management Engine (Fabric)",
+  "slug": "c2me-fabric",
+  "authors": [
+   "duplexsystem",
+   "ishland"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "c2me-fabric.png"
+ },
+ "4alTd2ag": {
+  "title": "Consumable Optimizer",
+  "slug": "consumableoptimizer",
+  "authors": [
+   "Walksy",
+   "OutcastMaya"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "consumableoptimizer.png"
+ },
+ "1IjD5062": {
+  "title": "Continuity",
+  "slug": "continuity",
+  "authors": [
+   "Pepper_Bell"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "continuity.png"
+ },
+ "xv94TkTM": {
+  "title": "Controlling",
+  "slug": "controlling",
+  "authors": [
+   "jaredlll08"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "controlling.png"
+ },
+ "DMu0oBKf": {
+  "title": "Crafting Tweaks",
+  "slug": "crafting-tweaks",
+  "authors": [
+   "BlayTheNinth"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "crafting-tweaks.png"
+ },
+ "ix1qq8Ux": {
+  "title": "Crash Assistant",
+  "slug": "crash-assistant",
+  "authors": [
+   "KostromDan"
+  ],
+  "licence": "LicenseRef-LicenseRef-KostromDan-MML-1.1.3",
+  "icon": true,
+  "file": "crash-assistant.png"
+ },
+ "QrKEZXN9": {
+  "title": "Crosshair Addons Public",
+  "slug": "crosshair-addons-public",
+  "authors": [
+   "Walksy",
+   "OutcastMaya"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "crosshair-addons-public.png"
+ },
+ "zLAdIOH7": {
+  "title": "Crosshair Indicator",
+  "slug": "crosshair-indicator",
+  "authors": [
+   "MGC8"
+  ],
+  "licence": "CC0-1.0",
+  "icon": true,
+  "file": "crosshair-indicator.png"
+ },
+ "ZkHPmyRx": {
+  "title": "Crystal Speed",
+  "slug": "crystal-speed",
+  "authors": [
+   "cutebow"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "crystal-speed.png"
+ },
+ "FH4YDbIf": {
+  "title": "Custom Glint",
+  "slug": "custom-glint",
+  "authors": [
+   "cutebow"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "custom-glint.png"
+ },
+ "gD9OBTtF": {
+  "title": "Custom Shield Scale",
+  "slug": "shieldscale",
+  "authors": [
+   "cutebow"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "shieldscale.png"
+ },
+ "ETlrkaYF": {
+  "title": "Cubes Without Borders",
+  "slug": "cubes-without-borders",
+  "authors": [
+   "Kira-NT"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "cubes-without-borders.png"
+ },
+ "h3XWIuzM": {
+  "title": "Dark Loading Screen",
+  "slug": "dark-loading-screen",
+  "authors": [
+   "A5b84"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "dark-loading-screen.png"
+ },
+ "QwxR6Gcd": {
+  "title": "Debugify",
+  "slug": "debugify",
+  "authors": [
+   "isxander"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "debugify.png"
+ },
+ "6SLU7tS5": {
+  "title": "Default Dark Mode",
+  "slug": "default-dark-mode",
+  "authors": [
+   "nebulr"
+  ],
+  "licence": "CC-BY-NC-SA-4.0",
+  "icon": true,
+  "file": "default-dark-mode.png"
+ },
+ "m3vMfZFQ": {
+  "title": "Default Dark Mode: Expansion",
+  "slug": "default-dark-mode-expansion",
+  "authors": [
+   "aric3435"
+  ],
+  "licence": "LicenseRef-LicenseRef-AllRightsReserved-Aric3435",
+  "icon": true,
+  "file": "default-dark-mode-expansion.png"
+ },
+ "Si9Uim4y": {
+  "title": "Detail Armor Bar Reconstructed",
+  "slug": "detail-armor-bar-reconstructed",
+  "authors": [
+   "Coredex"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "detail-armor-bar-reconstructed.png"
+ },
+ "smUP7V3r": {
+  "title": "Durability Tooltip",
+  "slug": "durability-tooltip",
+  "authors": [
+   "SuperMartijn642"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "durability-tooltip.png"
+ },
+ "LQ3K71Q1": {
+  "title": "Dynamic FPS",
+  "slug": "dynamic-fps",
+  "authors": [
+   "LostLuma",
+   "juliand665"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "dynamic-fps.png"
+ },
+ "qANg5Jrr": {
+  "title": "e4mc",
+  "slug": "e4mc",
+  "authors": [
+   "vgskye"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "e4mc.png"
+ },
+ "o962rBDR": {
+  "title": "Eating Animation",
+  "slug": "eating-animation-resourcepack",
+  "authors": [
+   "ThatCuteOne"
+  ],
+  "licence": "CC-BY-4.0",
+  "icon": true,
+  "file": "eating-animation-resourcepack.png"
+ },
+ "99cGtHRy": {
+  "title": "EclipseUI",
+  "slug": "eclipseui",
+  "authors": [
+   "Coredex"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "eclipseui.png"
+ },
+ "gxUihgVw": {
+  "title": "Emissive Trims",
+  "slug": "emissive-trims",
+  "authors": [
+   "Bluebird"
+  ],
+  "licence": "CC-BY-4.0",
+  "icon": true,
+  "file": "emissive-trims.png"
+ },
+ "UVtY3ZAC": {
+  "title": "Enchantment Descriptions",
+  "slug": "enchantment-descriptions",
+  "authors": [
+   "Darkhax"
+  ],
+  "licence": "LGPL-2.1-only",
+  "icon": true,
+  "file": "enchantment-descriptions.png"
+ },
+ "xLSpHE43": {
+  "title": "Enchantment Insights",
+  "slug": "enchantment-insights",
+  "authors": [
+   "Fuzs",
+   "LunaPixelStudios"
+  ],
+  "licence": "MPL-2.0",
+  "icon": true,
+  "file": "enchantment-insights.png"
+ },
+ "OVuFYfre": {
+  "title": "Enhanced Block Entities",
+  "slug": "ebe",
+  "authors": [
+   "FoundationGames"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "ebe.png"
+ },
+ "NNAgCjsB": {
+  "title": "Entity Culling",
+  "slug": "entityculling",
+  "authors": [
+   "vicisacat",
+   "Pelotrio",
+   "tr7zw"
+  ],
+  "licence": "LicenseRef-tr7zw-Protective-License",
+  "icon": true,
+  "file": "entityculling.png"
+ },
+ "4I1XuqiY": {
+  "title": "[EMF] Entity Model Features",
+  "slug": "entity-model-features",
+  "authors": [
+   "Traben"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "entity-model-features.png"
+ },
+ "HBz1jJcy": {
+  "title": "Entity Crosshair",
+  "slug": "entitycrosshair",
+  "authors": [
+   "Tomeko"
+  ],
+  "licence": "GPL-3.0-or-later",
+  "icon": true,
+  "file": "entitycrosshair.png"
+ },
+ "k2ZPuTBm": {
+  "title": "Essential Mod",
+  "slug": "essential",
+  "authors": [
+   "SparkUniverse"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "essential.png"
+ },
+ "a9H9ZwuV": {
+  "title": "F5 Split",
+  "slug": "f5-split",
+  "authors": [
+   "02Alexis"
+  ],
+  "licence": "LicenseRef-02Alexis-Protective-License",
+  "icon": false
+ },
+ "P7dR8mSH": {
+  "title": "Fabric API",
+  "slug": "fabric-api",
+  "authors": [
+   "Player7457",
+   "modmuss50"
+  ],
+  "licence": "Apache-2.0",
+  "icon": true,
+  "file": "fabric-api.png"
+ },
+ "TQTTVgYE": {
+  "title": "Carpet",
+  "slug": "carpet",
+  "authors": [
+   "gnembon",
+   "altrisi"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "carpet.png"
+ },
+ "Ha28R6CL": {
+  "title": "Fabric Language Kotlin",
+  "slug": "fabric-language-kotlin",
+  "authors": [
+   "Player7457",
+   "modmuss50"
+  ],
+  "licence": "Apache-2.0",
+  "icon": true,
+  "file": "fabric-language-kotlin.png"
+ },
+ "9mtu0sUO": {
+  "title": "Fast IP Ping",
+  "slug": "fast-ip-ping",
+  "authors": [
+   "fallen-breath"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "fast-ip-ping.png"
+ },
+ "x1hIzbuY": {
+  "title": "FastQuit",
+  "slug": "fastquit",
+  "authors": [
+   "contaria"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "fastquit.png"
+ },
+ "uXXizFIs": {
+  "title": "FerriteCore",
+  "slug": "ferrite-core",
+  "authors": [
+   "malte0811"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "ferrite-core.png"
+ },
+ "ohNO6lps": {
+  "title": "Forge Config API Port",
+  "slug": "forge-config-api-port",
+  "authors": [
+   "Fuzs"
+  ],
+  "licence": "MPL-2.0",
+  "icon": true,
+  "file": "forge-config-api-port.png"
+ },
+ "DIlqwRFH": {
+  "title": "FPS - Display",
+  "slug": "fpsdisplay",
+  "authors": [
+   "Grayray75"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "fpsdisplay.png"
+ },
+ "XeEZ3fK2": {
+  "title": "Freecam",
+  "slug": "freecam",
+  "authors": [
+   "hashalite",
+   "MattSturgeon"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "freecam.png"
+ },
+ "g4pR0Fmy": {
+  "title": "Freelook",
+  "slug": "freelook",
+  "authors": [
+   "Celibistrial"
+  ],
+  "licence": "AGPL-3.0-only",
+  "icon": true,
+  "file": "freelook.png"
+ },
+ "VyxkIxCd": {
+  "title": "Fullbright",
+  "slug": "fullbright",
+  "authors": [
+   "greeenman999"
+  ],
+  "licence": "GPL-3.0-only",
+  "icon": true,
+  "file": "fullbright.png"
+ },
+ "hYykXjDp": {
+  "title": "Fzzy Config",
+  "slug": "fzzy-config",
+  "authors": [
+   "fzzyhmstrs"
+  ],
+  "licence": "LicenseRef-TDL-M",
+  "icon": true,
+  "file": "fzzy-config.png"
+ },
+ "wdLuzzEP": {
+  "title": "Gamma Utils (Fullbright)",
+  "slug": "gamma-utils",
+  "authors": [
+   "Sjouwer"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "gamma-utils.png"
+ },
+ "3MBhOT2G": {
+  "title": "Glow Trims",
+  "slug": "glow-trims",
+  "authors": [
+   "TorNato"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "glow-trims.png"
+ },
+ "wt23fpWX": {
+  "title": "HeroBot",
+  "slug": "herobot",
+  "authors": [
+   "herobane"
+  ],
+  "licence": "CC-BY-NC-4.0",
+  "icon": true,
+  "file": "herobot.png"
+ },
+ "hbUrCPGQ": {
+  "title": "HUD Manager",
+  "slug": "hud-manager",
+  "authors": [
+   "i5wear"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "hud-manager.png"
+ },
+ "5ZwdcRci": {
+  "title": "ImmediatelyFast",
+  "slug": "immediatelyfast",
+  "authors": [
+   "RaphiMC"
+  ],
+  "licence": "LGPL-3.0-or-later",
+  "icon": true,
+  "file": "immediatelyfast.png"
+ },
+ "yQj7xqEM": {
+  "title": "Inventory Totem",
+  "slug": "inventory-totem",
+  "authors": [
+   "Serilum"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "inventory-totem.png"
+ },
+ "REfW2AEX": {
+  "title": "InvMove",
+  "slug": "invmove",
+  "authors": [
+   "PieKing1215"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "invmove.png"
+ },
+ "YL57xq9U": {
+  "title": "Iris Shaders",
+  "slug": "iris",
+  "authors": [
+   "IMS",
+   "coderbot"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "iris.png"
+ },
+ "cVNW5lr6": {
+  "title": "Item Highlighter",
+  "slug": "item-highlighter",
+  "authors": [
+   "Grend",
+   "Mat0u5"
+  ],
+  "licence": "CC-BY-NC-ND-4.0",
+  "icon": true,
+  "file": "item-highlighter.png"
+ },
+ "hYTvGCAq": {
+  "title": "Item Scale",
+  "slug": "itemscale",
+  "authors": [
+   "cutebow"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "itemscale.png"
+ },
+ "Upv1bw1P": {
+  "title": "Key Overlay",
+  "slug": "keyoverlay",
+  "authors": [
+   "Seyit"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "keyoverlay.png"
+ },
+ "J81TRJWm": {
+  "title": "Konkrete",
+  "slug": "konkrete",
+  "authors": [
+   "Keksuccino"
+  ],
+  "licence": "Apache-2.0",
+  "icon": true,
+  "file": "konkrete.png"
+ },
+ "fQEb0iXm": {
+  "title": "Krypton",
+  "slug": "krypton",
+  "authors": [
+   "astei"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "krypton.png"
+ },
+ "yBW8D80W": {
+  "title": "LambDynamicLights - Dynamic Lights",
+  "slug": "lambdynamiclights",
+  "authors": [
+   "LambdAurora"
+  ],
+  "licence": "LicenseRef-Lambda-License",
+  "icon": true,
+  "file": "lambdynamiclights.png"
+ },
+ "uLbm7CG6": {
+  "title": "Language Reload",
+  "slug": "language-reload",
+  "authors": [
+   "Jerozgen"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "language-reload.png"
+ },
+ "WKwQAwke": {
+  "title": "LibJF",
+  "slug": "libjf",
+  "authors": [
+   "JFronny"
+  ],
+  "licence": "LGPL-3.0-or-later",
+  "icon": true,
+  "file": "libjf.png"
+ },
+ "bEpr0Arc": {
+  "title": "Litematica",
+  "slug": "litematica",
+  "authors": [
+   "sakura-ryoko",
+   "masa"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "litematica.png"
+ },
+ "gvQqBUqZ": {
+  "title": "Lithium",
+  "slug": "lithium",
+  "authors": [
+   "jellysquid3",
+   "2No2Name"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "lithium.png"
+ },
+ "1jZGHJ05": {
+  "title": "Low Fire",
+  "slug": "low-fire-pack",
+  "authors": [
+   "Oculie"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "low-fire-pack.png"
+ },
+ "CZrLuVQo": {
+  "title": "Low Shield",
+  "slug": "low-shield-pack",
+  "authors": [
+   "Oculie"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "low-shield-pack.png"
+ },
+ "1cENlqGZ": {
+  "title": "Mace Optimizer",
+  "slug": "mace_optimizer",
+  "authors": [
+   "cutebow",
+   "bowcute"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "mace-optimizer.png"
+ },
+ "GcWjdA9I": {
+  "title": "MaLiLib",
+  "slug": "malilib",
+  "authors": [
+   "sakura-ryoko",
+   "masa"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "malilib.png"
+ },
+ "ozpC8eDC": {
+  "title": "Marlow's Crystal Optimizer",
+  "slug": "marlow-crystal-optimizer",
+  "authors": [
+   "DevBram",
+   "Pathdos",
+   "Legertje08"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "marlow-crystal-optimizer.png"
+ },
+ "NRjRiSSD": {
+  "title": "Memory Leak Fix",
+  "slug": "memoryleakfix",
+  "authors": [
+   "FX"
+  ],
+  "licence": "LGPL-2.1-only",
+  "icon": true,
+  "file": "memoryleakfix.png"
+ },
+ "codAaoxh": {
+  "title": "MidnightLib",
+  "slug": "midnightlib",
+  "authors": [
+   "Motschen"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "midnightlib.png"
+ },
+ "UaS8ROxa": {
+  "title": "Miniature Shader",
+  "slug": "miniature-shader",
+  "authors": [
+   "ukrech"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "miniature-shader.png"
+ },
+ "UMxybHE8": {
+  "title": "MiniHUD",
+  "slug": "minihud",
+  "authors": [
+   "masa",
+   "sakura-ryoko"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "minihud.png"
+ },
+ "QdG47OkI": {
+  "title": "Model Gap Fix",
+  "slug": "modelfix",
+  "authors": [
+   "MehVahdJukaar"
+  ],
+  "licence": "GPL-3.0-only",
+  "icon": true,
+  "file": "modelfix.png"
+ },
+ "TjSm1wrD": {
+  "title": "ModernFix-mVUS",
+  "slug": "modernfix-mvus",
+  "authors": [
+   "Coredex"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "modernfix-mvus.png"
+ },
+ "mOgUt4GM": {
+  "title": "Mod Menu",
+  "slug": "modmenu",
+  "authors": [
+   "gniftygnome",
+   "Prospector",
+   "modmuss50"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "modmenu.png"
+ },
+ "8qkXwOnk": {
+  "title": "More Chat History",
+  "slug": "morechathistory",
+  "authors": [
+   "JackFred"
+  ],
+  "licence": "CC0-1.0",
+  "icon": true,
+  "file": "morechathistory.png"
+ },
+ "51shyZVL": {
+  "title": "More Culling",
+  "slug": "moreculling",
+  "authors": [
+   "1Foxy2",
+   "FX"
+  ],
+  "licence": "GPL-3.0-only",
+  "icon": true,
+  "file": "moreculling.png"
+ },
+ "aC3cM3Vq": {
+  "title": "Mouse Tweaks",
+  "slug": "mouse-tweaks",
+  "authors": [
+   "YaLTeR"
+  ],
+  "licence": "BSD-3-Clause",
+  "icon": true,
+  "file": "mouse-tweaks.png"
+ },
+ "2VF6JEnL": {
+  "title": "Multi Key Bindings",
+  "slug": "multi-key-bindings",
+  "authors": [
+   "kennybc"
+  ],
+  "licence": "GPL-3.0-only",
+  "icon": true,
+  "file": "multi-key-bindings.png"
+ },
+ "r6VxNyu0": {
+  "title": "No Death Animation",
+  "slug": "no-death-animation",
+  "authors": [
+   "Walksy",
+   "OutcastMaya"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "no-death-animation.png"
+ },
+ "qQyHxfxd": {
+  "title": "No Chat Reports",
+  "slug": "no-chat-reports",
+  "authors": [
+   "robotkoer",
+   "Aizistral"
+  ],
+  "licence": "WTFPL",
+  "icon": true,
+  "file": "no-chat-reports.png"
+ },
+ "46n24c6r": {
+  "title": "No Fog",
+  "slug": "clear-fog",
+  "authors": [
+   "n8-M4x"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "clear-fog.png"
+ },
+ "hasdd01q": {
+  "title": "NoisiumForked",
+  "slug": "noisiumforked",
+  "authors": [
+   "Coredex"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "noisiumforked.png"
+ },
+ "MPCX6s5C": {
+  "title": "Not Enough Animations",
+  "slug": "not-enough-animations",
+  "authors": [
+   "tr7zw"
+  ],
+  "licence": "LicenseRef-tr7zw-Protective-License",
+  "icon": true,
+  "file": "not-enough-animations.png"
+ },
+ "Kw7Sm3Xf": {
+  "title": "Noxesium",
+  "slug": "noxesium",
+  "authors": [
+   "Noxcrew",
+   "Aeltumn"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "noxesium.png"
+ },
+ "SfMw2IZN": {
+  "title": "Nvidium",
+  "slug": "nvidium",
+  "authors": [
+   "cortex",
+   "drouarb"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "nvidium.png"
+ },
+ "AibBIVmj": {
+  "title": "OneConfig",
+  "slug": "oneconfig",
+  "authors": [
+   "Wyvest"
+  ],
+  "licence": "LicenseRef-LGPL-3.0-with-Additional-Terms-Applicable-to-OneConfig",
+  "icon": true,
+  "file": "oneconfig.png"
+ },
+ "c7m1mi73": {
+  "title": "Packet Fixer",
+  "slug": "packet-fixer",
+  "authors": [
+   "TonimatasDEV"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "packet-fixer.png"
+ },
+ "RSeLon5O": {
+  "title": "Particle Core",
+  "slug": "particle-core",
+  "authors": [
+   "fzzyhmstrs"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "particle-core.png"
+ },
+ "nrikgvxm": {
+  "title": "Particle Rain",
+  "slug": "particle-rain",
+  "authors": [
+   "PigCart"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "particle-rain.png"
+ },
+ "aSymSNSe": {
+  "title": "Pearl Optimizer",
+  "slug": "pearl_optimizer",
+  "authors": [
+   "cutebow",
+   "bowcute"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "pearl-optimizer.png"
+ },
+ "ZX66K16c": {
+  "title": "Pick Up Notifier",
+  "slug": "pick-up-notifier",
+  "authors": [
+   "LunaPixelStudios",
+   "Fuzs"
+  ],
+  "licence": "MPL-2.0",
+  "icon": true,
+  "file": "pick-up-notifier.png"
+ },
+ "gvl7lVcV": {
+  "title": "Ping View",
+  "slug": "ping-view",
+  "authors": [
+   "karlsson1000"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "ping-view.png"
+ },
+ "JzdjByS4": {
+  "title": "PotionCounter",
+  "slug": "potioncounter",
+  "authors": [
+   "uku"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "potioncounter.png"
+ },
+ "aaRl8GiW": {
+  "title": "Prickle",
+  "slug": "prickle",
+  "authors": [
+   "Darkhax"
+  ],
+  "licence": "LGPL-2.1-only",
+  "icon": true,
+  "file": "prickle.png"
+ },
+ "3IuO68q1": {
+  "title": "Puzzle",
+  "slug": "puzzle",
+  "authors": [
+   "Motschen"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "puzzle.png"
+ },
+ "QAGBst4M": {
+  "title": "Puzzles Lib",
+  "slug": "puzzles-lib",
+  "authors": [
+   "Fuzs"
+  ],
+  "licence": "MPL-2.0",
+  "icon": true,
+  "file": "puzzles-lib.png"
+ },
+ "vgVfk0m2": {
+  "title": "Real Arrow Tip",
+  "slug": "real-arrow-tip",
+  "authors": [
+   "ToBinio"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "real-arrow-tip.png"
+ },
+ "L8vWoopg": {
+  "title": "Red Trapped Chests",
+  "slug": "red-trapped-chests",
+  "authors": [
+   "Anceps"
+  ],
+  "licence": "CC-BY-NC-SA-4.0",
+  "icon": true,
+  "file": "red-trapped-chests.png"
+ },
+ "Bh37bMuy": {
+  "title": "Reese's Sodium Options",
+  "slug": "reeses-sodium-options",
+  "authors": [
+   "FlashyReese"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "reeses-sodium-options.png"
+ },
+ "WTVzusYD": {
+  "title": "Reflex AntiLag",
+  "slug": "reflex-antilag",
+  "authors": [
+   "Tythee"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "reflex-antilag.png"
+ },
+ "ZP7xHXtw": {
+  "title": "Remove Reloading Screen",
+  "slug": "rrls",
+  "authors": [
+   "dima_dencep"
+  ],
+  "licence": "OSL-3.0",
+  "icon": true,
+  "file": "rrls.png"
+ },
+ "RLzHAoZe": {
+  "title": "Resourcify",
+  "slug": "resourcify",
+  "authors": [
+   "DeDiamondPro"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "resourcify.png"
+ },
+ "Ps1zyz6x": {
+  "title": "ScalableLux",
+  "slug": "scalablelux",
+  "authors": [
+   "ishland"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "scalablelux.png"
+ },
+ "fuuu3xnx": {
+  "title": "Searchables",
+  "slug": "searchables",
+  "authors": [
+   "jaredlll08"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "searchables.png"
+ },
+ "ExI7GmJi": {
+  "title": "Search Stats",
+  "slug": "searchstats",
+  "authors": [
+   "NotRyken"
+  ],
+  "licence": "Apache-2.0",
+  "icon": true,
+  "file": "searchstats.png"
+ },
+ "4WWQxlQP": {
+  "title": "ServerCore",
+  "slug": "servercore",
+  "authors": [
+   "Wesley1808"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "servercore.png"
+ },
+ "HfLFMeJe": {
+  "title": "Shield Fixes",
+  "slug": "complete-shield-fixes",
+  "authors": [
+   "OutcastMaya",
+   "Walksy"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "complete-shield-fixes.png"
+ },
+ "GfoMZ9Ly": {
+  "title": "Shield Statuses",
+  "slug": "shield-statuses",
+  "authors": [
+   "Walksy",
+   "OutcastMaya"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "shield-statuses.png"
+ },
+ "GExZOLXP": {
+  "title": "Short Swords",
+  "slug": "short-swords-pack",
+  "authors": [
+   "Oculie"
+  ],
+  "licence": "CC-BY-4.0",
+  "icon": true,
+  "file": "short-swords-pack.png"
+ },
+ "2M01OLQq": {
+  "title": "Shulker Box Tooltip",
+  "slug": "shulkerboxtooltip",
+  "authors": [
+   "MisterPeModder"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "shulkerboxtooltip.png"
+ },
+ "MdNZOBlg": {
+  "title": "Silicon",
+  "slug": "silicons",
+  "authors": [
+   "cutebow"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "silicons.png"
+ },
+ "EYKTeOIO": {
+  "title": "Simple Zoom",
+  "slug": "zoom-simple",
+  "authors": [
+   "MrRockis"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "zoom-simple.png"
+ },
+ "zV5r3pPn": {
+  "title": "3D Skin Layers",
+  "slug": "3dskinlayers",
+  "authors": [
+   "tr7zw"
+  ],
+  "licence": "LicenseRef-tr7zw-Protective-License",
+  "icon": true,
+  "file": "3dskinlayers.png"
+ },
+ "DWuwk8aA": {
+  "title": "Skyboxify",
+  "slug": "skyboxify",
+  "authors": [
+   "lowercasebtw"
+  ],
+  "licence": "GPL-3.0-only",
+  "icon": true,
+  "file": "skyboxify.png"
+ },
+ "diCZrsch": {
+  "title": "Slyde",
+  "slug": "slyde",
+  "authors": [
+   "JFronny"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "slyde.png"
+ },
+ "dWOPoahl": {
+  "title": "SnappyTappy",
+  "slug": "snappytappy",
+  "authors": [
+   "cutebow"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "snappytappy.png"
+ },
+ "AANobbMI": {
+  "title": "Sodium",
+  "slug": "sodium",
+  "authors": [
+   "IMS",
+   "jellysquid3",
+   "douira"
+  ],
+  "licence": "LicenseRef-Polyform-Shield-1.0.0",
+  "icon": true,
+  "file": "sodium.png"
+ },
+ "PtjYWJkn": {
+  "title": "Sodium Extra",
+  "slug": "sodium-extra",
+  "authors": [
+   "FlashyReese"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "sodium-extra.png"
+ },
+ "EIa1eiMm": {
+  "title": "Sodium Shadowy Path Blocks (SSPB)",
+  "slug": "sodium-shadowy-path-blocks",
+  "authors": [
+   "Rynnavinx"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "sodium-shadowy-path-blocks.png"
+ },
+ "yfDziwn1": {
+  "title": "Translations for Sodium",
+  "slug": "translations-for-sodium",
+  "authors": [
+   "FlashyReese",
+   "robotkoer"
+  ],
+  "licence": "CC0-1.0",
+  "icon": true,
+  "file": "translations-for-sodium.png"
+ },
+ "l6YH9Als": {
+  "title": "spark",
+  "slug": "spark",
+  "authors": [
+   "lucko"
+  ],
+  "licence": "GPL-3.0-only",
+  "icon": true,
+  "file": "spark.png"
+ },
+ "KKLrfZbI": {
+  "title": "Sprint Indicator",
+  "slug": "sprint-indicator",
+  "authors": [
+   "Roundaround"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "sprint-indicator.png"
+ },
+ "x02cBj9Y": {
+  "title": "Status Effect Bars",
+  "slug": "status-effect-bars",
+  "authors": [
+   "A5b84"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "status-effect-bars.png"
+ },
+ "T9FDHbY5": {
+  "title": "Status Effect Timer",
+  "slug": "statuseffecttimer",
+  "authors": [
+   "magicus"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "statuseffecttimer.png"
+ },
+ "LN9BxssP": {
+  "title": "SuperMartijn642's Config Lib",
+  "slug": "supermartijn642s-config-lib",
+  "authors": [
+   "SuperMartijn642"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "supermartijn642s-config-lib.png"
+ },
+ "Eldc1g37": {
+  "title": "TCDCommons API",
+  "slug": "tcdcommons",
+  "authors": [
+   "TheCSDev"
+  ],
+  "licence": "LicenseRef-TCDCommons-API-License",
+  "icon": true,
+  "file": "tcdcommons.png"
+ },
+ "eXts2L7r": {
+  "title": "Text Placeholder API",
+  "slug": "placeholder-api",
+  "authors": [
+   "Patbox"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "placeholder-api.png"
+ },
+ "bubOj4AD": {
+  "title": "Tiers",
+  "slug": "tiers",
+  "authors": [
+   "Flavio6561"
+  ],
+  "licence": "GPL-3.0-only",
+  "icon": true,
+  "file": "tiers.png"
+ },
+ "2RKFTmiB": {
+  "title": "ToolTipFix",
+  "slug": "tooltipfix",
+  "authors": [
+   "kyrptonaught"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "tooltipfix.png"
+ },
+ "T9R7YTnA": {
+  "title": "TotemCounter",
+  "slug": "totemcounter",
+  "authors": [
+   "uku"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "totemcounter.png"
+ },
+ "1cfO6J6t": {
+  "title": "Totem Tweaks",
+  "slug": "cpvp",
+  "authors": [
+   "Pathdos",
+   "DevBram",
+   "Legertje08"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "cpvp.png"
+ },
+ "t5wuYk45": {
+  "title": "Tweakeroo",
+  "slug": "tweakeroo",
+  "authors": [
+   "masa",
+   "sakura-ryoko"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "tweakeroo.png"
+ },
+ "Y8uFrUil": {
+  "title": "ukulib",
+  "slug": "ukulib",
+  "authors": [
+   "uku"
+  ],
+  "licence": "MPL-2.0",
+  "icon": true,
+  "file": "ukulib.png"
+ },
+ "wF189hn9": {
+  "title": "uku's Armor HUD",
+  "slug": "ukus-armor-hud",
+  "authors": [
+   "uku"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "ukus-armor-hud.png"
+ },
+ "BaY1UdGV": {
+  "title": "Unique Dark",
+  "slug": "unique-dark",
+  "authors": [
+   "amongstreality"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "unique-dark.png"
+ },
+ "tPtjib62": {
+  "title": "Visual: Armor Trims",
+  "slug": "visual-armor-trims",
+  "authors": [
+   "thanos"
+  ],
+  "licence": "CC-BY-SA-4.0",
+  "icon": true,
+  "file": "visual-armor-trims.png"
+ },
+ "rI0hvYcd": {
+  "title": "Visuality",
+  "slug": "visuality",
+  "authors": [
+   "PinkGoosik"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "visuality.png"
+ },
+ "HEds12HI": {
+  "title": "VisualKeys",
+  "slug": "visualkeys",
+  "authors": [
+   "DimasKama",
+   "KlashRaick"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "visualkeys.png"
+ },
+ "wnEe9KBa": {
+  "title": "Very Many Players (Fabric)",
+  "slug": "vmp-fabric",
+  "authors": [
+   "ishland"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "vmp-fabric.png"
+ },
+ "9eGKb6K1": {
+  "title": "Simple Voice Chat",
+  "slug": "simple-voice-chat",
+  "authors": [
+   "BreadLoaf",
+   "Stridey",
+   "henkelmax"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "simple-voice-chat.png"
+ },
+ "fxxUqruK": {
+  "title": "voxy",
+  "slug": "voxy",
+  "authors": [
+   "cortex"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "voxy.png"
+ },
+ "JYQhtZtO": {
+  "title": "VulkanMod",
+  "slug": "vulkanmod",
+  "authors": [
+   "xCollateral"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "vulkanmod.png"
+ },
+ "7P86n6Vg": {
+  "title": "WalksyLib",
+  "slug": "walksylib",
+  "authors": [
+   "Walksy"
+  ],
+  "licence": "MIT",
+  "icon": true,
+  "file": "walksylib.png"
+ },
+ "kYuIpRLv": {
+  "title": "Wavey Capes",
+  "slug": "wavey-capes",
+  "authors": [
+   "Cardistymo",
+   "tr7zw"
+  ],
+  "licence": "LicenseRef-tr7zw-Protective-License",
+  "icon": true,
+  "file": "wavey-capes.png"
+ },
+ "1bokaNcj": {
+  "title": "Xaero's Minimap",
+  "slug": "xaeros-minimap",
+  "authors": [
+   "thexaero"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "xaeros-minimap.png"
+ },
+ "NcUtCpym": {
+  "title": "Xaero's World Map",
+  "slug": "xaeros-world-map",
+  "authors": [
+   "thexaero"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "xaeros-world-map.png"
+ },
+ "c5VHeSai": {
+  "title": "Xp Bottle Optimizer",
+  "slug": "xp-bottle-optimizer",
+  "authors": [
+   "cutebow"
+  ],
+  "licence": "LicenseRef-All-Rights-Reserved",
+  "icon": true,
+  "file": "xp-bottle-optimizer.png"
+ },
+ "1eAoo2KR": {
+  "title": "YetAnotherConfigLib (YACL)",
+  "slug": "yacl",
+  "authors": [
+   "isxander"
+  ],
+  "licence": "LGPL-3.0-or-later",
+  "icon": true,
+  "file": "yacl.png"
+ },
+ "WwbubTsV": {
+  "title": "Your Options Shall Be Respected (YOSBR)",
+  "slug": "yosbr",
+  "authors": [
+   "shedaniel"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "yosbr.png"
+ },
+ "4qmvXRB9": {
+  "title": "ZConfig",
+  "slug": "zconfig",
+  "authors": [
+   "ZenXArch"
+  ],
+  "licence": "MPL-2.0",
+  "icon": true,
+  "file": "zconfig.png"
+ },
+ "OnlVIpq5": {
+  "title": "Fast Noise",
+  "slug": "zfastnoise",
+  "authors": [
+   "ZenXArch"
+  ],
+  "licence": "MPL-2.0",
+  "icon": true,
+  "file": "zfastnoise.png"
+ },
+ "w7ThoJFB": {
+  "title": "Zoomify (Zoom)",
+  "slug": "zoomify",
+  "authors": [
+   "isxander"
+  ],
+  "licence": "LGPL-3.0-only",
+  "icon": true,
+  "file": "zoomify.png"
+ }
+}

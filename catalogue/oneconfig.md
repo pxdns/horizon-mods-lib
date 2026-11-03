@@ -1,6 +1,6 @@
 # OneConfig
 
-![OneConfig placeholder icon](../assets/icons/catalogue/oneconfig.svg)
+![OneConfig icon](../assets/icons/catalogue/oneconfig.png)
 
 **Status:** Library - **Upstream licence:** `see project` - **26.3 build:** `OneConfig-26.3-fabric-1.2.6` - [Modrinth](https://modrinth.com/mod/oneconfig)
 
@@ -12,5 +12,5 @@ This is a library that other Fabric mods load. Native Horizon mods are self-cont
 
 ## Credit
 
-OneConfig belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+OneConfig belongs to Wyvest; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Wyvest, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

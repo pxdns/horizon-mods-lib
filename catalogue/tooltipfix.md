@@ -1,6 +1,6 @@
 # ToolTipFix
 
-![ToolTipFix placeholder icon](../assets/icons/catalogue/tooltipfix.svg)
+![ToolTipFix icon](../assets/icons/catalogue/tooltipfix.png)
 
 **Status:** No 26.3 build - **Upstream licence:** `MIT` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/tooltipfix)
 
@@ -12,5 +12,5 @@ The upstream project has no build for Minecraft 26.3, the version Horizon implem
 
 ## Credit
 
-ToolTipFix belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+ToolTipFix belongs to kyrptonaught; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by kyrptonaught, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

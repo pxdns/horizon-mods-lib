@@ -1,6 +1,6 @@
 # Continuity
 
-![Continuity placeholder icon](../assets/icons/catalogue/continuity.svg)
+![Continuity icon](../assets/icons/catalogue/continuity.png)
 
 **Status:** Engine or server - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `continuity-3.0.1+26.3` - [Modrinth](https://modrinth.com/mod/continuity)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Continuity belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Continuity belongs to Pepper_Bell; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Pepper_Bell, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

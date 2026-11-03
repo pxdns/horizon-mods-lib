@@ -1,6 +1,6 @@
 # Sodium Shadowy Path Blocks (SSPB)
 
-![Sodium Shadowy Path Blocks (SSPB) placeholder icon](../assets/icons/catalogue/sodium-shadowy-path-blocks.svg)
+![Sodium Shadowy Path Blocks (SSPB) icon](../assets/icons/catalogue/sodium-shadowy-path-blocks.png)
 
 **Status:** Engine or server - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `sodium-shadowy-path-blocks-fabric-8.0.0` - [Modrinth](https://modrinth.com/mod/sodium-shadowy-path-blocks)
 
@@ -12,5 +12,5 @@ This changes how the game engine performs or how a server runs. Horizon is a nat
 
 ## Credit
 
-Sodium Shadowy Path Blocks (SSPB) belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Sodium Shadowy Path Blocks (SSPB) belongs to Rynnavinx; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Rynnavinx, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

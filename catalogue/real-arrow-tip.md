@@ -1,6 +1,6 @@
 # Real Arrow Tip
 
-![Real Arrow Tip placeholder icon](../assets/icons/catalogue/real-arrow-tip.svg)
+![Real Arrow Tip icon](../assets/icons/catalogue/real-arrow-tip.png)
 
 **Status:** Pack or asset - **Upstream licence:** `MIT License` - **26.3 build:** `real-arrow-tip-0.3.1+mc26.3` - [Modrinth](https://modrinth.com/mod/real-arrow-tip)
 
@@ -12,5 +12,5 @@ This is a resource pack, shader, theme or model asset. The Horizon registry list
 
 ## Credit
 
-Real Arrow Tip belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Real Arrow Tip belongs to ToBinio; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by ToBinio, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

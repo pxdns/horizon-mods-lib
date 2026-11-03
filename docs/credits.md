@@ -40,9 +40,12 @@ cross-pack matrix, its licence notes (`docs/MOD-LICENSES.md`) and its 1.16.5 por
 
 ## Icons
 
-Every project's icon in this repository and on the site is **original artwork** made for this library (`assets/icons/*.svg`,
-MIT). No upstream mod's icon, logo or screenshot is bundled or hot-linked. Icons belong to their projects: the catalogue links to
-each upstream page instead of reproducing its art.
+- **The nine projects' own icons** (`assets/icons/<project>.svg`) are original artwork made for this library, MIT.
+- **The catalogue's icons** (`assets/icons/catalogue/`) are each upstream mod's **own project icon, downloaded from Modrinth**, shown only to identify the mod
+  it belongs to. They are the work of those mods' authors (named on every catalogue page, from Modrinth's team listing) and are **not** covered by this repository's
+  MIT licence: they stay under whatever terms the authors gave them. They are shrunk to 96 px and otherwise unaltered. Three projects have no icon on Modrinth and
+  show a placeholder tile instead.
+- If you made one of these icons and want it gone, see [DMCA and takedowns](dmca.md); it is removed without argument.
 
 ## Fonts
 

@@ -1,6 +1,6 @@
 # Enchantment Descriptions
 
-![Enchantment Descriptions placeholder icon](../assets/icons/catalogue/enchantment-descriptions.svg)
+![Enchantment Descriptions icon](../assets/icons/catalogue/enchantment-descriptions.png)
 
 **Status:** No 26.3 build - **Upstream licence:** `GNU Lesser General Public License v2.1 only` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/enchantment-descriptions)
 
@@ -12,5 +12,5 @@ The upstream project has no build for Minecraft 26.3, the version Horizon implem
 
 ## Credit
 
-Enchantment Descriptions belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Enchantment Descriptions belongs to Darkhax; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Darkhax, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).

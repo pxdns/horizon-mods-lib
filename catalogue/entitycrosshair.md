@@ -1,6 +1,6 @@
 # Entity Crosshair
 
-![Entity Crosshair placeholder icon](../assets/icons/catalogue/entitycrosshair.svg)
+![Entity Crosshair icon](../assets/icons/catalogue/entitycrosshair.png)
 
 **Status:** Needs a hook point - **Upstream licence:** `GNU General Public License v3.0 or later` - **26.3 build:** `EntityCrosshair-2.3.0-26.3+_fabric` - [Modrinth](https://modrinth.com/mod/entitycrosshair)
 
@@ -12,5 +12,5 @@ A port needs data or a hook that Horizon's stable hook points do not give a mod.
 
 ## Credit
 
-Entity Crosshair belongs to its authors; see its Modrinth page. Nothing from it is copied here, and the icon above is a placeholder drawn for this library, not the upstream mod's art.
+Entity Crosshair belongs to Tomeko; see its Modrinth page. No code or text from it is copied here. The icon above is the project's own icon from Modrinth, by Tomeko, shown only to identify the mod; it is not covered by this repository's licence and comes down on request (see [DMCA and takedowns](../docs/dmca.md)).
 Back to the [catalogue](../MODS.md).
