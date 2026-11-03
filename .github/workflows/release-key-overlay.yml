@@ -1,0 +1,31 @@
+# Releases the Key Overlay native mod (key-overlay/) as key_overlay-<version>.hnmod.
+#
+# Bump `version` in mods/key-overlay/mixins/key_overlay/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `key-overlay-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release key-overlay
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/key-overlay/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-key-overlay.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: key-overlay
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

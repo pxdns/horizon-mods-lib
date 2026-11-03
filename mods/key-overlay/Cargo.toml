@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-key-overlay"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Shows W, A, S, D, jump and the mouse buttons on screen and lights the ones you hold."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/key_overlay/runtime.rs"
+
+[workspace]

@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-info-hud"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Your speed, the way you face and your dimension in a corner of the screen, in the spirit of MiniHUD's info lines."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/info_hud/runtime.rs"
+
+[workspace]

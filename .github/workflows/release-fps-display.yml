@@ -1,0 +1,31 @@
+# Releases the FPS Display native mod (fps-display/) as fps_display-<version>.hnmod.
+#
+# Bump `version` in mods/fps-display/mixins/fps_display/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `fps-display-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release fps-display
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/fps-display/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-fps-display.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: fps-display
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

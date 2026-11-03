@@ -1,0 +1,48 @@
+name: ci
+
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  logic:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mod: [fps-display, sprint-indicator, key-overlay, cps-counter, info-hud, custom-hud, zoomify, simple-zoom, waypoints]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Rust
+        run: rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+      - name: Format, lint and test the mod's logic
+        working-directory: mods/${{ matrix.mod }}
+        run: |
+          cargo fmt --check
+          cargo clippy --all-targets --locked -- -D warnings
+          cargo test --locked
+      - name: The bundle packages
+        run: python3 tools/mods.py package "${{ matrix.mod }}"
+
+  on-horizon:
+    # Applies every mod together on the pinned Horizon and type-checks the game, as the launcher builds a player's set.
+    runs-on: ubuntu-latest
+    needs: logic
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Rust
+        run: rustup toolchain install stable --profile minimal
+      - name: System libraries the game's crates link
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev libudev-dev libwayland-dev libxkbcommon-dev pkg-config
+      - name: Apply all mods on Horizon and cargo check
+        run: python3 tools/mods.py check all

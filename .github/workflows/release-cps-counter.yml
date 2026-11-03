@@ -1,0 +1,31 @@
+# Releases the CPS Counter native mod (cps-counter/) as cps_counter-<version>.hnmod.
+#
+# Bump `version` in mods/cps-counter/mixins/cps_counter/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `cps-counter-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release cps-counter
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/cps-counter/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-cps-counter.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: cps-counter
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

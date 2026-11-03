@@ -1,0 +1,68 @@
+# Shared by every release-<mod>.yml: test the mod, package its .hnmod, release it when its version is new.
+name: release a mod
+
+on:
+  workflow_call:
+    inputs:
+      slug:
+        description: "Folder of the mod under mods/"
+        required: true
+        type: string
+      publish:
+        description: "Create the GitHub release when the tag is new"
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Rust
+        run: rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+
+      - name: Format, lint and test the mod's logic
+        working-directory: mods/${{ inputs.slug }}
+        run: |
+          cargo fmt --check
+          cargo clippy --all-targets --locked -- -D warnings
+          cargo test --locked
+
+      - name: Package the .hnmod
+        id: package
+        run: |
+          python3 tools/mods.py package "${{ inputs.slug }}" | tee package.json
+          echo "file=$(python3 -c 'import json; print(json.load(open("package.json"))["file"])')" >> "$GITHUB_OUTPUT"
+          echo "sha=$(python3 -c 'import json; print(json.load(open("package.json"))["sha256"])')" >> "$GITHUB_OUTPUT"
+          echo "version=$(python3 tools/mods.py version "${{ inputs.slug }}")" >> "$GITHUB_OUTPUT"
+
+      - name: Upload the .hnmod as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.slug }}-${{ steps.package.outputs.version }}
+          path: ${{ steps.package.outputs.file }}
+
+      - name: Release when this version is new
+        if: ${{ inputs.publish }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${{ inputs.slug }}-v${{ steps.package.outputs.version }}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "$tag is already released; bump the version to release again."
+            exit 0
+          fi
+          printf '%s\n' "${{ steps.package.outputs.sha }}  $(basename '${{ steps.package.outputs.file }}')" > "${{ steps.package.outputs.file }}.sha256"
+          gh release create "$tag" "${{ steps.package.outputs.file }}" "${{ steps.package.outputs.file }}.sha256" \
+            --title "${{ inputs.slug }} ${{ steps.package.outputs.version }}" \
+            --target "${{ github.sha }}" \
+            --notes "Native Horizon mod \`${{ inputs.slug }}\` ${{ steps.package.outputs.version }}, built for Horizon ${{ '26.3' }} on the hook points (hooks 1). Unzip it and build it into a game with horizon-launcher native-build; SHA-256 \`${{ steps.package.outputs.sha }}\`."

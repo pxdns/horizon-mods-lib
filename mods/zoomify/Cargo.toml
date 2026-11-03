@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-zoomify"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Hold a key to zoom in, turn the wheel to zoom further, with smooth easing and slower turning."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/zoomify/runtime.rs"
+
+[workspace]
