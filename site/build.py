@@ -18,7 +18,7 @@ import markdown
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "site" / "dist"
 REPO = "https://github.com/pxdns/horizon-mods-lib"
-SITE = "https://pxdns.github.io/horizon-mods-lib/"
+SITE = ""  # deployed on Vercel; every link in the site is relative, so no base URL is needed
 
 DATA = json.loads((ROOT / "site/data/mods.json").read_text())
 COUNTS = DATA["counts"]

@@ -5,7 +5,7 @@
 Native mods for [Horizon](https://github.com/horizon-rust/horizon) (the Rust rewrite of Minecraft: Java 26.3), **ported from
 popular Fabric mods**, one small tested project per mod, each released automatically as a `.hnmod`.
 
-**Site and docs:** <https://pxdns.github.io/horizon-mods-lib/> · [Catalogue of 186 mods](MODS.md) · [Modules](MODULES.md)
+**Docs:** [docs/](docs/introduction.md) · [Catalogue of 186 mods](MODS.md) · [Modules](MODULES.md)
 
 ## The mods
 
@@ -34,7 +34,7 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 All nine mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
 game type-checks with warnings denied. CI cannot play the game through a window, so none has been exercised in a live session by CI.
-44 of the 186 catalogued mods are waiting on hook points Horizon does not have yet; see the [roadmap](https://pxdns.github.io/horizon-mods-lib/roadmap.html).
+44 of the 186 catalogued mods are waiting on hook points Horizon does not have yet; see the [roadmap](docs/hook-points.md).
 
 ## Credits, licensing, takedowns
 
