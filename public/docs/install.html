@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install a mod · horizon-mods-lib</title>
+<meta name="description" content="Install a mod Native mods are built into your game, so installing one means building one. The first build downloads Rust and can take 20 to 30 minutes">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../index.html"><img src="../assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="../index.html">Home</a><a href="../mods/index.html">Mods</a><a href="../why.html">Why native</a><a href="../from-fabric.html">From Fabric</a><a href="../trust.html">Trust</a><a href="../roadmap.html">Roadmap</a><a href="../docs/introduction.html" aria-current=page>Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<div class="docs">
+<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html">Introduction</a><a href="install.html" aria-current=page>Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><h5>Reference</h5><a href="hook-points.html">Hook points</a><a href="anatomy.html">Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html">Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html">Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html">Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
+<main class="doc">
+<div class="crumbs"><a href="introduction.html">Docs</a> / Getting started</div>
+<h1 id="install-a-mod">Install a mod</h1>
+<p>Native mods are built into your game, so installing one means building one. The first build downloads Rust and can take 20 to
+30 minutes; later builds are faster (<a href="https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md">Horizon's native mods guide</a>
+has the measured numbers).</p>
+<h2 id="1-get-the-hnmod">1. Get the <code>.hnmod</code></h2>
+<p>Every mod has a GitHub release named <code>&lt;project&gt;-v&lt;version&gt;</code> with the <code>.hnmod</code> and its SHA-256 next to it. Download both and
+check the hash:</p>
+<pre><code class="language-sh">sha256sum -c zoomify_1.0.0.hnmod.sha256
+</code></pre>
+<p>The tag and file name are <code>zoomify-v1.0.0</code> and <code>zoomify-1.0.0.hnmod</code>; the hash file names the exact file it covers.</p>
+<h2 id="2-unpack-it">2. Unpack it</h2>
+<p>A <code>.hnmod</code> is a zip: <code>horizon-native.json</code> and <code>mixins/&lt;id&gt;/…</code> with the sources. Unpack it into its own folder:</p>
+<pre><code class="language-sh">mkdir zoomify &amp;&amp; cd zoomify &amp;&amp; unzip ../zoomify-1.0.0.hnmod
+</code></pre>
+<p>Read the files first. That is the point of a source-only bundle: <code>runtime.rs</code> is the whole logic, the other <code>.rs</code> files are one
+hook each.</p>
+<h2 id="3-build-it-into-your-game">3. Build it into your game</h2>
+<p>Native mods are experimental in Horizon and the launcher asks you to trust the code. From the command line:</p>
+<pre><code class="language-sh">horizon-launcher native-build ./zoomify --instance MyInstance --trust-native-code
+</code></pre>
+<p>The folder can hold one unpacked bundle or several, so you can build a set of mods into one game. The launcher builds on the
+Horizon commit the mods name, or on the commit of the version you play when the mods name none. All mods in one build must
+agree on that commit; mods that use only the hook points (these all do) do not pin one.</p>
+<h2 id="4-switch-it-on">4. Switch it on</h2>
+<p>In the game, open <strong>Options → Mods</strong>. Each mod has a row with its description, a settings page and, where it has keys
+(the two zoom mods), the keys listed first.</p>
+<h2 id="getting-it-into-the-launchers-browser">Getting it into the launcher's browser</h2>
+<p>The launcher's Mods page lists what is in <a href="https://github.com/horizon-rust/horizon-mods"><code>horizon-rust/horizon-mods</code></a>, after a
+maintainer has read the source. These projects are not listed there unless their maintainers submitted them; read that
+repository's <code>MOD-POLICY.md</code> before doing so.</p>
+<nav class="pager" aria-label="Previous and next"><a class="prev" href="introduction.html"><small>Previous</small>Introduction</a><a class="next" href="build.html"><small>Next</small>Build from source</a></nav>
+<p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/docs/install.md">Edit this page on GitHub</a></p>
+</main>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#1-get-the-hnmod">1. Get the .hnmod</a><a class="" href="#2-unpack-it">2. Unpack it</a><a class="" href="#3-build-it-into-your-game">3. Build it into your game</a><a class="" href="#4-switch-it-on">4. Switch it on</a><a class="" href="#getting-it-into-the-launchers-browser">Getting it into the launcher&#x27;s browser</a></aside>
+</div>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="../mods/index.html">The mods</a><a href="../docs/catalogue.html">Status of every mod</a><a href="../roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="../docs/install.html">Install a mod</a><a href="../docs/hook-points.html">Hook points</a><a href="../docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="../docs/credits.html">Credits</a><a href="../docs/licensing.html">Licensing</a><a href="../docs/dmca.html">DMCA and takedowns</a><a href="../docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

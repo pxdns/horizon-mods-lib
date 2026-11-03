@@ -1,0 +1,25 @@
+# The site is committed in public/ (Vercel serves it as is). This fails when public/ no longer matches
+# what site/build.py makes from the docs, so a change to a doc or a mod cannot leave the site stale.
+name: site
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "docs/**", "MODS.md", "MODULES.md", "assets/**", "mods/**", "public/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  fresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 -m venv .venv && .venv/bin/pip install markdown
+      - run: .venv/bin/python site/build.py
+      - name: public/ is up to date
+        run: git diff --exit-code --stat -- public || { echo "::error::Run python3 site/build.py and commit public/"; exit 1; }

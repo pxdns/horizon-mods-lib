@@ -1,0 +1,1682 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mod catalogue · horizon-mods-lib</title>
+<meta name="description" content="Mod catalogue Every mod in the Tempest project&#x27;s cross-pack matrix ( docs/MOD-MATRIX.md in pxdns/patcher ): 186 mods , 5 ported · 2 partly ported · 44">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../index.html"><img src="../assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="../index.html">Home</a><a href="../mods/index.html">Mods</a><a href="../why.html">Why native</a><a href="../from-fabric.html">From Fabric</a><a href="../trust.html">Trust</a><a href="../roadmap.html">Roadmap</a><a href="../docs/introduction.html" aria-current=page>Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<div class="docs">
+<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html">Introduction</a><a href="install.html">Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><h5>Reference</h5><a href="hook-points.html">Hook points</a><a href="anatomy.html">Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html" aria-current=page>Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html">Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html">Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
+<main class="doc">
+<div class="crumbs"><a href="introduction.html">Docs</a> / Catalogue</div>
+<h1 id="mod-catalogue">Mod catalogue</h1>
+<p>Every mod in the Tempest project's cross-pack matrix (<a href="https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md"><code>docs/MOD-MATRIX.md</code></a>
+in <code>pxdns/patcher</code>): <strong>186 mods</strong>, <strong>5</strong> ported · <strong>2</strong> partly ported · <strong>44</strong> needs a hook point · <strong>31</strong> pack or asset · <strong>31</strong> engine or server · <strong>28</strong> library · <strong>45</strong> no 26.3 build.</p>
+<p>Horizon implements Minecraft <strong>26.3</strong>, so the 26.3 column decides what can be ported at all. A native Horizon mod can
+only use what Horizon's <a href="hook-points.html">native hook points</a> expose (frame, tick, HUD, key, wheel, command, zoom,
+minimap, mods list, settings and the world lifecycle, plus the item panel and recipes), which is why most Fabric mods that
+rewrite rendering, networking or inventories wait for more hook points. The status below says which case each mod is in;
+nothing is marked ported unless a project in <a href="https://github.com/pxdns/horizon-mods-lib/tree/main/mods"><code>mods/</code></a> builds and passes its tests.</p>
+<h2 id="status">Status</h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ported</td>
+<td>A project in <code>mods/</code> implements it for Horizon, independently of the upstream code</td>
+</tr>
+<tr>
+<td>Partly ported</td>
+<td>Only the part the hook points allow is in a project</td>
+</tr>
+<tr>
+<td>Needs a hook point</td>
+<td>Wanted, but Horizon does not expose what it needs yet</td>
+</tr>
+<tr>
+<td>Pack or asset</td>
+<td>Belongs in the registry as a resource, shader or data pack</td>
+</tr>
+<tr>
+<td>Engine or server</td>
+<td>Performance or server work that Horizon's own engine replaces</td>
+</tr>
+<tr>
+<td>Library</td>
+<td>A helper other Fabric mods load; native mods do not use it</td>
+</tr>
+<tr>
+<td>No 26.3 build</td>
+<td>The upstream mod has no build for Horizon's game version</td>
+</tr>
+</tbody>
+</table>
+<p>Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
+copies no upstream code or art: every port is a clean re-implementation of the behaviour.</p>
+<div class="filters" id="filters"><button data-s="all" aria-pressed="true">All</button><button data-s="ported" aria-pressed="false">Ported (5)</button><button data-s="partly ported" aria-pressed="false">Partly ported (2)</button><button data-s="needs a hook point" aria-pressed="false">Needs a hook point (44)</button><button data-s="library" aria-pressed="false">Library (28)</button><button data-s="engine or server" aria-pressed="false">Engine or server (31)</button><button data-s="pack or asset" aria-pressed="false">Pack or asset (31)</button><button data-s="no 26.3 build" aria-pressed="false">No 26.3 build (45)</button><input id="filter-text" type="search" placeholder="Filter by name or licence" aria-label="Filter the catalogue"><span class="count" id="count"></span></div><h2 id="ported-5">Ported (5)</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Modrinth</th>
+<th>Upstream licence</th>
+<th>26.3 build</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fpsdisplay-5.1.0+26.2</td>
+<td><a href="https://modrinth.com/mod/fpsdisplay">fpsdisplay</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>fpsdisplay-5.2.0+26.3</code></td>
+<td>Ported (<a href="mods/fps-display.html"><code>fps-display</code></a>)</td>
+<td>FPS Display</td>
+</tr>
+<tr>
+<td>KeyOverlay-26.2</td>
+<td><a href="https://modrinth.com/mod/keyoverlay">keyoverlay</a></td>
+<td><code>see project</code></td>
+<td><code>KeyOverlay-26.3</code></td>
+<td>Ported (<a href="mods/key-overlay.html"><code>key-overlay</code></a>)</td>
+<td>Key Overlay</td>
+</tr>
+<tr>
+<td>simplezoom-fabric-26.2-1.3.0</td>
+<td><a href="https://modrinth.com/mod/zoom-simple">zoom-simple</a></td>
+<td><code>MIT License</code></td>
+<td><code>simplezoom-fabric-26.3-1.4.0</code></td>
+<td>Ported (<a href="mods/simple-zoom.html"><code>simple-zoom</code></a>)</td>
+<td>Simple Zoom</td>
+</tr>
+<tr>
+<td>sprintindicator-fabric-2.0.0+26.2</td>
+<td><a href="https://modrinth.com/mod/sprint-indicator">sprint-indicator</a></td>
+<td><code>MIT License</code></td>
+<td><code>sprintindicator-fabric-2.1.0+26.3</code></td>
+<td>Ported (<a href="mods/sprint-indicator.html"><code>sprint-indicator</code></a>)</td>
+<td>Sprint Indicator</td>
+</tr>
+<tr>
+<td>Zoomify (Zoom)</td>
+<td><a href="https://modrinth.com/mod/zoomify">zoomify</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>zoomify-2.16.3+26.3</code></td>
+<td>Ported (<a href="mods/zoomify.html"><code>zoomify</code></a>)</td>
+<td>Zoomify</td>
+</tr>
+</tbody>
+</table>
+<h2 id="partly-ported-2">Partly ported (2)</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Modrinth</th>
+<th>Upstream licence</th>
+<th>26.3 build</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>xaerominimap-fabric-1.21.11-25.3.10</td>
+<td><a href="https://modrinth.com/mod/xaeros-minimap">xaeros-minimap</a></td>
+<td><code>see project</code></td>
+<td><code>xaerominimap-fabric-26.3-26.5.3</code></td>
+<td>Partly ported (<a href="mods/waypoints.html"><code>waypoints</code></a>)</td>
+<td>Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap.</td>
+</tr>
+<tr>
+<td>xaeroworldmap-fabric-1.21.11-1.40.11</td>
+<td><a href="https://modrinth.com/mod/xaeros-world-map">xaeros-world-map</a></td>
+<td><code>see project</code></td>
+<td><code>xaeroworldmap-fabric-26.3-1.46.4</code></td>
+<td>Partly ported (<a href="mods/waypoints.html"><code>waypoints</code></a>)</td>
+<td>Only the waypoints idea; there is no map screen hook yet.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="needs-a-hook-point-44">Needs a hook point (44)</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Modrinth</th>
+<th>Upstream licence</th>
+<th>26.3 build</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[ETF] Entity Texture Features</td>
+<td><a href="https://modrinth.com/mod/entitytexturefeatures">entitytexturefeatures</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>7.2.5-fabric-26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>AppleSkin</td>
+<td><a href="https://modrinth.com/mod/appleskin">appleskin</a></td>
+<td><code>The Unlicense</code></td>
+<td><code>appleskin-fabric-mc26.3-3.0.10</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>authme-fabric-9.3.0+26.2</td>
+<td><a href="https://modrinth.com/mod/auth-me">auth-me</a></td>
+<td><code>MIT License</code></td>
+<td><code>authme-fabric-9.3.0+26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>Better Statistics Screen</td>
+<td><a href="https://modrinth.com/mod/better-stats">better-stats</a></td>
+<td><code>see project</code></td>
+<td><code>betterstats-5.6.0-beta.1+fn-26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>BetterGrassify</td>
+<td><a href="https://modrinth.com/mod/bettergrassify">bettergrassify</a></td>
+<td><code>Apache-2.0</code></td>
+<td><code>1.8.8+fabric.26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>bettermounthud-1.3.1</td>
+<td><a href="https://modrinth.com/mod/better-mount-hud">better-mount-hud</a></td>
+<td><code>GNU General Public License v3.0 only</code></td>
+<td><code>bettermounthud-1.2.6</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>Chat Animation [Smooth Chat]</td>
+<td><a href="https://modrinth.com/mod/chatanimation">chatanimation</a></td>
+<td><code>MIT License</code></td>
+<td><code>chatanimation-fabric-1.3.3+mc26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs incoming-chat or screen hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Chat Heads</td>
+<td><a href="https://modrinth.com/mod/chat-heads">chat-heads</a></td>
+<td><code>Mozilla Public License 2.0</code></td>
+<td><code>chat_heads-1.2.9-fabric-26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs incoming-chat or screen hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>chatnotify-fabric-3.103.1+26.2</td>
+<td><a href="https://modrinth.com/mod/chatnotify">chatnotify</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>chatnotify-fabric-3.104.0+26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs incoming-chat or screen hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>clientsort-fabric-3.103.1+26.2</td>
+<td><a href="https://modrinth.com/mod/clientsort">clientsort</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>clientsort-fabric-3.104.0+26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Clumps</td>
+<td><a href="https://modrinth.com/mod/clumps">clumps</a></td>
+<td><code>MIT License</code></td>
+<td><code>Clumps-fabric-26.3-26.3.2</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>Combat Hitboxes</td>
+<td><a href="https://modrinth.com/mod/combat-hitboxes">combat-hitboxes</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>combat-hitbox-1.0.11</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Controlling</td>
+<td><a href="https://modrinth.com/mod/controlling">controlling</a></td>
+<td><code>MIT License</code></td>
+<td><code>26.3.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>craftingtweaks-fabric-26.2-26.2.0.3</td>
+<td><a href="https://modrinth.com/mod/crafting-tweaks">crafting-tweaks</a></td>
+<td><code>see project</code></td>
+<td><code>craftingtweaks-fabric-26.3-26.3.0.1</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>crosshairindicator-1.0.3</td>
+<td><a href="https://modrinth.com/mod/crosshair-indicator">crosshair-indicator</a></td>
+<td><code>Creative Commons Zero v1.0 Universal</code></td>
+<td><code>crosshairindicator-1.0.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Detail Armor Bar Reconstructed</td>
+<td><a href="https://modrinth.com/mod/detail-armor-bar-reconstructed">detail-armor-bar-reconstructed</a></td>
+<td><code>MIT License</code></td>
+<td><code>DetailArmorBarReconstructed-5.3.2-26.3-fabric</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>Durability Tooltip</td>
+<td><a href="https://modrinth.com/mod/durability-tooltip">durability-tooltip</a></td>
+<td><code>see project</code></td>
+<td><code>durabilitytooltip-1.2.0-fabric-mc26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>EntityCrosshair-2.3.0-26.3+_fabric</td>
+<td><a href="https://modrinth.com/mod/entitycrosshair">entitycrosshair</a></td>
+<td><code>GNU General Public License v3.0 or later</code></td>
+<td><code>EntityCrosshair-2.3.0-26.3+_fabric</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Freecam</td>
+<td><a href="https://modrinth.com/mod/freecam">freecam</a></td>
+<td><code>MIT</code></td>
+<td><code>1.5.0-alpha.2</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>freelook-1.4.3</td>
+<td><a href="https://modrinth.com/mod/freelook">freelook</a></td>
+<td><code>GNU Affero General Public License v3.0 only</code></td>
+<td><code>freelook-1.4.4</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Gamma-Utils-Fabric-3.1.1+mc26.2</td>
+<td><a href="https://modrinth.com/mod/gamma-utils">gamma-utils</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>Gamma-Utils-Fabric-3.2.0+mc26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>InvMove</td>
+<td><a href="https://modrinth.com/mod/invmove">invmove</a></td>
+<td><code>LGPL-3.0-only</code></td>
+<td><code>0.9.6+26.3-fabric</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Item Highlighter</td>
+<td><a href="https://modrinth.com/mod/item-highlighter">item-highlighter</a></td>
+<td><code>CC-BY-NC-ND-4.0</code></td>
+<td><code>1.2.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>litematica-fabric-26.2-0.28.5</td>
+<td><a href="https://modrinth.com/mod/litematica">litematica</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>litematica-fabric-26.3-0.29.0</code></td>
+<td>Needs a hook point</td>
+<td>Needs a screen or world-data hook point.</td>
+</tr>
+<tr>
+<td>Marlow's Crystal Optimizer</td>
+<td><a href="https://modrinth.com/mod/marlow-crystal-optimizer">marlow-crystal-optimizer</a></td>
+<td><code>MIT License</code></td>
+<td><code>Marlow Crystal Optimizer</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>modmenu-17.0.0</td>
+<td><a href="https://modrinth.com/mod/modmenu">modmenu</a></td>
+<td><code>MIT License</code></td>
+<td><code>modmenu-21.0.0</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>More Chat History</td>
+<td><a href="https://modrinth.com/mod/morechathistory">morechathistory</a></td>
+<td><code>Creative Commons Zero v1.0 Universal</code></td>
+<td><code>2.0.0</code></td>
+<td>Needs a hook point</td>
+<td>Needs incoming-chat or screen hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Mouse Tweaks</td>
+<td><a href="https://modrinth.com/mod/mouse-tweaks">mouse-tweaks</a></td>
+<td><code>BSD 3-Clause "New" or "Revised" License</code></td>
+<td><code>MouseTweaks-fabric-mc26.3-2.31</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>multi-key-bindings-1.3.4+26.2</td>
+<td><a href="https://modrinth.com/mod/multi-key-bindings">multi-key-bindings</a></td>
+<td><code>GNU General Public License v3.0 only</code></td>
+<td><code>multi-key-bindings-1.3.5+26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>NoChatReports-FABRIC-1.21.11-v2.18.0</td>
+<td><a href="https://modrinth.com/mod/no-chat-reports">no-chat-reports</a></td>
+<td><code>Do What The F*ck You Want To Public License</code></td>
+<td><code>NoChatReports-FABRIC-26.3-v2.21.0</code></td>
+<td>Needs a hook point</td>
+<td>Needs incoming-chat or screen hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>Pearl Optimizer</td>
+<td><a href="https://modrinth.com/mod/pearl_optimizer">pearl_optimizer</a></td>
+<td><code>see project</code></td>
+<td><code>PearlOptimizer-26.1-26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>Pick Up Notifier</td>
+<td><a href="https://modrinth.com/mod/pick-up-notifier">pick-up-notifier</a></td>
+<td><code>Mozilla Public License 2.0</code></td>
+<td><code>pickupnotifier-v26.3.0-mc26.3.x+fabric</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>pingview-fabric-1.6</td>
+<td><a href="https://modrinth.com/mod/ping-view">ping-view</a></td>
+<td><code>MIT License</code></td>
+<td><code>pingview-fabric-1.6</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>potioncounter-fabric-1.12.0+mc26.2</td>
+<td><a href="https://modrinth.com/mod/potioncounter">potioncounter</a></td>
+<td><code>MIT License</code></td>
+<td><code>potioncounter-fabric-1.12.1+mc26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>ScalableLux-0.1.6+fabric.c25518a-all</td>
+<td><a href="https://modrinth.com/mod/scalablelux">scalablelux</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>ScalableLux-fabric-mc26.3-0.3.0-alpha.0.6-all</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>searchstats-fabric-1.103.0+26.2</td>
+<td><a href="https://modrinth.com/mod/searchstats">searchstats</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>searchstats-fabric-1.103.0+26.2</code></td>
+<td>Needs a hook point</td>
+<td>Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).</td>
+</tr>
+<tr>
+<td>Shulker Box Tooltip</td>
+<td><a href="https://modrinth.com/mod/shulkerboxtooltip">shulkerboxtooltip</a></td>
+<td><code>MIT License</code></td>
+<td><code>shulkerboxtooltip-fabric-5.4.2+26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>SnappyTappy</td>
+<td><a href="https://modrinth.com/mod/snappytappy">snappytappy</a></td>
+<td><code>MIT</code></td>
+<td><code>26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs input or camera hooks that Horizon does not expose yet.</td>
+</tr>
+<tr>
+<td>status-effect-bars-1.0.10</td>
+<td><a href="https://modrinth.com/mod/status-effect-bars">status-effect-bars</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>status-effect-bars-1.0.12</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>statuseffecttimer-2.0.0+26.2</td>
+<td><a href="https://modrinth.com/mod/statuseffecttimer">statuseffecttimer</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>statuseffecttimer-2.0.0+26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>tiers-0.8.3+26.2</td>
+<td><a href="https://modrinth.com/mod/tiers">tiers</a></td>
+<td><code>GNU General Public License v3.0 only</code></td>
+<td><code>tiers-0.9.0+26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs a screen or world-data hook point.</td>
+</tr>
+<tr>
+<td>totemcounter-fabric-1.13.0+mc26.2</td>
+<td><a href="https://modrinth.com/mod/totemcounter">totemcounter</a></td>
+<td><code>MIT License</code></td>
+<td><code>totemcounter-fabric-1.14.0+mc26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>ukus-armor-hud-0.10.2+mc1.21.11</td>
+<td><a href="https://modrinth.com/mod/ukus-armor-hud">ukus-armor-hud</a></td>
+<td><code>MIT License</code></td>
+<td><code>ukus-armor-hud-fabric-0.13.0+mc26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs inventory, effect or item data that the hook points do not give a mod yet.</td>
+</tr>
+<tr>
+<td>VisualKeys-0.0.11+26.2</td>
+<td><a href="https://modrinth.com/mod/visualkeys">visualkeys</a></td>
+<td><code>see project</code></td>
+<td><code>VisualKeys-0.0.11+26.3</code></td>
+<td>Needs a hook point</td>
+<td>Needs incoming-chat or screen hooks that Horizon does not expose yet.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pack-or-asset-31">Pack or asset (31)</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Modrinth</th>
+<th>Upstream licence</th>
+<th>26.3 build</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anchor Optimizer</td>
+<td><a href="https://modrinth.com/mod/anchoroptimizer">anchoroptimizer</a></td>
+<td><code>see project</code></td>
+<td><code>AnchorOptimizer-26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>betterhurtcam-fabric-1.14.0+mc26.2</td>
+<td><a href="https://modrinth.com/mod/betterhurtcam">betterhurtcam</a></td>
+<td><code>MIT License</code></td>
+<td><code>betterhurtcam-fabric-1.15.0+mc26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Block Outline Customizer</td>
+<td><a href="https://modrinth.com/mod/block-outline-customizer">block-outline-customizer</a></td>
+<td><code>MIT</code></td>
+<td><code>1.5.0</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Capes</td>
+<td><a href="https://modrinth.com/mod/capes">capes</a></td>
+<td><code>GNU Lesser General Public License v2.1 only</code></td>
+<td><code>capes-1.5.10+26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>centered-crosshair+1.21.11-1.4.0</td>
+<td><a href="https://modrinth.com/mod/centered-crosshair">centered-crosshair</a></td>
+<td><code>MIT License</code></td>
+<td><code>centered-crosshair+26.3-1.6.0</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>ClearWaterLava-Fabric-26.2</td>
+<td><a href="https://modrinth.com/mod/clear-waterlavapowdersnow">clear-waterlavapowdersnow</a></td>
+<td><code>see project</code></td>
+<td><code>ClearWaterLava-Fabric-26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Cobweb Outline</td>
+<td><a href="https://modrinth.com/mod/cobweb-outline">cobweb-outline</a></td>
+<td><code>MIT License</code></td>
+<td><code>Cobweb Outline</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>ComplementaryUnbound_r5.8.1</td>
+<td><a href="https://modrinth.com/mod/complementary-unbound">complementary-unbound</a></td>
+<td><code>see project</code></td>
+<td><code>ComplementaryUnbound_r5.9.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>dark-loading-screen-1.6.19</td>
+<td><a href="https://modrinth.com/mod/dark-loading-screen">dark-loading-screen</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>dark-loading-screen-1.6.20</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Default Dark Mode: Expansion</td>
+<td><a href="https://modrinth.com/mod/default-dark-mode-expansion">default-dark-mode-expansion</a></td>
+<td><code>see project</code></td>
+<td><code>Default-Dark-Mode-Expansion-1.19.0+-2026.9.1</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Default-Dark-Mode-26.2-2026.6.0</td>
+<td><a href="https://modrinth.com/mod/default-dark-mode">default-dark-mode</a></td>
+<td><code>Creative Commons Attribution Non Commercial Share Alike 4.0 International</code></td>
+<td><code>Default-Dark-Mode-26.3-2026.9.0</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Eating Animation[1.0.1]</td>
+<td><a href="https://modrinth.com/mod/eating-animation-resourcepack">eating-animation-resourcepack</a></td>
+<td><code>Creative Commons Attribution 4.0 International</code></td>
+<td><code>Eating Animation[1.0.1]</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>EclipseUI-fabric-1.0.5+mc26.2-rc-2</td>
+<td><a href="https://modrinth.com/mod/eclipseui">eclipseui</a></td>
+<td><code>MIT License</code></td>
+<td><code>EclipseUI-fabric-1.0.5-fabric-26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Emissive Trims v1.5</td>
+<td><a href="https://modrinth.com/mod/emissive-trims">emissive-trims</a></td>
+<td><code>Creative Commons Attribution 4.0 International</code></td>
+<td><code>Emissive Trims v1.6</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>glow_trims-1.0</td>
+<td><a href="https://modrinth.com/mod/glow-trims">glow-trims</a></td>
+<td><code>MIT License</code></td>
+<td><code>glow_trims-1.0</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Low Fire</td>
+<td><a href="https://modrinth.com/mod/low-fire-pack">low-fire-pack</a></td>
+<td><code>see project</code></td>
+<td><code>Low Fire</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Low Shield</td>
+<td><a href="https://modrinth.com/mod/low-shield-pack">low-shield-pack</a></td>
+<td><code>see project</code></td>
+<td><code>Low Shield</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>miniature-shader-2.18.6</td>
+<td><a href="https://modrinth.com/mod/miniature-shader">miniature-shader</a></td>
+<td><code>MIT License</code></td>
+<td><code>miniature-shader-2.19</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>nofog-fabric-26.2</td>
+<td><a href="https://modrinth.com/mod/clear-fog">clear-fog</a></td>
+<td><code>see project</code></td>
+<td><code>nofog-fabric-26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Not Enough Animations</td>
+<td><a href="https://modrinth.com/mod/not-enough-animations">not-enough-animations</a></td>
+<td><code>see project</code></td>
+<td><code>notenoughanimations-fabric-1.12.6-mc26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>real-arrow-tip-0.3.1+mc26.2</td>
+<td><a href="https://modrinth.com/mod/real-arrow-tip">real-arrow-tip</a></td>
+<td><code>MIT License</code></td>
+<td><code>real-arrow-tip-0.3.1+mc26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Red Trapped Chests v1.0</td>
+<td><a href="https://modrinth.com/mod/red-trapped-chests">red-trapped-chests</a></td>
+<td><code>Creative Commons Attribution Non Commercial Share Alike 4.0 International</code></td>
+<td><code>Red Trapped Chests v1.0</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Remove Reloading Screen</td>
+<td><a href="https://modrinth.com/mod/rrls">rrls</a></td>
+<td><code>Open Software License 3.0</code></td>
+<td><code>5.2.8+mc26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>shieldfixes-2.0.4+26.2</td>
+<td><a href="https://modrinth.com/mod/complete-shield-fixes">complete-shield-fixes</a></td>
+<td><code>MIT License</code></td>
+<td><code>shieldfixes-2.0.4+26.2</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Short Swords</td>
+<td><a href="https://modrinth.com/mod/short-swords-pack">short-swords-pack</a></td>
+<td><code>Creative Commons Attribution 4.0 International</code></td>
+<td><code>Short Swords</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>skinlayers3d-fabric-1.11.2-mc26.2</td>
+<td><a href="https://modrinth.com/mod/3dskinlayers">3dskinlayers</a></td>
+<td><code>see project</code></td>
+<td><code>skinlayers3d-fabric-1.11.3-mc26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>skyboxify-3.3.1+26.2-fabric</td>
+<td><a href="https://modrinth.com/mod/skyboxify">skyboxify</a></td>
+<td><code>GNU General Public License v3.0 only</code></td>
+<td><code>skyboxify-3.4+26.3-fabric</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>Unique Dark - Lite - 1.20.2-26.x</td>
+<td><a href="https://modrinth.com/mod/unique-dark">unique-dark</a></td>
+<td><code>see project</code></td>
+<td><code>Unique Dark - Lite - 1.20.2-26.x</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>visual_armor_trims_4.2</td>
+<td><a href="https://modrinth.com/mod/visual-armor-trims">visual-armor-trims</a></td>
+<td><code>Creative Commons Attribution Share Alike 4.0 International</code></td>
+<td><code>visual_armor_trims_4.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>visuality-0.7.15+26.3</td>
+<td><a href="https://modrinth.com/mod/visuality">visuality</a></td>
+<td><code>MIT License</code></td>
+<td><code>visuality-0.7.15+26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+<tr>
+<td>waveycapes-fabric-1.10.2-mc26.2</td>
+<td><a href="https://modrinth.com/mod/wavey-capes">wavey-capes</a></td>
+<td><code>see project</code></td>
+<td><code>waveycapes-fabric-1.11.2-mc26.3</code></td>
+<td>Pack or asset</td>
+<td>Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="engine-or-server-31">Engine or server (31)</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Modrinth</th>
+<th>Upstream licence</th>
+<th>26.3 build</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BadOptimizations</td>
+<td><a href="https://modrinth.com/mod/badoptimizations">badoptimizations</a></td>
+<td><code>MIT License</code></td>
+<td><code>BadOptimizations-2.4.1-26.3-fabric</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Concurrent Chunk Management Engine (Fabric)</td>
+<td><a href="https://modrinth.com/mod/c2me-fabric">c2me-fabric</a></td>
+<td><code>MIT License</code></td>
+<td><code>c2me-fabric-mc26.3-0.4.2-alpha.0.88</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>continuity-3.0.1+26.2</td>
+<td><a href="https://modrinth.com/mod/continuity">continuity</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>continuity-3.0.1+26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>CrashAssistant-fabric-26.2-1.11.12</td>
+<td><a href="https://modrinth.com/mod/crash-assistant">crash-assistant</a></td>
+<td><code>see project</code></td>
+<td><code>CrashAssistant-fabric-26.2-26.3-1.11.14</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>debugify-26.2.0.0</td>
+<td><a href="https://modrinth.com/mod/debugify">debugify</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>debugify-26.3.0.0</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Dynamic FPS</td>
+<td><a href="https://modrinth.com/mod/dynamic-fps">dynamic-fps</a></td>
+<td><code>MIT License</code></td>
+<td><code>dynamic-fps-3.11.10+minecraft-26.3.0-fabric</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>e4mc</td>
+<td><a href="https://modrinth.com/mod/e4mc">e4mc</a></td>
+<td><code>MIT License</code></td>
+<td><code>6.2.3-fabric-modern</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Entity Culling</td>
+<td><a href="https://modrinth.com/mod/entityculling">entityculling</a></td>
+<td><code>see project</code></td>
+<td><code>entityculling-fabric-1.11.2-mc26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Fast IP Ping</td>
+<td><a href="https://modrinth.com/mod/fast-ip-ping">fast-ip-ping</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>fast-ip-ping-v1.0.12-mc26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>fastquit-3.1.5+mc26.2</td>
+<td><a href="https://modrinth.com/mod/fastquit">fastquit</a></td>
+<td><code>MIT License</code></td>
+<td><code>fastquit-3.1.5+mc26.2</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>FerriteCore</td>
+<td><a href="https://modrinth.com/mod/ferrite-core">ferrite-core</a></td>
+<td><code>MIT License</code></td>
+<td><code>ferritecore-9.0.0-fabric</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>ImmediatelyFast</td>
+<td><a href="https://modrinth.com/mod/immediatelyfast">immediatelyfast</a></td>
+<td><code>GNU Lesser General Public License v3.0 or later</code></td>
+<td><code>1.17.1+26.3-fabric</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>inventorytotem-26.2.0-3.4</td>
+<td><a href="https://modrinth.com/mod/inventory-totem">inventory-totem</a></td>
+<td><code>see project</code></td>
+<td><code>inventorytotem-26.3.0-3.4</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>iris-fabric-1.10.7+mc1.21.11</td>
+<td><a href="https://modrinth.com/mod/iris">iris</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>iris-fabric-1.11.6+mc26.3</code>; <code>iris-fabric-1.11.7+mc26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Krypton</td>
+<td><a href="https://modrinth.com/mod/krypton">krypton</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>0.3.2</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Lithium</td>
+<td><a href="https://modrinth.com/mod/lithium">lithium</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>lithium-fabric-0.26.1+mc26.3</code>; <code>lithium-fabric-0.26.2+mc26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>modernfix-5.27.19-build.1</td>
+<td><a href="https://modrinth.com/mod/modernfix-mvus">modernfix-mvus</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>modernfix-5.27.20-build.1</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>More Culling</td>
+<td><a href="https://modrinth.com/mod/moreculling">moreculling</a></td>
+<td><code>GNU General Public License v3.0 only</code></td>
+<td><code>moreculling-fabric-26.3-1.9.0-beta.1</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>nvidium-0.4.4-beta4-26.2</td>
+<td><a href="https://modrinth.com/mod/nvidium">nvidium</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>nvidium-0.4.4-beta7-26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Packet Fixer</td>
+<td><a href="https://modrinth.com/mod/packet-fixer">packet-fixer</a></td>
+<td><code>MIT License</code></td>
+<td><code>PacketFixer-fabric-3.3.6</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Reese's Sodium Options</td>
+<td><a href="https://modrinth.com/mod/reeses-sodium-options">reeses-sodium-options</a></td>
+<td><code>MIT License</code></td>
+<td><code>reeses-sodium-options-fabric-2.2.5+mc26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>servercore-fabric-1.5.19+26.2</td>
+<td><a href="https://modrinth.com/mod/servercore">servercore</a></td>
+<td><code>MIT License</code></td>
+<td><code>servercore-fabric-1.5.20+26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Silicon-26.1.X</td>
+<td><a href="https://modrinth.com/mod/silicons">silicons</a></td>
+<td><code>MIT License</code></td>
+<td><code>Silicon-1.21.X-26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Sodium</td>
+<td><a href="https://modrinth.com/mod/sodium">sodium</a></td>
+<td><code>see project</code></td>
+<td><code>sodium-fabric-0.9.2+mc26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Sodium Shadowy Path Blocks (SSPB)</td>
+<td><a href="https://modrinth.com/mod/sodium-shadowy-path-blocks">sodium-shadowy-path-blocks</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>sodium-shadowy-path-blocks-fabric-8.0.0</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>sodium-extra-fabric-0.8.3+mc1.21.11</td>
+<td><a href="https://modrinth.com/mod/sodium-extra">sodium-extra</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>sodium-extra-fabric-0.9.4+mc26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>SodiumTranslations</td>
+<td><a href="https://modrinth.com/mod/translations-for-sodium">translations-for-sodium</a></td>
+<td><code>Creative Commons Zero v1.0 Universal</code></td>
+<td><code>SodiumTranslations</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>spark-1.10.173-fabric</td>
+<td><a href="https://modrinth.com/mod/spark">spark</a></td>
+<td><code>GNU General Public License v3.0 only</code></td>
+<td><code>spark-1.10.187-fabric</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>Very Many Players (Fabric)</td>
+<td><a href="https://modrinth.com/mod/vmp-fabric">vmp-fabric</a></td>
+<td><code>MIT License</code></td>
+<td><code>vmp-fabric-mc26.3-0.2.0+beta.7.238-all</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>voicechat-fabric-1.21.11-2.6.15</td>
+<td><a href="https://modrinth.com/mod/simple-voice-chat">simple-voice-chat</a></td>
+<td><code>see project</code></td>
+<td><code>voicechat-fabric-2.6.24+26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+<tr>
+<td>zfastnoise-1.0.40+26.2</td>
+<td><a href="https://modrinth.com/mod/zfastnoise">zfastnoise</a></td>
+<td><code>Mozilla Public License 2.0</code></td>
+<td><code>zfastnoise-1.1.0-beta.5+26.3</code></td>
+<td>Engine or server</td>
+<td>Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="library-28">Library (28)</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Modrinth</th>
+<th>Upstream licence</th>
+<th>26.3 build</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>adventure-platform-fabric-7.2.0</td>
+<td><a href="https://modrinth.com/mod/adventure-platform-mod">adventure-platform-mod</a></td>
+<td><code>MIT License</code></td>
+<td><code>adventure-platform-fabric-7.2.0</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>balm-fabric-26.2-26.2.0.6</td>
+<td><a href="https://modrinth.com/mod/balm">balm</a></td>
+<td><code>see project</code></td>
+<td><code>balm-fabric-26.3-26.3.0.1</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>Better Compatibility Checker</td>
+<td><a href="https://modrinth.com/mod/better-compatibility-checker">better-compatibility-checker</a></td>
+<td><code>see project</code></td>
+<td><code>better-compatability-checker-fabric-26.3.0.1</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>Bookshelf-fabric-MC26.3-26.3.0.1</td>
+<td><a href="https://modrinth.com/mod/bookshelf-lib">bookshelf-lib</a></td>
+<td><code>GNU Lesser General Public License v2.1 only</code></td>
+<td><code>Bookshelf-fabric-MC26.3-26.3.0.1</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>clienttweaks-fabric-26.2-26.2.0.6</td>
+<td><a href="https://modrinth.com/mod/client-tweaks">client-tweaks</a></td>
+<td><code>see project</code></td>
+<td><code>clienttweaks-fabric-26.3-26.3.0.1</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>cloth-config-21.11.153-fabric</td>
+<td><a href="https://modrinth.com/mod/cloth-config">cloth-config</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>cloth-config-fabric-26.3.159</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>collective-26.2.0-8.39</td>
+<td><a href="https://modrinth.com/mod/collective">collective</a></td>
+<td><code>see project</code></td>
+<td><code>collective-26.3.0-8.40</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>compose-bundle-1.0.4+compose.1.12.0</td>
+<td><a href="https://modrinth.com/mod/compose-multiplatform">compose-multiplatform</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>compose-bundle-1.0.4+compose.1.12.0</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>Essential_1-4-1-1_fabric_26-2</td>
+<td><a href="https://modrinth.com/mod/essential">essential</a></td>
+<td><code>see project</code></td>
+<td><code>Essential_1-5-0-1_fabric_26-3</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>Fabric Language Kotlin</td>
+<td><a href="https://modrinth.com/mod/fabric-language-kotlin">fabric-language-kotlin</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>fabric-language-kotlin-1.14.1+kotlin.2.4.20</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>fabric-api-0.141.3+1.21.11</td>
+<td><a href="https://modrinth.com/mod/fabric-api">fabric-api</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>fabric-api-0.161.0+26.3</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>Forge Config API Port</td>
+<td><a href="https://modrinth.com/mod/forge-config-api-port">forge-config-api-port</a></td>
+<td><code>Mozilla Public License 2.0</code></td>
+<td><code>ForgeConfigAPIPort-v26.3.1-mc26.3.x-Fabric</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>fzzy_config-0.7.6+26.2</td>
+<td><a href="https://modrinth.com/mod/fzzy-config">fzzy-config</a></td>
+<td><code>see project</code></td>
+<td><code>fzzy_config-0.7.7+fix2+26.3</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>konkrete_fabric_1.11.1_MC_26.2</td>
+<td><a href="https://modrinth.com/mod/konkrete">konkrete</a></td>
+<td><code>Apache License 2.0</code></td>
+<td><code>konkrete_fabric_1.11.1_MC_26.3</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>libjf-26.2.2</td>
+<td><a href="https://modrinth.com/mod/libjf">libjf</a></td>
+<td><code>GNU Lesser General Public License v3.0 or later</code></td>
+<td><code>libjf-26.3.1</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>malilib-fabric-26.2-0.29.4</td>
+<td><a href="https://modrinth.com/mod/malilib">malilib</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>malilib-fabric-26.3-0.30.1</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>midnightlib-fabric-1.9.3+1.21.11</td>
+<td><a href="https://modrinth.com/mod/midnightlib">midnightlib</a></td>
+<td><code>MIT License</code></td>
+<td><code>midnightlib-fabric-1.9.3+26.3-rc-2</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>OneConfig-26.3-fabric-1.2.6</td>
+<td><a href="https://modrinth.com/mod/oneconfig">oneconfig</a></td>
+<td><code>see project</code></td>
+<td><code>OneConfig-26.3-fabric-1.2.6</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>PrickleMC-fabric-MC26.2-26.2.0.3</td>
+<td><a href="https://modrinth.com/mod/prickle">prickle</a></td>
+<td><code>GNU Lesser General Public License v2.1 only</code></td>
+<td><code>PrickleMC-fabric-MC26.3-26.3.0.2</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>PuzzlesLib-v26.2.3-mc26.2.x-Fabric</td>
+<td><a href="https://modrinth.com/mod/puzzles-lib">puzzles-lib</a></td>
+<td><code>Mozilla Public License 2.0</code></td>
+<td><code>puzzleslib-v26.3.4-mc26.3.x+fabric</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>Resourcify (26.2-fabric)-1.8.5</td>
+<td><a href="https://modrinth.com/mod/resourcify">resourcify</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>Resourcify (26.3-fabric)-1.8.6</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>SuperMartijn642's Config Lib</td>
+<td><a href="https://modrinth.com/mod/supermartijn642s-config-lib">supermartijn642s-config-lib</a></td>
+<td><code>see project</code></td>
+<td><code>supermartijn642configlib-1.1.8-fabric-mc26.3</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>tcdcommons-5.5.6+fn-26.2</td>
+<td><a href="https://modrinth.com/mod/tcdcommons">tcdcommons</a></td>
+<td><code>see project</code></td>
+<td><code>tcdcommons-5.6.0-beta.1+fn-26.3</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>Text Placeholder API</td>
+<td><a href="https://modrinth.com/mod/placeholder-api">placeholder-api</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>placeholder-api-3.2.0+26.3</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>ukulib-1.10.2+1.21.11</td>
+<td><a href="https://modrinth.com/mod/ukulib">ukulib</a></td>
+<td><code>Mozilla Public License 2.0</code></td>
+<td><code>ukulib-fabric-2.2.0+26.3</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>WalksyLib-1.0.12+26.2</td>
+<td><a href="https://modrinth.com/mod/walksylib">walksylib</a></td>
+<td><code>MIT License</code></td>
+<td><code>WalksyLib-1.0.12+26.2</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>YetAnotherConfigLib (YACL)</td>
+<td><a href="https://modrinth.com/mod/yacl">yacl</a></td>
+<td><code>GNU Lesser General Public License v3.0 or later</code></td>
+<td><code>yet_another_config_lib_v3-3.9.7+26.3-fabric</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+<tr>
+<td>zconfig-1.0.0+26.x</td>
+<td><a href="https://modrinth.com/mod/zconfig">zconfig</a></td>
+<td><code>Mozilla Public License 2.0</code></td>
+<td><code>zconfig-1.0.0+26.x</code></td>
+<td>Library</td>
+<td>A library other Fabric mods load; Horizon's native mods do not use Fabric libraries.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="no-263-build-45">No 26.3 build (45)</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Modrinth</th>
+<th>Upstream licence</th>
+<th>26.3 build</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[EMF] Entity Model Features</td>
+<td><a href="https://modrinth.com/mod/entity-model-features">entity-model-features</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>alternate-current-mc1.21.11-1.9.0</td>
+<td><a href="https://modrinth.com/mod/alternate-current">alternate-current</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Better Hitboxes</td>
+<td><a href="https://modrinth.com/mod/betterhitboxes">betterhitboxes</a></td>
+<td><code>LicenseRef-All-Rights-Reserved</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>BetterF3-19.0.0-Fabric-26.2</td>
+<td><a href="https://modrinth.com/mod/betterf3">betterf3</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Bobby</td>
+<td><a href="https://modrinth.com/mod/bobby">bobby</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Carpet</td>
+<td><a href="https://modrinth.com/mod/carpet">carpet</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>chatpatches-8.0-alpha.11+26.2-fabric</td>
+<td><a href="https://modrinth.com/mod/chatpatches">chatpatches</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>CIT Resewn</td>
+<td><a href="https://modrinth.com/mod/cit-resewn">cit-resewn</a></td>
+<td><code>MIT</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>ConsumableOptimizer-2.2.2-26.2</td>
+<td><a href="https://modrinth.com/mod/consumableoptimizer">consumableoptimizer</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>CrosshairAddons-2.1.4-26.2</td>
+<td><a href="https://modrinth.com/mod/crosshair-addons-public">crosshair-addons-public</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Crystal Speed</td>
+<td><a href="https://modrinth.com/mod/crystal-speed">crystal-speed</a></td>
+<td><code>LicenseRef-All-Rights-Reserved</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Custom Glint</td>
+<td><a href="https://modrinth.com/mod/custom-glint">custom-glint</a></td>
+<td><code>LicenseRef-All-Rights-Reserved</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Custom Shield Scale</td>
+<td><a href="https://modrinth.com/mod/shieldscale">shieldscale</a></td>
+<td><code>LicenseRef-All-Rights-Reserved</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>cwb-4.1.0+26.2</td>
+<td><a href="https://modrinth.com/mod/cubes-without-borders">cubes-without-borders</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Enchantment Descriptions</td>
+<td><a href="https://modrinth.com/mod/enchantment-descriptions">enchantment-descriptions</a></td>
+<td><code>GNU Lesser General Public License v2.1 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Enchantment Insights</td>
+<td><a href="https://modrinth.com/mod/enchantment-insights">enchantment-insights</a></td>
+<td><code>Mozilla Public License 2.0</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Enhanced Block Entities</td>
+<td><a href="https://modrinth.com/mod/ebe">ebe</a></td>
+<td><code>LGPL-3.0-only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>f5split-2.1.0+mc26.2</td>
+<td><a href="https://modrinth.com/mod/f5-split">f5-split</a></td>
+<td><code>see project</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Fullbright</td>
+<td><a href="https://modrinth.com/mod/fullbright">fullbright</a></td>
+<td><code>GPL-3.0-only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>herobot-1.21.11-1.4.3+v260315</td>
+<td><a href="https://modrinth.com/mod/herobot">herobot</a></td>
+<td><code>Creative Commons Attribution Non Commercial 4.0 International</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>hudmanager-4.0.3</td>
+<td><a href="https://modrinth.com/mod/hud-manager">hud-manager</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Item Scale</td>
+<td><a href="https://modrinth.com/mod/itemscale">itemscale</a></td>
+<td><code>LicenseRef-All-Rights-Reserved</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>lambdynamiclights-4.9.1+1.21.11</td>
+<td><a href="https://modrinth.com/mod/lambdynamiclights">lambdynamiclights</a></td>
+<td><code>see project</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>language-reload-1.7.7+26.2</td>
+<td><a href="https://modrinth.com/mod/language-reload">language-reload</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Mace Optimizer</td>
+<td><a href="https://modrinth.com/mod/mace_optimizer">mace_optimizer</a></td>
+<td><code>LicenseRef-All-Rights-Reserved</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Memory Leak Fix</td>
+<td><a href="https://modrinth.com/mod/memoryleakfix">memoryleakfix</a></td>
+<td><code>LGPL-2.1-only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>minihud-fabric-1.21.11-0.38.2</td>
+<td><a href="https://modrinth.com/mod/minihud">minihud</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Model Gap Fix</td>
+<td><a href="https://modrinth.com/mod/modelfix">modelfix</a></td>
+<td><code>GPL-3.0-only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>No Death Animation</td>
+<td><a href="https://modrinth.com/mod/no-death-animation">no-death-animation</a></td>
+<td><code>MIT</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>noisium-fabric-2.8.5+mc26.2-pre-2</td>
+<td><a href="https://modrinth.com/mod/noisiumforked">noisiumforked</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>noxesium-fabric-3.2.4</td>
+<td><a href="https://modrinth.com/mod/noxesium">noxesium</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Particle Core</td>
+<td><a href="https://modrinth.com/mod/particle-core">particle-core</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Particle Rain</td>
+<td><a href="https://modrinth.com/mod/particle-rain">particle-rain</a></td>
+<td><code>MIT</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>puzzle-fabric-2.3.1+26.2</td>
+<td><a href="https://modrinth.com/mod/puzzle">puzzle</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>reflex-fabric-1.0.4+26.2</td>
+<td><a href="https://modrinth.com/mod/reflex-antilag">reflex-antilag</a></td>
+<td><code>see project</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Searchables-fabric-1.21.11-1.0.2</td>
+<td><a href="https://modrinth.com/mod/searchables">searchables</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>ShieldStatus-4.1.8+26.2</td>
+<td><a href="https://modrinth.com/mod/shield-statuses">shield-statuses</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>slyde-26.2.0</td>
+<td><a href="https://modrinth.com/mod/slyde">slyde</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>ToolTipFix</td>
+<td><a href="https://modrinth.com/mod/tooltipfix">tooltipfix</a></td>
+<td><code>MIT</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>totemtweaks-26.2-1.2.0</td>
+<td><a href="https://modrinth.com/mod/cpvp">cpvp</a></td>
+<td><code>see project</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>tweakeroo-fabric-1.21.11-0.27.2</td>
+<td><a href="https://modrinth.com/mod/tweakeroo">tweakeroo</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>voxy-0.2.8-alpha</td>
+<td><a href="https://modrinth.com/mod/voxy">voxy</a></td>
+<td><code>see project</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>VulkanMod</td>
+<td><a href="https://modrinth.com/mod/vulkanmod">vulkanmod</a></td>
+<td><code>LGPL-3.0-only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>Xp Bottle Optimizer</td>
+<td><a href="https://modrinth.com/mod/xp-bottle-optimizer">xp-bottle-optimizer</a></td>
+<td><code>LicenseRef-All-Rights-Reserved</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+<tr>
+<td>yosbr-0.1.2</td>
+<td><a href="https://modrinth.com/mod/yosbr">yosbr</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>-</code></td>
+<td>No 26.3 build</td>
+<td>No Fabric build for 26.3, the game version Horizon implements.</td>
+</tr>
+</tbody>
+</table>
+<nav class="pager" aria-label="Previous and next"><a class="prev" href="compatibility.html"><small>Previous</small>Compatibility</a><a class="next" href="modules.html"><small>Next</small>Modules and Horizon</a></nav>
+<p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/MODS.md">Edit this page on GitHub</a></p>
+</main>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#status">Status</a><a class="" href="#ported-5">Ported (5)</a><a class="" href="#partly-ported-2">Partly ported (2)</a><a class="" href="#needs-a-hook-point-44">Needs a hook point (44)</a><a class="" href="#pack-or-asset-31">Pack or asset (31)</a><a class="" href="#engine-or-server-31">Engine or server (31)</a><a class="" href="#library-28">Library (28)</a><a class="" href="#no-263-build-45">No 26.3 build (45)</a></aside>
+</div>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="../mods/index.html">The mods</a><a href="../docs/catalogue.html">Status of every mod</a><a href="../roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="../docs/install.html">Install a mod</a><a href="../docs/hook-points.html">Hook points</a><a href="../docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="../docs/credits.html">Credits</a><a href="../docs/licensing.html">Licensing</a><a href="../docs/dmca.html">DMCA and takedowns</a><a href="../docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

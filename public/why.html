@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-root="./">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why native mods · horizon-mods-lib</title>
+<meta name="description" content="Native mods for Horizon, ported to Rust: one small tested project per mod, each released automatically.">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><img src="assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="index.html">Home</a><a href="mods/index.html">Mods</a><a href="why.html" aria-current=page>Why native</a><a href="from-fabric.html">From Fabric</a><a href="trust.html">Trust</a><a href="roadmap.html">Roadmap</a><a href="docs/introduction.html">Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<main><section class="hero" style="padding-bottom:1.5rem"><div class="wrap">
+<span class="eyebrow">Why native</span>
+<h1 class="big" style="max-width:20ch">Mods you can <span class="text-accent">read, test and trust.</span></h1>
+<p class="lede">A plugin system is a promise that code you did not read will behave. Horizon's native mods make a smaller promise and keep it: the bundle is source, and the source is short.</p>
+</div></section>
+<section class="block"><div class="wrap prose-wide">
+<h2 class="sec">There is nothing to load</h2>
+<p>A Fabric mod is a jar the game opens at start-up, patches with bytecode tricks and runs inside the same JVM. Horizon is native
+Rust, so a mod cannot be loaded that way, and does not need to be. <strong>horizon-mixins</strong> works on the game's source tree: it parses the Rust,
+applies the injections a mod declares, and the compiler sees one program. A hook is a function call that was written into the game before it
+was built. No reflection, no class loader, nothing that decides at run time what runs.</p>
+<h2 class="sec">The bundle is the source</h2>
+<p>A <code>.hnmod</code> is a zip of <code>.rs</code> and <code>.toml</code> files and a licence. Nothing compiled is in it. The launcher checks it
+without running anything, refuses links, odd paths and anything beyond the bundle layout, and then builds it for your instance behind a red warning,
+because native code has the player's rights. Horizon's registry lists a native mod only after a maintainer has read its source. You can do the same in
+the time it takes to drink a coffee: here, a mod's logic is one file of a few hundred lines at most.</p>
+<h2 class="sec">Logic that does not need the game to test</h2>
+<p>Each project's Cargo library <em>is</em> its <code>runtime.rs</code>. The game's types never appear in it; the hook helpers read what they need and pass plain
+values in. That is why a zoom's wheel limits, a waypoint's bearing maths and a speedometer's smoothing have unit tests that run in under a second, and
+why a bug in them is a failed test instead of a crashed game.</p>
+<h2 class="sec">Small on purpose</h2>
+<p>There are no dependencies in any of these projects. There is no <code>unsafe</code>, no network access and no process spawning. A mod that is switched off in Options
+does nothing at all until the next build leaves it out. Settings are one file per key in the mod's own folder.</p>
+<h2 class="sec">What it costs</h2>
+<div class="note"><b>Build time.</b> Every set of mods is a build of the game: the first one downloads a toolchain and takes 20 to 30 minutes, a rebuild of one changed helper takes a few
+minutes. <b>Reach.</b> A native mod can only do what a hook point allows. <b>Servers.</b> Native mods are not built for dedicated servers yet; on a server you join, only client-side hooks do anything.
+<b>Maturity.</b> Native mods are experimental in Horizon. We say so on every page that matters.</div>
+<div class="btns" style="margin-top:2rem"><a class="btn primary" href="from-fabric.html">See how a port goes</a><a class="btn" href="docs/hook-points.html">The hook points</a></div>
+</div></section></main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="mods/index.html">The mods</a><a href="docs/catalogue.html">Status of every mod</a><a href="roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="docs/install.html">Install a mod</a><a href="docs/hook-points.html">Hook points</a><a href="docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="docs/credits.html">Credits</a><a href="docs/licensing.html">Licensing</a><a href="docs/dmca.html">DMCA and takedowns</a><a href="docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

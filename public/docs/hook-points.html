@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hook points · horizon-mods-lib</title>
+<meta name="description" content="Hook points The hook points are empty functions in Horizon&#x27;s crates/horizon-client/src/game/native_hooks.rs . The game calls them at fixed places; a n">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../index.html"><img src="../assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="../index.html">Home</a><a href="../mods/index.html">Mods</a><a href="../why.html">Why native</a><a href="../from-fabric.html">From Fabric</a><a href="../trust.html">Trust</a><a href="../roadmap.html">Roadmap</a><a href="../docs/introduction.html" aria-current=page>Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<div class="docs">
+<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html">Introduction</a><a href="install.html">Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><h5>Reference</h5><a href="hook-points.html" aria-current=page>Hook points</a><a href="anatomy.html">Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html">Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html">Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html">Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
+<main class="doc">
+<div class="crumbs"><a href="introduction.html">Docs</a> / Reference</div>
+<h1 id="hook-points">Hook points</h1>
+<p>The hook points are empty functions in Horizon's <code>crates/horizon-client/src/game/native_hooks.rs</code>. The game calls them at fixed
+places; a native mod hooks them with HEAD injections. They keep their names and signatures from release to release and are only ever
+added; each addition raises <code>NATIVE_HOOKS_API</code> (3 at the commit these projects were tested on).</p>
+<table>
+<thead>
+<tr>
+<th>Hook</th>
+<th>Called</th>
+<th>These projects use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>native_frame(elapsed)</code></td>
+<td>Once a frame</td>
+<td>Nothing yet</td>
+</tr>
+<tr>
+<td><code>native_tick()</code></td>
+<td>Once a tick, in every <code>Game</code> (check <code>native_window()</code>)</td>
+<td><code>info-hud</code>: speed from how far you moved</td>
+</tr>
+<tr>
+<td><code>native_world_lifecycle(…)</code></td>
+<td>World open, open failed, final close (API 3)</td>
+<td>Nothing yet</td>
+</tr>
+<tr>
+<td><code>native_hud(batch, corners)</code></td>
+<td>The HUD, not under F1</td>
+<td>Every HUD mod: <code>corners.place</code> a box, draw with <code>native_fill</code> and <code>native_text</code></td>
+</tr>
+<tr>
+<td><code>native_key(key, pressed)</code></td>
+<td>A key or mouse button, by vanilla name</td>
+<td><code>zoomify</code>, <code>simple-zoom</code></td>
+</tr>
+<tr>
+<td><code>native_wheel(steps, claimed)</code></td>
+<td>Wheel steps while playing</td>
+<td>The zoom mods claim them while zoomed</td>
+</tr>
+<tr>
+<td><code>native_command(command, ran)</code></td>
+<td>A chat command, before the server sees it</td>
+<td><code>/fps</code>, <code>/wp</code>, <code>/hud</code>…</td>
+</tr>
+<tr>
+<td><code>native_zoom(zoom)</code></td>
+<td>Each frame while playing</td>
+<td>The zoom mods set factor, smoothing and turn scale</td>
+</tr>
+<tr>
+<td><code>native_minimap(minimap)</code></td>
+<td>Each frame</td>
+<td>Nothing here; Horizon ships a minimap</td>
+</tr>
+<tr>
+<td><code>native_mods(mods)</code></td>
+<td>Options → Mods lists native mods</td>
+<td>Every mod pushes its row</td>
+</tr>
+<tr>
+<td><code>native_settings(mod_id, buttons)</code></td>
+<td>A mod's settings page opens</td>
+<td>Every mod pushes its buttons</td>
+</tr>
+<tr>
+<td><code>native_settings_click(mod_id, button)</code></td>
+<td>A button was clicked</td>
+<td>Every mod flips its option</td>
+</tr>
+<tr>
+<td><code>native_panel_event(…)</code></td>
+<td>The item panel's clicks (API 2)</td>
+<td>Nothing yet</td>
+</tr>
+</tbody>
+</table>
+<h2 id="helpers-the-game-gives-a-mod">Helpers the game gives a mod</h2>
+<p><code>native_on</code>, <code>native_playing</code>, <code>native_window</code>, <code>native_corner_shown</code>, <code>native_text_width</code>, <code>native_fill</code>, <code>native_text</code>,
+<code>native_player</code> (position, yaw, pitch, dimension), <code>native_frame_rate</code>, <code>native_clicks</code>, <code>native_mapping</code>, <code>native_mod_key</code>,
+<code>native_chat</code>, <code>native_data_dir</code>, <code>native_setting</code>, <code>native_set_setting</code>, and the item and recipe helpers of API 2.</p>
+<h2 id="what-the-hook-points-cannot-do-yet">What the hook points cannot do yet</h2>
+<p>No inventory, effects, incoming chat, camera, input injection or world data beyond the player's position. That is the reason
+most of the <a href="catalogue.html">catalogue</a> is marked <em>needs a hook point</em>: armour and potion HUDs need the inventory and effects, chat
+mods need incoming chat, Freecam and Freelook need the camera. Raising a hook point is a change to Horizon, not to a mod; the
+contract is described in <code>docs/native-mods.md</code> and <code>native-hooks.json</code> in the Horizon repository.</p>
+<nav class="pager" aria-label="Previous and next"><a class="prev" href="mods/waypoints.html"><small>Previous</small>Waypoints</a><a class="next" href="anatomy.html"><small>Next</small>Anatomy of a mod</a></nav>
+<p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/docs/hook-points.md">Edit this page on GitHub</a></p>
+</main>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#helpers-the-game-gives-a-mod">Helpers the game gives a mod</a><a class="" href="#what-the-hook-points-cannot-do-yet">What the hook points cannot do yet</a></aside>
+</div>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="../mods/index.html">The mods</a><a href="../docs/catalogue.html">Status of every mod</a><a href="../roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="../docs/install.html">Install a mod</a><a href="../docs/hook-points.html">Hook points</a><a href="../docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="../docs/credits.html">Credits</a><a href="../docs/licensing.html">Licensing</a><a href="../docs/dmca.html">DMCA and takedowns</a><a href="../docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

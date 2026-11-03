@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contributing · horizon-mods-lib</title>
+<meta name="description" content="Contributing Ports are welcome. A good one is small, tested, and honest about what the hook points let it do. Pick a mod that fits the hook points. Th">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../index.html"><img src="../assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="../index.html">Home</a><a href="../mods/index.html">Mods</a><a href="../why.html">Why native</a><a href="../from-fabric.html">From Fabric</a><a href="../trust.html">Trust</a><a href="../roadmap.html">Roadmap</a><a href="../docs/introduction.html" aria-current=page>Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<div class="docs">
+<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html">Introduction</a><a href="install.html">Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><h5>Reference</h5><a href="hook-points.html">Hook points</a><a href="anatomy.html">Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html">Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html">Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html" aria-current=page>Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
+<main class="doc">
+<div class="crumbs"><a href="introduction.html">Docs</a> / Project</div>
+<h1 id="contributing">Contributing</h1>
+<p>Ports are welcome. A good one is small, tested, and honest about what the hook points let it do.</p>
+<ol>
+<li><strong>Pick a mod that fits the hook points.</strong> The <a href="catalogue.html">catalogue</a> marks what needs a hook point and what does not; if a mod
+   needs one, the useful contribution is a pull request to <a href="https://github.com/horizon-rust/horizon">Horizon</a> that adds the hook point.</li>
+<li><strong>Copy a project folder</strong> under <code>mods/</code> and rename it (<code>slug</code> for the folder, <code>snake_case</code> for the id). Keep <code>runtime.rs</code> pure,
+   put the tests in it, keep each helper a few lines.</li>
+<li><strong>Write it from behaviour.</strong> Do not copy or translate upstream code. See <a href="licensing.html">Licensing</a>.</li>
+<li><strong>Run</strong> <code>cargo fmt</code>, <code>cargo clippy --all-targets --locked -- -D warnings</code>, <code>cargo test --locked</code>, and
+   <code>python3 tools/mods.py check &lt;slug&gt;</code>.</li>
+<li><strong>Add</strong> a <code>release-&lt;slug&gt;.yml</code> (copy an existing one and change the slug), a row in <code>docs/credits.md</code>, and an icon in <code>assets/icons/</code>.</li>
+<li>Open the pull request. CI applies all mods on the pinned Horizon.</li>
+</ol>
+<p>Be accurate in README claims: say what the mod does and what it does not, and name the upstream mod and its licence.</p>
+<nav class="pager" aria-label="Previous and next"><a class="prev" href="security.html"><small>Previous</small>Security</a><a class="next" href="changelog.html"><small>Next</small>Changelog</a></nav>
+<p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/docs/contributing.md">Edit this page on GitHub</a></p>
+</main>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5></aside>
+</div>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="../mods/index.html">The mods</a><a href="../docs/catalogue.html">Status of every mod</a><a href="../roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="../docs/install.html">Install a mod</a><a href="../docs/hook-points.html">Hook points</a><a href="../docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="../docs/credits.html">Credits</a><a href="../docs/licensing.html">Licensing</a><a href="../docs/dmca.html">DMCA and takedowns</a><a href="../docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

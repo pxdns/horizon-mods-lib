@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-root="./">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Fabric to Horizon · horizon-mods-lib</title>
+<meta name="description" content="Native mods for Horizon, ported to Rust: one small tested project per mod, each released automatically.">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><img src="assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="index.html">Home</a><a href="mods/index.html">Mods</a><a href="why.html">Why native</a><a href="from-fabric.html" aria-current=page>From Fabric</a><a href="trust.html">Trust</a><a href="roadmap.html">Roadmap</a><a href="docs/introduction.html">Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<main><section class="hero" style="padding-bottom:1.5rem"><div class="wrap">
+<span class="eyebrow">Porting</span>
+<h1 class="big" style="max-width:21ch">From Fabric to Horizon, <span class="text-accent">one behaviour at a time.</span></h1>
+<p class="lede">The Tempest project has a matrix of 186 Fabric mods across five game versions. This is what happens when you take that list to a game written in Rust.</p>
+</div></section>
+<section class="block"><div class="wrap">
+<h2 class="sec">Start with the list</h2>
+<p class="sub">Horizon implements Minecraft 26.3, so the first filter is blunt: 45 of the 186 mods have no 26.3 build and are out. Of the remaining 141, most are libraries, performance mods a native engine does not need, or packs. What is left is a short list of mods that
+are about what you see and press.</p>
+<div class="bars"><div class="bar"><span>Ported</span><i style="width:8%"></i><em>5</em></div><div class="bar"><span>Partly ported</span><i style="width:3%"></i><em>2</em></div><div class="bar"><span>Needs a hook point</span><i style="width:71%"></i><em>44</em></div><div class="bar"><span>Pack or asset</span><i style="width:50%"></i><em>31</em></div><div class="bar"><span>Engine or server</span><i style="width:50%"></i><em>31</em></div><div class="bar"><span>Library</span><i style="width:45%"></i><em>28</em></div><div class="bar"><span>No 26.3 build</span><i style="width:73%"></i><em>45</em></div></div></div></section>
+<section class="block"><div class="wrap split">
+<div><h2 class="sec">Rule one: copy the behaviour, never the code</h2>
+<p class="sub">Upstream mods are LGPL, GPL, MIT, all-rights-reserved. A port that contains none of their code owes them credit and nothing else, and it owes the reader an honest account of what it does. So each port starts from using the original, writing down what it does, and writing Rust. The <a href="docs/credits.html">credits</a> name every original and its licence.</p>
+<h2 class="sec" style="margin-top:2rem">Rule two: the logic gets tests</h2>
+<p class="sub">Zoomify's wheel clamps between 1.25x and 16x. A test fails if it does not. Waypoints compute a vanilla yaw to a block; one test pins north, south, east and west. The hook helpers cannot be tested without the game, so they are kept to a few lines, and CI type-checks them against the real Horizon.</p>
+<h2 class="sec" style="margin-top:2rem">Rule three: say what is missing</h2>
+<p class="sub">Xaero's minimap is only partly ported: Horizon ships its own minimap, and there is no map-screen hook, so what is left is the waypoints idea. The catalogue says so.</p></div>
+<div><h2 class="sec">A port, end to end</h2>
+<p class="sub">Zoomify holds a key and zooms. On Horizon that is three hooks. The key hook is this much code:</p>
+<pre style="background:#0b0716;border:1px solid var(--line);border-radius:1rem;padding:1rem 1.2rem;overflow:auto;font-size:.82rem"><code>// The zoom key went down or up: the player&#x27;s own choice of key.
+fn zoomify_key(game: &amp;mut crate::game::Game&lt;&#x27;_&gt;, key: &amp;str, pressed: bool) {
+    use crate::game::lib_zoomify as m;
+    // Turned off in Options &gt; Mods: nothing until the next build leaves it out.
+    if !game.native_on(m::ID) {
+        return;
+    }
+    if key != game.native_mod_key(m::ID, m::KEY, m::DEFAULT_KEY) {
+        return;
+    }
+    let playing = game.native_playing();
+    let game = &amp;*game;
+    m::key(playing, pressed, |name| game.native_setting(m::ID, name));
+}</code></pre>
+<p class="sub">And the wheel claims its steps while the zoom is on, so the hotbar does not move:</p>
+<pre style="background:#0b0716;border:1px solid var(--line);border-radius:1rem;padding:1rem 1.2rem;overflow:auto;font-size:.82rem"><code>// While the zoom is on, the wheel changes it instead of moving the hotbar.
+fn zoomify_wheel(game: &amp;crate::game::Game&lt;&#x27;_&gt;, steps: f32, claimed: &amp;mut bool) {
+    use crate::game::lib_zoomify as m;
+    if game.native_on(m::ID) &amp;&amp; m::wheel(steps) {
+        *claimed = true;
+    }
+}</code></pre>
+<p class="sub">Everything else (the levels, the easing flag, the turn scaling, the settings buttons) lives in <code>runtime.rs</code> and has seven tests.</p></div>
+</div></section></main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="mods/index.html">The mods</a><a href="docs/catalogue.html">Status of every mod</a><a href="roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="docs/install.html">Install a mod</a><a href="docs/hook-points.html">Hook points</a><a href="docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="docs/credits.html">Credits</a><a href="docs/licensing.html">Licensing</a><a href="docs/dmca.html">DMCA and takedowns</a><a href="docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

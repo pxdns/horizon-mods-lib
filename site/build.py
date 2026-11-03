@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Builds the horizon-mods-lib site into site/dist from docs/*.md, MODS.md, MODULES.md and the mod projects.
+"""Builds the horizon-mods-lib site into public from docs/*.md, MODS.md, MODULES.md and the mod projects.
 
-    pip install markdown && python3 site/build.py
+    python3 -m venv .venv && .venv/bin/pip install markdown && .venv/bin/python site/build.py (output: public/)
 
 Marketing pages are written here; documentation pages are the repository's own Markdown, so they read the same on GitHub.
 """
@@ -16,7 +16,7 @@ from pathlib import Path
 import markdown
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "site" / "dist"
+OUT = ROOT / "public"
 REPO = "https://github.com/pxdns/horizon-mods-lib"
 SITE = ""  # deployed on Vercel; every link in the site is relative, so no base URL is needed
 

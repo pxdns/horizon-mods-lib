@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Licensing · horizon-mods-lib</title>
+<meta name="description" content="Licensing Code Everything in this repository (the mods, the tools, the site, the documentation) is MIT, see LICENSE : Copyright (c) 2026 pxdns and the">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../index.html"><img src="../assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="../index.html">Home</a><a href="../mods/index.html">Mods</a><a href="../why.html">Why native</a><a href="../from-fabric.html">From Fabric</a><a href="../trust.html">Trust</a><a href="../roadmap.html">Roadmap</a><a href="../docs/introduction.html" aria-current=page>Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<div class="docs">
+<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html">Introduction</a><a href="install.html">Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><h5>Reference</h5><a href="hook-points.html">Hook points</a><a href="anatomy.html">Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html">Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html" aria-current=page>Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html">Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
+<main class="doc">
+<div class="crumbs"><a href="introduction.html">Docs</a> / Project</div>
+<h1 id="licensing">Licensing</h1>
+<h2 id="code">Code</h2>
+<p>Everything in this repository (the mods, the tools, the site, the documentation) is MIT, see <a href="https://github.com/pxdns/horizon-mods-lib/blob/main/LICENSE"><code>LICENSE</code></a>:
+Copyright (c) 2026 pxdns and the horizon-mods-lib contributors. Each project folder carries its own copy, and the <code>.hnmod</code>
+includes it as <code>mixins/&lt;id&gt;/LICENSE</code>, so the notice travels with the sources.</p>
+<h2 id="upstream-mods-and-clean-room-ports">Upstream mods and clean-room ports</h2>
+<p>The ports are written from behaviour, not from upstream source. Nobody here has copied or translated another mod's code, art,
+text, or data files; the reference was what the mod does when you use it, and its public description. Several upstream mods are
+LGPL, GPL or all-rights-reserved; none of that applies to a program that contains none of their code. A port can still share a
+name or idea with its original, and the <a href="credits.html">credits</a> say whose idea it was.</p>
+<p>If you contribute a port: <strong>do not paste upstream code into a pull request</strong>, and do not translate it line by line. Describe the
+behaviour, write the Rust, test it.</p>
+<h2 id="horizon-and-minecraft">Horizon and Minecraft</h2>
+<p>Horizon is MIT and independent of Mojang and Microsoft. These mods run in Horizon, which reads worlds and resources from a
+Minecraft installation the player owns; <strong>no Minecraft assets, code or names beyond plain descriptive references are included
+here.</strong> Minecraft is a trademark of Mojang Synergies AB. See <a href="trademarks.html">Trademarks</a>.</p>
+<h2 id="third-party-material">Third-party material</h2>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Licence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tools/mods.py</code> (adapted from horizon-mods)</td>
+<td>MIT, Ludovic Marie and the Horizon contributors</td>
+</tr>
+<tr>
+<td>Project layout and <code>horizon-mixin.toml</code> shape (from the template)</td>
+<td>MIT, levzzz5154 and the Horizon contributors</td>
+</tr>
+<tr>
+<td>Python <code>markdown</code> (site build only, not shipped)</td>
+<td>BSD-3-Clause</td>
+</tr>
+</tbody>
+</table>
+<p>Bundled fonts: none. The Rust crates in the mod projects: none; every <code>Cargo.toml</code> has no dependencies.</p>
+<nav class="pager" aria-label="Previous and next"><a class="prev" href="credits.html"><small>Previous</small>Credits</a><a class="next" href="dmca.html"><small>Next</small>DMCA and takedowns</a></nav>
+<p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/docs/licensing.md">Edit this page on GitHub</a></p>
+</main>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#code">Code</a><a class="" href="#upstream-mods-and-clean-room-ports">Upstream mods and clean-room ports</a><a class="" href="#horizon-and-minecraft">Horizon and Minecraft</a><a class="" href="#third-party-material">Third-party material</a></aside>
+</div>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="../mods/index.html">The mods</a><a href="../docs/catalogue.html">Status of every mod</a><a href="../roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="../docs/install.html">Install a mod</a><a href="../docs/hook-points.html">Hook points</a><a href="../docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="../docs/credits.html">Credits</a><a href="../docs/licensing.html">Licensing</a><a href="../docs/dmca.html">DMCA and takedowns</a><a href="../docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

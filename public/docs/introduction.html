@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introduction · horizon-mods-lib</title>
+<meta name="description" content="Introduction horizon-mods-lib is a library of native mods for Horizon , the free, open-source rewrite of Minecraft: Java Edition 26.3 in Rust. Every m">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../index.html"><img src="../assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="../index.html">Home</a><a href="../mods/index.html">Mods</a><a href="../why.html">Why native</a><a href="../from-fabric.html">From Fabric</a><a href="../trust.html">Trust</a><a href="../roadmap.html">Roadmap</a><a href="../docs/introduction.html" aria-current=page>Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<div class="docs">
+<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html" aria-current=page>Introduction</a><a href="install.html">Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><h5>Reference</h5><a href="hook-points.html">Hook points</a><a href="anatomy.html">Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html">Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html">Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html">Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
+<main class="doc">
+<div class="crumbs"><a href="introduction.html">Docs</a> / Getting started</div>
+<h1 id="introduction">Introduction</h1>
+<p><strong>horizon-mods-lib</strong> is a library of native mods for <a href="https://github.com/horizon-rust/horizon">Horizon</a>, the free,
+open-source rewrite of Minecraft: Java Edition 26.3 in Rust. Every mod is its own small project with its own tests, its own
+release and its own <code>.hnmod</code> file. They are ports: each one re-implements something people already use in Fabric
+(a FPS readout, a zoom, a key overlay, waypoints) on Horizon's native hook points.</p>
+<h2 id="what-a-native-mod-is">What a native mod is</h2>
+<p>A Fabric mod is Java that gets loaded into the JVM. A Horizon native mod is Rust <strong>source</strong> that
+<a href="https://github.com/horizon-rust/horizon-mixins">horizon-mixins</a> merges into the game's own source before it is compiled. The
+launcher builds a game for the instance the mod is installed in, so the mod is not a plugin loaded at run time: it is part of
+the executable you play.</p>
+<p>That has consequences, and this library is built around them:</p>
+<ul>
+<li>A mod can only do what the game's source lets it hook. Horizon keeps a short list of <strong>stable hook points</strong>
+  (see <a href="hook-points.html">Hook points</a>); mods written against them build on any Horizon whose hook-point version is new enough.</li>
+<li>A native mod runs with the player's rights, so the registry reads the source of every native mod before it lists it. These
+  projects are small on purpose: a mod's logic is one <code>runtime.rs</code> file with unit tests, and each hook is a helper of a few lines.</li>
+<li>Everything is MIT, nothing is minified, and the <code>.hnmod</code> contains exactly the <code>.rs</code> and <code>.toml</code> files you can read in the repository.</li>
+</ul>
+<h2 id="what-is-here">What is here</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="mods/fps-display.html">Mods</a></td>
+<td>9 projects in <code>mods/</code>, one folder each</td>
+</tr>
+<tr>
+<td><a href="catalogue.html">Catalogue</a></td>
+<td>The 186 mods in the Tempest cross-pack matrix and where each stands on Horizon</td>
+</tr>
+<tr>
+<td><a href="modules.html">Modules</a></td>
+<td>Tempest's own module list, and an overview of the Horizon organisation</td>
+</tr>
+<tr>
+<td><a href="credits.html">Credits</a>, <a href="licensing.html">Licensing</a>, <a href="dmca.html">DMCA</a></td>
+<td>Who made what, under which terms, and how to ask for something to come down</td>
+</tr>
+</tbody>
+</table>
+<h2 id="where-to-go-next">Where to go next</h2>
+<ol>
+<li><a href="install.html">Install a mod</a> if you want to play with one.</li>
+<li><a href="build.html">Build from source</a> if you want to change one.</li>
+<li><a href="anatomy.html">Anatomy of a mod</a> and <a href="hook-points.html">Hook points</a> if you want to write the next one.</li>
+</ol>
+<nav class="pager" aria-label="Previous and next"><a class="next" href="install.html"><small>Next</small>Install a mod</a></nav>
+<p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/docs/introduction.md">Edit this page on GitHub</a></p>
+</main>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#what-a-native-mod-is">What a native mod is</a><a class="" href="#what-is-here">What is here</a><a class="" href="#where-to-go-next">Where to go next</a></aside>
+</div>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="../mods/index.html">The mods</a><a href="../docs/catalogue.html">Status of every mod</a><a href="../roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="../docs/install.html">Install a mod</a><a href="../docs/hook-points.html">Hook points</a><a href="../docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="../docs/credits.html">Credits</a><a href="../docs/licensing.html">Licensing</a><a href="../docs/dmca.html">DMCA and takedowns</a><a href="../docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

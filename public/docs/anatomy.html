@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anatomy of a mod · horizon-mods-lib</title>
+<meta name="description" content="Anatomy of a mod mods/zoomify/ Cargo.toml the Cargo library: points at runtime.rs Cargo.lock compatibility.json pinned Horizon and horizon-mixins comm">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="../index.html"><img src="../assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="../index.html">Home</a><a href="../mods/index.html">Mods</a><a href="../why.html">Why native</a><a href="../from-fabric.html">From Fabric</a><a href="../trust.html">Trust</a><a href="../roadmap.html">Roadmap</a><a href="../docs/introduction.html" aria-current=page>Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<div class="docs">
+<aside class="side" aria-label="Documentation"><details open><summary>Documentation</summary><div class="links"><h5>Getting started</h5><a href="introduction.html">Introduction</a><a href="install.html">Install a mod</a><a href="build.html">Build from source</a><h5>Mods</h5><a href="mods/fps-display.html">FPS Display</a><a href="mods/sprint-indicator.html">Sprint Indicator</a><a href="mods/key-overlay.html">Key Overlay</a><a href="mods/cps-counter.html">CPS Counter</a><a href="mods/info-hud.html">Info HUD</a><a href="mods/custom-hud.html">Custom HUD</a><a href="mods/zoomify.html">Zoomify</a><a href="mods/simple-zoom.html">Simple Zoom</a><a href="mods/waypoints.html">Waypoints</a><h5>Reference</h5><a href="hook-points.html">Hook points</a><a href="anatomy.html" aria-current=page>Anatomy of a mod</a><a href="settings.html">Settings and storage</a><a href="releases.html">Releases</a><a href="compatibility.html">Compatibility</a><h5>Catalogue</h5><a href="catalogue.html">Status of every mod</a><a href="modules.html">Modules and Horizon</a><h5>Project</h5><a href="credits.html">Credits</a><a href="licensing.html">Licensing</a><a href="dmca.html">DMCA and takedowns</a><a href="trademarks.html">Trademarks and disclaimer</a><a href="security.html">Security</a><a href="contributing.html">Contributing</a><a href="changelog.html">Changelog</a></div></details></aside>
+<main class="doc">
+<div class="crumbs"><a href="introduction.html">Docs</a> / Reference</div>
+<h1 id="anatomy-of-a-mod">Anatomy of a mod</h1>
+<pre><code class="language-text">mods/zoomify/
+  Cargo.toml                       the Cargo library: points at runtime.rs
+  Cargo.lock
+  compatibility.json               pinned Horizon and horizon-mixins commits, hooks API
+  LICENSE
+  README.md
+  mixins/zoomify/
+    horizon-mixin.toml             module + HEAD injections
+    runtime.rs                     logic, state and tests (one file)
+    key.rs wheel.rs zoom.rs        one helper per hook
+    list.rs settings.rs click.rs   the Options &gt; Mods row and page
+</code></pre>
+<h2 id="horizon-mixintoml"><code>horizon-mixin.toml</code></h2>
+<p>Declares one <strong>module</strong> (the file <code>runtime.rs</code>, added to the game's <code>game.rs</code> as <code>game::lib_&lt;id&gt;</code>) and one <strong>injection</strong> per hook:</p>
+<pre><code class="language-toml">[[module]]
+id = &quot;runtime&quot;
+file = &quot;crates/horizon-client/src/game.rs&quot;
+name = &quot;lib_zoomify&quot;
+source = &quot;runtime.rs&quot;
+
+[[injection]]
+id = &quot;wheel&quot;
+kind = &quot;HEAD&quot;
+target = &quot;horizon_client::game::native_hooks::Game&lt;'_&gt;::native_wheel&quot;
+helper = &quot;wheel.rs&quot;
+bindings = [
+  { name = &quot;game&quot;, ty = &quot;&amp;crate::game::Game&lt;'_&gt;&quot;, value = &quot;&amp;*self&quot; },
+  { name = &quot;steps&quot;, ty = &quot;f32&quot;, value = &quot;steps&quot; },
+  { name = &quot;claimed&quot;, ty = &quot;&amp;mut bool&quot;, value = &quot;&amp;mut *claimed&quot; },
+]
+</code></pre>
+<p>A HEAD injection runs the helper before the hook point's own body, which is empty. Helper names are prefixed with the mod's
+id (<code>zoomify_wheel</code>) because every mod in a build ends up in the same module.</p>
+<h2 id="runtimers"><code>runtime.rs</code></h2>
+<p>Pure logic: no game types. It holds the mod's state in a <code>thread_local!</code>, reads settings through a closure the helper passes in
+(<code>|k| game.native_setting(ID, k)</code>), and carries its unit tests. That is what makes a native mod testable without the game.</p>
+<h2 id="the-helpers">The helpers</h2>
+<p>Each helper is a few lines: check <code>game.native_on(ID)</code>, read what it needs from the game, call into <code>runtime.rs</code>, draw or
+store the result. A mod that is switched off in Options → Mods does nothing until the next build leaves it out, so every helper
+checks first.</p>
+<h2 id="compatibilityjson-and-the-manifest"><code>compatibility.json</code> and the manifest</h2>
+<p><code>tools/mods.py package</code> writes <code>horizon-native.json</code> into the <code>.hnmod</code> from <code>compatibility.json</code>:</p>
+<pre><code class="language-json">{&quot;schema&quot;: 1, &quot;id&quot;: &quot;zoomify&quot;, &quot;version&quot;: &quot;1.0.0&quot;, &quot;game&quot;: &quot;26.3&quot;,
+ &quot;horizon&quot;: &quot;ba6344a59cb9e755b730dcf02285fc0d33b97d3c&quot;,
+ &quot;mixins&quot;: &quot;d9c83d7096b7ea5b83678da2efdfd6161f74997e&quot;, &quot;hooks&quot;: 1}
+</code></pre>
+<p>The launcher validates it (<code>schema 1</code>, exact 40-character revisions, <code>hooks</code> not zero) before it builds anything and refuses
+bundles with links, absolute paths or more than 512 entries.</p>
+<nav class="pager" aria-label="Previous and next"><a class="prev" href="hook-points.html"><small>Previous</small>Hook points</a><a class="next" href="settings.html"><small>Next</small>Settings and storage</a></nav>
+<p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/docs/anatomy.md">Edit this page on GitHub</a></p>
+</main>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#horizon-mixintoml">horizon-mixin.toml</a><a class="" href="#runtimers">runtime.rs</a><a class="" href="#the-helpers">The helpers</a><a class="" href="#compatibilityjson-and-the-manifest">compatibility.json and the manifest</a></aside>
+</div>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="../mods/index.html">The mods</a><a href="../docs/catalogue.html">Status of every mod</a><a href="../roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="../docs/install.html">Install a mod</a><a href="../docs/hook-points.html">Hook points</a><a href="../docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="../docs/credits.html">Credits</a><a href="../docs/licensing.html">Licensing</a><a href="../docs/dmca.html">DMCA and takedowns</a><a href="../docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

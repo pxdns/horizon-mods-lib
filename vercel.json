@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "pip3 install --quiet markdown",
-  "buildCommand": "python3 site/build.py",
-  "outputDirectory": "site/dist",
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "public",
   "cleanUrls": false,
   "trailingSlash": false,
   "headers": [

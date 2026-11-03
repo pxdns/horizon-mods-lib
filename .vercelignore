@@ -1,3 +1,7 @@
 target/
-mods/*/target/
+mods/
+tools/
+docs/
+site/
+.github/
 *.hnmod

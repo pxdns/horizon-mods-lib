@@ -27,6 +27,7 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 ## Install, build, write one
 
+- The site is committed in `public/` (Vercel serves it as is). Rebuild: `python3 -m venv .venv && .venv/bin/pip install markdown && .venv/bin/python site/build.py`.
 - [Install a mod](docs/install.md) · [Build from source](docs/build.md) · [Hook points](docs/hook-points.md) · [Anatomy of a mod](docs/anatomy.md)
 - `python3 tools/mods.py check all` applies every mod on Horizon and `cargo check`s the game; `package <slug>` makes the `.hnmod`.
 
