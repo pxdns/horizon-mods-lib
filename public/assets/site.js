@@ -70,3 +70,28 @@
     apply();
   }
 })();
+
+// All-mods grid: filter cards by status chip and name.
+(function () {
+  var bar = document.getElementById("grid-filters"), grid = document.getElementById("grid");
+  if (!bar || !grid) return;
+  var active = "all", text = "", count = document.getElementById("grid-count");
+  function apply() {
+    var n = 0;
+    Array.prototype.forEach.call(grid.children, function (c) {
+      var ok = (active === "all" || c.getAttribute("data-status") === active) && (!text || c.getAttribute("data-name").indexOf(text) >= 0);
+      c.hidden = !ok; if (ok) n++;
+    });
+    if (count) count.textContent = n + " shown";
+  }
+  bar.querySelectorAll("button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      active = b.getAttribute("data-s");
+      bar.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      apply();
+    });
+  });
+  var t = document.getElementById("grid-text");
+  if (t) t.addEventListener("input", function () { text = t.value.trim().toLowerCase(); apply(); });
+  apply();
+})();

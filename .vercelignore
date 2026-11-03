@@ -1,7 +1,9 @@
-target/
-mods/
-tools/
-docs/
-site/
-.github/
+/target/
+/mods/
+/tools/
+/docs/
+/site/
+/catalogue/
+/assets/
+/.github/
 *.hnmod

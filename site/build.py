@@ -90,10 +90,11 @@ def fix_links(body, src, page):
     return re.sub(r'(href|src)="([^"]+)"', sub, body)
 
 
-def shell(page, title, body, active=None, description="", doc=False):
-    root = rel(page, "index.html")
-    root = root[:-len("index.html")] if root.endswith("index.html") else root
-    root = "" if root in ("", ".") else root
+def shell(page, title, body, active=None, description="", doc=False, root=None):
+    if root is None:
+        root = rel(page, "index.html")
+        root = root[:-len("index.html")] if root.endswith("index.html") else root
+        root = "" if root in ("", ".") else root
     nav = "".join(f'<a href="{root}{u}"{" aria-current=page" if u == active else ""}>{html.escape(n)}</a>' for n, u in TOP)
     desc = html.escape(description or "Native mods for Horizon, ported to Rust: one small tested project per mod, each released automatically.")
     return f'''<!doctype html>
@@ -152,6 +153,33 @@ SEARCH = []
 # ------------------------------------------------------------------------------------------------ documentation pages
 flat = [s for _, group in DOC_NAV for s in group]
 md = markdown.Markdown(extensions=["tables", "fenced_code", "toc", "attr_list"], extension_configs={"toc": {"permalink": False, "toc_depth": "2-3"}})
+
+
+def catalogue_pages():
+    """One page per catalogued mod (catalogue/<slug>.md): same chrome as the docs, not in the sidebar."""
+    for path in sorted((ROOT / "catalogue").glob("*.md")):
+        src = f"catalogue/{path.name}"
+        page = out_path(src)
+        text = path.read_text()
+        md.reset()
+        body = fix_links(md.convert(text), src, page)
+        title = re.match(r"# (.+)", text).group(1)
+        side = ""
+        for group, items in DOC_NAV:
+            side += f"<h5>{group}</h5>"
+            for s2 in items:
+                label = SHORT.get(s2) or re.match(r"# (.+)", (ROOT / s2).read_text()).group(1)
+                cur = " aria-current=page" if s2 == "MODS.md" else ""
+                side += f'<a href="{rel(page, out_path(s2))}"{cur}>{html.escape(label)}</a>'
+        doc = f'''<div class="docs">
+<aside class="side" aria-label="Documentation"><details><summary>Documentation</summary><div class="links">{side}</div></details></aside>
+<main class="doc">
+<div class="crumbs"><a href="{rel(page, 'docs/introduction.html')}">Docs</a> / <a href="{rel(page, 'docs/catalogue.html')}">Catalogue</a></div>
+{body}
+<p class="edit"><a href="{REPO}/edit/main/{src}">Edit this page on GitHub</a></p>
+</main><aside class="toc"></aside></div>'''
+        write(page, shell(page, f"{title} · horizon-mods-lib", doc, active="docs/introduction.html", description=strip_tags(body)[:150]))
+        SEARCH.append(dict(title=title, url=page, text=strip_tags(body)[:300], excerpt=strip_tags(body)[:90]))
 
 
 def docs():
@@ -273,7 +301,7 @@ unit-tested, formatted and clippy-clean. They have not been played in a live gam
 <section class="block" style="border:0"><div class="wrap"><div class="grid">{"".join(card(p, "../") for p in PROJECTS)}</div>
 <h2 class="sec" style="margin-top:3rem">Beyond these</h2>
 <p class="sub">The catalogue lists all {TOTAL} mods of the Tempest cross-pack matrix: {COUNTS["ported"] + COUNTS["partial"]} ported or partly ported, {COUNTS["hook"]} waiting on a hook point, {COUNTS["pack"]} that are really packs, {COUNTS["engine"]} that Horizon's engine does itself, {COUNTS["library"]} libraries and {COUNTS["no-263"]} with no 26.3 build.</p>
-<a class="btn primary" href="../docs/catalogue.html">Open the catalogue</a></div></section></main>'''
+<a class="btn primary" href="../all.html">See every mod</a> <a class="btn" href="../docs/catalogue.html">Open the catalogue table</a></div></section></main>'''
     write("mods/index.html", shell("mods/index.html", "The mods · horizon-mods-lib", gallery, active="mods/index.html"))
 
     # ---- why native
@@ -384,6 +412,28 @@ The most useful contribution this library can make is a pull request to <a href=
         SEARCH.append(dict(title=title, url=page, text=t[:4000], excerpt=t[:90]))
 
 
+def everything():
+    """Every catalogued mod as a card with its placeholder icon, filterable by status."""
+    chips = '<button data-s="all" aria-pressed="true">All</button>' + "".join(
+        f'<button data-s="{k}" aria-pressed="false">{DATA["labels"][k]} ({n})</button>' for k, n in COUNTS.items() if n)
+    cards = ""
+    for m in sorted(DATA["mods"], key=lambda r: r["name"].lower()):
+        page = m["page"]
+        target = f'docs/mods/{m["project"]}.html' if m["project"] else f"catalogue/{page}.html"
+        cards += (f'<a class="card" data-status="{m["status"]}" data-name="{html.escape(m["name"].lower())}" href="{target}">'
+                  f'<img src="assets/icons/{m["project"] and (m["project"] + ".svg") or ("catalogue/" + page + ".svg")}" alt="" width="48" height="48">'
+                  f'<h3>{html.escape(m["name"])}</h3><p>{html.escape(DATA["labels"][m["status"]])}</p></a>')
+    body = f'''<main><section class="hero" style="padding-bottom:1.5rem"><div class="wrap">
+<span class="eyebrow">The whole list</span>
+<h1 class="big" style="max-width:22ch">All {TOTAL} mods, <span class="text-accent">and where each stands.</span></h1>
+<p class="lede">Every mod in the Tempest cross-pack matrix has a page. The ones with a green ring are ported; the rest say exactly why not yet.</p>
+<div class="filters" id="grid-filters">{chips}<input id="grid-text" type="search" placeholder="Filter by name" aria-label="Filter mods"><span class="count" id="grid-count"></span></div>
+</div></section>
+<section class="block" style="border:0;padding-top:0"><div class="wrap"><div class="grid" id="grid">{cards}</div></div></section></main>'''
+    write("all.html", shell("all.html", "All mods · horizon-mods-lib", body, active="mods/index.html"))
+    SEARCH.append(dict(title="All mods", url="all.html", text="every mod in the catalogue", excerpt="Every mod and its status"))
+
+
 def main():
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -392,11 +442,14 @@ def main():
     shutil.copy(ROOT / "site/assets/site.css", OUT / "assets/site.css")
     shutil.copy(ROOT / "site/assets/site.js", OUT / "assets/site.js")
     docs()
+    catalogue_pages()
     pages()
+    everything()
     (OUT / "search.json").write_text(json.dumps(SEARCH))
     (OUT / ".nojekyll").write_text("")
     (OUT / "404.html").write_text(shell("404.html", "Not found · horizon-mods-lib",
-                                        '<main><section class="hero"><div class="wrap"><h1 class="big">Nothing here.</h1><p class="lede"><a href="index.html">Back to the library.</a></p></div></section></main>'))
+                                        '<main><section class="hero"><div class="wrap"><h1 class="big">Nothing here.</h1><p class="lede"><a href="/index.html">Back to the library.</a></p></div></section></main>',
+                                        root="/"))
     print(f"{len(list(OUT.rglob('*.html')))} pages")
 
 
