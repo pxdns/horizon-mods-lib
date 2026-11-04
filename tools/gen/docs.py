@@ -12,7 +12,8 @@ from mods_chat import CHAT
 from mods_draw import DRAW
 from mods_hit import HIT
 from mods_ping import PING
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING
+from mods_inv import INV
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV
 
 ROOT = Path(__file__).resolve().parents[2]
 D = ROOT / "docs"
@@ -568,8 +569,8 @@ w("changelog.md", f"""
 
 ## 2026-11-03 — first release
 
-Twenty-seven native mods at {V}: `fps-display`, `sprint-indicator`, `key-overlay`, `cps-counter`, `info-hud`, `custom-hud`, `zoomify`,
-`simple-zoom`, `waypoints` and, reading game state, `armor-hud`, `potion-counter`, `totem-counter`, `effect-timer`, `apple-skin`, `pick-up-notifier` and, hooking Horizon's camera and input, `freelook`, `freecam`, `snappy-tappy`, `better-hurt-cam` and, in chat and tooltips, `more-chat-history`, `chat-notify`, `chat-animation` and `durability-tooltip`, and in crosshair and tooltip drawing `crosshair-indicator`, `entity-crosshair` and `shulker-box-tooltip`, and `combat-hitboxes` (a wrapped ray-versus-box test), each tested (unit tests), formatted, clippy-clean and applied on Horizon `{c.HORIZON_REV[:7]}`
+Twenty-nine native mods at {V}: `fps-display`, `sprint-indicator`, `key-overlay`, `cps-counter`, `info-hud`, `custom-hud`, `zoomify`,
+`simple-zoom`, `waypoints` and, reading game state, `armor-hud`, `potion-counter`, `totem-counter`, `effect-timer`, `apple-skin`, `pick-up-notifier` and, hooking Horizon's camera and input, `freelook`, `freecam`, `snappy-tappy`, `better-hurt-cam` and, in chat and tooltips, `more-chat-history`, `chat-notify`, `chat-animation` and `durability-tooltip`, and in crosshair and tooltip drawing `crosshair-indicator`, `entity-crosshair` and `shulker-box-tooltip`, `combat-hitboxes` (a wrapped ray-versus-box test), `ping-view` (the connection ping, from a hook on its logger) and `invmove` (walk with the inventory open), each tested (unit tests), formatted, clippy-clean and applied on Horizon `{c.HORIZON_REV[:7]}`
 with horizon-mixins `{c.MIXINS_REV[:7]}`. The catalogue covers the 186 mods in the Tempest cross-pack matrix.
 """)
 
@@ -591,7 +592,7 @@ for m in MODS:
         hold = "HOLD: bool = true" in m["runtime_extra"]
         default = "C" if m["id"] == "zoomify" else "V"
         cmd = f"| Key | Default | What it does |\n|---|---|---|\n| Zoom | `{default}` | {'Hold to zoom' if hold else 'Press to turn the zoom on, press again to turn it off'}; the wheel changes it while it is on |"
-    names = {"list": "native_mods", "click": "native_settings_click", "turn": "perspective::turn_player", "camera": "perspective::camera_view", "bob": "fov::bob_matrix", "add": "chat::Chat::add_message", "lines": "chat::Chat::add_lines", "message": "chat::Chat::add_message", "layout": "chat::Chat::layout", "tooltip": "stations::stack_tooltip", "crosshair": "hud_layout::crosshair", "ray": "game::ray_box", "log": "debug_chart::SampleLogger::log"}
+    names = {"list": "native_mods", "click": "native_settings_click", "turn": "perspective::turn_player", "camera": "perspective::camera_view", "bob": "fov::bob_matrix", "add": "chat::Chat::add_message", "lines": "chat::Chat::add_lines", "message": "chat::Chat::add_message", "layout": "chat::Chat::layout", "tooltip": "stations::stack_tooltip", "crosshair": "hud_layout::crosshair", "ray": "game::ray_box", "log": "debug_chart::SampleLogger::log", "walk": "game::Game::tick"}
     hooks = ", ".join(f"`{names.get(h, 'native_' + h)}`" for h in m["hooks"])
     if m.get("usage"):
         cmd = m["usage"].replace("\\n", "\n")

@@ -18,6 +18,7 @@ PORTED = {
     "Upv1bw1P": ("ported", "key-overlay", "Key Overlay"),
     "w7ThoJFB": ("ported", "zoomify", "Zoomify"),
     "EYKTeOIO": ("ported", "simple-zoom", "Simple Zoom"),
+    "REfW2AEX": ("ported", "invmove", "InvMove"),
     "gvl7lVcV": ("ported", "ping-view", "Ping View"),
     "1bokaNcj": ("partial", "waypoints", "Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap."),
     "NcUtCpym": ("partial", "waypoints", "Only the waypoints idea; there is no map screen hook yet."),
@@ -100,8 +101,6 @@ def classify(name, mid, has263):
     if mid in PORTED:
         s, slug, note = PORTED[mid]
         return s, slug, note
-    if mid == "REfW2AEX":
-        return "hook", "", "Needs the player's movement keys read while a screen is open. That read sits in Horizon's tick function, which uses `?` and closures, and horizon-mixins refuses to rewrite such a function (only HEAD hooks are allowed there)."
     if not has263:
         return "no-263", "", "No Fabric build for 26.3, the game version Horizon implements."
     if any(k in low for k in LIBRARY):

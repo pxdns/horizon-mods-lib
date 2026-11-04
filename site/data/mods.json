@@ -1,9 +1,9 @@
 {
  "counts": {
-  "ported": 22,
+  "ported": 23,
   "partial": 6,
   "builtin": 6,
-  "hook": 17,
+  "hook": 16,
   "library": 28,
   "engine": 32,
   "pack": 30,
@@ -1119,9 +1119,9 @@
    "slug": "invmove",
    "licence": "LGPL-3.0-only",
    "build": "0.9.6+26.3-fabric",
-   "status": "hook",
-   "project": "",
-   "note": "Needs the player's movement keys read while a screen is open. That read sits in Horizon's tick function, which uses `?` and closures, and horizon-mixins refuses to rewrite such a function (only HEAD hooks are allowed there).",
+   "status": "ported",
+   "project": "invmove",
+   "note": "InvMove",
    "page": "invmove",
    "icon": "catalogue/invmove.png"
   },

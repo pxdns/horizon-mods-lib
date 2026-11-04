@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **22** ported · **6** partly ported · **6** built into horizon · **17** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **23** ported · **6** partly ported · **6** built into horizon · **16** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -25,7 +25,7 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (22)
+## Ported (23)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -39,6 +39,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [FPS - Display](catalogue/fpsdisplay.md) | [fpsdisplay](https://modrinth.com/mod/fpsdisplay) | `GNU Lesser General Public License v3.0 only` | `fpsdisplay-5.2.0+26.3` | Ported ([`fps-display`](mods/fps-display/)) | FPS Display |
 | [Freecam](catalogue/freecam.md) | [freecam](https://modrinth.com/mod/freecam) | `MIT` | `1.5.0-alpha.2` | Ported ([`freecam`](mods/freecam/)) | Freecam (raw-hook port: detached camera) |
 | [Freelook](catalogue/freelook.md) | [freelook](https://modrinth.com/mod/freelook) | `GNU Affero General Public License v3.0 only` | `freelook-1.4.4` | Ported ([`freelook`](mods/freelook/)) | Freelook (raw-hook port: mouse look and render camera) |
+| [InvMove](catalogue/invmove.md) | [invmove](https://modrinth.com/mod/invmove) | `LGPL-3.0-only` | `0.9.6+26.3-fabric` | Ported ([`invmove`](mods/invmove/)) | InvMove |
 | [Key Overlay](catalogue/keyoverlay.md) | [keyoverlay](https://modrinth.com/mod/keyoverlay) | `see project` | `KeyOverlay-26.3` | Ported ([`key-overlay`](mods/key-overlay/)) | Key Overlay |
 | [More Chat History](catalogue/morechathistory.md) | [morechathistory](https://modrinth.com/mod/morechathistory) | `Creative Commons Zero v1.0 Universal` | `2.0.0` | Ported ([`more-chat-history`](mods/more-chat-history/)) | More Chat History (raw-hook port: raises the chat limits) |
 | [Pick Up Notifier](catalogue/pick-up-notifier.md) | [pick-up-notifier](https://modrinth.com/mod/pick-up-notifier) | `Mozilla Public License 2.0` | `pickupnotifier-v26.3.0-mc26.3.x+fabric` | Ported ([`pick-up-notifier`](mods/pick-up-notifier/)) | Pick Up Notifier (raw-hook port: watches the inventory) |
@@ -74,7 +75,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Mouse Tweaks](catalogue/mouse-tweaks.md) | [mouse-tweaks](https://modrinth.com/mod/mouse-tweaks) | `BSD 3-Clause "New" or "Revised" License` | `MouseTweaks-fabric-mc26.3-2.31` | Built into Horizon | Horizon ships Mouse Tweaks as one of its own extras (Options > Extras). |
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Built into Horizon | Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric. |
 
-## Needs a hook point (17)
+## Needs a hook point (16)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -86,7 +87,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Clumps](catalogue/clumps.md) | [clumps](https://modrinth.com/mod/clumps) | `MIT License` | `Clumps-fabric-26.3-26.3.2` | Needs a hook point | Merges XP orbs in the entity simulation: entity logic, not something a hook point reaches. |
 | [Controlling](catalogue/controlling.md) | [controlling](https://modrinth.com/mod/controlling) | `MIT License` | `26.3.3` | Needs a hook point | Changes the Controls screen, which Horizon builds in its generic options UI with no hook for a search box. |
 | [Crafting Tweaks](catalogue/crafting-tweaks.md) | [crafting-tweaks](https://modrinth.com/mod/crafting-tweaks) | `see project` | `craftingtweaks-fabric-26.3-26.3.0.1` | Needs a hook point | Adds buttons to the crafting grid screen; the container screens have no hook for extra widgets. |
-| [InvMove](catalogue/invmove.md) | [invmove](https://modrinth.com/mod/invmove) | `LGPL-3.0-only` | `0.9.6+26.3-fabric` | Needs a hook point | Needs the player's movement keys read while a screen is open. That read sits in Horizon's tick function, which uses `?` and closures, and horizon-mixins refuses to rewrite such a function (only HEAD hooks are allowed there). |
 | [Item Highlighter](catalogue/item-highlighter.md) | [item-highlighter](https://modrinth.com/mod/item-highlighter) | `CC-BY-NC-ND-4.0` | `1.2.3` | Needs a hook point | Highlights slots in the inventory screen; there is no hook in the slot drawing. |
 | [Litematica](catalogue/litematica.md) | [litematica](https://modrinth.com/mod/litematica) | `GNU Lesser General Public License v3.0 only` | `litematica-fabric-26.3-0.29.0` | Needs a hook point | Schematic loading, rendering and placement: a large feature, not something a hook-sized mod covers. |
 | [Marlow's Crystal Optimizer](catalogue/marlow-crystal-optimizer.md) | [marlow-crystal-optimizer](https://modrinth.com/mod/marlow-crystal-optimizer) | `MIT License` | `Marlow Crystal Optimizer` | Needs a hook point | Removes an end crystal on the client before the server confirms; it needs hooks in entity and packet handling. |

@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-invmove"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Keep walking, jumping and sneaking while your inventory is open."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/invmove/runtime.rs"
+
+[workspace]
