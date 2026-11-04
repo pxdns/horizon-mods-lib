@@ -1,9 +1,9 @@
 {
  "counts": {
-  "ported": 31,
+  "ported": 32,
   "partial": 7,
   "builtin": 8,
-  "hook": 15,
+  "hook": 14,
   "library": 28,
   "engine": 32,
   "pack": 30,
@@ -404,9 +404,9 @@
    "slug": "clumps",
    "licence": "MIT License",
    "build": "Clumps-fabric-26.3-26.3.2",
-   "status": "hook",
-   "project": "",
-   "note": "Merges XP orbs in the entity simulation: entity logic, not something a hook point reaches.",
+   "status": "ported",
+   "project": "clumps",
+   "note": "Orbs of any size merge into one orb worth all of them, collected at once",
    "page": "clumps",
    "icon": "catalogue/clumps.png"
   },
@@ -523,7 +523,7 @@
    "build": "26.3.3",
    "status": "hook",
    "project": "",
-   "note": "Changes the Controls screen, which Horizon builds in its generic options UI with no hook for a search box.",
+   "note": "Horizon's Key Binds page already has a search box that filters by action name (`options_ui.rs`); what Controlling adds, searching by key and filtering conflicts, sits in the middle of that page's layout function, which would have to be replaced whole.",
    "page": "controlling",
    "icon": "catalogue/controlling.png"
   },

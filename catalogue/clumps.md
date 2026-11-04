@@ -2,13 +2,15 @@
 
 ![Clumps icon](../assets/icons/catalogue/clumps.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `Clumps-fabric-26.3-26.3.2` - [Modrinth](https://modrinth.com/mod/clumps)
+**Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `Clumps-fabric-26.3-26.3.2` - [Modrinth](https://modrinth.com/mod/clumps)
+
+**Project:** [`clumps`](../mods/clumps/) - [docs](../docs/mods/clumps.md)
 
 ## Where it stands
 
-Merges XP orbs in the entity simulation: entity logic, not something a hook point reaches.
+Orbs of any size merge into one orb worth all of them, collected at once
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

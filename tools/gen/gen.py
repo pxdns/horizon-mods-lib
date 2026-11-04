@@ -23,7 +23,8 @@ from mods_ench import ENCH
 from mods_f5 import F5
 from mods_shield import SHIELD
 from mods_patches import PATCH
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH
+from mods_clumps import CLUMPS
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

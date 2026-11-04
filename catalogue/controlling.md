@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Changes the Controls screen, which Horizon builds in its generic options UI with no hook for a search box.
+Horizon's Key Binds page already has a search box that filters by action name (`options_ui.rs`); what Controlling adds, searching by key and filtering conflicts, sits in the middle of that page's layout function, which would have to be replaced whole.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 
