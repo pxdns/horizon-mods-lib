@@ -2,15 +2,15 @@
 
 ![Shulker Box Tooltip icon](../assets/icons/catalogue/shulkerboxtooltip.png)
 
-**Status:** Partly ported - **Upstream licence:** `MIT License` - **26.3 build:** `shulkerboxtooltip-fabric-5.4.2+26.3` - [Modrinth](https://modrinth.com/mod/shulkerboxtooltip)
+**Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `shulkerboxtooltip-fabric-5.4.2+26.3` - [Modrinth](https://modrinth.com/mod/shulkerboxtooltip)
 
 **Project:** [`shulker-box-tooltip`](../mods/shulker-box-tooltip/) - [docs](../docs/mods/shulker-box-tooltip.md)
 
 ## Where it stands
 
-The contents as text (totals and a slot grid); the graphical 9 by 3 grid needs a draw hook inside tooltips.
+Totals by item and a graphical 9 by 3 grid with real item icons
 
-Only part of this fits the hook points; see the project for what is in and what is missing.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

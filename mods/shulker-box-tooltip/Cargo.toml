@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "Shows what is inside a shulker box in its tooltip: totals by item, and a slot grid."
+description = "Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]

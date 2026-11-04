@@ -4,11 +4,11 @@
 
 **Status:** Partly ported - **Upstream licence:** `see project` - **26.3 build:** `xaerominimap-fabric-26.3-26.5.3` - [Modrinth](https://modrinth.com/mod/xaeros-minimap)
 
-**Project:** [`waypoints`](../mods/waypoints/) - [docs](../docs/mods/waypoints.md)
+**Project:** [`minimap-plus`](../mods/minimap-plus/) - [docs](../docs/mods/minimap-plus.md)
 
 ## Where it stands
 
-Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap.
+The map display (corner, size, zoom keys, big map, turning, round) on Horizon's own minimap, plus the waypoints mod; waypoints are not marked on the map and there is no entity radar.
 
 Only part of this fits the hook points; see the project for what is in and what is missing.
 

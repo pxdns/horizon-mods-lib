@@ -330,17 +330,21 @@ fn entity_crosshair_frame(game: &mut crate::game::Game<'_>, elapsed: std::time::
 # ------------------------------------------------------------------------------------------------ shulker_box_tooltip
 DRAW.append(dict(
     slug="shulker-box-tooltip", id="shulker_box_tooltip", name="Shulker Box Tooltip", title="Shulker Box Tooltip", raw=True,
-    usage="Nothing to press: hover a shulker box and its tooltip lists what is inside, totalled by item, and optionally as a 3 by 9 grid of two-letter slot codes.",
-    description="Shows what is inside a shulker box in its tooltip: totals by item, and a slot grid.",
+    usage="Nothing to press: hover a shulker box and its tooltip lists what is inside, totalled by item, with a 3 by 9 grid of the real item icons and counts under it.",
+    description="Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items.",
     upstream="Shulker Box Tooltip (shulkerboxtooltip)", upstream_licence="see the upstream project",
-    command=None, hooks=["tooltip", "list", "settings", "click"],
-    options=[("summary", "Totals by item", True), ("grid", "Slot grid", False), ("all", "Other containers too", False)],
-    toml_text=toml_text("shulker_box_tooltip", "1.0.0", "crates/horizon-client/src/game.rs", "lib_shulker_box_tooltip", [
+    command=None, hooks=["tooltip", "bundle", "list", "settings", "click"],
+    modpath="horizon_items::bundle::lib_shulker_box_tooltip",
+    options=[("summary", "Totals by item", True), ("grid", "Slot grid with item icons", True), ("all", "Other containers too", False)],
+    toml_text=toml_text("shulker_box_tooltip", "1.0.0", "crates/horizon-items/src/bundle.rs", "lib_shulker_box_tooltip", [
         dict(fields=[("id", '"tooltip"'), ("kind", '"RETURN"'), ("target", '"horizon_client::game::stations::Game<\'_>::stack_tooltip"'), ("helper", '"tooltip.rs"')],
              bindings=[("lines", "Vec<(horizon_client::text::Text, u32)>", "$value"), ("game", "&crate::game::Game<'_>", "&*self"), ("stack", "&ItemStack", "stack")]),
-    ] + common_native(False)),
-    raw_note=("It adds a RETURN modifier to `Game::stack_tooltip` and reads the item's container contents (`ItemStack::data`), neither of which is part of the stable hook-point contract, "
-              "so it is **pinned to one Horizon commit**. It shows text, not the graphical 9 by 3 grid of the original: drawing inside a tooltip needs a draw hook Horizon does not have."),
+        dict(fields=[("id", '"bundle"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_items::bundle::tooltip_layout"'), ("helper", '"bundle.rs"')],
+             bindings=[("items", "&Items", "items"), ("stack", "&ItemStack", "stack"), ("x", "f32", "x"), ("y", "f32", "y"), ("box_width", "f32", "box_width")]),
+    ] + common_native(False), visibility="pub"),
+    raw_note=("It adds a RETURN modifier to `Game::stack_tooltip` (the totals) and a cancellable HEAD hook on `bundle::tooltip_layout`, the function Horizon uses to lay out a bundle's item grid in its tooltip, "
+              "which it answers for a shulker box with a 9 by 3 grid; Horizon then draws the real item icons and counts itself. It reads the item's container contents (`ItemStack::data`). None of this is part of the stable hook-point contract, "
+              "so it is **pinned to one Horizon commit**."),
     runtime_extra='''
 use std::collections::BTreeMap;
 
@@ -394,33 +398,35 @@ pub fn summary(slots: &[Slot]) -> Vec<String> {
     out
 }
 
-/// A slot's two-letter code: the first letters of the item's first two words, or `..` for an empty slot.
-fn code(slot: Option<&Slot>) -> String {
-    match slot {
-        None => "..".to_owned(),
-        Some(s) => {
-            let t = title(&s.item);
-            let mut words = t.split(' ');
-            let first = words.next().and_then(|w| w.chars().next()).unwrap_or('?');
-            let second = words.next().and_then(|w| w.chars().next()).or_else(|| t.chars().nth(1)).unwrap_or(' ');
-            format!("{first}{}", second.to_ascii_lowercase())
-        }
-    }
+thread_local! {
+    /// Whether the tooltip being built should get the item grid (set while its lines are made).
+    static GRID: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
 }
 
-/// The three rows of the box as slot codes.
-pub fn grid(slots: &[Slot]) -> Vec<String> {
-    (0..SLOTS / COLUMNS)
-        .map(|row| {
-            (0..COLUMNS)
-                .map(|col| {
-                    let index = (row * COLUMNS + col) as u8;
-                    code(slots.iter().find(|s| s.slot == index))
-                })
-                .collect::<Vec<_>>()
-                .join(" ")
-        })
-        .collect()
+pub fn set_grid(on: bool) {
+    GRID.with(|g| g.set(on));
+}
+
+pub fn grid_on() -> bool {
+    GRID.with(std::cell::Cell::get)
+}
+
+/// A slot's cell in the grid is this many pixels square, like a bundle's.
+pub const CELL: f32 = 24.0;
+/// The grid's size: nine cells across, three down.
+pub const GRID_WIDTH: f32 = COLUMNS as f32 * CELL;
+pub const GRID_HEIGHT: f32 = (SLOTS / COLUMNS) as f32 * CELL;
+/// Spaces on a line of their own that make the tooltip wide enough for the grid.
+pub const PAD: usize = 60;
+
+/// The top-left of slot `n` for a tooltip whose box starts at `(x, y)` and is `box_width` wide, the grid centred in it.
+pub fn slot_at(n: u8, x: f32, y: f32, box_width: f32) -> Option<[f32; 2]> {
+    let n = usize::from(n);
+    if n >= SLOTS {
+        return None;
+    }
+    let left = x + ((box_width - GRID_WIDTH) / 2.0).floor().max(0.0);
+    Some([left + (n % COLUMNS) as f32 * CELL, y + (n / COLUMNS) as f32 * CELL])
 }
 ''',
     tests='''
@@ -452,14 +458,22 @@ pub fn grid(slots: &[Slot]) -> Vec<String> {
     }
 
     #[test]
-    fn the_grid_has_three_rows_of_nine_codes() {
-        let slots = [slot(0, "minecraft:cobblestone", 1), slot(10, "minecraft:diamond_pickaxe", 1), slot(26, "minecraft:stone", 1)];
-        let rows = grid(&slots);
-        assert_eq!(rows.len(), 3);
-        assert_eq!(rows[0], "Co .. .. .. .. .. .. .. ..");
-        assert_eq!(rows[1], ".. Dp .. .. .. .. .. .. ..");
-        assert_eq!(rows[2], ".. .. .. .. .. .. .. .. St");
-        assert!(rows.iter().all(|r| r.split(' ').count() == COLUMNS));
+    fn slots_sit_on_a_nine_by_three_grid_centred_in_the_box() {
+        assert_eq!(slot_at(0, 10.0, 20.0, 216.0), Some([10.0, 20.0]));
+        assert_eq!(slot_at(10, 10.0, 20.0, 216.0), Some([34.0, 44.0]));
+        assert_eq!(slot_at(26, 10.0, 20.0, 216.0), Some([202.0, 68.0]));
+        assert_eq!(slot_at(0, 0.0, 0.0, 240.0), Some([12.0, 0.0]), "a wider box centres it");
+        assert_eq!(slot_at(0, 0.0, 0.0, 100.0), Some([0.0, 0.0]), "a narrow box never pushes it left");
+        assert_eq!(slot_at(27, 0.0, 0.0, 216.0), None);
+        assert_eq!((GRID_WIDTH, GRID_HEIGHT), (216.0, 72.0));
+    }
+
+    #[test]
+    fn the_grid_flag_is_per_tooltip() {
+        set_grid(true);
+        assert!(grid_on());
+        set_grid(false);
+        assert!(!grid_on());
     }
 ''',
     helpers={
@@ -469,7 +483,8 @@ fn shulker_box_tooltip_tooltip(
     game: &crate::game::Game<'_>,
     stack: &ItemStack,
 ) -> Vec<(horizon_client::text::Text, u32)> {
-    use crate::game::lib_shulker_box_tooltip as m;
+    use crate::game::@MOD@ as m;
+    m::set_grid(false);
     if !game.native_on(m::ID) {
         return lines;
     }
@@ -496,11 +511,50 @@ fn shulker_box_tooltip_tooltip(
         }
     }
     if m::is(get, "grid") {
-        for line in m::grid(&slots) {
-            add(line);
-        }
+        // The tooltip is as wide as its widest line: a line of spaces makes room for the grid, which Horizon draws under the text.
+        add(" ".repeat(m::PAD));
+        m::set_grid(true);
     }
     lines
+}
+''',
+        "bundle": '''// A bundle's item grid in a tooltip: answered for a shulker box with its 27 slots, nine across.
+fn shulker_box_tooltip_bundle(
+    items: &Items,
+    stack: &ItemStack,
+    x: f32,
+    y: f32,
+    box_width: f32,
+) -> std::ops::ControlFlow<Option<TooltipLayout>> {
+    use lib_shulker_box_tooltip as m;
+    let _ = items;
+    if !m::grid_on() {
+        return std::ops::ControlFlow::Continue(());
+    }
+    let Some(data) = stack.data() else {
+        return std::ops::ControlFlow::Continue(());
+    };
+    if data.container.is_empty() {
+        return std::ops::ControlFlow::Continue(());
+    }
+    let slots = data
+        .container
+        .iter()
+        .filter_map(|(slot, s)| m::slot_at(*slot, x, y, box_width).map(|at| (at, s.clone())))
+        .collect();
+    std::ops::ControlFlow::Break(Some(TooltipLayout {
+        width: m::GRID_WIDTH,
+        height: m::GRID_HEIGHT,
+        slots,
+        selected: None,
+        overflow: None,
+        // The progress bar a bundle has is drawn far off screen.
+        bar: [-1000.0, -1000.0],
+        fill: 0.0,
+        full: false,
+        label: None,
+        empty_description: None,
+    }))
 }
 ''',
     },

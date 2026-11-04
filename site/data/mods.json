@@ -1,7 +1,7 @@
 {
  "counts": {
-  "ported": 27,
-  "partial": 3,
+  "ported": 28,
+  "partial": 2,
   "builtin": 6,
   "hook": 15,
   "library": 28,
@@ -1886,9 +1886,9 @@
    "slug": "shulkerboxtooltip",
    "licence": "MIT License",
    "build": "shulkerboxtooltip-fabric-5.4.2+26.3",
-   "status": "partial",
+   "status": "ported",
    "project": "shulker-box-tooltip",
-   "note": "The contents as text (totals and a slot grid); the graphical 9 by 3 grid needs a draw hook inside tooltips.",
+   "note": "Totals by item and a graphical 9 by 3 grid with real item icons",
    "page": "shulkerboxtooltip",
    "icon": "catalogue/shulkerboxtooltip.png"
   },
@@ -2342,8 +2342,8 @@
    "licence": "see project",
    "build": "xaerominimap-fabric-26.3-26.5.3",
    "status": "partial",
-   "project": "waypoints",
-   "note": "Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap.",
+   "project": "minimap-plus",
+   "note": "The map display (corner, size, zoom keys, big map, turning, round) on Horizon's own minimap, plus the waypoints mod; waypoints are not marked on the map and there is no entity radar.",
    "page": "xaeros-minimap",
    "icon": "catalogue/xaeros-minimap.png"
   },
@@ -2355,8 +2355,8 @@
    "licence": "see project",
    "build": "xaeroworldmap-fabric-26.3-1.46.4",
    "status": "partial",
-   "project": "waypoints",
-   "note": "Only the waypoints idea; there is no map screen hook yet.",
+   "project": "minimap-plus",
+   "note": "A big-map key that widens Horizon's minimap to its largest view; there is no full-screen map screen to scroll, since Horizon has no hook for a new screen.",
    "page": "xaeros-world-map",
    "icon": "catalogue/xaeros-world-map.png"
   },

@@ -9,9 +9,10 @@ horizon_revision = "ba6344a59cb9e755b730dcf02285fc0d33b97d3c"
 
 [[module]]
 id = "runtime"
-file = "crates/horizon-client/src/game.rs"
+file = "crates/horizon-items/src/bundle.rs"
 name = "lib_shulker_box_tooltip"
 source = "runtime.rs"
+visibility = "pub"
 
 [[injection]]
 id = "tooltip"
@@ -22,6 +23,20 @@ bindings = [
   { name = "lines", ty = "Vec<(horizon_client::text::Text, u32)>", value = "$value" },
   { name = "game", ty = "&crate::game::Game<'_>", value = "&*self" },
   { name = "stack", ty = "&ItemStack", value = "stack" },
+]
+
+[[injection]]
+id = "bundle"
+kind = "HEAD"
+cancellable = true
+target = "horizon_items::bundle::tooltip_layout"
+helper = "bundle.rs"
+bindings = [
+  { name = "items", ty = "&Items", value = "items" },
+  { name = "stack", ty = "&ItemStack", value = "stack" },
+  { name = "x", ty = "f32", value = "x" },
+  { name = "y", ty = "f32", value = "y" },
+  { name = "box_width", ty = "f32", value = "box_width" },
 ]
 
 [[injection]]

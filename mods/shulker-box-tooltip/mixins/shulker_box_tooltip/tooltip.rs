@@ -4,7 +4,8 @@ fn shulker_box_tooltip_tooltip(
     game: &crate::game::Game<'_>,
     stack: &ItemStack,
 ) -> Vec<(horizon_client::text::Text, u32)> {
-    use crate::game::lib_shulker_box_tooltip as m;
+    use horizon_items::bundle::lib_shulker_box_tooltip as m;
+    m::set_grid(false);
     if !game.native_on(m::ID) {
         return lines;
     }
@@ -31,9 +32,9 @@ fn shulker_box_tooltip_tooltip(
         }
     }
     if m::is(get, "grid") {
-        for line in m::grid(&slots) {
-            add(line);
-        }
+        // The tooltip is as wide as its widest line: a line of spaces makes room for the grid, which Horizon draws under the text.
+        add(" ".repeat(m::PAD));
+        m::set_grid(true);
     }
     lines
 }

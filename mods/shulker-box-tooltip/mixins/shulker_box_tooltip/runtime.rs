@@ -1,4 +1,4 @@
-// Shulker Box Tooltip, a native Horizon mod: Shows what is inside a shulker box in its tooltip: totals by item, and a slot grid.
+// Shulker Box Tooltip, a native Horizon mod: Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_shulker_box_tooltip`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,15 +6,14 @@
 pub const ID: &str = "shulker_box_tooltip";
 pub const NAME: &str = "Shulker Box Tooltip";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Shows what is inside a shulker box in its tooltip: totals by item, and a slot grid.";
+pub const DESCRIPTION: &str = "Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("summary", "Totals by item", true),
-    ("grid", "Slot grid", false),
+    ("grid", "Slot grid with item icons", true),
     ("all", "Other containers too", false),
 ];
 
@@ -136,37 +135,38 @@ pub fn summary(slots: &[Slot]) -> Vec<String> {
     out
 }
 
-/// A slot's two-letter code: the first letters of the item's first two words, or `..` for an empty slot.
-fn code(slot: Option<&Slot>) -> String {
-    match slot {
-        None => "..".to_owned(),
-        Some(s) => {
-            let t = title(&s.item);
-            let mut words = t.split(' ');
-            let first = words.next().and_then(|w| w.chars().next()).unwrap_or('?');
-            let second = words
-                .next()
-                .and_then(|w| w.chars().next())
-                .or_else(|| t.chars().nth(1))
-                .unwrap_or(' ');
-            format!("{first}{}", second.to_ascii_lowercase())
-        }
-    }
+thread_local! {
+    /// Whether the tooltip being built should get the item grid (set while its lines are made).
+    static GRID: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
 }
 
-/// The three rows of the box as slot codes.
-pub fn grid(slots: &[Slot]) -> Vec<String> {
-    (0..SLOTS / COLUMNS)
-        .map(|row| {
-            (0..COLUMNS)
-                .map(|col| {
-                    let index = (row * COLUMNS + col) as u8;
-                    code(slots.iter().find(|s| s.slot == index))
-                })
-                .collect::<Vec<_>>()
-                .join(" ")
-        })
-        .collect()
+pub fn set_grid(on: bool) {
+    GRID.with(|g| g.set(on));
+}
+
+pub fn grid_on() -> bool {
+    GRID.with(std::cell::Cell::get)
+}
+
+/// A slot's cell in the grid is this many pixels square, like a bundle's.
+pub const CELL: f32 = 24.0;
+/// The grid's size: nine cells across, three down.
+pub const GRID_WIDTH: f32 = COLUMNS as f32 * CELL;
+pub const GRID_HEIGHT: f32 = (SLOTS / COLUMNS) as f32 * CELL;
+/// Spaces on a line of their own that make the tooltip wide enough for the grid.
+pub const PAD: usize = 60;
+
+/// The top-left of slot `n` for a tooltip whose box starts at `(x, y)` and is `box_width` wide, the grid centred in it.
+pub fn slot_at(n: u8, x: f32, y: f32, box_width: f32) -> Option<[f32; 2]> {
+    let n = usize::from(n);
+    if n >= SLOTS {
+        return None;
+    }
+    let left = x + ((box_width - GRID_WIDTH) / 2.0).floor().max(0.0);
+    Some([
+        left + (n % COLUMNS) as f32 * CELL,
+        y + (n / COLUMNS) as f32 * CELL,
+    ])
 }
 
 #[cfg(test)]
@@ -214,18 +214,30 @@ mod tests {
     }
 
     #[test]
-    fn the_grid_has_three_rows_of_nine_codes() {
-        let slots = [
-            slot(0, "minecraft:cobblestone", 1),
-            slot(10, "minecraft:diamond_pickaxe", 1),
-            slot(26, "minecraft:stone", 1),
-        ];
-        let rows = grid(&slots);
-        assert_eq!(rows.len(), 3);
-        assert_eq!(rows[0], "Co .. .. .. .. .. .. .. ..");
-        assert_eq!(rows[1], ".. Dp .. .. .. .. .. .. ..");
-        assert_eq!(rows[2], ".. .. .. .. .. .. .. .. St");
-        assert!(rows.iter().all(|r| r.split(' ').count() == COLUMNS));
+    fn slots_sit_on_a_nine_by_three_grid_centred_in_the_box() {
+        assert_eq!(slot_at(0, 10.0, 20.0, 216.0), Some([10.0, 20.0]));
+        assert_eq!(slot_at(10, 10.0, 20.0, 216.0), Some([34.0, 44.0]));
+        assert_eq!(slot_at(26, 10.0, 20.0, 216.0), Some([202.0, 68.0]));
+        assert_eq!(
+            slot_at(0, 0.0, 0.0, 240.0),
+            Some([12.0, 0.0]),
+            "a wider box centres it"
+        );
+        assert_eq!(
+            slot_at(0, 0.0, 0.0, 100.0),
+            Some([0.0, 0.0]),
+            "a narrow box never pushes it left"
+        );
+        assert_eq!(slot_at(27, 0.0, 0.0, 216.0), None);
+        assert_eq!((GRID_WIDTH, GRID_HEIGHT), (216.0, 72.0));
+    }
+
+    #[test]
+    fn the_grid_flag_is_per_tooltip() {
+        set_grid(true);
+        assert!(grid_on());
+        set_grid(false);
+        assert!(!grid_on());
     }
 
     #[test]

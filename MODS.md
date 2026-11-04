@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **27** ported · **3** partly ported · **6** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **28** ported · **2** partly ported · **6** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -25,7 +25,7 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (27)
+## Ported (28)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -48,6 +48,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Pick Up Notifier](catalogue/pick-up-notifier.md) | [pick-up-notifier](https://modrinth.com/mod/pick-up-notifier) | `Mozilla Public License 2.0` | `pickupnotifier-v26.3.0-mc26.3.x+fabric` | Ported ([`pick-up-notifier`](mods/pick-up-notifier/)) | Pick Up Notifier (raw-hook port: watches the inventory) |
 | [Ping View](catalogue/ping-view.md) | [ping-view](https://modrinth.com/mod/ping-view) | `MIT License` | `pingview-fabric-1.6` | Ported ([`ping-view`](mods/ping-view/)) | Ping View |
 | [PotionCounter](catalogue/potioncounter.md) | [potioncounter](https://modrinth.com/mod/potioncounter) | `MIT License` | `potioncounter-fabric-1.12.1+mc26.3` | Ported ([`potion-counter`](mods/potion-counter/)) | Potion Counter (raw-hook port: reads the inventory) |
+| [Shulker Box Tooltip](catalogue/shulkerboxtooltip.md) | [shulkerboxtooltip](https://modrinth.com/mod/shulkerboxtooltip) | `MIT License` | `shulkerboxtooltip-fabric-5.4.2+26.3` | Ported ([`shulker-box-tooltip`](mods/shulker-box-tooltip/)) | Totals by item and a graphical 9 by 3 grid with real item icons |
 | [Simple Zoom](catalogue/zoom-simple.md) | [zoom-simple](https://modrinth.com/mod/zoom-simple) | `MIT License` | `simplezoom-fabric-26.3-1.4.0` | Ported ([`simple-zoom`](mods/simple-zoom/)) | Simple Zoom |
 | [SnappyTappy](catalogue/snappytappy.md) | [snappytappy](https://modrinth.com/mod/snappytappy) | `MIT` | `26.3` | Ported ([`snappy-tappy`](mods/snappy-tappy/)) | Snappy Tappy (raw-hook port: held-key set) |
 | [Sprint Indicator](catalogue/sprint-indicator.md) | [sprint-indicator](https://modrinth.com/mod/sprint-indicator) | `MIT License` | `sprintindicator-fabric-2.1.0+26.3` | Ported ([`sprint-indicator`](mods/sprint-indicator/)) | Sprint Indicator |
@@ -57,13 +58,12 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (3)
+## Partly ported (2)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
-| [Shulker Box Tooltip](catalogue/shulkerboxtooltip.md) | [shulkerboxtooltip](https://modrinth.com/mod/shulkerboxtooltip) | `MIT License` | `shulkerboxtooltip-fabric-5.4.2+26.3` | Partly ported ([`shulker-box-tooltip`](mods/shulker-box-tooltip/)) | The contents as text (totals and a slot grid); the graphical 9 by 3 grid needs a draw hook inside tooltips. |
-| [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`waypoints`](mods/waypoints/)) | Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap. |
-| [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`waypoints`](mods/waypoints/)) | Only the waypoints idea; there is no map screen hook yet. |
+| [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | The map display (corner, size, zoom keys, big map, turning, round) on Horizon's own minimap, plus the waypoints mod; waypoints are not marked on the map and there is no entity radar. |
+| [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | A big-map key that widens Horizon's minimap to its largest view; there is no full-screen map screen to scroll, since Horizon has no hook for a new screen. |
 
 ## Built into Horizon (6)
 

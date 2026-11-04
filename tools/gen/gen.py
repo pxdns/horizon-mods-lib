@@ -17,7 +17,8 @@ from mods_hit import HIT
 from mods_ping import PING
 from mods_inv import INV
 from mods_mount import MOUNT
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT
+from mods_map import MAP
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

@@ -1,11 +1,11 @@
 # Shulker Box Tooltip (Horizon native mod)
 
-Shows what is inside a shulker box in its tooltip: totals by item, and a slot grid.
+Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items.
 
 
 Ported from **Shulker Box Tooltip (shulkerboxtooltip)** (see the upstream project) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/shulker_box_tooltip/`). It adds a RETURN modifier to `Game::stack_tooltip` and reads the item's container contents (`ItemStack::data`), neither of which is part of the stable hook-point contract, so it is **pinned to one Horizon commit**. It shows text, not the graphical 9 by 3 grid of the original: drawing inside a tooltip needs a draw hook Horizon does not have.
+(`mixins/shulker_box_tooltip/`). It adds a RETURN modifier to `Game::stack_tooltip` (the totals) and a cancellable HEAD hook on `bundle::tooltip_layout`, the function Horizon uses to lay out a bundle's item grid in its tooltip, which it answers for a shulker box with a 9 by 3 grid; Horizon then draws the real item icons and counts itself. It reads the item's container contents (`ItemStack::data`). None of this is part of the stable hook-point contract, so it is **pinned to one Horizon commit**.
 
 ## Install
 

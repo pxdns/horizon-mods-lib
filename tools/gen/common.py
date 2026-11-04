@@ -185,6 +185,10 @@ HOOK_TARGETS = {
         ("game", "&crate::game::Game<'_>", "&*self"),
         ("zoom", "&mut Option<crate::game::native_hooks::NativeZoom>", "&mut *zoom"),
     ]),
+    "minimap": ("native_minimap", [
+        ("game", "&crate::game::Game<'_>", "&*self"),
+        ("minimap", "&mut Option<crate::game::native_hooks::NativeMinimap>", "&mut *minimap"),
+    ]),
     "tick": ("native_tick", [
         ("game", "&mut crate::game::Game<'_>", "&mut *self"),
     ]),
