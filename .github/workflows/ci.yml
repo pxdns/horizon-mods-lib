@@ -63,4 +63,8 @@ jobs:
           pip install markdown
       - run: python3 tools/gen/regen.py
       - name: Nothing changed
-        run: git diff --exit-code --stat || { echo "::error::Generated files are out of date: run python3 tools/gen/regen.py and commit"; exit 1; }
+        run: |
+          if ! git diff --exit-code --stat; then
+            echo "::error::Generated files are out of date, run python3 tools/gen/regen.py and commit"
+            exit 1
+          fi
