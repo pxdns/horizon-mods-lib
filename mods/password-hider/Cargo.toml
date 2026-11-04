@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-password-hider"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Shows the password in /login, /register and /changepassword as asterisks while you type, and keeps it out of the chat history and its file."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/password_hider/runtime.rs"
+
+[workspace]

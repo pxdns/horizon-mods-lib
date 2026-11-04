@@ -51,6 +51,7 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`invmove`](mods/invmove.md) | InvMove (invmove) | see the upstream project |
 | [`better-mount-hud`](mods/better-mount-hud.md) | Better Mount HUD (bettermounthud) | see the upstream project |
 | [`minimap-plus`](mods/minimap-plus.md) | Xaero's Minimap and Xaero's World Map (the map display) | independent implementation, no upstream code |
+| [`password-hider`](mods/password-hider.md) | the password-hiding in login plugins' clients (an idea, not a port) | independent implementation, no upstream code |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

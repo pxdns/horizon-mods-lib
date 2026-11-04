@@ -46,6 +46,7 @@ One zip with **all 27 mods**, unpacked, plus an install script: [`horizon-mods-a
 | [`ping-view`](mods/ping-view) | Your connection's ping, with average and range (hooks Horizon's ping logger) | Ping View |
 | [`invmove`](mods/invmove) | Keep walking with the inventory open (re-runs the tick with no screen) | InvMove |
 | [`better-mount-hud`](mods/better-mount-hud) | Health, speed and jump of the mount you ride (reads game state) | Better Mount HUD |
+| [`password-hider`](mods/password-hider) | Masks the password in `/login`, `/register` and the like, and keeps it out of the history file (hooks Horizon's chat) | Written for this library |
 | [`minimap-plus`](mods/minimap-plus) | Corner, size, zoom keys and a big map for Horizon's minimap | Xaero's Minimap and World Map (the map display) |
 
 Each folder is a complete project (`runtime.rs` with unit tests, a `horizon-mixin.toml`, pins, licence, README) and has its own
@@ -60,9 +61,9 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 ## Status, honestly
 
-All 31 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
+All 32 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
 game type-checks with warnings denied. CI cannot play the game through a window, so none has been exercised in a live session by CI.
-Of the 186 catalogued mods, 28 are ported, 2 partly, 6 are built into Horizon already and 15 are waiting on hook points Horizon does not have yet (each catalogue page says why; the proposals for [screen, slot and map hooks](proposals/native-screen-hooks.md) and [transport and packet hooks](proposals/native-network-hooks.md) say what would unlock them). See [the hook-point notes](docs/hook-points.md). 21 of the 31 read or hook Horizon's own internals and are pinned to one Horizon commit.
+Of the 186 catalogued mods, 28 are ported, 2 partly, 6 are built into Horizon already and 15 are waiting on hook points Horizon does not have yet (each catalogue page says why; the proposals for [screen, slot and map hooks](proposals/native-screen-hooks.md) and [transport and packet hooks](proposals/native-network-hooks.md) say what would unlock them). See [the hook-point notes](docs/hook-points.md). 22 of the 32 read or hook Horizon's own internals and are pinned to one Horizon commit.
 
 ## Credits, licensing, takedowns
 
