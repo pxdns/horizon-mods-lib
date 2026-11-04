@@ -253,7 +253,6 @@ def pages():
     # ---- home
     home = f'''<main>
 <section class="hero"><div class="wrap">
-<span class="eyebrow rise">Native mods for Horizon</span>
 <h1 class="big rise" style="--delay:60ms">Your favourite mods, <span class="text-accent">rewritten in Rust.</span></h1>
 <p class="lede rise" style="--delay:120ms">Horizon is a rewrite of Minecraft: Java in Rust, and its mods are not plugins: they are source that gets merged into the
 game and compiled with it. This is a library of them. {n} are done, each one a tiny project with its own tests, its own
