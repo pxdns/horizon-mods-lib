@@ -57,6 +57,8 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`shield-statuses`](mods/shield-statuses.md) | Shield Statuses (shieldstatus) | see the upstream project |
 | [`chat-patches`](mods/chat-patches.md) | Chat Patches (chatpatches) | see the upstream project |
 | [`clumps`](mods/clumps.md) | Clumps (clumps) | MIT |
+| [`search-stats`](mods/search-stats.md) | SearchStats (searchstats) | Apache-2.0 |
+| [`better-stats`](mods/better-stats.md) | Better Statistics Screen (betterstats) | independent implementation from the mod's public description; no upstream code or assets |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

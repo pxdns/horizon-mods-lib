@@ -21,7 +21,9 @@ from mods_f5 import F5
 from mods_shield import SHIELD
 from mods_patches import PATCH
 from mods_clumps import CLUMPS
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS
+from mods_stats import STATS
+from mods_betterstats import BSTATS
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS
 
 ROOT = Path(__file__).resolve().parents[2]
 D = ROOT / "docs"
@@ -616,7 +618,7 @@ for m in MODS:
         hold = "HOLD: bool = true" in m["runtime_extra"]
         default = "C" if m["id"] == "zoomify" else "V"
         cmd = f"| Key | Default | What it does |\n|---|---|---|\n| Zoom | `{default}` | {'Hold to zoom' if hold else 'Press to turn the zoom on, press again to turn it off'}; the wheel changes it while it is on |"
-    names = {"list": "native_mods", "click": "native_settings_click", "turn": "perspective::turn_player", "camera": "perspective::camera_view", "bob": "fov::bob_matrix", "add": "chat::Chat::add_message", "lines": "chat::Chat::add_lines", "message": "chat::Chat::add_message", "layout": "chat::Chat::layout", "tooltip": "stations::stack_tooltip", "crosshair": "hud_layout::crosshair", "ray": "game::ray_box", "log": "debug_chart::SampleLogger::log", "walk": "game::Game::tick", "bundle": "bundle::tooltip_layout", "format": "chat::ChatScreen::format", "recent": "chat::Chat::add_recent", "merge": "entities::merge_orbs"}
+    names = {"list": "native_mods", "click": "native_settings_click", "turn": "perspective::turn_player", "camera": "perspective::camera_view", "bob": "fov::bob_matrix", "add": "chat::Chat::add_message", "lines": "chat::Chat::add_lines", "message": "chat::Chat::add_message", "layout": "chat::Chat::layout", "tooltip": "stations::stack_tooltip", "crosshair": "hud_layout::crosshair", "ray": "game::ray_box", "log": "debug_chart::SampleLogger::log", "walk": "game::Game::tick", "bundle": "bundle::tooltip_layout", "format": "chat::ChatScreen::format", "recent": "chat::Chat::add_recent", "merge": "entities::merge_orbs", "items": "stats_screen::stat_items", "mobs": "stats_screen::stat_mobs", "footer": "stats_screen::draw_stats_footer", "open": "stats_screen::open_stats"}
     hooks = ", ".join(f"`{names.get(h, 'native_' + h)}`" for h in m["hooks"])
     if m.get("usage"):
         cmd = m["usage"].replace("\\n", "\n")

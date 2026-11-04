@@ -1,9 +1,9 @@
 {
  "counts": {
   "ported": 32,
-  "partial": 7,
+  "partial": 9,
   "builtin": 8,
-  "hook": 14,
+  "hook": 12,
   "library": 28,
   "engine": 32,
   "pack": 30,
@@ -144,9 +144,9 @@
    "slug": "better-stats",
    "licence": "see project",
    "build": "betterstats-5.6.0-beta.1+fn-26.3",
-   "status": "hook",
-   "project": "",
-   "note": "Replaces the Statistics screen, which Horizon draws and handles in `stats_screen.rs` (about 500 lines); a mod could only replace it whole.",
+   "status": "partial",
+   "project": "better-stats",
+   "note": "Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing",
    "page": "better-stats",
    "icon": "catalogue/better-stats.png"
   },
@@ -1821,9 +1821,9 @@
    "slug": "searchstats",
    "licence": "Apache License 2.0",
    "build": "searchstats-fabric-1.103.0+26.2",
-   "status": "hook",
-   "project": "",
-   "note": "Adds a search box to the Statistics screen, which Horizon draws and handles in `stats_screen.rs`; there is no hook for a text field there.",
+   "status": "partial",
+   "project": "search-stats",
+   "note": "A search box that filters the Items and Mobs lists; the General tab is not filtered",
    "page": "searchstats",
    "icon": "catalogue/searchstats.png"
   },

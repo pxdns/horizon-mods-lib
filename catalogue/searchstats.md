@@ -2,13 +2,15 @@
 
 ![Search Stats icon](../assets/icons/catalogue/searchstats.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `Apache License 2.0` - **26.3 build:** `searchstats-fabric-1.103.0+26.2` - [Modrinth](https://modrinth.com/mod/searchstats)
+**Status:** Partly ported - **Upstream licence:** `Apache License 2.0` - **26.3 build:** `searchstats-fabric-1.103.0+26.2` - [Modrinth](https://modrinth.com/mod/searchstats)
+
+**Project:** [`search-stats`](../mods/search-stats/) - [docs](../docs/mods/search-stats.md)
 
 ## Where it stands
 
-Adds a search box to the Statistics screen, which Horizon draws and handles in `stats_screen.rs`; there is no hook for a text field there.
+A search box that filters the Items and Mobs lists; the General tab is not filtered
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

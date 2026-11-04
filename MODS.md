@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **32** ported · **7** partly ported · **8** built into horizon · **14** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **35** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **32** ported · **9** partly ported · **8** built into horizon · **12** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **35** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -62,14 +62,16 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (7)
+## Partly ported (9)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
+| [Better Statistics Screen](catalogue/better-stats.md) | [better-stats](https://modrinth.com/mod/better-stats) | `see project` | `betterstats-5.6.0-beta.1+fn-26.3` | Partly ported ([`better-stats`](mods/better-stats/)) | Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing |
 | [Chat Patches](catalogue/chatpatches.md) | [chatpatches](https://modrinth.com/mod/chatpatches) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`chat-patches`](mods/chat-patches/)) | Timestamps and an option to drop immediate repeats; not copying, hiding or compact counters |
 | [Crosshair Addons Public](catalogue/crosshair-addons-public.md) | [crosshair-addons-public](https://modrinth.com/mod/crosshair-addons-public) | `MIT License` | `-` | Partly ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | A mark over the crosshair when it is over a living entity; none of the other conditions |
 | [Enchantment Insights](catalogue/enchantment-insights.md) | [enchantment-insights](https://modrinth.com/mod/enchantment-insights) | `Mozilla Public License 2.0` | `-` | Partly ported ([`enchantment-descriptions`](mods/enchantment-descriptions/)) | The descriptions under the tooltip; no coloured enchantment names |
 | [MiniHUD](catalogue/minihud.md) | [minihud](https://modrinth.com/mod/minihud) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`info-hud`](mods/info-hud/)) | Speed, facing, dimension and angles in Info HUD, coordinates in Custom HUD; no light level, biome or chunk overlays |
+| [Search Stats](catalogue/searchstats.md) | [searchstats](https://modrinth.com/mod/searchstats) | `Apache License 2.0` | `searchstats-fabric-1.103.0+26.2` | Partly ported ([`search-stats`](mods/search-stats/)) | A search box that filters the Items and Mobs lists; the General tab is not filtered |
 | [Shield Statuses](catalogue/shield-statuses.md) | [shield-statuses](https://modrinth.com/mod/shield-statuses) | `MIT License` | `-` | Partly ported ([`shield-statuses`](mods/shield-statuses/)) | Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook |
 | [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | The map display (corner, size, zoom keys, big map, turning, round) on Horizon's own minimap, plus the waypoints mod; waypoints are not marked on the map and there is no entity radar. |
 | [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | A big-map key that widens Horizon's minimap to its largest view; there is no full-screen map screen to scroll, since Horizon has no hook for a new screen. |
@@ -87,12 +89,11 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Built into Horizon | Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric. |
 | [ToolTipFix](catalogue/tooltipfix.md) | [tooltipfix](https://modrinth.com/mod/tooltipfix) | `MIT` | `-` | Built into Horizon | Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges. |
 
-## Needs a hook point (14)
+## Needs a hook point (12)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [[ETF] Entity Texture Features](catalogue/entitytexturefeatures.md) | [entitytexturefeatures](https://modrinth.com/mod/entitytexturefeatures) | `GNU Lesser General Public License v3.0 only` | `7.2.5-fabric-26.3` | Needs a hook point | Chooses entity textures by rules per entity; Horizon's mob renderers have no hook for that choice. |
-| [Better Statistics Screen](catalogue/better-stats.md) | [better-stats](https://modrinth.com/mod/better-stats) | `see project` | `betterstats-5.6.0-beta.1+fn-26.3` | Needs a hook point | Replaces the Statistics screen, which Horizon draws and handles in `stats_screen.rs` (about 500 lines); a mod could only replace it whole. |
 | [BetterGrassify](catalogue/bettergrassify.md) | [bettergrassify](https://modrinth.com/mod/bettergrassify) | `Apache-2.0` | `1.8.8+fabric.26.3` | Needs a hook point | Changes which texture a block face uses, inside the chunk mesher; there is no hook there. |
 | [Chat Heads](catalogue/chat-heads.md) | [chat-heads](https://modrinth.com/mod/chat-heads) | `Mozilla Public License 2.0` | `chat_heads-1.2.9-fabric-26.3` | Needs a hook point | Needs each sender's skin drawn beside chat lines; the chat has no skin access, and the HUD sprite atlas cannot take a player's head. |
 | [Controlling](catalogue/controlling.md) | [controlling](https://modrinth.com/mod/controlling) | `MIT License` | `26.3.3` | Needs a hook point | Horizon's Key Binds page already has a search box that filters by action name (`options_ui.rs`); what Controlling adds, searching by key and filtering conflicts, sits in the middle of that page's layout function, which would have to be replaced whole. |
@@ -102,7 +103,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Marlow's Crystal Optimizer](catalogue/marlow-crystal-optimizer.md) | [marlow-crystal-optimizer](https://modrinth.com/mod/marlow-crystal-optimizer) | `MIT License` | `Marlow Crystal Optimizer` | Needs a hook point | Removes an end crystal on the client before the server confirms; it needs hooks in entity and packet handling. |
 | [Multi Key Bindings](catalogue/multi-key-bindings.md) | [multi-key-bindings](https://modrinth.com/mod/multi-key-bindings) | `GNU General Public License v3.0 only` | `multi-key-bindings-1.3.5+26.3` | Needs a hook point | Adds a second binding per action to the Controls screen and the key map; both sit in Horizon's options UI, with no hook. |
 | [Pearl Optimizer](catalogue/pearl-optimizer.md) | [pearl_optimizer](https://modrinth.com/mod/pearl_optimizer) | `see project` | `PearlOptimizer-26.1-26.3` | Needs a hook point | Predicts an ender pearl on the client before the server confirms; it needs hooks in entity and packet handling. |
-| [Search Stats](catalogue/searchstats.md) | [searchstats](https://modrinth.com/mod/searchstats) | `Apache License 2.0` | `searchstats-fabric-1.103.0+26.2` | Needs a hook point | Adds a search box to the Statistics screen, which Horizon draws and handles in `stats_screen.rs`; there is no hook for a text field there. |
 | [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Needs a hook point | Looks players up on an external tier service and draws the result on name tags; there is no network or name-tag hook. |
 | [VisualKeys](catalogue/visualkeys.md) | [visualkeys](https://modrinth.com/mod/visualkeys) | `see project` | `VisualKeys-0.0.11+26.3` | Needs a hook point | Adds a keyboard screen to the options; there is no hook for a new screen. |
 

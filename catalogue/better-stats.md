@@ -2,13 +2,15 @@
 
 ![Better Statistics Screen icon](../assets/icons/catalogue/better-stats.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `see project` - **26.3 build:** `betterstats-5.6.0-beta.1+fn-26.3` - [Modrinth](https://modrinth.com/mod/better-stats)
+**Status:** Partly ported - **Upstream licence:** `see project` - **26.3 build:** `betterstats-5.6.0-beta.1+fn-26.3` - [Modrinth](https://modrinth.com/mod/better-stats)
+
+**Project:** [`better-stats`](../mods/better-stats/) - [docs](../docs/mods/better-stats.md)
 
 ## Where it stands
 
-Replaces the Statistics screen, which Horizon draws and handles in `stats_screen.rs` (about 500 lines); a mod could only replace it whole.
+Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

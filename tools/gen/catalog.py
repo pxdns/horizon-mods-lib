@@ -48,6 +48,8 @@ PORTED = {
     "aC3cM3Vq": ("builtin", "", "Horizon ships Mouse Tweaks as one of its own extras (Options > Extras)."),
     "K0AkAin6": ("builtin", "", "Horizon ships Client Sort as one of its own extras (sort key in Extras)."),
     "wdLuzzEP": ("builtin", "", "Horizon has a Fullbright extra of its own."),
+    "n6PXGAoM": ("partial", "better-stats", "Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing"),
+    "ExI7GmJi": ("partial", "search-stats", "A search box that filters the Items and Mobs lists; the General tab is not filtered"),
     "Wnxd13zP": ("ported", "clumps", "Orbs of any size merge into one orb worth all of them, collected at once"),
     "GfoMZ9Ly": ("partial", "shield-statuses", "Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook"),
     "MOqt4Z5n": ("partial", "chat-patches", "Timestamps and an option to drop immediate repeats; not copying, hiding or compact counters"),
@@ -89,8 +91,6 @@ DEFAULT_REASON = "Needs a hook point Horizon does not have yet (the current hook
 
 SPECIFIC = {
     "BVzZfTc1": "Chooses entity textures by rules per entity; Horizon's mob renderers have no hook for that choice.",
-    "n6PXGAoM": "Replaces the Statistics screen, which Horizon draws and handles in `stats_screen.rs` (about 500 lines); a mod could only replace it whole.",
-    "ExI7GmJi": "Adds a search box to the Statistics screen, which Horizon draws and handles in `stats_screen.rs`; there is no hook for a text field there.",
     "m5T5xmUy": "Changes which texture a block face uses, inside the chunk mesher; there is no hook there.",
     "Wb5oqrBJ": "Needs each sender's skin drawn beside chat lines; the chat has no skin access, and the HUD sprite atlas cannot take a player's head.",
     "xv94TkTM": "Horizon's Key Binds page already has a search box that filters by action name (`options_ui.rs`); what Controlling adds, searching by key and filtering conflicts, sits in the middle of that page's layout function, which would have to be replaced whole.",
