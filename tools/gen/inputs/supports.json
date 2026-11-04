@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "targets": [
+    "1.16.5",
+    "1.19.4",
+    "1.21.11",
+    "26.2",
+    "26.3"
+  ],
+  "modules": {
+    "appleskin": {
+      "26.2": "partial"
+    },
+    "better-stats": {
+      "26.2": "partial"
+    },
+    "bettergrassify": {
+      "26.2": "partial"
+    },
+    "bobby": {
+      "26.2": "partial"
+    },
+    "capes": {
+      "26.2": "partial"
+    },
+    "chat-heads": {
+      "26.2": "partial"
+    },
+    "chatanimation": {
+      "26.2": "partial"
+    },
+    "cit-resewn": {
+      "26.2": "partial"
+    },
+    "controlling": {
+      "26.2": "partial"
+    },
+    "crystal-speed": {
+      "26.2": "partial"
+    },
+    "customhud": {
+      "26.2": "partial"
+    },
+    "dynamic-fps": {
+      "26.2": "partial"
+    },
+    "entity-model-features": {
+      "26.2": "partial"
+    },
+    "entitytexturefeatures": {
+      "26.2": "partial"
+    },
+    "freecam": {
+      "26.2": "partial"
+    },
+    "fullbright": {
+      "26.2": "partial"
+    },
+    "invmove": {
+      "26.2": "partial"
+    },
+    "item-highlighter": {
+      "26.2": "partial"
+    },
+    "morechathistory": {
+      "26.2": "partial"
+    },
+    "mouse-tweaks": {
+      "26.2": "partial"
+    },
+    "no-death-animation": {
+      "26.2": "partial"
+    },
+    "shulkerboxtooltip": {
+      "26.2": "partial"
+    },
+    "tooltipfix": {
+      "26.2": "partial"
+    },
+    "ukus-armor-hud": {
+      "26.2": "partial"
+    },
+    "xp-bottle-optimizer": {
+      "26.2": "partial"
+    },
+    "zoomify": {
+      "26.2": "partial"
+    },
+    "transparent-shield": {
+      "26.2": "partial"
+    }
+  }
+}

@@ -2,13 +2,15 @@
 
 ![Combat Hitboxes icon](../assets/icons/catalogue/combat-hitboxes.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `Apache License 2.0` - **26.3 build:** `combat-hitbox-1.0.11` - [Modrinth](https://modrinth.com/mod/combat-hitboxes)
+**Status:** Ported - **Upstream licence:** `Apache License 2.0` - **26.3 build:** `combat-hitbox-1.0.11` - [Modrinth](https://modrinth.com/mod/combat-hitboxes)
+
+**Project:** [`combat-hitboxes`](../mods/combat-hitboxes/) - [docs](../docs/mods/combat-hitboxes.md)
 
 ## Where it stands
 
-Needs input or camera hooks that Horizon does not expose yet.
+Combat Hitboxes (raw-hook port: wraps the ray-versus-box test)
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

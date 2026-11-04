@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).
+Merges XP orbs in the entity simulation: entity logic, not something a hook point reaches.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 

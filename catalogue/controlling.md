@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Needs input or camera hooks that Horizon does not expose yet.
+Changes the Controls screen, which Horizon builds in its generic options UI with no hook for a search box.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 

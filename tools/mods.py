@@ -9,6 +9,7 @@ Adapted from horizon-rust/horizon-mods' native/tools/native.py (MIT), with one m
     python3 tools/mods.py bundle all                 # target/horizon-mods-all.zip: every mod unpacked + install scripts
     python3 tools/mods.py version zoomify            # the mod's version
     python3 tools/mods.py list                       # every project
+    python3 tools/mods.py fetch                      # download the pinned Horizon source into target/
     --horizon REV   build on another Horizon commit (`latest` = the newest Nightly) instead of compatibility.json.
 
 Horizon's source comes from GitHub's archive of the commit, never a local checkout; horizon-mixins is built once at
@@ -81,18 +82,31 @@ def get_commit(ref):
 
 
 def source(revision):
-    """Horizon's source at `revision`, unpacked once into target/horizon/<revision>/."""
+    """Horizon's source at `revision`, unpacked once into target/horizon/<revision>/: GitHub's archive of the commit, or
+    (where the archive host is not reachable) a shallow `git fetch` of exactly that commit. Never a local checkout."""
     out = TARGET / "horizon" / revision
     if (out / ".horizon-revision").is_file():
         return out
     log(f"Downloading Horizon {revision[:7]}")
-    data = get(f"https://codeload.github.com/{REPO}/tar.gz/{revision}")
     partial = TARGET / "horizon" / f".{revision}.partial"
     shutil.rmtree(partial, ignore_errors=True)
     partial.mkdir(parents=True)
-    with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as archive:
-        archive.extractall(partial, filter="data")
-    top = next(partial.iterdir())
+    try:
+        data = get(f"https://codeload.github.com/{REPO}/tar.gz/{revision}")
+        with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as archive:
+            archive.extractall(partial, filter="data")
+        top = next(partial.iterdir())
+    except Exception as error:  # noqa: BLE001 - any download failure falls back to git
+        log(f"archive download failed ({error}); fetching the commit with git")
+        shutil.rmtree(partial, ignore_errors=True)
+        top = partial / "horizon"
+        top.mkdir(parents=True)
+        git = ["git", "-C", str(top)]
+        subprocess.run(["git", "init", "-q", str(top)], check=True)
+        subprocess.run(git + ["remote", "add", "origin", f"https://github.com/{REPO}"], check=True)
+        subprocess.run(git + ["fetch", "-q", "--depth", "1", "origin", revision], check=True)
+        subprocess.run(git + ["checkout", "-q", "FETCH_HEAD"], check=True)
+        shutil.rmtree(top / ".git")
     # horizon-mixins refuses links; the source has a few (docs), none needed to build.
     for path in top.rglob("*"):
         if path.is_symlink():
@@ -100,7 +114,7 @@ def source(revision):
     (top / ".horizon-revision").write_text(revision)
     shutil.rmtree(out, ignore_errors=True)
     top.rename(out)
-    shutil.rmtree(partial)
+    shutil.rmtree(partial, ignore_errors=True)
     return out
 
 
@@ -320,12 +334,18 @@ def bundle(mods):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("action", choices=["check", "build", "package", "bundle", "version", "list"])
+    parser.add_argument("action", choices=["check", "build", "package", "bundle", "version", "list", "fetch"])
     parser.add_argument("mods", nargs="*", help="folders of mods/ (`all`: every one)")
     parser.add_argument("--horizon", help="a Horizon commit, `latest` (newest Nightly) or a tag (default: the mods' own)")
     args = parser.parse_args()
     if args.action == "list":
         print("\n".join(all_mods()))
+        return
+    if args.action == "fetch":
+        # Downloads the pinned Horizon source (what the generators and `check` read); nothing is taken from a local checkout.
+        revisions = {Mod(n).compat["horizon_revision"] for n in all_mods()}
+        for revision in sorted(revisions):
+            print(source(revision))
         return
     if not args.mods:
         sys.exit("name a mod, or `all`")

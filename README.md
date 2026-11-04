@@ -9,7 +9,7 @@ popular Fabric mods**, one small tested project per mod, each released automatic
 
 ## Download everything
 
-One zip with **all 26 mods**, unpacked, plus an install script: [`horizon-mods-all.zip`](https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip) (rebuilt on every change). Unzip it and run `./install.sh MyInstance`
+One zip with **all 27 mods**, unpacked, plus an install script: [`horizon-mods-all.zip`](https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip) (rebuilt on every change). Unzip it and run `./install.sh MyInstance`
 (or `install.ps1` on Windows); [the install guide](docs/install.md) has the details and the two pairs that overlap.
 
 ## The mods
@@ -42,6 +42,7 @@ One zip with **all 26 mods**, unpacked, plus an install script: [`horizon-mods-a
 | [`crosshair-indicator`](mods/crosshair-indicator) | Red mark over the crosshair when it is over a living entity | Crosshair Indicator |
 | [`entity-crosshair`](mods/entity-crosshair) | Crosshair style and colour of your choice, red over living entities | Entity Crosshair |
 | [`shulker-box-tooltip`](mods/shulker-box-tooltip) | What is inside a shulker box, in its tooltip (text) | Shulker Box Tooltip |
+| [`combat-hitboxes`](mods/combat-hitboxes) | Entities a little easier to hit (grows the aiming boxes) | Combat Hitboxes |
 
 Each folder is a complete project (`runtime.rs` with unit tests, a `horizon-mixin.toml`, pins, licence, README) and has its own
 workflow: bump its `version` on `main` and `release-<project>.yml` tests, packages and publishes `<project>-v<version>` with the `.hnmod`
@@ -55,9 +56,9 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 ## Status, honestly
 
-All 26 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
+All 27 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
 game type-checks with warnings denied. CI cannot play the game through a window, so none has been exercised in a live session by CI.
-22 of the 186 catalogued mods are still waiting on hook points Horizon does not have yet; 4 more are built into Horizon already. See [the hook-point notes](docs/hook-points.md). Seventeen of the 26 read or hook Horizon's own internals and are pinned to one Horizon commit.
+18 of the 186 catalogued mods are still waiting on hook points Horizon does not have yet (each catalogue page says why); 6 more are built into Horizon already. See [the hook-point notes](docs/hook-points.md). Eighteen of the 27 read or hook Horizon's own internals and are pinned to one Horizon commit.
 
 ## Credits, licensing, takedowns
 
@@ -66,3 +67,7 @@ game type-checks with warnings denied. CI cannot play the game through a window,
 
 MIT licensed. An unofficial community project: not made or endorsed by the Horizon project, Mojang or Microsoft. Minecraft is a
 trademark of Mojang Synergies AB.
+
+## Regenerating
+
+The mods, docs, catalogue and release workflows are generated from [`tools/gen/`](tools/gen/README.md). `python3 tools/gen/regen.py` rebuilds them from this repository alone (it downloads the pinned Horizon source itself); a second run changes nothing.

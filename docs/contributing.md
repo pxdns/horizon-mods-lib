@@ -12,4 +12,7 @@ Ports are welcome. A good one is small, tested, and honest about what the hook p
 5. **Add** a `release-<slug>.yml` (copy an existing one and change the slug), a row in `docs/credits.md`, and an icon in `assets/icons/`.
 6. Open the pull request. CI applies all mods on the pinned Horizon.
 
+Everything under `mods/`, `docs/`, `catalogue/` and the release workflows is generated from `tools/gen/`: edit the generator and run `python3 tools/gen/regen.py` (it downloads the pinned Horizon source itself, and a second run changes nothing).
+See `tools/gen/README.md`.
+
 Be accurate in README claims: say what the mod does and what it does not, and name the upstream mod and its licence.

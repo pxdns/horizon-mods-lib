@@ -2,13 +2,13 @@
 
 ![Auth Me icon](../assets/icons/catalogue/auth-me.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `authme-fabric-9.3.0+26.3` - [Modrinth](https://modrinth.com/mod/auth-me)
+**Status:** Built into Horizon - **Upstream licence:** `MIT License` - **26.3 build:** `authme-fabric-9.3.0+26.3` - [Modrinth](https://modrinth.com/mod/auth-me)
 
 ## Where it stands
 
-Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).
+Horizon has its own account sign-in (a device-code sign-in in its settings).
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Horizon already does this itself, so a mod would only duplicate it.
 
 ## Credit
 

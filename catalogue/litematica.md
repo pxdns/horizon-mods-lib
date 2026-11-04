@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Needs a screen or world-data hook point.
+Schematic loading, rendering and placement: a large feature, not something a hook-sized mod covers.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 

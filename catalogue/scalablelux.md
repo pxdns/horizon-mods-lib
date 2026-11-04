@@ -2,13 +2,13 @@
 
 ![ScalableLux icon](../assets/icons/catalogue/scalablelux.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `ScalableLux-fabric-mc26.3-0.3.0-alpha.0.6-all` - [Modrinth](https://modrinth.com/mod/scalablelux)
+**Status:** Engine or server - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `ScalableLux-fabric-mc26.3-0.3.0-alpha.0.6-all` - [Modrinth](https://modrinth.com/mod/scalablelux)
 
 ## Where it stands
 
-Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).
+Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+This changes how the game engine performs or how a server runs. Horizon is a native rewrite with its own engine, so there is nothing to patch in.
 
 ## Credit
 

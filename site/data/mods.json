@@ -1,11 +1,11 @@
 {
  "counts": {
-  "ported": 20,
+  "ported": 21,
   "partial": 6,
-  "builtin": 4,
-  "hook": 22,
+  "builtin": 6,
+  "hook": 18,
   "library": 28,
-  "engine": 31,
+  "engine": 32,
   "pack": 30,
   "no-263": 45
  },
@@ -29,7 +29,7 @@
    "build": "7.2.5-fabric-26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Chooses entity textures by rules per entity; Horizon's mob renderers have no hook for that choice.",
    "page": "entitytexturefeatures",
    "icon": "catalogue/entitytexturefeatures.png"
   },
@@ -92,9 +92,9 @@
    "slug": "auth-me",
    "licence": "MIT License",
    "build": "authme-fabric-9.3.0+26.3",
-   "status": "hook",
+   "status": "builtin",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Horizon has its own account sign-in (a device-code sign-in in its settings).",
    "page": "auth-me",
    "icon": "catalogue/auth-me.png"
   },
@@ -146,7 +146,7 @@
    "build": "betterstats-5.6.0-beta.1+fn-26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Replaces the Statistics screen, which Horizon draws and handles in `stats_screen.rs` (about 500 lines); a mod could only replace it whole.",
    "page": "better-stats",
    "icon": "catalogue/better-stats.png"
   },
@@ -185,7 +185,7 @@
    "build": "1.8.8+fabric.26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Changes which texture a block face uses, inside the chunk mesher; there is no hook there.",
    "page": "bettergrassify",
    "icon": "catalogue/bettergrassify.png"
   },
@@ -211,7 +211,7 @@
    "build": "bettermounthud-1.2.6",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Rearranges the health and food bars while riding; Horizon lays them out in one function (`HealthHud::layout`) that mixins can only replace whole.",
    "page": "better-mount-hud",
    "icon": "catalogue/better-mount-hud.png"
   },
@@ -302,7 +302,7 @@
    "build": "chat_heads-1.2.9-fabric-26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
+   "note": "Needs each sender's skin drawn beside chat lines; the chat has no skin access, and the HUD sprite atlas cannot take a player's head.",
    "page": "chat-heads",
    "icon": "catalogue/chat-heads.png"
   },
@@ -406,7 +406,7 @@
    "build": "Clumps-fabric-26.3-26.3.2",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Merges XP orbs in the entity simulation: entity logic, not something a hook point reaches.",
    "page": "clumps",
    "icon": "catalogue/clumps.png"
   },
@@ -443,9 +443,9 @@
    "slug": "combat-hitboxes",
    "licence": "Apache License 2.0",
    "build": "combat-hitbox-1.0.11",
-   "status": "hook",
-   "project": "",
-   "note": "Needs input or camera hooks that Horizon does not expose yet.",
+   "status": "ported",
+   "project": "combat-hitboxes",
+   "note": "Combat Hitboxes (raw-hook port: wraps the ray-versus-box test)",
    "page": "combat-hitboxes",
    "icon": "catalogue/combat-hitboxes.png"
   },
@@ -523,7 +523,7 @@
    "build": "26.3.3",
    "status": "hook",
    "project": "",
-   "note": "Needs input or camera hooks that Horizon does not expose yet.",
+   "note": "Changes the Controls screen, which Horizon builds in its generic options UI with no hook for a search box.",
    "page": "controlling",
    "icon": "catalogue/controlling.png"
   },
@@ -536,7 +536,7 @@
    "build": "craftingtweaks-fabric-26.3-26.3.0.1",
    "status": "hook",
    "project": "",
-   "note": "Needs input or camera hooks that Horizon does not expose yet.",
+   "note": "Adds buttons to the crafting grid screen; the container screens have no hook for extra widgets.",
    "page": "crafting-tweaks",
    "icon": "catalogue/crafting-tweaks.png"
   },
@@ -1147,7 +1147,7 @@
    "build": "1.2.3",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Highlights slots in the inventory screen; there is no hook in the slot drawing.",
    "page": "item-highlighter",
    "icon": "catalogue/item-highlighter.png"
   },
@@ -1251,7 +1251,7 @@
    "build": "litematica-fabric-26.3-0.29.0",
    "status": "hook",
    "project": "",
-   "note": "Needs a screen or world-data hook point.",
+   "note": "Schematic loading, rendering and placement: a large feature, not something a hook-sized mod covers.",
    "page": "litematica",
    "icon": "catalogue/litematica.png"
   },
@@ -1329,7 +1329,7 @@
    "build": "Marlow Crystal Optimizer",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Removes an end crystal on the client before the server confirms; it needs hooks in entity and packet handling.",
    "page": "marlow-crystal-optimizer",
    "icon": "catalogue/marlow-crystal-optimizer.png"
   },
@@ -1472,7 +1472,7 @@
    "build": "multi-key-bindings-1.3.5+26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs input or camera hooks that Horizon does not expose yet.",
+   "note": "Adds a second binding per action to the Controls screen and the key map; both sit in Horizon's options UI, with no hook.",
    "page": "multi-key-bindings",
    "icon": "catalogue/multi-key-bindings.png"
   },
@@ -1496,9 +1496,9 @@
    "slug": "no-chat-reports",
    "licence": "Do What The F*ck You Want To Public License",
    "build": "NoChatReports-FABRIC-26.3-v2.21.0",
-   "status": "hook",
+   "status": "builtin",
    "project": "",
-   "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
+   "note": "Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric.",
    "page": "no-chat-reports",
    "icon": "catalogue/no-chat-reports.png"
   },
@@ -1628,7 +1628,7 @@
    "build": "PearlOptimizer-26.1-26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Predicts an ender pearl on the client before the server confirms; it needs hooks in entity and packet handling.",
    "page": "pearl-optimizer",
    "icon": "catalogue/pearl-optimizer.png"
   },
@@ -1654,7 +1654,7 @@
    "build": "pingview-fabric-1.6",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Needs the connection's latest ping; Horizon keeps those samples private (`SampleLogger` has no getter).",
    "page": "ping-view",
    "icon": "catalogue/ping-view.png"
   },
@@ -1795,9 +1795,9 @@
    "slug": "scalablelux",
    "licence": "GNU Lesser General Public License v3.0 only",
    "build": "ScalableLux-fabric-mc26.3-0.3.0-alpha.0.6-all",
-   "status": "hook",
+   "status": "engine",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
    "page": "scalablelux",
    "icon": "catalogue/scalablelux.png"
   },
@@ -1823,7 +1823,7 @@
    "build": "searchstats-fabric-1.103.0+26.2",
    "status": "hook",
    "project": "",
-   "note": "Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).",
+   "note": "Adds a search box to the Statistics screen, which Horizon draws and handles in `stats_screen.rs`; there is no hook for a text field there.",
    "page": "searchstats",
    "icon": "catalogue/searchstats.png"
   },
@@ -2122,7 +2122,7 @@
    "build": "tiers-0.9.0+26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs a screen or world-data hook point.",
+   "note": "Looks players up on an external tier service and draws the result on name tags; there is no network or name-tag hook.",
    "page": "tiers",
    "icon": "catalogue/tiers.png"
   },
@@ -2252,7 +2252,7 @@
    "build": "VisualKeys-0.0.11+26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs incoming-chat or screen hooks that Horizon does not expose yet.",
+   "note": "Adds a keyboard screen to the options; there is no hook for a new screen.",
    "page": "visualkeys",
    "icon": "catalogue/visualkeys.png"
   },

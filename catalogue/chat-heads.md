@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Needs incoming-chat or screen hooks that Horizon does not expose yet.
+Needs each sender's skin drawn beside chat lines; the chat has no skin access, and the HUD sprite atlas cannot take a player's head.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 
