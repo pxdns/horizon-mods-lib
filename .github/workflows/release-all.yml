@@ -73,7 +73,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           git tag -f all-mods "$GITHUB_SHA"
-          git push -f origin refs/tags/all-mods
+          # GitHub sometimes rejects a ref update with "fatal error in commit_refs"; the same push works a moment later.
+          for wait in 2 4 8 16 0; do
+            git push -f origin refs/tags/all-mods && break
+            [ "$wait" = 0 ] && exit 1
+            sleep "$wait"
+          done
           gh release view all-mods >/dev/null 2>&1 || gh release create all-mods --verify-tag --latest=false \
             --title "All mods (latest build)" --notes-file notes.md
           gh release edit all-mods --notes-file notes.md --title "All mods (latest build, ${{ steps.build.outputs.count }} mods)"

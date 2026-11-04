@@ -61,6 +61,10 @@ One zip with **all 27 mods**, unpacked, plus an install script: [`horizon-mods-a
 | [`chat-heads`](mods/chat-heads) | The sender's face in front of each chat line (hooks Horizon's chat) | Chat Heads |
 | [`controlling`](mods/controlling) | `/keybinds find`, `conflicts`, `unbound`: search bindings by action or key (reads key bindings) | Controlling |
 | [`multi-key-bindings`](mods/multi-key-bindings) | More than one key per action, with `/multikey` (extends Horizon's key translation) | Multi Key Bindings |
+| [`pearl-optimizer`](mods/pearl-optimizer) | Your thrown pearl shows at once on a server and is swapped for the server's (hooks Horizon's packet send) | Pearl Optimizer |
+| [`bettergrassify`](mods/bettergrassify) | Grass block sides show the grass top next to a step down onto grass (rebuilds the mesher's face; not seen on screen) | BetterGrassify |
+| [`entity-texture-features`](mods/entity-texture-features) | Random numbered texture variants and emissive layers for mobs, from a resource pack (not seen on screen) | Entity Texture Features |
+| [`litematica`](mods/litematica) | `/schematic` reads .litematic files: info and the material list (no ghost or placing) | Litematica |
 | [`minimap-plus`](mods/minimap-plus) | Corner, size, zoom keys and a big map for Horizon's minimap | Xaero's Minimap and World Map (the map display) |
 
 Each folder is a complete project (`runtime.rs` with unit tests, a `horizon-mixin.toml`, pins, licence, README) and has its own
@@ -75,9 +79,9 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 ## Status, honestly
 
-All 46 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
+All 50 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
 game type-checks with warnings denied. CI cannot play the game through a window, so none has been exercised in a live session by CI.
-Of the 186 catalogued mods, 34 are ported, 14 partly, 8 are built into Horizon already and 5 are waiting on hook points Horizon does not have yet (each catalogue page says why; the proposals for [screen, slot and map hooks](proposals/native-screen-hooks.md) and [transport and packet hooks](proposals/native-network-hooks.md) say what would unlock them). See [the hook-point notes](docs/hook-points.md). 36 of the 46 read or hook Horizon's own internals and are pinned to one Horizon commit.
+Of the 186 catalogued mods, 35 are ported, 17 partly, 8 are built into Horizon already and 1 are waiting on hook points Horizon does not have yet (each catalogue page says why; the proposals for [screen, slot and map hooks](proposals/native-screen-hooks.md) and [transport and packet hooks](proposals/native-network-hooks.md) say what would unlock them). See [the hook-point notes](docs/hook-points.md). 40 of the 50 read or hook Horizon's own internals and are pinned to one Horizon commit.
 
 ## Credits, licensing, takedowns
 

@@ -2,13 +2,15 @@
 
 ![BetterGrassify icon](../assets/icons/catalogue/bettergrassify.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `Apache-2.0` - **26.3 build:** `1.8.8+fabric.26.3` - [Modrinth](https://modrinth.com/mod/bettergrassify)
+**Status:** Partly ported - **Upstream licence:** `Apache-2.0` - **26.3 build:** `1.8.8+fabric.26.3` - [Modrinth](https://modrinth.com/mod/bettergrassify)
+
+**Project:** [`bettergrassify`](../mods/bettergrassify/) - [docs](../docs/mods/bettergrassify.md)
 
 ## Where it stands
 
-Swaps a grass block's side texture for its top texture next to other grass. Horizon's mesher (`mesher.rs`, `Mesher::face`) draws a face from a texture layer that a rebuilt `face` could swap, but the result cannot be seen or checked here. Not attempted.
+Better Grass (fancy) on plain grass block sides, drawn with the top texture; not checked visually, and no snowy grass, fast mode or better snow
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

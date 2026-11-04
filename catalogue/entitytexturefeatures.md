@@ -2,13 +2,15 @@
 
 ![[ETF] Entity Texture Features icon](../assets/icons/catalogue/entitytexturefeatures.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `7.2.5-fabric-26.3` - [Modrinth](https://modrinth.com/mod/entitytexturefeatures)
+**Status:** Partly ported - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `7.2.5-fabric-26.3` - [Modrinth](https://modrinth.com/mod/entitytexturefeatures)
+
+**Project:** [`entity-texture-features`](../mods/entity-texture-features/) - [docs](../docs/mods/entity-texture-features.md)
 
 ## Where it stands
 
-Chooses entity textures by rules from resource packs; Horizon's mob renderers pick their texture inside the renderer with no hook for the choice. Not attempted.
+Random numbered texture variants and emissive layers from a resource pack; not checked visually, and no .properties rules, optifine/random folders or block entity textures
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

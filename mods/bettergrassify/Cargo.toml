@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-bettergrassify"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Connected grass: a grass block's side shows the grass top where the neighbouring step down is grass too."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/bettergrassify/runtime.rs"
+
+[workspace]

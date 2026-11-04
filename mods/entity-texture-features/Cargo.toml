@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-entity-texture-features"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Random texture variants and emissive layers for mobs, from the textures a resource pack provides."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/entity_texture_features/runtime.rs"
+
+[workspace]

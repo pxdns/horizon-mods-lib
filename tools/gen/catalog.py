@@ -56,6 +56,10 @@ PORTED = {
     "DMu0oBKf": ("partial", "crafting-tweaks", "Rotate, balance and clear as keys, for single player and LAN hosts; no buttons, full-stack result click, hold-W transfer or compress keys"),
     "cVNW5lr6": ("ported", "item-highlighter", "A twinkling star on slots holding items picked up since the inventory was last closed"),
     "n6PXGAoM": ("partial", "better-stats", "Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing"),
+    "aSymSNSe": ("ported", "pearl-optimizer", "Your thrown pearl shows at once on a server and is swapped for the server's when it arrives"),
+    "m5T5xmUy": ("partial", "bettergrassify", "Better Grass (fancy) on plain grass block sides, drawn with the top texture; not checked visually, and no snowy grass, fast mode or better snow"),
+    "BVzZfTc1": ("partial", "entity-texture-features", "Random numbered texture variants and emissive layers from a resource pack; not checked visually, and no .properties rules, optifine/random folders or block entity textures"),
+    "bEpr0Arc": ("partial", "litematica", "Reading .litematic files: info and the material list as /schematic commands; no ghost in the world, no differences view and no placing"),
     "ExI7GmJi": ("partial", "search-stats", "A search box that filters the Items and Mobs lists; the General tab is not filtered"),
     "Wnxd13zP": ("ported", "clumps", "Orbs of any size merge into one orb worth all of them, collected at once"),
     "GfoMZ9Ly": ("partial", "shield-statuses", "Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook"),
@@ -97,11 +101,7 @@ DEFAULT_REASON = "Needs a hook point Horizon does not have yet (the current hook
 
 
 SPECIFIC = {
-    "BVzZfTc1": "Chooses entity textures by rules from resource packs; Horizon's mob renderers pick their texture inside the renderer with no hook for the choice. Not attempted.",
-    "m5T5xmUy": "Swaps a grass block's side texture for its top texture next to other grass. Horizon's mesher (`mesher.rs`, `Mesher::face`) draws a face from a texture layer that a rebuilt `face` could swap, but the result cannot be seen or checked here. Not attempted.",
-    "bEpr0Arc": "Schematic loading, rendering and placement: its own file formats, a world overlay renderer and placement tools. Not attempted; it is far larger than the other ports.",
-    "aSymSNSe": "Horizon's single-player pearl logic runs for any pearl entity it simulates (it teleports the player and deals the fall damage when the pearl lands, `creatures.rs`), so a local pearl made to look instant on a server would also teleport and hurt the player on this client. A purely visual projectile does not exist to hook. Not attempted. The original is All Rights Reserved, so it was not read.",
-    "bubOj4AD": "Looks players up on a third-party tier website and draws the result on name tags. Native mods here make no network requests of their own, and there is no hook in the name tag drawing. Not attempted.",
+    "bubOj4AD": "Looks every player up on a third-party tier website and draws the rank on name tags. Not ported: it would send other players' names to that service, I could not check its interface from here, and Horizon has no hook in the name tag drawing. The original is GPL-3.0, so it was not read.",
 }
 
 # No 26.3 build of the upstream project exists, which does not stop a native port; these are the reasons the entries are still not ported.

@@ -66,6 +66,10 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`chat-heads`](mods/chat-heads.md) | Chat Heads (chat_heads) | MPL-2.0 |
 | [`controlling`](mods/controlling.md) | Controlling (controlling) | MIT |
 | [`multi-key-bindings`](mods/multi-key-bindings.md) | Multi Key Bindings (multi-key-bindings) | independent implementation from the mod's public description; no upstream code or assets |
+| [`pearl-optimizer`](mods/pearl-optimizer.md) | Pearl Optimizer (pearloptimizer) | independent implementation from the mod's public description; no upstream code or assets |
+| [`bettergrassify`](mods/bettergrassify.md) | BetterGrassify (bettergrass) | Apache-2.0 for the idea; no upstream code is used (its sprite code is LGPL from another project) |
+| [`entity-texture-features`](mods/entity-texture-features.md) | Entity Texture Features (etf) | independent implementation from the mod's public description; no upstream code or assets |
+| [`litematica`](mods/litematica.md) | Litematica (litematica) | independent implementation of the public .litematic file layout; no upstream code or assets (the original is LGPL-3.0) |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

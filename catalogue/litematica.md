@@ -2,13 +2,15 @@
 
 ![Litematica icon](../assets/icons/catalogue/litematica.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `litematica-fabric-26.3-0.29.0` - [Modrinth](https://modrinth.com/mod/litematica)
+**Status:** Partly ported - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `litematica-fabric-26.3-0.29.0` - [Modrinth](https://modrinth.com/mod/litematica)
+
+**Project:** [`litematica`](../mods/litematica/) - [docs](../docs/mods/litematica.md)
 
 ## Where it stands
 
-Schematic loading, rendering and placement: its own file formats, a world overlay renderer and placement tools. Not attempted; it is far larger than the other ports.
+Reading .litematic files: info and the material list as /schematic commands; no ghost in the world, no differences view and no placing
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 
