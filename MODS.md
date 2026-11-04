@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **31** ported · **5** partly ported · **8** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **37** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **31** ported · **7** partly ported · **8** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **35** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -61,13 +61,15 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (5)
+## Partly ported (7)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
+| [Chat Patches](catalogue/chatpatches.md) | [chatpatches](https://modrinth.com/mod/chatpatches) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`chat-patches`](mods/chat-patches/)) | Timestamps and an option to drop immediate repeats; not copying, hiding or compact counters |
 | [Crosshair Addons Public](catalogue/crosshair-addons-public.md) | [crosshair-addons-public](https://modrinth.com/mod/crosshair-addons-public) | `MIT License` | `-` | Partly ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | A mark over the crosshair when it is over a living entity; none of the other conditions |
 | [Enchantment Insights](catalogue/enchantment-insights.md) | [enchantment-insights](https://modrinth.com/mod/enchantment-insights) | `Mozilla Public License 2.0` | `-` | Partly ported ([`enchantment-descriptions`](mods/enchantment-descriptions/)) | The descriptions under the tooltip; no coloured enchantment names |
 | [MiniHUD](catalogue/minihud.md) | [minihud](https://modrinth.com/mod/minihud) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`info-hud`](mods/info-hud/)) | Speed, facing, dimension and angles in Info HUD, coordinates in Custom HUD; no light level, biome or chunk overlays |
+| [Shield Statuses](catalogue/shield-statuses.md) | [shield-statuses](https://modrinth.com/mod/shield-statuses) | `MIT License` | `-` | Partly ported ([`shield-statuses`](mods/shield-statuses/)) | Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook |
 | [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | The map display (corner, size, zoom keys, big map, turning, round) on Horizon's own minimap, plus the waypoints mod; waypoints are not marked on the map and there is no entity radar. |
 | [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | A big-map key that widens Horizon's minimap to its largest view; there is no full-screen map screen to scroll, since Horizon has no hook for a new screen. |
 
@@ -209,7 +211,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [YetAnotherConfigLib (YACL)](catalogue/yacl.md) | [yacl](https://modrinth.com/mod/yacl) | `GNU Lesser General Public License v3.0 or later` | `yet_another_config_lib_v3-3.9.7+26.3-fabric` | Library | A library other Fabric mods load; Horizon's native mods do not use Fabric libraries. |
 | [ZConfig](catalogue/zconfig.md) | [zconfig](https://modrinth.com/mod/zconfig) | `Mozilla Public License 2.0` | `zconfig-1.0.0+26.x` | Library | A library other Fabric mods load; Horizon's native mods do not use Fabric libraries. |
 
-## No 26.3 build (37)
+## No 26.3 build (35)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -219,7 +221,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [BetterF3](catalogue/betterf3.md) | [betterf3](https://modrinth.com/mod/betterf3) | `MIT License` | `-` | No 26.3 build | Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there. |
 | [Bobby](catalogue/bobby.md) | [bobby](https://modrinth.com/mod/bobby) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | Keeps chunks beyond the server's view distance: chunk storage and the network layer, no hook. |
 | [Carpet](catalogue/carpet.md) | [carpet](https://modrinth.com/mod/carpet) | `MIT License` | `-` | No 26.3 build | Server-side rules and tools; Horizon's native mods are client-side. |
-| [Chat Patches](catalogue/chatpatches.md) | [chatpatches](https://modrinth.com/mod/chatpatches) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | A set of chat features (timestamps, hiding, copying); not started. The chat hooks used by More Chat History reach some of it. |
 | [CIT Resewn](catalogue/cit-resewn.md) | [cit-resewn](https://modrinth.com/mod/cit-resewn) | `MIT` | `-` | No 26.3 build | Custom item textures by rules: item rendering has no hook for that choice. |
 | [Consumable Optimizer](catalogue/consumableoptimizer.md) | [consumableoptimizer](https://modrinth.com/mod/consumableoptimizer) | `MIT License` | `-` | No 26.3 build | Predicts eating on the client before the server confirms; needs entity and packet hooks. |
 | [Crystal Speed](catalogue/crystal-speed.md) | [crystal-speed](https://modrinth.com/mod/crystal-speed) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Predicts end crystal hits on the client; needs entity and packet hooks. |
@@ -242,7 +243,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Puzzle](catalogue/puzzle.md) | [puzzle](https://modrinth.com/mod/puzzle) | `MIT License` | `-` | No 26.3 build | A resource-pack feature GUI for OptiFine alternatives; Horizon loads packs itself. |
 | [Reflex AntiLag](catalogue/reflex-antilag.md) | [reflex-antilag](https://modrinth.com/mod/reflex-antilag) | `see project` | `-` | No 26.3 build | NVIDIA Reflex latency control through the GPU driver; Horizon renders with wgpu. |
 | [Searchables](catalogue/searchables.md) | [searchables](https://modrinth.com/mod/searchables) | `MIT License` | `-` | No 26.3 build | A library for searchable lists in Fabric mod screens. |
-| [Shield Statuses](catalogue/shield-statuses.md) | [shield-statuses](https://modrinth.com/mod/shield-statuses) | `MIT License` | `-` | No 26.3 build | Colours a shield's state; the shield state is not exposed to the hook points yet. Not started. |
 | [Slyde](catalogue/slyde.md) | [slyde](https://modrinth.com/mod/slyde) | `MIT License` | `-` | No 26.3 build | Lets sliders be dragged past their ends; Horizon's option sliders have no hook. |
 | [Totem Tweaks](catalogue/cpvp.md) | [cpvp](https://modrinth.com/mod/cpvp) | `see project` | `-` | No 26.3 build | Changes the totem pop animation; the item activation animation has no hook. |
 | [Tweakeroo](catalogue/tweakeroo.md) | [tweakeroo](https://modrinth.com/mod/tweakeroo) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | A large collection of client tweaks (placement, restock, hotbar swap); not started, and most of it needs input and inventory hooks. |

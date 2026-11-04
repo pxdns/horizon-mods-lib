@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mod: [fps-display, sprint-indicator, key-overlay, cps-counter, info-hud, custom-hud, zoomify, simple-zoom, waypoints, armor-hud, potion-counter, totem-counter, effect-timer, apple-skin, pick-up-notifier, freelook, freecam, snappy-tappy, better-hurt-cam, more-chat-history, chat-notify, chat-animation, durability-tooltip, crosshair-indicator, entity-crosshair, shulker-box-tooltip, combat-hitboxes, ping-view, invmove, better-mount-hud, minimap-plus, password-hider, enchantment-descriptions, f5-split]
+        mod: [fps-display, sprint-indicator, key-overlay, cps-counter, info-hud, custom-hud, zoomify, simple-zoom, waypoints, armor-hud, potion-counter, totem-counter, effect-timer, apple-skin, pick-up-notifier, freelook, freecam, snappy-tappy, better-hurt-cam, more-chat-history, chat-notify, chat-animation, durability-tooltip, crosshair-indicator, entity-crosshair, shulker-box-tooltip, combat-hitboxes, ping-view, invmove, better-mount-hud, minimap-plus, password-hider, enchantment-descriptions, f5-split, shield-statuses, chat-patches]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

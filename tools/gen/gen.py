@@ -21,7 +21,9 @@ from mods_map import MAP
 from mods_pass import PASS
 from mods_ench import ENCH
 from mods_f5 import F5
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5
+from mods_shield import SHIELD
+from mods_patches import PATCH
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

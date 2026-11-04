@@ -1,13 +1,13 @@
 {
  "counts": {
   "ported": 31,
-  "partial": 5,
+  "partial": 7,
   "builtin": 8,
   "hook": 15,
   "library": 28,
   "engine": 32,
   "pack": 30,
-  "no-263": 37
+  "no-263": 35
  },
  "labels": {
   "ported": "Ported",
@@ -326,9 +326,9 @@
    "slug": "chatpatches",
    "licence": "GNU Lesser General Public License v3.0 only",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "A set of chat features (timestamps, hiding, copying); not started. The chat hooks used by More Chat History reach some of it.",
+   "status": "partial",
+   "project": "chat-patches",
+   "note": "Timestamps and an option to drop immediate repeats; not copying, hiding or compact counters",
    "page": "chatpatches",
    "icon": "catalogue/chatpatches.png"
   },
@@ -1860,9 +1860,9 @@
    "slug": "shield-statuses",
    "licence": "MIT License",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "Colours a shield's state; the shield state is not exposed to the hook points yet. Not started.",
+   "status": "partial",
+   "project": "shield-statuses",
+   "note": "Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook",
    "page": "shield-statuses",
    "icon": "catalogue/shield-statuses.png"
   },
