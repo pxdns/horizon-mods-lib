@@ -91,7 +91,6 @@ SPECIFIC = {
     "bEpr0Arc": "Schematic loading, rendering and placement: a large feature, not something a hook-sized mod covers.",
     "ozpC8eDC": "Removes an end crystal on the client before the server confirms; it needs hooks in entity and packet handling.",
     "aSymSNSe": "Predicts an ender pearl on the client before the server confirms; it needs hooks in entity and packet handling.",
-    "gvl7lVcV": "Needs the connection's latest ping; Horizon keeps those samples private (`SampleLogger` has no getter).",
     "bubOj4AD": "Looks players up on an external tier service and draws the result on name tags; there is no network or name-tag hook.",
 }
 
