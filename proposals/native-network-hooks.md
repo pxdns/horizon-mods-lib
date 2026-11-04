@@ -146,8 +146,9 @@ WebSocket transport is the *only* one there, and is worth checking first.
 
 1. `native_protocol` and the raw frame pass-through with `native_translator` (no new transport). A first translator can be tested
    against a real 1.21.11 server with only these.
-2. Measure (first pass done: [774 against 777](measurements/774-vs-777.md)): the 774 -> 775 step is small and a translator's own
-   per-packet cost is negligible; the exact 774 -> 777 id table still needs Mojang's generator reports.
+2. Measure (done for ids and registries: [774 against 777](measurements/774-vs-777.md)). Result: 70 % of the shared packets and nearly
+   every registry id move, but these are generated tables; the 776 -> 777 step is by far the largest; a translator's own per-packet cost is
+   negligible. Field layouts for 775 to 777 are still unmeasured and are the next thing to read from Horizon's decoders.
 3. `NativeTransport` and the built-in `ws`/`wss` client (choice A).
 4. Eaglercraft, as research then a translator.
 
