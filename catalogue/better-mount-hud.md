@@ -2,13 +2,15 @@
 
 ![Better Mount HUD icon](../assets/icons/catalogue/better-mount-hud.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `GNU General Public License v3.0 only` - **26.3 build:** `bettermounthud-1.2.6` - [Modrinth](https://modrinth.com/mod/better-mount-hud)
+**Status:** Ported - **Upstream licence:** `GNU General Public License v3.0 only` - **26.3 build:** `bettermounthud-1.2.6` - [Modrinth](https://modrinth.com/mod/better-mount-hud)
+
+**Project:** [`better-mount-hud`](../mods/better-mount-hud/) - [docs](../docs/mods/better-mount-hud.md)
 
 ## Where it stands
 
-Rearranges the health and food bars while riding; Horizon lays them out in one function (`HealthHud::layout`) that mixins can only replace whole.
+Better Mount HUD
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

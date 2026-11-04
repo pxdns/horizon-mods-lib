@@ -1,9 +1,9 @@
 {
  "counts": {
-  "ported": 23,
+  "ported": 24,
   "partial": 6,
   "builtin": 6,
-  "hook": 16,
+  "hook": 15,
   "library": 28,
   "engine": 32,
   "pack": 30,
@@ -209,9 +209,9 @@
    "slug": "better-mount-hud",
    "licence": "GNU General Public License v3.0 only",
    "build": "bettermounthud-1.2.6",
-   "status": "hook",
-   "project": "",
-   "note": "Rearranges the health and food bars while riding; Horizon lays them out in one function (`HealthHud::layout`) that mixins can only replace whole.",
+   "status": "ported",
+   "project": "better-mount-hud",
+   "note": "Better Mount HUD",
    "page": "better-mount-hud",
    "icon": "catalogue/better-mount-hud.png"
   },

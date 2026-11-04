@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-better-mount-hud"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Numbers for the mount you ride: health, speed in blocks per second, jump height and jump charge."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/better_mount_hud/runtime.rs"
+
+[workspace]

@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **23** ported · **6** partly ported · **6** built into horizon · **16** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **24** ported · **6** partly ported · **6** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -25,10 +25,11 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (23)
+## Ported (24)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
+| [Better Mount HUD](catalogue/better-mount-hud.md) | [better-mount-hud](https://modrinth.com/mod/better-mount-hud) | `GNU General Public License v3.0 only` | `bettermounthud-1.2.6` | Ported ([`better-mount-hud`](mods/better-mount-hud/)) | Better Mount HUD |
 | [BetterHurtCam](catalogue/betterhurtcam.md) | [betterhurtcam](https://modrinth.com/mod/betterhurtcam) | `MIT License` | `betterhurtcam-fabric-1.15.0+mc26.3` | Ported ([`better-hurt-cam`](mods/better-hurt-cam/)) | Better Hurt Cam (raw-hook port: camera bob and hurt tilt) |
 | [Chat Animation [Smooth Chat]](catalogue/chatanimation.md) | [chatanimation](https://modrinth.com/mod/chatanimation) | `MIT License` | `chatanimation-fabric-1.3.3+mc26.3` | Ported ([`chat-animation`](mods/chat-animation/)) | Chat Animation (raw-hook port: rebuilds Chat::layout) |
 | [Chat Notify](catalogue/chatnotify.md) | [chatnotify](https://modrinth.com/mod/chatnotify) | `Apache License 2.0` | `chatnotify-fabric-3.104.0+26.3` | Ported ([`chat-notify`](mods/chat-notify/)) | Chat Notify (raw-hook port: hooks Chat::add_message) |
@@ -75,12 +76,11 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Mouse Tweaks](catalogue/mouse-tweaks.md) | [mouse-tweaks](https://modrinth.com/mod/mouse-tweaks) | `BSD 3-Clause "New" or "Revised" License` | `MouseTweaks-fabric-mc26.3-2.31` | Built into Horizon | Horizon ships Mouse Tweaks as one of its own extras (Options > Extras). |
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Built into Horizon | Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric. |
 
-## Needs a hook point (16)
+## Needs a hook point (15)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [[ETF] Entity Texture Features](catalogue/entitytexturefeatures.md) | [entitytexturefeatures](https://modrinth.com/mod/entitytexturefeatures) | `GNU Lesser General Public License v3.0 only` | `7.2.5-fabric-26.3` | Needs a hook point | Chooses entity textures by rules per entity; Horizon's mob renderers have no hook for that choice. |
-| [Better Mount HUD](catalogue/better-mount-hud.md) | [better-mount-hud](https://modrinth.com/mod/better-mount-hud) | `GNU General Public License v3.0 only` | `bettermounthud-1.2.6` | Needs a hook point | Rearranges the health and food bars while riding; Horizon lays them out in one function (`HealthHud::layout`) that mixins can only replace whole. |
 | [Better Statistics Screen](catalogue/better-stats.md) | [better-stats](https://modrinth.com/mod/better-stats) | `see project` | `betterstats-5.6.0-beta.1+fn-26.3` | Needs a hook point | Replaces the Statistics screen, which Horizon draws and handles in `stats_screen.rs` (about 500 lines); a mod could only replace it whole. |
 | [BetterGrassify](catalogue/bettergrassify.md) | [bettergrassify](https://modrinth.com/mod/bettergrassify) | `Apache-2.0` | `1.8.8+fabric.26.3` | Needs a hook point | Changes which texture a block face uses, inside the chunk mesher; there is no hook there. |
 | [Chat Heads](catalogue/chat-heads.md) | [chat-heads](https://modrinth.com/mod/chat-heads) | `Mozilla Public License 2.0` | `chat_heads-1.2.9-fabric-26.3` | Needs a hook point | Needs each sender's skin drawn beside chat lines; the chat has no skin access, and the HUD sprite atlas cannot take a player's head. |

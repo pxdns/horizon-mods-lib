@@ -13,7 +13,8 @@ from mods_draw import DRAW
 from mods_hit import HIT
 from mods_ping import PING
 from mods_inv import INV
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV
+from mods_mount import MOUNT
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT
 
 ROOT = Path(__file__).resolve().parents[2]
 D = ROOT / "docs"
@@ -569,8 +570,8 @@ w("changelog.md", f"""
 
 ## 2026-11-03 — first release
 
-Twenty-nine native mods at {V}: `fps-display`, `sprint-indicator`, `key-overlay`, `cps-counter`, `info-hud`, `custom-hud`, `zoomify`,
-`simple-zoom`, `waypoints` and, reading game state, `armor-hud`, `potion-counter`, `totem-counter`, `effect-timer`, `apple-skin`, `pick-up-notifier` and, hooking Horizon's camera and input, `freelook`, `freecam`, `snappy-tappy`, `better-hurt-cam` and, in chat and tooltips, `more-chat-history`, `chat-notify`, `chat-animation` and `durability-tooltip`, and in crosshair and tooltip drawing `crosshair-indicator`, `entity-crosshair` and `shulker-box-tooltip`, `combat-hitboxes` (a wrapped ray-versus-box test), `ping-view` (the connection ping, from a hook on its logger) and `invmove` (walk with the inventory open), each tested (unit tests), formatted, clippy-clean and applied on Horizon `{c.HORIZON_REV[:7]}`
+Thirty native mods at {V}: `fps-display`, `sprint-indicator`, `key-overlay`, `cps-counter`, `info-hud`, `custom-hud`, `zoomify`,
+`simple-zoom`, `waypoints` and, reading game state, `armor-hud`, `potion-counter`, `totem-counter`, `effect-timer`, `apple-skin`, `pick-up-notifier` and, hooking Horizon's camera and input, `freelook`, `freecam`, `snappy-tappy`, `better-hurt-cam` and, in chat and tooltips, `more-chat-history`, `chat-notify`, `chat-animation` and `durability-tooltip`, and in crosshair and tooltip drawing `crosshair-indicator`, `entity-crosshair` and `shulker-box-tooltip`, `combat-hitboxes` (a wrapped ray-versus-box test), `ping-view` (the connection ping, from a hook on its logger), `invmove` (walk with the inventory open) and `better-mount-hud` (health, speed and jump of your mount), each tested (unit tests), formatted, clippy-clean and applied on Horizon `{c.HORIZON_REV[:7]}`
 with horizon-mixins `{c.MIXINS_REV[:7]}`. The catalogue covers the 186 mods in the Tempest cross-pack matrix.
 """)
 

@@ -1,0 +1,31 @@
+# Releases the Better Mount HUD native mod (better-mount-hud/) as better_mount_hud-<version>.hnmod.
+#
+# Bump `version` in mods/better-mount-hud/mixins/better_mount_hud/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `better-mount-hud-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release better-mount-hud
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/better-mount-hud/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-better-mount-hud.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: better-mount-hud
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

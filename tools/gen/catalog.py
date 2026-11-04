@@ -18,6 +18,7 @@ PORTED = {
     "Upv1bw1P": ("ported", "key-overlay", "Key Overlay"),
     "w7ThoJFB": ("ported", "zoomify", "Zoomify"),
     "EYKTeOIO": ("ported", "simple-zoom", "Simple Zoom"),
+    "kqJFAPU9": ("ported", "better-mount-hud", "Better Mount HUD"),
     "REfW2AEX": ("ported", "invmove", "InvMove"),
     "gvl7lVcV": ("ported", "ping-view", "Ping View"),
     "1bokaNcj": ("partial", "waypoints", "Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap."),
@@ -77,7 +78,6 @@ DEFAULT_REASON = "Needs a hook point Horizon does not have yet (the current hook
 
 SPECIFIC = {
     "BVzZfTc1": "Chooses entity textures by rules per entity; Horizon's mob renderers have no hook for that choice.",
-    "kqJFAPU9": "Rearranges the health and food bars while riding; Horizon lays them out in one function (`HealthHud::layout`) that mixins can only replace whole.",
     "n6PXGAoM": "Replaces the Statistics screen, which Horizon draws and handles in `stats_screen.rs` (about 500 lines); a mod could only replace it whole.",
     "ExI7GmJi": "Adds a search box to the Statistics screen, which Horizon draws and handles in `stats_screen.rs`; there is no hook for a text field there.",
     "m5T5xmUy": "Changes which texture a block face uses, inside the chunk mesher; there is no hook there.",
