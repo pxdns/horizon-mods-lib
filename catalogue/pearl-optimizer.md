@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Needs a local ender pearl that flies at once and is swapped for the server's when it arrives, through the projectile spawn and removal code for a server's entities. Not attempted: it cannot be checked here against a real server. The original is All Rights Reserved, so it was not read.
+Horizon's single-player pearl logic runs for any pearl entity it simulates (it teleports the player and deals the fall damage when the pearl lands, `creatures.rs`), so a local pearl made to look instant on a server would also teleport and hurt the player on this client. A purely visual projectile does not exist to hook. Not attempted. The original is All Rights Reserved, so it was not read.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 

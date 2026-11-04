@@ -1,0 +1,31 @@
+# Releases the Multi Key Bindings native mod (multi-key-bindings/) as multi_key_bindings-<version>.hnmod.
+#
+# Bump `version` in mods/multi-key-bindings/mixins/multi_key_bindings/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `multi-key-bindings-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release multi-key-bindings
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/multi-key-bindings/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-multi-key-bindings.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: multi-key-bindings
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

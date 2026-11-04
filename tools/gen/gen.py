@@ -30,7 +30,10 @@ from mods_highlight import HIGH
 from mods_crafting import CRAFT
 from mods_visualkeys import VK
 from mods_crystal import CRYSTAL
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS + HIGH + CRAFT + VK + CRYSTAL
+from mods_heads import HEADS
+from mods_controlling import CTRL
+from mods_multikey import MKB
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS + HIGH + CRAFT + VK + CRYSTAL + HEADS + CTRL + MKB
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

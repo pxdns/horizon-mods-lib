@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **33** ported · **12** partly ported · **8** built into horizon · **8** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **35** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **34** ported · **14** partly ported · **8** built into horizon · **5** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **35** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -25,7 +25,7 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (33)
+## Ported (34)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -33,6 +33,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Better Mount HUD](catalogue/better-mount-hud.md) | [better-mount-hud](https://modrinth.com/mod/better-mount-hud) | `GNU General Public License v3.0 only` | `bettermounthud-1.2.6` | Ported ([`better-mount-hud`](mods/better-mount-hud/)) | Better Mount HUD |
 | [BetterHurtCam](catalogue/betterhurtcam.md) | [betterhurtcam](https://modrinth.com/mod/betterhurtcam) | `MIT License` | `betterhurtcam-fabric-1.15.0+mc26.3` | Ported ([`better-hurt-cam`](mods/better-hurt-cam/)) | Better Hurt Cam (raw-hook port: camera bob and hurt tilt) |
 | [Chat Animation [Smooth Chat]](catalogue/chatanimation.md) | [chatanimation](https://modrinth.com/mod/chatanimation) | `MIT License` | `chatanimation-fabric-1.3.3+mc26.3` | Ported ([`chat-animation`](mods/chat-animation/)) | Chat Animation (raw-hook port: rebuilds Chat::layout) |
+| [Chat Heads](catalogue/chat-heads.md) | [chat-heads](https://modrinth.com/mod/chat-heads) | `Mozilla Public License 2.0` | `chat_heads-1.2.9-fabric-26.3` | Ported ([`chat-heads`](mods/chat-heads/)) | The sender's face in front of each chat line, through Horizon's inline player heads |
 | [Chat Notify](catalogue/chatnotify.md) | [chatnotify](https://modrinth.com/mod/chatnotify) | `Apache License 2.0` | `chatnotify-fabric-3.104.0+26.3` | Ported ([`chat-notify`](mods/chat-notify/)) | Chat Notify (raw-hook port: hooks Chat::add_message) |
 | [Clumps](catalogue/clumps.md) | [clumps](https://modrinth.com/mod/clumps) | `MIT License` | `Clumps-fabric-26.3-26.3.2` | Ported ([`clumps`](mods/clumps/)) | Orbs of any size merge into one orb worth all of them, collected at once |
 | [Combat Hitboxes](catalogue/combat-hitboxes.md) | [combat-hitboxes](https://modrinth.com/mod/combat-hitboxes) | `Apache License 2.0` | `combat-hitbox-1.0.11` | Ported ([`combat-hitboxes`](mods/combat-hitboxes/)) | Combat Hitboxes (raw-hook port: wraps the ray-versus-box test) |
@@ -63,17 +64,19 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (12)
+## Partly ported (14)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [Better Statistics Screen](catalogue/better-stats.md) | [better-stats](https://modrinth.com/mod/better-stats) | `see project` | `betterstats-5.6.0-beta.1+fn-26.3` | Partly ported ([`better-stats`](mods/better-stats/)) | Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing |
 | [Chat Patches](catalogue/chatpatches.md) | [chatpatches](https://modrinth.com/mod/chatpatches) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`chat-patches`](mods/chat-patches/)) | Timestamps and an option to drop immediate repeats; not copying, hiding or compact counters |
+| [Controlling](catalogue/controlling.md) | [controlling](https://modrinth.com/mod/controlling) | `MIT License` | `26.3.3` | Partly ported ([`controlling`](mods/controlling/)) | Find bindings by action or key, list conflicts and unbound actions as /keybinds commands; Horizon's own Key Binds page already searches by action name |
 | [Crafting Tweaks](catalogue/crafting-tweaks.md) | [crafting-tweaks](https://modrinth.com/mod/crafting-tweaks) | `see project` | `craftingtweaks-fabric-26.3-26.3.0.1` | Partly ported ([`crafting-tweaks`](mods/crafting-tweaks/)) | Rotate, balance and clear as keys, for single player and LAN hosts; no buttons, full-stack result click, hold-W transfer or compress keys |
 | [Crosshair Addons Public](catalogue/crosshair-addons-public.md) | [crosshair-addons-public](https://modrinth.com/mod/crosshair-addons-public) | `MIT License` | `-` | Partly ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | A mark over the crosshair when it is over a living entity; none of the other conditions |
 | [Enchantment Insights](catalogue/enchantment-insights.md) | [enchantment-insights](https://modrinth.com/mod/enchantment-insights) | `Mozilla Public License 2.0` | `-` | Partly ported ([`enchantment-descriptions`](mods/enchantment-descriptions/)) | The descriptions under the tooltip; no coloured enchantment names |
 | [Marlow's Crystal Optimizer](catalogue/marlow-crystal-optimizer.md) | [marlow-crystal-optimizer](https://modrinth.com/mod/marlow-crystal-optimizer) | `MIT License` | `Marlow Crystal Optimizer` | Partly ported ([`crystal-optimizer`](mods/crystal-optimizer/)) | A crystal you hit vanishes at once on a server and returns if the server does not break it; no crystal placement prediction |
 | [MiniHUD](catalogue/minihud.md) | [minihud](https://modrinth.com/mod/minihud) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`info-hud`](mods/info-hud/)) | Speed, facing, dimension and angles in Info HUD, coordinates in Custom HUD; no light level, biome or chunk overlays |
+| [Multi Key Bindings](catalogue/multi-key-bindings.md) | [multi-key-bindings](https://modrinth.com/mod/multi-key-bindings) | `GNU General Public License v3.0 only` | `multi-key-bindings-1.3.5+26.3` | Partly ported ([`multi-key-bindings`](mods/multi-key-bindings/)) | Extra keys for an action, made with /multikey commands and honoured wherever the action is; no buttons on the Key Binds page, no modifier combinations |
 | [Search Stats](catalogue/searchstats.md) | [searchstats](https://modrinth.com/mod/searchstats) | `Apache License 2.0` | `searchstats-fabric-1.103.0+26.2` | Partly ported ([`search-stats`](mods/search-stats/)) | A search box that filters the Items and Mobs lists; the General tab is not filtered |
 | [Shield Statuses](catalogue/shield-statuses.md) | [shield-statuses](https://modrinth.com/mod/shield-statuses) | `MIT License` | `-` | Partly ported ([`shield-statuses`](mods/shield-statuses/)) | Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook |
 | [VisualKeys](catalogue/visualkeys.md) | [visualkeys](https://modrinth.com/mod/visualkeys) | `see project` | `VisualKeys-0.0.11+26.3` | Partly ported ([`visual-keys`](mods/visual-keys/)) | The keyboard on the HUD with every key coloured by its binding, plus /keyboard free and /keyboard <key>; not inside the controls screen, no Malilib bindings, no category collapse |
@@ -93,17 +96,14 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Built into Horizon | Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric. |
 | [ToolTipFix](catalogue/tooltipfix.md) | [tooltipfix](https://modrinth.com/mod/tooltipfix) | `MIT` | `-` | Built into Horizon | Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges. |
 
-## Needs a hook point (8)
+## Needs a hook point (5)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [[ETF] Entity Texture Features](catalogue/entitytexturefeatures.md) | [entitytexturefeatures](https://modrinth.com/mod/entitytexturefeatures) | `GNU Lesser General Public License v3.0 only` | `7.2.5-fabric-26.3` | Needs a hook point | Chooses entity textures by rules from resource packs; Horizon's mob renderers pick their texture inside the renderer with no hook for the choice. Not attempted. |
 | [BetterGrassify](catalogue/bettergrassify.md) | [bettergrassify](https://modrinth.com/mod/bettergrassify) | `Apache-2.0` | `1.8.8+fabric.26.3` | Needs a hook point | Swaps a grass block's side texture for its top texture next to other grass. Horizon's mesher (`mesher.rs`, `Mesher::face`) draws a face from a texture layer that a rebuilt `face` could swap, but the result cannot be seen or checked here. Not attempted. |
-| [Chat Heads](catalogue/chat-heads.md) | [chat-heads](https://modrinth.com/mod/chat-heads) | `Mozilla Public License 2.0` | `chat_heads-1.2.9-fabric-26.3` | Needs a hook point | Needs the sender's skin face drawn beside each chat line. Horizon draws heads for the player list through its skin slots (`game/scoreboard.rs`), but the chat layout is in the render crate with no way to ask for them; it would take a rebuilt layout (as Chat Animation has) plus a lookup of the sender's slot. Not attempted. |
-| [Controlling](catalogue/controlling.md) | [controlling](https://modrinth.com/mod/controlling) | `MIT License` | `26.3.3` | Needs a hook point | Horizon's Key Binds page already has a search box that filters by action name (`options_ui.rs`); what Controlling adds, searching by key and filtering conflicts, sits in the middle of that page's layout function, which would have to be replaced whole. |
 | [Litematica](catalogue/litematica.md) | [litematica](https://modrinth.com/mod/litematica) | `GNU Lesser General Public License v3.0 only` | `litematica-fabric-26.3-0.29.0` | Needs a hook point | Schematic loading, rendering and placement: its own file formats, a world overlay renderer and placement tools. Not attempted; it is far larger than the other ports. |
-| [Multi Key Bindings](catalogue/multi-key-bindings.md) | [multi-key-bindings](https://modrinth.com/mod/multi-key-bindings) | `GNU General Public License v3.0 only` | `multi-key-bindings-1.3.5+26.3` | Needs a hook point | Horizon keeps exactly one key per action (`KeyBinds`, a name to key map read all over the input code); a second binding per action changes that model. Not attempted. The original is GPL-3.0, so it was not read. |
-| [Pearl Optimizer](catalogue/pearl-optimizer.md) | [pearl_optimizer](https://modrinth.com/mod/pearl_optimizer) | `see project` | `PearlOptimizer-26.1-26.3` | Needs a hook point | Needs a local ender pearl that flies at once and is swapped for the server's when it arrives, through the projectile spawn and removal code for a server's entities. Not attempted: it cannot be checked here against a real server. The original is All Rights Reserved, so it was not read. |
+| [Pearl Optimizer](catalogue/pearl-optimizer.md) | [pearl_optimizer](https://modrinth.com/mod/pearl_optimizer) | `see project` | `PearlOptimizer-26.1-26.3` | Needs a hook point | Horizon's single-player pearl logic runs for any pearl entity it simulates (it teleports the player and deals the fall damage when the pearl lands, `creatures.rs`), so a local pearl made to look instant on a server would also teleport and hurt the player on this client. A purely visual projectile does not exist to hook. Not attempted. The original is All Rights Reserved, so it was not read. |
 | [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Needs a hook point | Looks players up on a third-party tier website and draws the result on name tags. Native mods here make no network requests of their own, and there is no hook in the name tag drawing. Not attempted. |
 
 ## Pack or asset (30)

@@ -48,6 +48,9 @@ PORTED = {
     "aC3cM3Vq": ("builtin", "", "Horizon ships Mouse Tweaks as one of its own extras (Options > Extras)."),
     "K0AkAin6": ("builtin", "", "Horizon ships Client Sort as one of its own extras (sort key in Extras)."),
     "wdLuzzEP": ("builtin", "", "Horizon has a Fullbright extra of its own."),
+    "2VF6JEnL": ("partial", "multi-key-bindings", "Extra keys for an action, made with /multikey commands and honoured wherever the action is; no buttons on the Key Binds page, no modifier combinations"),
+    "xv94TkTM": ("partial", "controlling", "Find bindings by action or key, list conflicts and unbound actions as /keybinds commands; Horizon's own Key Binds page already searches by action name"),
+    "Wb5oqrBJ": ("ported", "chat-heads", "The sender's face in front of each chat line, through Horizon's inline player heads"),
     "ozpC8eDC": ("partial", "crystal-optimizer", "A crystal you hit vanishes at once on a server and returns if the server does not break it; no crystal placement prediction"),
     "HEds12HI": ("partial", "visual-keys", "The keyboard on the HUD with every key coloured by its binding, plus /keyboard free and /keyboard <key>; not inside the controls screen, no Malilib bindings, no category collapse"),
     "DMu0oBKf": ("partial", "crafting-tweaks", "Rotate, balance and clear as keys, for single player and LAN hosts; no buttons, full-stack result click, hold-W transfer or compress keys"),
@@ -96,11 +99,8 @@ DEFAULT_REASON = "Needs a hook point Horizon does not have yet (the current hook
 SPECIFIC = {
     "BVzZfTc1": "Chooses entity textures by rules from resource packs; Horizon's mob renderers pick their texture inside the renderer with no hook for the choice. Not attempted.",
     "m5T5xmUy": "Swaps a grass block's side texture for its top texture next to other grass. Horizon's mesher (`mesher.rs`, `Mesher::face`) draws a face from a texture layer that a rebuilt `face` could swap, but the result cannot be seen or checked here. Not attempted.",
-    "Wb5oqrBJ": "Needs the sender's skin face drawn beside each chat line. Horizon draws heads for the player list through its skin slots (`game/scoreboard.rs`), but the chat layout is in the render crate with no way to ask for them; it would take a rebuilt layout (as Chat Animation has) plus a lookup of the sender's slot. Not attempted.",
-    "xv94TkTM": "Horizon's Key Binds page already has a search box that filters by action name (`options_ui.rs`); what Controlling adds, searching by key and filtering conflicts, sits in the middle of that page's layout function, which would have to be replaced whole.",
-    "2VF6JEnL": "Horizon keeps exactly one key per action (`KeyBinds`, a name to key map read all over the input code); a second binding per action changes that model. Not attempted. The original is GPL-3.0, so it was not read.",
     "bEpr0Arc": "Schematic loading, rendering and placement: its own file formats, a world overlay renderer and placement tools. Not attempted; it is far larger than the other ports.",
-    "aSymSNSe": "Needs a local ender pearl that flies at once and is swapped for the server's when it arrives, through the projectile spawn and removal code for a server's entities. Not attempted: it cannot be checked here against a real server. The original is All Rights Reserved, so it was not read.",
+    "aSymSNSe": "Horizon's single-player pearl logic runs for any pearl entity it simulates (it teleports the player and deals the fall damage when the pearl lands, `creatures.rs`), so a local pearl made to look instant on a server would also teleport and hurt the player on this client. A purely visual projectile does not exist to hook. Not attempted. The original is All Rights Reserved, so it was not read.",
     "bubOj4AD": "Looks players up on a third-party tier website and draws the result on name tags. Native mods here make no network requests of their own, and there is no hook in the name tag drawing. Not attempted.",
 }
 

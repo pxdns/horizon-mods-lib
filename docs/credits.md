@@ -63,6 +63,9 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`crafting-tweaks`](mods/crafting-tweaks.md) | Crafting Tweaks (craftingtweaks) | independent implementation from the mod's public description; no upstream code or assets |
 | [`visual-keys`](mods/visual-keys.md) | VisualKeys (visualkeys) | independent implementation from the mod's public description; no upstream code or assets |
 | [`crystal-optimizer`](mods/crystal-optimizer.md) | Marlow's Crystal Optimizer (marlowcrystal) | MIT |
+| [`chat-heads`](mods/chat-heads.md) | Chat Heads (chat_heads) | MPL-2.0 |
+| [`controlling`](mods/controlling.md) | Controlling (controlling) | MIT |
+| [`multi-key-bindings`](mods/multi-key-bindings.md) | Multi Key Bindings (multi-key-bindings) | independent implementation from the mod's public description; no upstream code or assets |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

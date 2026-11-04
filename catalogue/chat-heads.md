@@ -2,13 +2,15 @@
 
 ![Chat Heads icon](../assets/icons/catalogue/chat-heads.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `Mozilla Public License 2.0` - **26.3 build:** `chat_heads-1.2.9-fabric-26.3` - [Modrinth](https://modrinth.com/mod/chat-heads)
+**Status:** Ported - **Upstream licence:** `Mozilla Public License 2.0` - **26.3 build:** `chat_heads-1.2.9-fabric-26.3` - [Modrinth](https://modrinth.com/mod/chat-heads)
+
+**Project:** [`chat-heads`](../mods/chat-heads/) - [docs](../docs/mods/chat-heads.md)
 
 ## Where it stands
 
-Needs the sender's skin face drawn beside each chat line. Horizon draws heads for the player list through its skin slots (`game/scoreboard.rs`), but the chat layout is in the render crate with no way to ask for them; it would take a rebuilt layout (as Chat Animation has) plus a lookup of the sender's slot. Not attempted.
+The sender's face in front of each chat line, through Horizon's inline player heads
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

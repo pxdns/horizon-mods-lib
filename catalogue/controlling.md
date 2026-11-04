@@ -2,13 +2,15 @@
 
 ![Controlling icon](../assets/icons/catalogue/controlling.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `26.3.3` - [Modrinth](https://modrinth.com/mod/controlling)
+**Status:** Partly ported - **Upstream licence:** `MIT License` - **26.3 build:** `26.3.3` - [Modrinth](https://modrinth.com/mod/controlling)
+
+**Project:** [`controlling`](../mods/controlling/) - [docs](../docs/mods/controlling.md)
 
 ## Where it stands
 
-Horizon's Key Binds page already has a search box that filters by action name (`options_ui.rs`); what Controlling adds, searching by key and filtering conflicts, sits in the middle of that page's layout function, which would have to be replaced whole.
+Find bindings by action or key, list conflicts and unbound actions as /keybinds commands; Horizon's own Key Binds page already searches by action name
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 
