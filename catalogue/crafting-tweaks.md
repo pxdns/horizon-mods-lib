@@ -2,13 +2,15 @@
 
 ![Crafting Tweaks icon](../assets/icons/catalogue/crafting-tweaks.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `see project` - **26.3 build:** `craftingtweaks-fabric-26.3-26.3.0.1` - [Modrinth](https://modrinth.com/mod/crafting-tweaks)
+**Status:** Partly ported - **Upstream licence:** `see project` - **26.3 build:** `craftingtweaks-fabric-26.3-26.3.0.1` - [Modrinth](https://modrinth.com/mod/crafting-tweaks)
+
+**Project:** [`crafting-tweaks`](../mods/crafting-tweaks/) - [docs](../docs/mods/crafting-tweaks.md)
 
 ## Where it stands
 
-Adds buttons to the crafting grid screen; the container screens have no hook for extra widgets.
+Rotate, balance and clear as keys, for single player and LAN hosts; no buttons, full-stack result click, hold-W transfer or compress keys
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

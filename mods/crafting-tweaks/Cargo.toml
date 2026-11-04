@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-crafting-tweaks"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Keys that rotate, balance and clear the crafting grid."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/crafting_tweaks/runtime.rs"
+
+[workspace]

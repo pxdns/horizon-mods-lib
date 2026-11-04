@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-crystal-optimizer"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Makes End crystals you hit disappear at once on a server, and brings one back if the server did not break it."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/crystal_optimizer/runtime.rs"
+
+[workspace]

@@ -2,13 +2,15 @@
 
 ![VisualKeys icon](../assets/icons/catalogue/visualkeys.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `see project` - **26.3 build:** `VisualKeys-0.0.11+26.3` - [Modrinth](https://modrinth.com/mod/visualkeys)
+**Status:** Partly ported - **Upstream licence:** `see project` - **26.3 build:** `VisualKeys-0.0.11+26.3` - [Modrinth](https://modrinth.com/mod/visualkeys)
+
+**Project:** [`visual-keys`](../mods/visual-keys/) - [docs](../docs/mods/visual-keys.md)
 
 ## Where it stands
 
-Adds a keyboard screen to the options; there is no hook for a new screen.
+The keyboard on the HUD with every key coloured by its binding, plus /keyboard free and /keyboard <key>; not inside the controls screen, no Malilib bindings, no category collapse
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

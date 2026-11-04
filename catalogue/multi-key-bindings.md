@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Adds a second binding per action to the Controls screen and the key map; both sit in Horizon's options UI, with no hook.
+Horizon keeps exactly one key per action (`KeyBinds`, a name to key map read all over the input code); a second binding per action changes that model. Not attempted. The original is GPL-3.0, so it was not read.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 

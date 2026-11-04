@@ -26,7 +26,11 @@ from mods_patches import PATCH
 from mods_clumps import CLUMPS
 from mods_stats import STATS
 from mods_betterstats import BSTATS
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS
+from mods_highlight import HIGH
+from mods_crafting import CRAFT
+from mods_visualkeys import VK
+from mods_crystal import CRYSTAL
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS + HIGH + CRAFT + VK + CRYSTAL
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

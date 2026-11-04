@@ -1,0 +1,31 @@
+# Releases the Item Highlighter native mod (item-highlighter/) as item_highlighter-<version>.hnmod.
+#
+# Bump `version` in mods/item-highlighter/mixins/item_highlighter/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `item-highlighter-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release item-highlighter
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/item-highlighter/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-item-highlighter.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: item-highlighter
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

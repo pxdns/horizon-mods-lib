@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Looks players up on an external tier service and draws the result on name tags; there is no network or name-tag hook.
+Looks players up on a third-party tier website and draws the result on name tags. Native mods here make no network requests of their own, and there is no hook in the name tag drawing. Not attempted.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 

@@ -59,6 +59,10 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`clumps`](mods/clumps.md) | Clumps (clumps) | MIT |
 | [`search-stats`](mods/search-stats.md) | SearchStats (searchstats) | Apache-2.0 |
 | [`better-stats`](mods/better-stats.md) | Better Statistics Screen (betterstats) | independent implementation from the mod's public description; no upstream code or assets |
+| [`item-highlighter`](mods/item-highlighter.md) | Item Highlighter (highlighter) | independent implementation from the mod's public description; no upstream code or assets |
+| [`crafting-tweaks`](mods/crafting-tweaks.md) | Crafting Tweaks (craftingtweaks) | independent implementation from the mod's public description; no upstream code or assets |
+| [`visual-keys`](mods/visual-keys.md) | VisualKeys (visualkeys) | independent implementation from the mod's public description; no upstream code or assets |
+| [`crystal-optimizer`](mods/crystal-optimizer.md) | Marlow's Crystal Optimizer (marlowcrystal) | MIT |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

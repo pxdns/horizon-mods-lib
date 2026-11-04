@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-item-highlighter"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Marks newly picked-up items with a twinkling star in your inventory."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/item_highlighter/runtime.rs"
+
+[workspace]

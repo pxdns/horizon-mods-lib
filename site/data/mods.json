@@ -1,9 +1,9 @@
 {
  "counts": {
-  "ported": 32,
-  "partial": 9,
+  "ported": 33,
+  "partial": 12,
   "builtin": 8,
-  "hook": 12,
+  "hook": 8,
   "library": 28,
   "engine": 32,
   "pack": 30,
@@ -29,7 +29,7 @@
    "build": "7.2.5-fabric-26.3",
    "status": "hook",
    "project": "",
-   "note": "Chooses entity textures by rules per entity; Horizon's mob renderers have no hook for that choice.",
+   "note": "Chooses entity textures by rules from resource packs; Horizon's mob renderers pick their texture inside the renderer with no hook for the choice. Not attempted.",
    "page": "entitytexturefeatures",
    "icon": "catalogue/entitytexturefeatures.png"
   },
@@ -185,7 +185,7 @@
    "build": "1.8.8+fabric.26.3",
    "status": "hook",
    "project": "",
-   "note": "Changes which texture a block face uses, inside the chunk mesher; there is no hook there.",
+   "note": "Swaps a grass block's side texture for its top texture next to other grass. Horizon's mesher (`mesher.rs`, `Mesher::face`) draws a face from a texture layer that a rebuilt `face` could swap, but the result cannot be seen or checked here. Not attempted.",
    "page": "bettergrassify",
    "icon": "catalogue/bettergrassify.png"
   },
@@ -302,7 +302,7 @@
    "build": "chat_heads-1.2.9-fabric-26.3",
    "status": "hook",
    "project": "",
-   "note": "Needs each sender's skin drawn beside chat lines; the chat has no skin access, and the HUD sprite atlas cannot take a player's head.",
+   "note": "Needs the sender's skin face drawn beside each chat line. Horizon draws heads for the player list through its skin slots (`game/scoreboard.rs`), but the chat layout is in the render crate with no way to ask for them; it would take a rebuilt layout (as Chat Animation has) plus a lookup of the sender's slot. Not attempted.",
    "page": "chat-heads",
    "icon": "catalogue/chat-heads.png"
   },
@@ -534,9 +534,9 @@
    "slug": "crafting-tweaks",
    "licence": "see project",
    "build": "craftingtweaks-fabric-26.3-26.3.0.1",
-   "status": "hook",
-   "project": "",
-   "note": "Adds buttons to the crafting grid screen; the container screens have no hook for extra widgets.",
+   "status": "partial",
+   "project": "crafting-tweaks",
+   "note": "Rotate, balance and clear as keys, for single player and LAN hosts; no buttons, full-stack result click, hold-W transfer or compress keys",
    "page": "crafting-tweaks",
    "icon": "catalogue/crafting-tweaks.png"
   },
@@ -1145,9 +1145,9 @@
    "slug": "item-highlighter",
    "licence": "CC-BY-NC-ND-4.0",
    "build": "1.2.3",
-   "status": "hook",
-   "project": "",
-   "note": "Highlights slots in the inventory screen; there is no hook in the slot drawing.",
+   "status": "ported",
+   "project": "item-highlighter",
+   "note": "A twinkling star on slots holding items picked up since the inventory was last closed",
    "page": "item-highlighter",
    "icon": "catalogue/item-highlighter.png"
   },
@@ -1251,7 +1251,7 @@
    "build": "litematica-fabric-26.3-0.29.0",
    "status": "hook",
    "project": "",
-   "note": "Schematic loading, rendering and placement: a large feature, not something a hook-sized mod covers.",
+   "note": "Schematic loading, rendering and placement: its own file formats, a world overlay renderer and placement tools. Not attempted; it is far larger than the other ports.",
    "page": "litematica",
    "icon": "catalogue/litematica.png"
   },
@@ -1327,9 +1327,9 @@
    "slug": "marlow-crystal-optimizer",
    "licence": "MIT License",
    "build": "Marlow Crystal Optimizer",
-   "status": "hook",
-   "project": "",
-   "note": "Removes an end crystal on the client before the server confirms; it needs hooks in entity and packet handling.",
+   "status": "partial",
+   "project": "crystal-optimizer",
+   "note": "A crystal you hit vanishes at once on a server and returns if the server does not break it; no crystal placement prediction",
    "page": "marlow-crystal-optimizer",
    "icon": "catalogue/marlow-crystal-optimizer.png"
   },
@@ -1472,7 +1472,7 @@
    "build": "multi-key-bindings-1.3.5+26.3",
    "status": "hook",
    "project": "",
-   "note": "Adds a second binding per action to the Controls screen and the key map; both sit in Horizon's options UI, with no hook.",
+   "note": "Horizon keeps exactly one key per action (`KeyBinds`, a name to key map read all over the input code); a second binding per action changes that model. Not attempted. The original is GPL-3.0, so it was not read.",
    "page": "multi-key-bindings",
    "icon": "catalogue/multi-key-bindings.png"
   },
@@ -1628,7 +1628,7 @@
    "build": "PearlOptimizer-26.1-26.3",
    "status": "hook",
    "project": "",
-   "note": "Predicts an ender pearl on the client before the server confirms; it needs hooks in entity and packet handling.",
+   "note": "Needs a local ender pearl that flies at once and is swapped for the server's when it arrives, through the projectile spawn and removal code for a server's entities. Not attempted: it cannot be checked here against a real server. The original is All Rights Reserved, so it was not read.",
    "page": "pearl-optimizer",
    "icon": "catalogue/pearl-optimizer.png"
   },
@@ -2122,7 +2122,7 @@
    "build": "tiers-0.9.0+26.3",
    "status": "hook",
    "project": "",
-   "note": "Looks players up on an external tier service and draws the result on name tags; there is no network or name-tag hook.",
+   "note": "Looks players up on a third-party tier website and draws the result on name tags. Native mods here make no network requests of their own, and there is no hook in the name tag drawing. Not attempted.",
    "page": "tiers",
    "icon": "catalogue/tiers.png"
   },
@@ -2250,9 +2250,9 @@
    "slug": "visualkeys",
    "licence": "see project",
    "build": "VisualKeys-0.0.11+26.3",
-   "status": "hook",
-   "project": "",
-   "note": "Adds a keyboard screen to the options; there is no hook for a new screen.",
+   "status": "partial",
+   "project": "visual-keys",
+   "note": "The keyboard on the HUD with every key coloured by its binding, plus /keyboard free and /keyboard <key>; not inside the controls screen, no Malilib bindings, no category collapse",
    "page": "visualkeys",
    "icon": "catalogue/visualkeys.png"
   },

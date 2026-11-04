@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Schematic loading, rendering and placement: a large feature, not something a hook-sized mod covers.
+Schematic loading, rendering and placement: its own file formats, a world overlay renderer and placement tools. Not attempted; it is far larger than the other ports.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 

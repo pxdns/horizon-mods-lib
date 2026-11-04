@@ -2,13 +2,15 @@
 
 ![Marlow's Crystal Optimizer icon](../assets/icons/catalogue/marlow-crystal-optimizer.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `Marlow Crystal Optimizer` - [Modrinth](https://modrinth.com/mod/marlow-crystal-optimizer)
+**Status:** Partly ported - **Upstream licence:** `MIT License` - **26.3 build:** `Marlow Crystal Optimizer` - [Modrinth](https://modrinth.com/mod/marlow-crystal-optimizer)
+
+**Project:** [`crystal-optimizer`](../mods/crystal-optimizer/) - [docs](../docs/mods/crystal-optimizer.md)
 
 ## Where it stands
 
-Removes an end crystal on the client before the server confirms; it needs hooks in entity and packet handling.
+A crystal you hit vanishes at once on a server and returns if the server does not break it; no crystal placement prediction
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

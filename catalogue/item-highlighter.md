@@ -2,13 +2,15 @@
 
 ![Item Highlighter icon](../assets/icons/catalogue/item-highlighter.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `CC-BY-NC-ND-4.0` - **26.3 build:** `1.2.3` - [Modrinth](https://modrinth.com/mod/item-highlighter)
+**Status:** Ported - **Upstream licence:** `CC-BY-NC-ND-4.0` - **26.3 build:** `1.2.3` - [Modrinth](https://modrinth.com/mod/item-highlighter)
+
+**Project:** [`item-highlighter`](../mods/item-highlighter/) - [docs](../docs/mods/item-highlighter.md)
 
 ## Where it stands
 
-Highlights slots in the inventory screen; there is no hook in the slot drawing.
+A twinkling star on slots holding items picked up since the inventory was last closed
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

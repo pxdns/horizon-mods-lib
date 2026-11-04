@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-visual-keys"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "An on-screen keyboard that shows what every key is bound to and which keys are free."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/visual_keys/runtime.rs"
+
+[workspace]

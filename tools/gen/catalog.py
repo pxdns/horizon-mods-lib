@@ -48,6 +48,10 @@ PORTED = {
     "aC3cM3Vq": ("builtin", "", "Horizon ships Mouse Tweaks as one of its own extras (Options > Extras)."),
     "K0AkAin6": ("builtin", "", "Horizon ships Client Sort as one of its own extras (sort key in Extras)."),
     "wdLuzzEP": ("builtin", "", "Horizon has a Fullbright extra of its own."),
+    "ozpC8eDC": ("partial", "crystal-optimizer", "A crystal you hit vanishes at once on a server and returns if the server does not break it; no crystal placement prediction"),
+    "HEds12HI": ("partial", "visual-keys", "The keyboard on the HUD with every key coloured by its binding, plus /keyboard free and /keyboard <key>; not inside the controls screen, no Malilib bindings, no category collapse"),
+    "DMu0oBKf": ("partial", "crafting-tweaks", "Rotate, balance and clear as keys, for single player and LAN hosts; no buttons, full-stack result click, hold-W transfer or compress keys"),
+    "cVNW5lr6": ("ported", "item-highlighter", "A twinkling star on slots holding items picked up since the inventory was last closed"),
     "n6PXGAoM": ("partial", "better-stats", "Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing"),
     "ExI7GmJi": ("partial", "search-stats", "A search box that filters the Items and Mobs lists; the General tab is not filtered"),
     "Wnxd13zP": ("ported", "clumps", "Orbs of any size merge into one orb worth all of them, collected at once"),
@@ -90,18 +94,14 @@ DEFAULT_REASON = "Needs a hook point Horizon does not have yet (the current hook
 
 
 SPECIFIC = {
-    "BVzZfTc1": "Chooses entity textures by rules per entity; Horizon's mob renderers have no hook for that choice.",
-    "m5T5xmUy": "Changes which texture a block face uses, inside the chunk mesher; there is no hook there.",
-    "Wb5oqrBJ": "Needs each sender's skin drawn beside chat lines; the chat has no skin access, and the HUD sprite atlas cannot take a player's head.",
+    "BVzZfTc1": "Chooses entity textures by rules from resource packs; Horizon's mob renderers pick their texture inside the renderer with no hook for the choice. Not attempted.",
+    "m5T5xmUy": "Swaps a grass block's side texture for its top texture next to other grass. Horizon's mesher (`mesher.rs`, `Mesher::face`) draws a face from a texture layer that a rebuilt `face` could swap, but the result cannot be seen or checked here. Not attempted.",
+    "Wb5oqrBJ": "Needs the sender's skin face drawn beside each chat line. Horizon draws heads for the player list through its skin slots (`game/scoreboard.rs`), but the chat layout is in the render crate with no way to ask for them; it would take a rebuilt layout (as Chat Animation has) plus a lookup of the sender's slot. Not attempted.",
     "xv94TkTM": "Horizon's Key Binds page already has a search box that filters by action name (`options_ui.rs`); what Controlling adds, searching by key and filtering conflicts, sits in the middle of that page's layout function, which would have to be replaced whole.",
-    "2VF6JEnL": "Adds a second binding per action to the Controls screen and the key map; both sit in Horizon's options UI, with no hook.",
-    "HEds12HI": "Adds a keyboard screen to the options; there is no hook for a new screen.",
-    "DMu0oBKf": "Adds buttons to the crafting grid screen; the container screens have no hook for extra widgets.",
-    "cVNW5lr6": "Highlights slots in the inventory screen; there is no hook in the slot drawing.",
-    "bEpr0Arc": "Schematic loading, rendering and placement: a large feature, not something a hook-sized mod covers.",
-    "ozpC8eDC": "Removes an end crystal on the client before the server confirms; it needs hooks in entity and packet handling.",
-    "aSymSNSe": "Predicts an ender pearl on the client before the server confirms; it needs hooks in entity and packet handling.",
-    "bubOj4AD": "Looks players up on an external tier service and draws the result on name tags; there is no network or name-tag hook.",
+    "2VF6JEnL": "Horizon keeps exactly one key per action (`KeyBinds`, a name to key map read all over the input code); a second binding per action changes that model. Not attempted. The original is GPL-3.0, so it was not read.",
+    "bEpr0Arc": "Schematic loading, rendering and placement: its own file formats, a world overlay renderer and placement tools. Not attempted; it is far larger than the other ports.",
+    "aSymSNSe": "Needs a local ender pearl that flies at once and is swapped for the server's when it arrives, through the projectile spawn and removal code for a server's entities. Not attempted: it cannot be checked here against a real server. The original is All Rights Reserved, so it was not read.",
+    "bubOj4AD": "Looks players up on a third-party tier website and draws the result on name tags. Native mods here make no network requests of their own, and there is no hook in the name tag drawing. Not attempted.",
 }
 
 # No 26.3 build of the upstream project exists, which does not stop a native port; these are the reasons the entries are still not ported.
