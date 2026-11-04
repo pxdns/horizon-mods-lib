@@ -6,7 +6,7 @@
 
 ## Where it stands
 
-Looks every player up on a third-party tier website and draws the rank on name tags. Not ported: it would send other players' names to that service, I could not check its interface from here, and Horizon has no hook in the name tag drawing. The original is GPL-3.0, so it was not read.
+Needs the PvPTiers service's lookup interface, which could not be reached from the build environment (the site is blocked there) and is only described in the original's GPL-3.0 source, which was not read. A lookup also sends each player's name to that service, so it would be opt-in. Horizon has no hook in the name tag drawing; the display would be a command and a HUD line. Not ported until a sample response from the service is available.
 
 A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 

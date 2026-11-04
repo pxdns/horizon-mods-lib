@@ -104,7 +104,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
-| [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Needs a hook point | Looks every player up on a third-party tier website and draws the rank on name tags. Not ported: it would send other players' names to that service, I could not check its interface from here, and Horizon has no hook in the name tag drawing. The original is GPL-3.0, so it was not read. |
+| [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Needs a hook point | Needs the PvPTiers service's lookup interface, which could not be reached from the build environment (the site is blocked there) and is only described in the original's GPL-3.0 source, which was not read. A lookup also sends each player's name to that service, so it would be opt-in. Horizon has no hook in the name tag drawing; the display would be a command and a HUD line. Not ported until a sample response from the service is available. |
 
 ## Pack or asset (30)
 
