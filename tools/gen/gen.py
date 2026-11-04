@@ -37,7 +37,8 @@ from mods_pearl import PEARL
 from mods_grassify import GRASS
 from mods_etf import ETF
 from mods_litematica import LITE
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS + HIGH + CRAFT + VK + CRYSTAL + HEADS + CTRL + MKB + PEARL + GRASS + ETF + LITE
+from mods_tiers import TIERS
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS + HIGH + CRAFT + VK + CRYSTAL + HEADS + CTRL + MKB + PEARL + GRASS + ETF + LITE + TIERS
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

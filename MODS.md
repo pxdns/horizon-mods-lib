@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **35** ported · **17** partly ported · **8** built into horizon · **1** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **35** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **35** ported · **18** partly ported · **8** built into horizon · **30** pack or asset · **32** engine or server · **28** library · **35** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -65,7 +65,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (17)
+## Partly ported (18)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -83,6 +83,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Multi Key Bindings](catalogue/multi-key-bindings.md) | [multi-key-bindings](https://modrinth.com/mod/multi-key-bindings) | `GNU General Public License v3.0 only` | `multi-key-bindings-1.3.5+26.3` | Partly ported ([`multi-key-bindings`](mods/multi-key-bindings/)) | Extra keys for an action, made with /multikey commands and honoured wherever the action is; no buttons on the Key Binds page, no modifier combinations |
 | [Search Stats](catalogue/searchstats.md) | [searchstats](https://modrinth.com/mod/searchstats) | `Apache License 2.0` | `searchstats-fabric-1.103.0+26.2` | Partly ported ([`search-stats`](mods/search-stats/)) | A search box that filters the Items and Mobs lists; the General tab is not filtered |
 | [Shield Statuses](catalogue/shield-statuses.md) | [shield-statuses](https://modrinth.com/mod/shield-statuses) | `MIT License` | `-` | Partly ported ([`shield-statuses`](mods/shield-statuses/)) | Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook |
+| [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Partly ported ([`tiers`](mods/tiers/)) | /tier <name> looks a player up and prints their tiers; the website interface is a guess, lookups are off until switched on, and there are no name tags |
 | [VisualKeys](catalogue/visualkeys.md) | [visualkeys](https://modrinth.com/mod/visualkeys) | `see project` | `VisualKeys-0.0.11+26.3` | Partly ported ([`visual-keys`](mods/visual-keys/)) | The keyboard on the HUD with every key coloured by its binding, plus /keyboard free and /keyboard <key>; not inside the controls screen, no Malilib bindings, no category collapse |
 | [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | The map display (corner, size, zoom keys, big map, turning, round) on Horizon's own minimap, plus the waypoints mod; waypoints are not marked on the map and there is no entity radar. |
 | [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | A big-map key that widens Horizon's minimap to its largest view; there is no full-screen map screen to scroll, since Horizon has no hook for a new screen. |
@@ -99,12 +100,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Mouse Tweaks](catalogue/mouse-tweaks.md) | [mouse-tweaks](https://modrinth.com/mod/mouse-tweaks) | `BSD 3-Clause "New" or "Revised" License` | `MouseTweaks-fabric-mc26.3-2.31` | Built into Horizon | Horizon ships Mouse Tweaks as one of its own extras (Options > Extras). |
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Built into Horizon | Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric. |
 | [ToolTipFix](catalogue/tooltipfix.md) | [tooltipfix](https://modrinth.com/mod/tooltipfix) | `MIT` | `-` | Built into Horizon | Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges. |
-
-## Needs a hook point (1)
-
-| Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
-|---|---|---|---|---|---|
-| [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Needs a hook point | Needs the PvPTiers service's lookup interface, which could not be reached from the build environment (the site is blocked there) and is only described in the original's GPL-3.0 source, which was not read. A lookup also sends each player's name to that service, so it would be opt-in. Horizon has no hook in the name tag drawing; the display would be a command and a HUD line. Not ported until a sample response from the service is available. |
 
 ## Pack or asset (30)
 

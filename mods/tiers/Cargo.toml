@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-tiers"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Look up a player's tiers on a tier website with /tier. The website interface is a guess; lookups are off until you switch them on."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/tiers/runtime.rs"
+
+[workspace]

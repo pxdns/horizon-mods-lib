@@ -19,9 +19,9 @@
 <main><section class="hero" style="padding-bottom:1.5rem"><div class="wrap">
 <span class="eyebrow">Roadmap</span>
 <h1 class="big" style="max-width:20ch">What is waiting on <span class="text-accent">Horizon, not on us.</span></h1>
-<p class="lede">1 catalogued mods cannot be written yet. The reason is never effort: it is that a hook point does not exist. Hook points are only ever added, so each one that lands unblocks a group of them.</p>
+<p class="lede">0 catalogued mods cannot be written yet. The reason is never effort: it is that a hook point does not exist. Hook points are only ever added, so each one that lands unblocks a group of them.</p>
 </div></section>
-<section class="block"><div class="wrap"><div class="grid"><div class="card"><h3>1 mods</h3><p><b style="color:#fff">Needs the PvPTiers service&#x27;s lookup interface, which could not be reached from the build environment (the site is blocked there) and is only described in the original&#x27;s GPL-3.0 source, which was not read. A lookup also sends each player&#x27;s name to that service, so it would be opt-in. Horizon has no hook in the name tag drawing; the display would be a command and a HUD line. Not ported until a sample response from the service is available.</b></p><div class="meta">Tiers…</div></div></div>
+<section class="block"><div class="wrap"><div class="grid"></div>
 <h2 class="sec" style="margin-top:3rem">How a hook point gets added</h2>
 <p class="sub">It is a change to Horizon, not to a mod: an empty function the game calls at a fixed place, a bump of <code>NATIVE_HOOKS_API</code>, and an entry in <code>native-hooks.json</code>.
 The most useful contribution this library can make is a pull request to <a href="https://github.com/horizon-rust/horizon">horizon-rust/horizon</a> that adds one, with a mod here that uses it.</p>

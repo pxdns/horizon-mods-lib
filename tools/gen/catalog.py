@@ -60,6 +60,7 @@ PORTED = {
     "m5T5xmUy": ("partial", "bettergrassify", "Better Grass (fancy) on plain grass block sides, drawn with the top texture; not checked visually, and no snowy grass, fast mode or better snow"),
     "BVzZfTc1": ("partial", "entity-texture-features", "Random numbered texture variants and emissive layers from a resource pack; not checked visually, and no .properties rules, optifine/random folders or block entity textures"),
     "bEpr0Arc": ("partial", "litematica", "Reading .litematic files: info and the material list as /schematic commands; no ghost in the world, no differences view and no placing"),
+    "bubOj4AD": ("partial", "tiers", "/tier <name> looks a player up and prints their tiers; the website interface is a guess, lookups are off until switched on, and there are no name tags"),
     "ExI7GmJi": ("partial", "search-stats", "A search box that filters the Items and Mobs lists; the General tab is not filtered"),
     "Wnxd13zP": ("ported", "clumps", "Orbs of any size merge into one orb worth all of them, collected at once"),
     "GfoMZ9Ly": ("partial", "shield-statuses", "Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook"),
@@ -101,7 +102,6 @@ DEFAULT_REASON = "Needs a hook point Horizon does not have yet (the current hook
 
 
 SPECIFIC = {
-    "bubOj4AD": "Needs the PvPTiers service's lookup interface, which could not be reached from the build environment (the site is blocked there) and is only described in the original's GPL-3.0 source, which was not read. A lookup also sends each player's name to that service, so it would be opt-in. Horizon has no hook in the name tag drawing; the display would be a command and a HUD line. Not ported until a sample response from the service is available.",
 }
 
 # No 26.3 build of the upstream project exists, which does not stop a native port; these are the reasons the entries are still not ported.
