@@ -397,12 +397,12 @@ are about what you see and press.</p>
     digest = hashlib.sha256(offline.read_bytes()).hexdigest()
     play = f'''<main><section class="hero" style="padding-bottom:1.5rem"><div class="wrap">
 <h1 class="big" style="max-width:20ch">Play Horizon <span class="text-accent">in your browser.</span></h1>
-<p class="lede">The offline build of Horizon: the game code is inside one HTML file, you point it at the folder that holds your game resources, and it runs. Nothing is downloaded while you play.</p>
+<p class="lede">A full build of Horizon with its game files included: open it and it runs, with the game data served from this same site. It needs a browser with WebGPU.</p>
 <div class="btns"><a class="btn primary" href="horizon-offline.html">Play Horizon (offline)</a><a class="btn" href="horizon-offline.html" download>Download the file</a></div>
 </div></section>
 <section class="block"><div class="wrap">
 <div class="card" style="max-width:46rem"><h3 style="margin-top:0">Horizon (offline)</h3>
-<p>A single HTML file, {size_mb:.1f} MB. It contains the game and its loader; the resources come from your own folder.</p>
+<p>The page ({size_mb:.1f} MB) plus its wasm and resource package in <code>horizon-offline/</code> (about 115 MB, fetched from this site only).</p>
 <div class="meta" style="word-break:break-all">horizon-offline.html &middot; SHA-256 {digest}</div></div>
 </div></section>
 <section class="block"><div class="wrap split">
@@ -476,7 +476,15 @@ def main():
     shutil.copy(ROOT / "site/assets/site.css", OUT / "assets/site.css")
     shutil.copy(ROOT / "site/assets/site.js", OUT / "assets/site.js")
     for extra in sorted((ROOT / "site/static").glob("*")):
-        shutil.copy(extra, OUT / extra.name)
+        if extra.is_dir():
+            shutil.copytree(extra, OUT / extra.name)
+        else:
+            shutil.copy(extra, OUT / extra.name)
+    # A project whose Root Directory is `public` reads its headers from here.
+    cfg = json.loads((ROOT / "vercel.json").read_text())
+    for key in ("outputDirectory", "buildCommand", "installCommand"):
+        cfg.pop(key, None)
+    (OUT / "vercel.json").write_text(json.dumps(cfg, indent=2) + "\n")
     docs()
     catalogue_pages()
     pages()
