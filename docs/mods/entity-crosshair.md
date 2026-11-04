@@ -1,6 +1,6 @@
 # Entity Crosshair
 
-![Entity Crosshair icon](../../assets/icons/entity-crosshair.svg)
+![Entity Crosshair icon](../../assets/icons/catalogue/entitycrosshair.png)
 
 Replaces the crosshair with a style and colour of your choice, red over living entities.
 

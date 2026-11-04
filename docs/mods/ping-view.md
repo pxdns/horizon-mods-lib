@@ -1,6 +1,6 @@
 # Ping View
 
-![Ping View icon](../../assets/icons/ping-view.svg)
+![Ping View icon](../../assets/icons/catalogue/ping-view.png)
 
 Shows your ping to the server: the latest reply, the average of the last 20 and the best and worst.
 

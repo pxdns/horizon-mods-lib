@@ -2,15 +2,15 @@
 
 ![Detail Armor Bar Reconstructed icon](../assets/icons/catalogue/detail-armor-bar-reconstructed.png)
 
-**Status:** Partly ported - **Upstream licence:** `MIT License` - **26.3 build:** `DetailArmorBarReconstructed-5.3.2-26.3-fabric` - [Modrinth](https://modrinth.com/mod/detail-armor-bar-reconstructed)
+**Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `DetailArmorBarReconstructed-5.3.2-26.3-fabric` - [Modrinth](https://modrinth.com/mod/detail-armor-bar-reconstructed)
 
 **Project:** [`armor-hud`](../mods/armor-hud/) - [docs](../docs/mods/armor-hud.md)
 
 ## Where it stands
 
-Armor pieces and durability as text; the detailed bar needs a draw hook.
+Pieces and durability, the armor value on the bar, and extra rows past 20 points
 
-Only part of this fits the hook points; see the project for what is in and what is missing.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

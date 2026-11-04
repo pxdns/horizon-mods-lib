@@ -6,6 +6,21 @@ fn armor_hud_hud(
 ) {
     use crate::game::lib_armor_hud as m;
     use horizon_client::extras::Corner;
+    if game.native_on(m::ID) && m::is(|k| game.native_setting(m::ID, k), "bar") && !game.creative {
+        {
+            let armor = game.player.as_mut().map_or(0, |p| p.attribute("minecraft:armor").or_else(|_| p.attribute("armor")).unwrap_or(0.0) as i32);
+            if armor > 0 {
+                let (wi, hi) = (batch.width as i32, batch.height as i32);
+                let row = (hi - game.health_hud.left_height + 10) as f32;
+                let label = m::label(armor);
+                let x = (wi / 2 - 91) as f32 - game.native_text_width(&label) - 3.0;
+                game.native_text(batch, &label, [x, row + 1.0], m::INK, true);
+                for (rect, ink) in m::extra_rows(wi, row as i32, armor) {
+                    game.native_fill(batch, rect, ink);
+                }
+            }
+        }
+    }
     if !game.native_on(m::ID) || !game.native_corner_shown(Corner::BottomLeft) {
         return;
     }

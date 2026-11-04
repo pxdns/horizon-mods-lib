@@ -15,6 +15,65 @@ DRAW_INK = '''    if lines.is_empty() {
         game.native_text(batch, line, [x + 2.0, y + 2.0 + 10.0 * i as f32], *ink, true);
     }'''
 
+OVER_APPLE = """    if game.native_on(m::ID) && m::is(|k| game.native_setting(m::ID, k), "overlay") && game.riding.is_none() && !game.creative {
+        if let Some(p) = game.player.as_ref() {
+            let get = |k: &str| game.native_setting(m::ID, k);
+            let (food, saturation) = (p.health.food.food, p.health.food.saturation);
+            let after = if m::is(get, "preview") {
+                game.held()
+                    .and_then(|stack| game.items().get(&stack.item).and_then(|info| info.food))
+                    .map(|(nutrition, gain)| m::preview(food, saturation, nutrition, gain).food)
+            } else {
+                None
+            };
+            for (rect, ink) in m::food_overlay(batch.width as i32, batch.height as i32, food, saturation, after, m::is(get, "saturation")) {
+                game.native_fill(batch, rect, ink);
+            }
+        }
+    }
+"""
+
+OVER_EFFECT = """    if game.native_on(m::ID) && m::is(|k| game.native_setting(m::ID, k), "bars") {
+        let icons: Vec<m::Icon> = game
+            .potions
+            .effects
+            .list
+            .iter()
+            .filter(|e| e.visible)
+            .map(|e| {
+                let def = horizon_client_core::potions::effect(e.id);
+                m::Icon {
+                    id: e.id.to_owned(),
+                    duration: e.duration,
+                    ambient: e.ambient,
+                    beneficial: def.is_some_and(|d| d.category == horizon_client_core::potions::Category::Beneficial),
+                    color: def.map_or(0xFF_FFFF, |d| d.color as u32),
+                }
+            })
+            .collect();
+        for (rect, ink) in m::bars(batch.width as i32, &icons) {
+            game.native_fill(batch, rect, ink);
+        }
+    }
+"""
+
+OVER_ARMOR = """    if game.native_on(m::ID) && m::is(|k| game.native_setting(m::ID, k), "bar") && !game.creative {
+        {
+            let armor = game.player.as_mut().map_or(0, |p| p.attribute("minecraft:armor").or_else(|_| p.attribute("armor")).unwrap_or(0.0) as i32);
+            if armor > 0 {
+                let (wi, hi) = (batch.width as i32, batch.height as i32);
+                let row = (hi - game.health_hud.left_height + 10) as f32;
+                let label = m::label(armor);
+                let x = (wi / 2 - 91) as f32 - game.native_text_width(&label) - 3.0;
+                game.native_text(batch, &label, [x, row + 1.0], m::INK, true);
+                for (rect, ink) in m::extra_rows(wi, row as i32, armor) {
+                    game.native_fill(batch, rect, ink);
+                }
+            }
+        }
+    }
+"""
+
 TITLE = r'''
 /// `minecraft:diamond_helmet` as `Diamond Helmet`.
 pub fn title(id: &str) -> String {
@@ -44,10 +103,10 @@ TITLE_TEST = r'''
 # ---------------------------------------------------------------------------------------------- armor_hud
 RAW.append(dict(
     slug="armor-hud", id="armor_hud", name="Armor HUD", title="Armor HUD", raw=True,
-    description="Your armor pieces and how much durability each has left, in a corner of the screen.",
+    description="Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points.",
     upstream="uku's Armor HUD and Detail Armor Bar Reconstructed", upstream_licence="see the upstream projects",
     command="armor", hooks=["hud", "command", "list", "settings", "click"],
-    options=[("shown", "Shown", True), ("percent", "Show percent", True), ("full", "Hide undamaged pieces", False)],
+    options=[("shown", "Shown", True), ("percent", "Show percent", True), ("full", "Hide undamaged pieces", False), ("bar", "Armor value on the armor bar", True)],
     runtime_extra=BOX_HEAD + TITLE + r'''
 /// Slash command that hides or shows the box.
 pub const COMMAND: &str = "armor";
@@ -90,6 +149,34 @@ impl Piece {
     }
 }
 
+/// The armor value written beside the armor bar.
+pub fn label(armor: i32) -> String {
+    armor.to_string()
+}
+
+/// Rectangles `([x, y, w, h], argb)` for armor past the ten vanilla icons (20 points): one row of small bars
+/// above the bar per further 20 points, a half bar for an odd point. `row` is the y of the vanilla armor row.
+pub fn extra_rows(w: i32, row: i32, armor: i32) -> Vec<([f32; 4], u32)> {
+    const INKS: [u32; 4] = [0xFF_8FB8FF, 0xFF_C28FFF, 0xFF_FF9FD0, 0xFF_FFE08F];
+    let mut out = Vec::new();
+    let mut left = armor - 20;
+    let mut level = 0;
+    while left > 0 && level < INKS.len() {
+        let y = (row - 4 - 4 * level as i32) as f32;
+        for n in 0..10 {
+            let points = (left - 2 * n).clamp(0, 2);
+            if points == 0 {
+                break;
+            }
+            let x = (w / 2 - 91 + n * 8) as f32;
+            out.push(([x, y, if points == 2 { 9.0 } else { 4.0 }, 3.0], INKS[level]));
+        }
+        left -= 20;
+        level += 1;
+    }
+    out
+}
+
 /// The box's lines with their colours.
 pub fn lines(pieces: &[Piece], as_percent: bool, hide_full: bool) -> Vec<(String, u32)> {
     pieces
@@ -107,6 +194,18 @@ pub fn lines(pieces: &[Piece], as_percent: bool, hide_full: bool) -> Vec<(String
 }
 ''',
     tests=TITLE_TEST + r'''
+    #[test]
+    fn armor_past_twenty_gets_extra_rows() {
+        assert!(extra_rows(320, 180, 20).is_empty());
+        let out = extra_rows(320, 180, 25);
+        assert_eq!(out.len(), 3, "two full bars and a half");
+        assert_eq!(out[0].0, [69.0, 176.0, 9.0, 3.0]);
+        assert_eq!(out[2].0[2], 4.0);
+        assert_eq!(extra_rows(320, 180, 60).len(), 20, "two rows of ten");
+        assert_eq!(extra_rows(320, 180, 60)[10].0[1], 172.0, "the second row sits above the first");
+        assert_eq!(label(14), "14");
+    }
+
     #[test]
     fn durability_reads_as_left_percent_and_colour() {
         let p = Piece::new("Head", "minecraft:iron_helmet", 55, 165);
@@ -130,7 +229,7 @@ pub fn lines(pieces: &[Piece], as_percent: bool, hide_full: bool) -> Vec<(String
         assert_eq!(lines(&[Piece::new("Chest", "elytra", 0, 0)], false, false)[0].0, "Chest: Elytra unbreakable");
     }
 ''',
-    hud=lambda: HUD_BOX.replace("@CORNERDOC@", "the bottom-left corner").replace("@DATA@", hud_guard("Corner::BottomLeft", '''    let get = |k: &str| game.native_setting(m::ID, k);
+    hud=lambda: HUD_BOX.replace("@CORNERDOC@", "the bottom-left corner").replace("@DATA@", OVER_ARMOR + hud_guard("Corner::BottomLeft", '''    let get = |k: &str| game.native_setting(m::ID, k);
     let (percent, hide_full) = (m::is(get, "percent"), m::is(get, "full"));
     let mut pieces = Vec::new();
     for (i, slot) in ["Head", "Chest", "Legs", "Feet"].into_iter().enumerate() {
@@ -284,10 +383,10 @@ pub fn line(count: u32, hide_none: bool) -> Option<(String, u32)> {
 # ---------------------------------------------------------------------------------------------- effect_timer
 RAW.append(dict(
     slug="effect-timer", id="effect_timer", name="Effect Timer", title="Effect Timer", raw=True,
-    description="Your active potion effects and how long each has left, red in the last ten seconds.",
+    description="Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.",
     upstream="Status Effect Timer and Status Effect Bars", upstream_licence="see the upstream projects",
     command="effects", hooks=["hud", "command", "list", "settings", "click"],
-    options=[("shown", "Shown", True), ("ambient", "Show beacon effects", True)],
+    options=[("shown", "Shown", True), ("ambient", "Show beacon effects", True), ("bars", "Duration bars under the icons", True)],
     runtime_extra=BOX_HEAD + TITLE + r'''
 /// Slash command that hides or shows the box.
 pub const COMMAND: &str = "effects";
@@ -320,6 +419,88 @@ pub fn level(amplifier: i32) -> String {
         Ok(n) if n < NUMERALS.len() => NUMERALS[n].to_owned(),
         Ok(n) => (n + 1).to_string(),
     }
+}
+
+/// An effect as the icon row shows it.
+#[derive(Clone, Debug, PartialEq)]
+pub struct Icon {
+    pub id: String,
+    pub duration: i32,
+    pub ambient: bool,
+    pub beneficial: bool,
+    pub color: u32,
+}
+
+/// The game's own order of the icons (`MobEffectInstance.compareTo`), as the row is sorted by it, reversed.
+pub fn icon_order(a: &Icon, o: &Icon) -> std::cmp::Ordering {
+    if (a.duration <= 32147 || o.duration <= 32147) && !(a.ambient && o.ambient) {
+        a.ambient
+            .cmp(&o.ambient)
+            .then((a.duration == -1).cmp(&(o.duration == -1)))
+            .then(a.duration.cmp(&o.duration))
+            .then(a.color.cmp(&o.color))
+    } else {
+        a.ambient.cmp(&o.ambient).then(a.color.cmp(&o.color))
+    }
+}
+
+/// The longest each effect has been seen to last, to turn the ticks left into a fraction.
+#[derive(Default)]
+pub struct Longest(std::collections::BTreeMap<String, i32>);
+
+impl Longest {
+    /// Notes the current effects and returns each one's longest duration; forgets effects that ended.
+    pub fn observe(&mut self, icons: &[Icon]) -> Vec<i32> {
+        self.0.retain(|id, _| icons.iter().any(|i| &i.id == id));
+        icons
+            .iter()
+            .map(|i| {
+                let longest = self.0.entry(i.id.clone()).or_insert(i.duration);
+                if i.duration > *longest {
+                    *longest = i.duration;
+                }
+                *longest
+            })
+            .collect()
+    }
+}
+
+/// Rectangles `([x, y, w, h], argb)` for a bar under each timed icon of the vanilla row: icons are 24 wide and
+/// sit 25 apart from the right edge, beneficial ones at y 1 and harmful ones at y 27.
+pub fn layout(w: i32, icons: &[Icon], longest: &[i32]) -> Vec<([f32; 4], u32)> {
+    let mut order: Vec<usize> = (0..icons.len()).collect();
+    order.sort_by(|&a, &b| icon_order(&icons[b], &icons[a]));
+    let (mut beneficial, mut harmful) = (0, 0);
+    let mut out = Vec::new();
+    for i in order {
+        let icon = &icons[i];
+        let (x, y) = if icon.beneficial {
+            beneficial += 1;
+            (w - 25 * beneficial, 1)
+        } else {
+            harmful += 1;
+            (w - 25 * harmful, 27)
+        };
+        if icon.duration < 0 {
+            continue;
+        }
+        let fraction = (icon.duration as f32 / longest[i].max(1) as f32).clamp(0.0, 1.0);
+        let width = (20.0 * fraction).ceil();
+        let (x, y) = ((x + 2) as f32, (y + 21) as f32);
+        out.push(([x, y, 20.0, 2.0], 0xAA_000000));
+        out.push(([x, y, width, 2.0], 0xFF00_0000 | icon.color));
+    }
+    out
+}
+
+thread_local! {
+    static LONGEST: std::cell::RefCell<Longest> = std::cell::RefCell::new(Longest::default());
+}
+
+/// `layout` with the longest durations the mod has seen so far.
+pub fn bars(w: i32, icons: &[Icon]) -> Vec<([f32; 4], u32)> {
+    let longest = LONGEST.with_borrow_mut(|l| l.observe(icons));
+    layout(w, icons, &longest)
 }
 
 /// The box's lines, shortest time first; red when ten seconds or fewer are left.
@@ -358,6 +539,29 @@ pub fn lines(list: &[Active], show_ambient: bool) -> Vec<(String, u32)> {
     }
 
     #[test]
+    fn bars_follow_the_game_row_and_fill_with_time_left() {
+        let icon = |id: &str, duration, beneficial| Icon { id: id.into(), duration, ambient: false, beneficial, color: 0x33_CC33 };
+        let icons = [icon("speed", 600, true), icon("poison", 100, false), icon("haste", 1200, true)];
+        let mut longest = Longest::default();
+        assert_eq!(longest.observe(&icons), [600, 100, 1200]);
+        // Fifteen seconds in, speed has half left.
+        let later = [icon("speed", 300, true), icon("poison", 50, false), icon("haste", 900, true)];
+        let maxes = longest.observe(&later);
+        assert_eq!(maxes, [600, 100, 1200], "the longest stays");
+        let out = layout(320, &later, &maxes);
+        // The row lists the longest-lasting first: haste, then speed, one icon further left.
+        assert_eq!(out[0].0, [297.0, 22.0, 20.0, 2.0]);
+        assert_eq!(out[1].0[2], 15.0, "haste has 900 of 1200: 15 of 20 pixels");
+        assert_eq!(out[2].0[0], 272.0);
+        assert_eq!(out[3].0[2], 10.0);
+        // Harmful effects sit on the second row.
+        assert_eq!(out[4].0[1], 48.0);
+        assert!(layout(320, &[Icon { duration: -1, ..icon("x", 0, true) }], &[1]).is_empty(), "endless effects have no bar");
+        longest.observe(&[]);
+        assert_eq!(longest.observe(&icons), [600, 100, 1200], "an ended effect is forgotten");
+    }
+
+    #[test]
     fn lines_sort_colour_and_filter() {
         let e = |id: &str, duration, amplifier, ambient| Active { id: id.into(), duration, amplifier, ambient };
         let list = [e("speed", 3600, 1, false), e("poison", 100, 0, false), e("haste", -1, 0, true)];
@@ -368,7 +572,7 @@ pub fn lines(list: &[Active], show_ambient: bool) -> Vec<(String, u32)> {
         assert_eq!(lines(&list, false).len(), 2, "beacon effects hidden");
     }
 ''',
-    hud=lambda: HUD_BOX.replace("@CORNERDOC@", "the bottom-right corner").replace("@DATA@", hud_guard("Corner::BottomRight", '''    let ambient = m::is(|k| game.native_setting(m::ID, k), "ambient");
+    hud=lambda: HUD_BOX.replace("@CORNERDOC@", "the bottom-right corner").replace("@DATA@", OVER_EFFECT + hud_guard("Corner::BottomRight", '''    let ambient = m::is(|k| game.native_setting(m::ID, k), "ambient");
     let active: Vec<m::Active> = game
         .potions
         .effects
@@ -384,10 +588,10 @@ pub fn lines(list: &[Active], show_ambient: bool) -> Vec<(String, u32)> {
 # ---------------------------------------------------------------------------------------------- apple_skin
 RAW.append(dict(
     slug="apple-skin", id="apple_skin", name="Apple Skin", title="Apple Skin", raw=True,
-    description="Your hunger and saturation as numbers, and what the food in your hand would restore.",
+    description="Your hunger and saturation as numbers and as overlays on the food bar, and what the food in your hand would restore.",
     upstream="AppleSkin (appleskin)", upstream_licence="The Unlicense",
     command="food", hooks=["hud", "command", "list", "settings", "click"],
-    options=[("shown", "Shown", True), ("preview", "Held food preview", True), ("saturation", "Show saturation", True)],
+    options=[("shown", "Shown", True), ("preview", "Held food preview", True), ("saturation", "Show saturation", True), ("overlay", "Draw on the food bar", True)],
     runtime_extra=BOX_HEAD + r'''
 /// Slash command that hides or shows the box.
 pub const COMMAND: &str = "food";
@@ -408,6 +612,36 @@ pub fn preview(food: i32, saturation: f32, nutrition: u32, gain: f32) -> Preview
     let after = (food + nutrition as i32).clamp(0, MAX_FOOD);
     let sat = (saturation + gain).clamp(0.0, after as f32);
     Preview { food: after, saturation: sat, restored: after - food, wasted: nutrition as i32 - (after - food) }
+}
+
+/// Rectangles `([x, y, w, h], argb)` drawn over the vanilla food bar (ten icons right to left from the right of the
+/// hotbar, at `h - 39`): a tint where the held food would fill it, and a thin gold line for the saturation.
+pub fn food_overlay(w: i32, h: i32, food: i32, saturation: f32, after: Option<i32>, show_saturation: bool) -> Vec<([f32; 4], u32)> {
+    let mut out = Vec::new();
+    let y = (h - 39) as f32;
+    for n in 0..10 {
+        let x = (w / 2 + 91 - n * 8 - 9) as f32;
+        let low = 2 * n;
+        if let Some(a) = after {
+            let gain = a.clamp(low, low + 2) - food.clamp(low, low + 2);
+            let width = match gain {
+                2 => 9.0,
+                1 => 5.0,
+                _ => 0.0,
+            };
+            if width > 0.0 {
+                out.push(([x, y, width, 9.0], 0x66_FFAA33));
+            }
+        }
+        if show_saturation {
+            let amount = (saturation - low as f32).clamp(0.0, 2.0) / 2.0;
+            let width = (9.0 * amount).round();
+            if width > 0.0 {
+                out.push(([x, y + 8.0, width, 1.0], 0xFF_FFD23F));
+            }
+        }
+    }
+    out
 }
 
 /// The box's lines.
@@ -443,6 +677,20 @@ pub fn lines(food: i32, saturation: f32, held: Option<Preview>, show_saturation:
     }
 
     #[test]
+    fn the_overlay_sits_on_the_food_icons() {
+        let out = food_overlay(320, 240, 17, 3.0, Some(20), true);
+        // Icons 8 and 9 (points 16 to 20) get a tint: a half and a full one; saturation 3 fills icon 0 and half of icon 1.
+        let tints: Vec<_> = out.iter().filter(|(_, c)| *c == 0x66_FFAA33).collect();
+        assert_eq!(tints.len(), 2);
+        assert_eq!(tints[0].0, [(320 / 2 + 91 - 8 * 8 - 9) as f32, 201.0, 5.0, 9.0]);
+        let lines: Vec<_> = out.iter().filter(|(_, c)| *c == 0xFF_FFD23F).collect();
+        assert_eq!(lines.len(), 2);
+        assert_eq!(lines[0].0, [242.0, 209.0, 9.0, 1.0]);
+        assert_eq!(lines[1].0[2], 5.0, "half an icon, rounded up from 4.5");
+        assert!(food_overlay(320, 240, 20, 0.0, None, false).is_empty());
+    }
+
+    #[test]
     fn lines_follow_the_options() {
         assert_eq!(lines(18, 4.25, None, true), ["Food 18/20", "Saturation 4.2"]);
         assert_eq!(lines(18, 4.25, None, false), ["Food 18/20"]);
@@ -452,7 +700,7 @@ pub fn lines(food: i32, saturation: f32, held: Option<Preview>, show_saturation:
         assert_eq!(lines(10, 0.0, Some(preview(10, 0.0, 4, 2.4)), false)[1], "Eat: +4 food");
     }
 ''',
-    hud=lambda: HUD_BOX.replace("@CORNERDOC@", "the top-right corner").replace("@DATA@", hud_guard("Corner::TopRight", '''    let get = |k: &str| game.native_setting(m::ID, k);
+    hud=lambda: HUD_BOX.replace("@CORNERDOC@", "the top-right corner").replace("@DATA@", OVER_APPLE + hud_guard("Corner::TopRight", '''    let get = |k: &str| game.native_setting(m::ID, k);
     let (want_preview, show_saturation) = (m::is(get, "preview"), m::is(get, "saturation"));
     let Some(p) = game.player.as_ref() else {
         return;

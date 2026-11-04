@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "Your armor pieces and how much durability each has left, in a corner of the screen."
+description = "Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]

@@ -1,4 +1,4 @@
-// Effect Timer, a native Horizon mod: Your active potion effects and how long each has left, red in the last ten seconds.
+// Effect Timer, a native Horizon mod: Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_effect_timer`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,8 +6,7 @@
 pub const ID: &str = "effect_timer";
 pub const NAME: &str = "Effect Timer";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Your active potion effects and how long each has left, red in the last ten seconds.";
+pub const DESCRIPTION: &str = "Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.";
 
 use std::cell::RefCell;
 
@@ -15,6 +14,7 @@ use std::cell::RefCell;
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("ambient", "Show beacon effects", true),
+    ("bars", "Duration bars under the icons", true),
 ];
 
 thread_local! {
@@ -135,6 +135,88 @@ pub fn level(amplifier: i32) -> String {
     }
 }
 
+/// An effect as the icon row shows it.
+#[derive(Clone, Debug, PartialEq)]
+pub struct Icon {
+    pub id: String,
+    pub duration: i32,
+    pub ambient: bool,
+    pub beneficial: bool,
+    pub color: u32,
+}
+
+/// The game's own order of the icons (`MobEffectInstance.compareTo`), as the row is sorted by it, reversed.
+pub fn icon_order(a: &Icon, o: &Icon) -> std::cmp::Ordering {
+    if (a.duration <= 32147 || o.duration <= 32147) && !(a.ambient && o.ambient) {
+        a.ambient
+            .cmp(&o.ambient)
+            .then((a.duration == -1).cmp(&(o.duration == -1)))
+            .then(a.duration.cmp(&o.duration))
+            .then(a.color.cmp(&o.color))
+    } else {
+        a.ambient.cmp(&o.ambient).then(a.color.cmp(&o.color))
+    }
+}
+
+/// The longest each effect has been seen to last, to turn the ticks left into a fraction.
+#[derive(Default)]
+pub struct Longest(std::collections::BTreeMap<String, i32>);
+
+impl Longest {
+    /// Notes the current effects and returns each one's longest duration; forgets effects that ended.
+    pub fn observe(&mut self, icons: &[Icon]) -> Vec<i32> {
+        self.0.retain(|id, _| icons.iter().any(|i| &i.id == id));
+        icons
+            .iter()
+            .map(|i| {
+                let longest = self.0.entry(i.id.clone()).or_insert(i.duration);
+                if i.duration > *longest {
+                    *longest = i.duration;
+                }
+                *longest
+            })
+            .collect()
+    }
+}
+
+/// Rectangles `([x, y, w, h], argb)` for a bar under each timed icon of the vanilla row: icons are 24 wide and
+/// sit 25 apart from the right edge, beneficial ones at y 1 and harmful ones at y 27.
+pub fn layout(w: i32, icons: &[Icon], longest: &[i32]) -> Vec<([f32; 4], u32)> {
+    let mut order: Vec<usize> = (0..icons.len()).collect();
+    order.sort_by(|&a, &b| icon_order(&icons[b], &icons[a]));
+    let (mut beneficial, mut harmful) = (0, 0);
+    let mut out = Vec::new();
+    for i in order {
+        let icon = &icons[i];
+        let (x, y) = if icon.beneficial {
+            beneficial += 1;
+            (w - 25 * beneficial, 1)
+        } else {
+            harmful += 1;
+            (w - 25 * harmful, 27)
+        };
+        if icon.duration < 0 {
+            continue;
+        }
+        let fraction = (icon.duration as f32 / longest[i].max(1) as f32).clamp(0.0, 1.0);
+        let width = (20.0 * fraction).ceil();
+        let (x, y) = ((x + 2) as f32, (y + 21) as f32);
+        out.push(([x, y, 20.0, 2.0], 0xAA_000000));
+        out.push(([x, y, width, 2.0], 0xFF00_0000 | icon.color));
+    }
+    out
+}
+
+thread_local! {
+    static LONGEST: std::cell::RefCell<Longest> = std::cell::RefCell::new(Longest::default());
+}
+
+/// `layout` with the longest durations the mod has seen so far.
+pub fn bars(w: i32, icons: &[Icon]) -> Vec<([f32; 4], u32)> {
+    let longest = LONGEST.with_borrow_mut(|l| l.observe(icons));
+    layout(w, icons, &longest)
+}
+
 /// The box's lines, shortest time first; red when ten seconds or fewer are left.
 pub fn lines(list: &[Active], show_ambient: bool) -> Vec<(String, u32)> {
     let mut shown: Vec<&Active> = list.iter().filter(|e| show_ambient || !e.ambient).collect();
@@ -186,6 +268,58 @@ mod tests {
         assert_eq!(level(4), "V");
         assert_eq!(level(11), "12");
         assert_eq!(level(-3), "");
+    }
+
+    #[test]
+    fn bars_follow_the_game_row_and_fill_with_time_left() {
+        let icon = |id: &str, duration, beneficial| Icon {
+            id: id.into(),
+            duration,
+            ambient: false,
+            beneficial,
+            color: 0x33_CC33,
+        };
+        let icons = [
+            icon("speed", 600, true),
+            icon("poison", 100, false),
+            icon("haste", 1200, true),
+        ];
+        let mut longest = Longest::default();
+        assert_eq!(longest.observe(&icons), [600, 100, 1200]);
+        // Fifteen seconds in, speed has half left.
+        let later = [
+            icon("speed", 300, true),
+            icon("poison", 50, false),
+            icon("haste", 900, true),
+        ];
+        let maxes = longest.observe(&later);
+        assert_eq!(maxes, [600, 100, 1200], "the longest stays");
+        let out = layout(320, &later, &maxes);
+        // The row lists the longest-lasting first: haste, then speed, one icon further left.
+        assert_eq!(out[0].0, [297.0, 22.0, 20.0, 2.0]);
+        assert_eq!(out[1].0[2], 15.0, "haste has 900 of 1200: 15 of 20 pixels");
+        assert_eq!(out[2].0[0], 272.0);
+        assert_eq!(out[3].0[2], 10.0);
+        // Harmful effects sit on the second row.
+        assert_eq!(out[4].0[1], 48.0);
+        assert!(
+            layout(
+                320,
+                &[Icon {
+                    duration: -1,
+                    ..icon("x", 0, true)
+                }],
+                &[1]
+            )
+            .is_empty(),
+            "endless effects have no bar"
+        );
+        longest.observe(&[]);
+        assert_eq!(
+            longest.observe(&icons),
+            [600, 100, 1200],
+            "an ended effect is forgotten"
+        );
     }
 
     #[test]

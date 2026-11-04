@@ -1,6 +1,6 @@
 # InvMove
 
-![InvMove icon](../../assets/icons/invmove.svg)
+![InvMove icon](../../assets/icons/horizon-mods-lib.svg)
 
 Keep walking, jumping and sneaking while your inventory is open.
 

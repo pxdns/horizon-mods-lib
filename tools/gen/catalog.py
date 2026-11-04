@@ -26,8 +26,8 @@ PORTED = {
     "JzdjByS4": ("ported", "potion-counter", "Potion Counter (raw-hook port: reads the inventory)"),
     "T9R7YTnA": ("ported", "totem-counter", "Totem Counter (raw-hook port: reads the inventory)"),
     "T9FDHbY5": ("ported", "effect-timer", "Effect Timer (raw-hook port: reads the active effects)"),
-    "x02cBj9Y": ("partial", "effect-timer", "The timer text only; the duration bars under the icons need a draw hook."),
-    "EsAfCjCV": ("partial", "apple-skin", "The numbers and the held-food preview as text; the overlays on the bars need a draw hook."),
+    "x02cBj9Y": ("ported", "effect-timer", "Timer text and the duration bars under the effect icons"),
+    "EsAfCjCV": ("ported", "apple-skin", "Numbers, plus the held-food tint and saturation line drawn on the food bar"),
     "ZX66K16c": ("ported", "pick-up-notifier", "Pick Up Notifier (raw-hook port: watches the inventory)"),
     "wF189hn9": ("ported", "armor-hud", "Armor HUD (raw-hook port: reads the worn armor)"),
     "XeEZ3fK2": ("ported", "freecam", "Freecam (raw-hook port: detached camera)"),
@@ -48,7 +48,7 @@ PORTED = {
     "aC3cM3Vq": ("builtin", "", "Horizon ships Mouse Tweaks as one of its own extras (Options > Extras)."),
     "K0AkAin6": ("builtin", "", "Horizon ships Client Sort as one of its own extras (sort key in Extras)."),
     "wdLuzzEP": ("builtin", "", "Horizon has a Fullbright extra of its own."),
-    "Si9Uim4y": ("partial", "armor-hud", "Armor pieces and durability as text; the detailed bar needs a draw hook."),
+    "Si9Uim4y": ("ported", "armor-hud", "Pieces and durability, the armor value on the bar, and extra rows past 20 points"),
 }
 
 LIBRARY = ["cloth-config", "balm", "bookshelf", "puzzleslib", "collective", "konkrete", "malilib", "midnightlib", "fabric-api",

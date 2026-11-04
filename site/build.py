@@ -137,8 +137,18 @@ Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to 
 '''
 
 
+def icon_of(slug):
+    """The mod's own SVG when it has one, else its catalogue icon."""
+    if (ROOT / "assets/icons" / f"{slug}.svg").exists():
+        return f"{slug}.svg"
+    for m in DATA["mods"]:
+        if m["project"] == slug:
+            return m["icon"]
+    return "horizon-mods-lib.svg"
+
+
 def card(p, root=""):
-    return (f'<a class="card" href="{root}docs/mods/{p["slug"]}.html"><img src="{root}assets/icons/{p["slug"]}.svg" alt="" width="48" height="48">'
+    return (f'<a class="card" href="{root}docs/mods/{p["slug"]}.html"><img src="{root}assets/icons/{icon_of(p["slug"])}" alt="" width="48" height="48">'
             f'<h3>{html.escape(p["name"])}</h3><p>{html.escape(p["description"])}</p>'
             f'<div class="meta">{p["id"]} {p["version"]} · {p["tests"]} tests</div></a>')
 

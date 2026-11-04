@@ -1,6 +1,6 @@
 # Armor HUD (Horizon native mod)
 
-Your armor pieces and how much durability each has left, in a corner of the screen.
+Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points.
 
 - `/armor` hides or shows it.
 

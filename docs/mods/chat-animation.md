@@ -1,6 +1,6 @@
 # Chat Animation
 
-![Chat Animation icon](../../assets/icons/chat-animation.svg)
+![Chat Animation icon](../../assets/icons/catalogue/chatanimation.png)
 
 New chat lines slide up into place instead of appearing at once.
 

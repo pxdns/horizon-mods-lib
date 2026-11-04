@@ -6,6 +6,22 @@ fn apple_skin_hud(
 ) {
     use crate::game::lib_apple_skin as m;
     use horizon_client::extras::Corner;
+    if game.native_on(m::ID) && m::is(|k| game.native_setting(m::ID, k), "overlay") && game.riding.is_none() && !game.creative {
+        if let Some(p) = game.player.as_ref() {
+            let get = |k: &str| game.native_setting(m::ID, k);
+            let (food, saturation) = (p.health.food.food, p.health.food.saturation);
+            let after = if m::is(get, "preview") {
+                game.held()
+                    .and_then(|stack| game.items().get(&stack.item).and_then(|info| info.food))
+                    .map(|(nutrition, gain)| m::preview(food, saturation, nutrition, gain).food)
+            } else {
+                None
+            };
+            for (rect, ink) in m::food_overlay(batch.width as i32, batch.height as i32, food, saturation, after, m::is(get, "saturation")) {
+                game.native_fill(batch, rect, ink);
+            }
+        }
+    }
     if !game.native_on(m::ID) || !game.native_corner_shown(Corner::TopRight) {
         return;
     }

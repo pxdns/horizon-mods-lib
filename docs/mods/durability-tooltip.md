@@ -1,6 +1,6 @@
 # Durability Tooltip
 
-![Durability Tooltip icon](../../assets/icons/durability-tooltip.svg)
+![Durability Tooltip icon](../../assets/icons/catalogue/durability-tooltip.png)
 
 Adds a Durability line to the tooltip of tools, weapons and armor.
 

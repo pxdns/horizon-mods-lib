@@ -1,6 +1,6 @@
 # Potion Counter
 
-![Potion Counter icon](../../assets/icons/potion-counter.svg)
+![Potion Counter icon](../../assets/icons/catalogue/potioncounter.png)
 
 How many potions, splash potions and lingering potions you carry.
 

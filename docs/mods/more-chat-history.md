@@ -1,6 +1,6 @@
 # More Chat History
 
-![More Chat History icon](../../assets/icons/more-chat-history.svg)
+![More Chat History icon](../../assets/icons/catalogue/morechathistory.png)
 
 Chat remembers up to 2000 lines instead of 100, so you can scroll back through a long conversation.
 

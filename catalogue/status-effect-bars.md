@@ -2,15 +2,15 @@
 
 ![Status Effect Bars icon](../assets/icons/catalogue/status-effect-bars.png)
 
-**Status:** Partly ported - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `status-effect-bars-1.0.12` - [Modrinth](https://modrinth.com/mod/status-effect-bars)
+**Status:** Ported - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `status-effect-bars-1.0.12` - [Modrinth](https://modrinth.com/mod/status-effect-bars)
 
 **Project:** [`effect-timer`](../mods/effect-timer/) - [docs](../docs/mods/effect-timer.md)
 
 ## Where it stands
 
-The timer text only; the duration bars under the icons need a draw hook.
+Timer text and the duration bars under the effect icons
 
-Only part of this fits the hook points; see the project for what is in and what is missing.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

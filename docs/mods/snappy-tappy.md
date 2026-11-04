@@ -1,6 +1,6 @@
 # Snappy Tappy
 
-![Snappy Tappy icon](../../assets/icons/snappy-tappy.svg)
+![Snappy Tappy icon](../../assets/icons/horizon-mods-lib.svg)
 
 When you hold two opposite movement keys, the one pressed last wins, so you switch direction at once.
 

@@ -1,4 +1,4 @@
-// Apple Skin, a native Horizon mod: Your hunger and saturation as numbers, and what the food in your hand would restore.
+// Apple Skin, a native Horizon mod: Your hunger and saturation as numbers and as overlays on the food bar, and what the food in your hand would restore.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_apple_skin`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,8 +6,7 @@
 pub const ID: &str = "apple_skin";
 pub const NAME: &str = "Apple Skin";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Your hunger and saturation as numbers, and what the food in your hand would restore.";
+pub const DESCRIPTION: &str = "Your hunger and saturation as numbers and as overlays on the food bar, and what the food in your hand would restore.";
 
 use std::cell::RefCell;
 
@@ -16,6 +15,7 @@ pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("preview", "Held food preview", true),
     ("saturation", "Show saturation", true),
+    ("overlay", "Draw on the food bar", true),
 ];
 
 thread_local! {
@@ -108,6 +108,43 @@ pub fn preview(food: i32, saturation: f32, nutrition: u32, gain: f32) -> Preview
     }
 }
 
+/// Rectangles `([x, y, w, h], argb)` drawn over the vanilla food bar (ten icons right to left from the right of the
+/// hotbar, at `h - 39`): a tint where the held food would fill it, and a thin gold line for the saturation.
+pub fn food_overlay(
+    w: i32,
+    h: i32,
+    food: i32,
+    saturation: f32,
+    after: Option<i32>,
+    show_saturation: bool,
+) -> Vec<([f32; 4], u32)> {
+    let mut out = Vec::new();
+    let y = (h - 39) as f32;
+    for n in 0..10 {
+        let x = (w / 2 + 91 - n * 8 - 9) as f32;
+        let low = 2 * n;
+        if let Some(a) = after {
+            let gain = a.clamp(low, low + 2) - food.clamp(low, low + 2);
+            let width = match gain {
+                2 => 9.0,
+                1 => 5.0,
+                _ => 0.0,
+            };
+            if width > 0.0 {
+                out.push(([x, y, width, 9.0], 0x66_FFAA33));
+            }
+        }
+        if show_saturation {
+            let amount = (saturation - low as f32).clamp(0.0, 2.0) / 2.0;
+            let width = (9.0 * amount).round();
+            if width > 0.0 {
+                out.push(([x, y + 8.0, width, 1.0], 0xFF_FFD23F));
+            }
+        }
+    }
+    out
+}
+
 /// The box's lines.
 pub fn lines(
     food: i32,
@@ -149,6 +186,23 @@ mod tests {
             capped.saturation, 20.0,
             "saturation never passes the food level"
         );
+    }
+
+    #[test]
+    fn the_overlay_sits_on_the_food_icons() {
+        let out = food_overlay(320, 240, 17, 3.0, Some(20), true);
+        // Icons 8 and 9 (points 16 to 20) get a tint: a half and a full one; saturation 3 fills icon 0 and half of icon 1.
+        let tints: Vec<_> = out.iter().filter(|(_, c)| *c == 0x66_FFAA33).collect();
+        assert_eq!(tints.len(), 2);
+        assert_eq!(
+            tints[0].0,
+            [(320 / 2 + 91 - 8 * 8 - 9) as f32, 201.0, 5.0, 9.0]
+        );
+        let lines: Vec<_> = out.iter().filter(|(_, c)| *c == 0xFF_FFD23F).collect();
+        assert_eq!(lines.len(), 2);
+        assert_eq!(lines[0].0, [242.0, 209.0, 9.0, 1.0]);
+        assert_eq!(lines[1].0[2], 5.0, "half an icon, rounded up from 4.5");
+        assert!(food_overlay(320, 240, 20, 0.0, None, false).is_empty());
     }
 
     #[test]

@@ -1,6 +1,6 @@
 # Better Hurt Cam
 
-![Better Hurt Cam icon](../../assets/icons/better-hurt-cam.svg)
+![Better Hurt Cam icon](../../assets/icons/catalogue/betterhurtcam.png)
 
 Tone the camera shake down when you are hit, and switch the death tilt off.
 

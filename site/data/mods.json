@@ -1,7 +1,7 @@
 {
  "counts": {
-  "ported": 24,
-  "partial": 6,
+  "ported": 27,
+  "partial": 3,
   "builtin": 6,
   "hook": 15,
   "library": 28,
@@ -79,9 +79,9 @@
    "slug": "appleskin",
    "licence": "The Unlicense",
    "build": "appleskin-fabric-mc26.3-3.0.10",
-   "status": "partial",
+   "status": "ported",
    "project": "apple-skin",
-   "note": "The numbers and the held-food preview as text; the overlays on the bars need a draw hook.",
+   "note": "Numbers, plus the held-food tint and saturation line drawn on the food bar",
    "page": "appleskin",
    "icon": "catalogue/appleskin.png"
   },
@@ -690,9 +690,9 @@
    "slug": "detail-armor-bar-reconstructed",
    "licence": "MIT License",
    "build": "DetailArmorBarReconstructed-5.3.2-26.3-fabric",
-   "status": "partial",
+   "status": "ported",
    "project": "armor-hud",
-   "note": "Armor pieces and durability as text; the detailed bar needs a draw hook.",
+   "note": "Pieces and durability, the armor value on the bar, and extra rows past 20 points",
    "page": "detail-armor-bar-reconstructed",
    "icon": "catalogue/detail-armor-bar-reconstructed.png"
   },
@@ -2055,9 +2055,9 @@
    "slug": "status-effect-bars",
    "licence": "GNU Lesser General Public License v3.0 only",
    "build": "status-effect-bars-1.0.12",
-   "status": "partial",
+   "status": "ported",
    "project": "effect-timer",
-   "note": "The timer text only; the duration bars under the icons need a draw hook.",
+   "note": "Timer text and the duration bars under the effect icons",
    "page": "status-effect-bars",
    "icon": "catalogue/status-effect-bars.png"
   },

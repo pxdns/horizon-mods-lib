@@ -2,15 +2,15 @@
 
 ![AppleSkin icon](../assets/icons/catalogue/appleskin.png)
 
-**Status:** Partly ported - **Upstream licence:** `The Unlicense` - **26.3 build:** `appleskin-fabric-mc26.3-3.0.10` - [Modrinth](https://modrinth.com/mod/appleskin)
+**Status:** Ported - **Upstream licence:** `The Unlicense` - **26.3 build:** `appleskin-fabric-mc26.3-3.0.10` - [Modrinth](https://modrinth.com/mod/appleskin)
 
 **Project:** [`apple-skin`](../mods/apple-skin/) - [docs](../docs/mods/apple-skin.md)
 
 ## Where it stands
 
-The numbers and the held-food preview as text; the overlays on the bars need a draw hook.
+Numbers, plus the held-food tint and saturation line drawn on the food bar
 
-Only part of this fits the hook points; see the project for what is in and what is missing.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

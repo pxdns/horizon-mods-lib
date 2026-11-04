@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mod catalogue · horizon-mods-lib</title>
-<meta name="description" content="Mod catalogue Every mod in the Tempest project&#x27;s cross-pack matrix ( docs/MOD-MATRIX.md in pxdns/patcher ): 186 mods , 24 ported · 6 partly ported · 6">
+<meta name="description" content="Mod catalogue Every mod in the Tempest project&#x27;s cross-pack matrix ( docs/MOD-MATRIX.md in pxdns/patcher ): 186 mods , 27 ported · 3 partly ported · 6">
 <meta name="theme-color" content="#100a1f">
 <link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/site.css">
@@ -22,7 +22,7 @@
 <div class="crumbs"><a href="introduction.html">Docs</a> / Catalogue</div>
 <h1 id="mod-catalogue">Mod catalogue</h1>
 <p>Every mod in the Tempest project's cross-pack matrix (<a href="https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md"><code>docs/MOD-MATRIX.md</code></a>
-in <code>pxdns/patcher</code>): <strong>186 mods</strong>, <strong>24</strong> ported · <strong>6</strong> partly ported · <strong>6</strong> built into horizon · <strong>15</strong> needs a hook point · <strong>30</strong> pack or asset · <strong>32</strong> engine or server · <strong>28</strong> library · <strong>45</strong> no 26.3 build.</p>
+in <code>pxdns/patcher</code>): <strong>186 mods</strong>, <strong>27</strong> ported · <strong>3</strong> partly ported · <strong>6</strong> built into horizon · <strong>15</strong> needs a hook point · <strong>30</strong> pack or asset · <strong>32</strong> engine or server · <strong>28</strong> library · <strong>45</strong> no 26.3 build.</p>
 <p>Horizon implements Minecraft <strong>26.3</strong>, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's <a href="hook-points.html">native hook points</a> expose (frame, tick, HUD, key, wheel, command, zoom,
 minimap, mods list, settings and the world lifecycle, plus the item panel and recipes), which is why most Fabric mods that
@@ -73,7 +73,7 @@ nothing is marked ported unless a project in <a href="https://github.com/pxdns/h
 </table>
 <p>Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.</p>
-<h2 id="ported-24">Ported (24)</h2>
+<h2 id="ported-27">Ported (27)</h2>
 <table>
 <thead>
 <tr>
@@ -86,6 +86,14 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../catalogue/appleskin.html">AppleSkin</a></td>
+<td><a href="https://modrinth.com/mod/appleskin">appleskin</a></td>
+<td><code>The Unlicense</code></td>
+<td><code>appleskin-fabric-mc26.3-3.0.10</code></td>
+<td>Ported (<a href="mods/apple-skin.html"><code>apple-skin</code></a>)</td>
+<td>Numbers, plus the held-food tint and saturation line drawn on the food bar</td>
+</tr>
 <tr>
 <td><a href="../catalogue/better-mount-hud.html">Better Mount HUD</a></td>
 <td><a href="https://modrinth.com/mod/better-mount-hud">better-mount-hud</a></td>
@@ -133,6 +141,14 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td><code>crosshairindicator-1.0.3</code></td>
 <td>Ported (<a href="mods/crosshair-indicator.html"><code>crosshair-indicator</code></a>)</td>
 <td>Crosshair Indicator (raw-hook port: draws over the crosshair)</td>
+</tr>
+<tr>
+<td><a href="../catalogue/detail-armor-bar-reconstructed.html">Detail Armor Bar Reconstructed</a></td>
+<td><a href="https://modrinth.com/mod/detail-armor-bar-reconstructed">detail-armor-bar-reconstructed</a></td>
+<td><code>MIT License</code></td>
+<td><code>DetailArmorBarReconstructed-5.3.2-26.3-fabric</code></td>
+<td>Ported (<a href="mods/armor-hud.html"><code>armor-hud</code></a>)</td>
+<td>Pieces and durability, the armor value on the bar, and extra rows past 20 points</td>
 </tr>
 <tr>
 <td><a href="../catalogue/durability-tooltip.html">Durability Tooltip</a></td>
@@ -247,6 +263,14 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td>Sprint Indicator</td>
 </tr>
 <tr>
+<td><a href="../catalogue/status-effect-bars.html">Status Effect Bars</a></td>
+<td><a href="https://modrinth.com/mod/status-effect-bars">status-effect-bars</a></td>
+<td><code>GNU Lesser General Public License v3.0 only</code></td>
+<td><code>status-effect-bars-1.0.12</code></td>
+<td>Ported (<a href="mods/effect-timer.html"><code>effect-timer</code></a>)</td>
+<td>Timer text and the duration bars under the effect icons</td>
+</tr>
+<tr>
 <td><a href="../catalogue/statuseffecttimer.html">Status Effect Timer</a></td>
 <td><a href="https://modrinth.com/mod/statuseffecttimer">statuseffecttimer</a></td>
 <td><code>GNU Lesser General Public License v3.0 only</code></td>
@@ -280,7 +304,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 </tr>
 </tbody>
 </table>
-<h2 id="partly-ported-6">Partly ported (6)</h2>
+<h2 id="partly-ported-3">Partly ported (3)</h2>
 <table>
 <thead>
 <tr>
@@ -294,36 +318,12 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 </thead>
 <tbody>
 <tr>
-<td><a href="../catalogue/appleskin.html">AppleSkin</a></td>
-<td><a href="https://modrinth.com/mod/appleskin">appleskin</a></td>
-<td><code>The Unlicense</code></td>
-<td><code>appleskin-fabric-mc26.3-3.0.10</code></td>
-<td>Partly ported (<a href="mods/apple-skin.html"><code>apple-skin</code></a>)</td>
-<td>The numbers and the held-food preview as text; the overlays on the bars need a draw hook.</td>
-</tr>
-<tr>
-<td><a href="../catalogue/detail-armor-bar-reconstructed.html">Detail Armor Bar Reconstructed</a></td>
-<td><a href="https://modrinth.com/mod/detail-armor-bar-reconstructed">detail-armor-bar-reconstructed</a></td>
-<td><code>MIT License</code></td>
-<td><code>DetailArmorBarReconstructed-5.3.2-26.3-fabric</code></td>
-<td>Partly ported (<a href="mods/armor-hud.html"><code>armor-hud</code></a>)</td>
-<td>Armor pieces and durability as text; the detailed bar needs a draw hook.</td>
-</tr>
-<tr>
 <td><a href="../catalogue/shulkerboxtooltip.html">Shulker Box Tooltip</a></td>
 <td><a href="https://modrinth.com/mod/shulkerboxtooltip">shulkerboxtooltip</a></td>
 <td><code>MIT License</code></td>
 <td><code>shulkerboxtooltip-fabric-5.4.2+26.3</code></td>
 <td>Partly ported (<a href="mods/shulker-box-tooltip.html"><code>shulker-box-tooltip</code></a>)</td>
 <td>The contents as text (totals and a slot grid); the graphical 9 by 3 grid needs a draw hook inside tooltips.</td>
-</tr>
-<tr>
-<td><a href="../catalogue/status-effect-bars.html">Status Effect Bars</a></td>
-<td><a href="https://modrinth.com/mod/status-effect-bars">status-effect-bars</a></td>
-<td><code>GNU Lesser General Public License v3.0 only</code></td>
-<td><code>status-effect-bars-1.0.12</code></td>
-<td>Partly ported (<a href="mods/effect-timer.html"><code>effect-timer</code></a>)</td>
-<td>The timer text only; the duration bars under the icons need a draw hook.</td>
 </tr>
 <tr>
 <td><a href="../catalogue/xaeros-minimap.html">Xaero's Minimap</a></td>
@@ -1684,7 +1684,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <nav class="pager" aria-label="Previous and next"><a class="prev" href="compatibility.html"><small>Previous</small>Compatibility</a><a class="next" href="modules.html"><small>Next</small>Modules and Horizon</a></nav>
 <p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/MODS.md">Edit this page on GitHub</a></p>
 </main>
-<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#status">Status</a><a class="" href="#ported-24">Ported (24)</a><a class="" href="#partly-ported-6">Partly ported (6)</a><a class="" href="#built-into-horizon-6">Built into Horizon (6)</a><a class="" href="#needs-a-hook-point-15">Needs a hook point (15)</a><a class="" href="#pack-or-asset-30">Pack or asset (30)</a><a class="" href="#engine-or-server-32">Engine or server (32)</a><a class="" href="#library-28">Library (28)</a><a class="" href="#no-263-build-45">No 26.3 build (45)</a></aside>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#status">Status</a><a class="" href="#ported-27">Ported (27)</a><a class="" href="#partly-ported-3">Partly ported (3)</a><a class="" href="#built-into-horizon-6">Built into Horizon (6)</a><a class="" href="#needs-a-hook-point-15">Needs a hook point (15)</a><a class="" href="#pack-or-asset-30">Pack or asset (30)</a><a class="" href="#engine-or-server-32">Engine or server (32)</a><a class="" href="#library-28">Library (28)</a><a class="" href="#no-263-build-45">No 26.3 build (45)</a></aside>
 </div>
 <footer class="site"><div class="wrap">
 <div class="cols">

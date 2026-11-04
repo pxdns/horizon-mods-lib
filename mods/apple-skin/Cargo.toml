@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "Your hunger and saturation as numbers, and what the food in your hand would restore."
+description = "Your hunger and saturation as numbers and as overlays on the food bar, and what the food in your hand would restore."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]

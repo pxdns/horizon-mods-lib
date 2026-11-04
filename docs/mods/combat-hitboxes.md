@@ -1,6 +1,6 @@
 # Combat Hitboxes
 
-![Combat Hitboxes icon](../../assets/icons/combat-hitboxes.svg)
+![Combat Hitboxes icon](../../assets/icons/catalogue/combat-hitboxes.png)
 
 Makes entities slightly easier to hit by growing the box your crosshair is tested against.
 

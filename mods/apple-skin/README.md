@@ -1,6 +1,6 @@
 # Apple Skin (Horizon native mod)
 
-Your hunger and saturation as numbers, and what the food in your hand would restore.
+Your hunger and saturation as numbers and as overlays on the food bar, and what the food in your hand would restore.
 
 - `/food` hides or shows it.
 

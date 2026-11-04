@@ -1,8 +1,8 @@
 # Apple Skin
 
-![Apple Skin icon](../../assets/icons/apple-skin.svg)
+![Apple Skin icon](../../assets/icons/catalogue/appleskin.png)
 
-Your hunger and saturation as numbers, and what the food in your hand would restore.
+Your hunger and saturation as numbers and as overlays on the food bar, and what the food in your hand would restore.
 
 **Version** 1.0.0 · **Game** 26.3 · **Pinned to Horizon ba6344a, reads game state** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/apple-skin) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=apple-skin)
 
@@ -17,6 +17,7 @@ Your hunger and saturation as numbers, and what the food in your hand would rest
 | Shown | on |
 | Held food preview | on |
 | Show saturation | on |
+| Draw on the food bar | on |
 
 Switch it on or off in **Options → Mods → Apple Skin**; its settings page has one button per option. Install steps are in
 [Install a mod](../install.md).

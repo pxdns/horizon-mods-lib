@@ -1,6 +1,6 @@
 # Totem Counter
 
-![Totem Counter icon](../../assets/icons/totem-counter.svg)
+![Totem Counter icon](../../assets/icons/catalogue/totemcounter.png)
 
 How many totems of undying you carry, red when you have none.
 

@@ -1,6 +1,6 @@
 # Effect Timer (Horizon native mod)
 
-Your active potion effects and how long each has left, red in the last ten seconds.
+Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.
 
 - `/effects` hides or shows it.
 

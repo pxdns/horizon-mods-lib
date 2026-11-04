@@ -1,6 +1,6 @@
 # Shulker Box Tooltip
 
-![Shulker Box Tooltip icon](../../assets/icons/shulker-box-tooltip.svg)
+![Shulker Box Tooltip icon](../../assets/icons/catalogue/shulkerboxtooltip.png)
 
 Shows what is inside a shulker box in its tooltip: totals by item, and a slot grid.
 

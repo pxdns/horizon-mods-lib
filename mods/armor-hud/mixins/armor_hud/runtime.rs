@@ -1,4 +1,4 @@
-// Armor HUD, a native Horizon mod: Your armor pieces and how much durability each has left, in a corner of the screen.
+// Armor HUD, a native Horizon mod: Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_armor_hud`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,8 +6,7 @@
 pub const ID: &str = "armor_hud";
 pub const NAME: &str = "Armor HUD";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Your armor pieces and how much durability each has left, in a corner of the screen.";
+pub const DESCRIPTION: &str = "Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points.";
 
 use std::cell::RefCell;
 
@@ -16,6 +15,7 @@ pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("percent", "Show percent", true),
     ("full", "Hide undamaged pieces", false),
+    ("bar", "Armor value on the armor bar", true),
 ];
 
 thread_local! {
@@ -145,6 +145,37 @@ impl Piece {
     }
 }
 
+/// The armor value written beside the armor bar.
+pub fn label(armor: i32) -> String {
+    armor.to_string()
+}
+
+/// Rectangles `([x, y, w, h], argb)` for armor past the ten vanilla icons (20 points): one row of small bars
+/// above the bar per further 20 points, a half bar for an odd point. `row` is the y of the vanilla armor row.
+pub fn extra_rows(w: i32, row: i32, armor: i32) -> Vec<([f32; 4], u32)> {
+    const INKS: [u32; 4] = [0xFF_8FB8FF, 0xFF_C28FFF, 0xFF_FF9FD0, 0xFF_FFE08F];
+    let mut out = Vec::new();
+    let mut left = armor - 20;
+    let mut level = 0;
+    while left > 0 && level < INKS.len() {
+        let y = (row - 4 - 4 * level as i32) as f32;
+        for n in 0..10 {
+            let points = (left - 2 * n).clamp(0, 2);
+            if points == 0 {
+                break;
+            }
+            let x = (w / 2 - 91 + n * 8) as f32;
+            out.push((
+                [x, y, if points == 2 { 9.0 } else { 4.0 }, 3.0],
+                INKS[level],
+            ));
+        }
+        left -= 20;
+        level += 1;
+    }
+    out
+}
+
 /// The box's lines with their colours.
 pub fn lines(pieces: &[Piece], as_percent: bool, hide_full: bool) -> Vec<(String, u32)> {
     pieces
@@ -170,6 +201,22 @@ mod tests {
         assert_eq!(title("minecraft:diamond_helmet"), "Diamond Helmet");
         assert_eq!(title("totem_of_undying"), "Totem Of Undying");
         assert_eq!(title(""), "");
+    }
+
+    #[test]
+    fn armor_past_twenty_gets_extra_rows() {
+        assert!(extra_rows(320, 180, 20).is_empty());
+        let out = extra_rows(320, 180, 25);
+        assert_eq!(out.len(), 3, "two full bars and a half");
+        assert_eq!(out[0].0, [69.0, 176.0, 9.0, 3.0]);
+        assert_eq!(out[2].0[2], 4.0);
+        assert_eq!(extra_rows(320, 180, 60).len(), 20, "two rows of ten");
+        assert_eq!(
+            extra_rows(320, 180, 60)[10].0[1],
+            172.0,
+            "the second row sits above the first"
+        );
+        assert_eq!(label(14), "14");
     }
 
     #[test]

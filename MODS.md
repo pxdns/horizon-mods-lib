@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **24** ported · **6** partly ported · **6** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **27** ported · **3** partly ported · **6** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -25,16 +25,18 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (24)
+## Ported (27)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
+| [AppleSkin](catalogue/appleskin.md) | [appleskin](https://modrinth.com/mod/appleskin) | `The Unlicense` | `appleskin-fabric-mc26.3-3.0.10` | Ported ([`apple-skin`](mods/apple-skin/)) | Numbers, plus the held-food tint and saturation line drawn on the food bar |
 | [Better Mount HUD](catalogue/better-mount-hud.md) | [better-mount-hud](https://modrinth.com/mod/better-mount-hud) | `GNU General Public License v3.0 only` | `bettermounthud-1.2.6` | Ported ([`better-mount-hud`](mods/better-mount-hud/)) | Better Mount HUD |
 | [BetterHurtCam](catalogue/betterhurtcam.md) | [betterhurtcam](https://modrinth.com/mod/betterhurtcam) | `MIT License` | `betterhurtcam-fabric-1.15.0+mc26.3` | Ported ([`better-hurt-cam`](mods/better-hurt-cam/)) | Better Hurt Cam (raw-hook port: camera bob and hurt tilt) |
 | [Chat Animation [Smooth Chat]](catalogue/chatanimation.md) | [chatanimation](https://modrinth.com/mod/chatanimation) | `MIT License` | `chatanimation-fabric-1.3.3+mc26.3` | Ported ([`chat-animation`](mods/chat-animation/)) | Chat Animation (raw-hook port: rebuilds Chat::layout) |
 | [Chat Notify](catalogue/chatnotify.md) | [chatnotify](https://modrinth.com/mod/chatnotify) | `Apache License 2.0` | `chatnotify-fabric-3.104.0+26.3` | Ported ([`chat-notify`](mods/chat-notify/)) | Chat Notify (raw-hook port: hooks Chat::add_message) |
 | [Combat Hitboxes](catalogue/combat-hitboxes.md) | [combat-hitboxes](https://modrinth.com/mod/combat-hitboxes) | `Apache License 2.0` | `combat-hitbox-1.0.11` | Ported ([`combat-hitboxes`](mods/combat-hitboxes/)) | Combat Hitboxes (raw-hook port: wraps the ray-versus-box test) |
 | [Crosshair Indicator](catalogue/crosshair-indicator.md) | [crosshair-indicator](https://modrinth.com/mod/crosshair-indicator) | `Creative Commons Zero v1.0 Universal` | `crosshairindicator-1.0.3` | Ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | Crosshair Indicator (raw-hook port: draws over the crosshair) |
+| [Detail Armor Bar Reconstructed](catalogue/detail-armor-bar-reconstructed.md) | [detail-armor-bar-reconstructed](https://modrinth.com/mod/detail-armor-bar-reconstructed) | `MIT License` | `DetailArmorBarReconstructed-5.3.2-26.3-fabric` | Ported ([`armor-hud`](mods/armor-hud/)) | Pieces and durability, the armor value on the bar, and extra rows past 20 points |
 | [Durability Tooltip](catalogue/durability-tooltip.md) | [durability-tooltip](https://modrinth.com/mod/durability-tooltip) | `see project` | `durabilitytooltip-1.2.0-fabric-mc26.3` | Ported ([`durability-tooltip`](mods/durability-tooltip/)) | Durability Tooltip (raw-hook port: returns from stack_tooltip) |
 | [Entity Crosshair](catalogue/entitycrosshair.md) | [entitycrosshair](https://modrinth.com/mod/entitycrosshair) | `GNU General Public License v3.0 or later` | `EntityCrosshair-2.3.0-26.3+_fabric` | Ported ([`entity-crosshair`](mods/entity-crosshair/)) | Entity Crosshair (raw-hook port: replaces the crosshair shape) |
 | [FPS - Display](catalogue/fpsdisplay.md) | [fpsdisplay](https://modrinth.com/mod/fpsdisplay) | `GNU Lesser General Public License v3.0 only` | `fpsdisplay-5.2.0+26.3` | Ported ([`fps-display`](mods/fps-display/)) | FPS Display |
@@ -49,19 +51,17 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Simple Zoom](catalogue/zoom-simple.md) | [zoom-simple](https://modrinth.com/mod/zoom-simple) | `MIT License` | `simplezoom-fabric-26.3-1.4.0` | Ported ([`simple-zoom`](mods/simple-zoom/)) | Simple Zoom |
 | [SnappyTappy](catalogue/snappytappy.md) | [snappytappy](https://modrinth.com/mod/snappytappy) | `MIT` | `26.3` | Ported ([`snappy-tappy`](mods/snappy-tappy/)) | Snappy Tappy (raw-hook port: held-key set) |
 | [Sprint Indicator](catalogue/sprint-indicator.md) | [sprint-indicator](https://modrinth.com/mod/sprint-indicator) | `MIT License` | `sprintindicator-fabric-2.1.0+26.3` | Ported ([`sprint-indicator`](mods/sprint-indicator/)) | Sprint Indicator |
+| [Status Effect Bars](catalogue/status-effect-bars.md) | [status-effect-bars](https://modrinth.com/mod/status-effect-bars) | `GNU Lesser General Public License v3.0 only` | `status-effect-bars-1.0.12` | Ported ([`effect-timer`](mods/effect-timer/)) | Timer text and the duration bars under the effect icons |
 | [Status Effect Timer](catalogue/statuseffecttimer.md) | [statuseffecttimer](https://modrinth.com/mod/statuseffecttimer) | `GNU Lesser General Public License v3.0 only` | `statuseffecttimer-2.0.0+26.3` | Ported ([`effect-timer`](mods/effect-timer/)) | Effect Timer (raw-hook port: reads the active effects) |
 | [TotemCounter](catalogue/totemcounter.md) | [totemcounter](https://modrinth.com/mod/totemcounter) | `MIT License` | `totemcounter-fabric-1.14.0+mc26.3` | Ported ([`totem-counter`](mods/totem-counter/)) | Totem Counter (raw-hook port: reads the inventory) |
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (6)
+## Partly ported (3)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
-| [AppleSkin](catalogue/appleskin.md) | [appleskin](https://modrinth.com/mod/appleskin) | `The Unlicense` | `appleskin-fabric-mc26.3-3.0.10` | Partly ported ([`apple-skin`](mods/apple-skin/)) | The numbers and the held-food preview as text; the overlays on the bars need a draw hook. |
-| [Detail Armor Bar Reconstructed](catalogue/detail-armor-bar-reconstructed.md) | [detail-armor-bar-reconstructed](https://modrinth.com/mod/detail-armor-bar-reconstructed) | `MIT License` | `DetailArmorBarReconstructed-5.3.2-26.3-fabric` | Partly ported ([`armor-hud`](mods/armor-hud/)) | Armor pieces and durability as text; the detailed bar needs a draw hook. |
 | [Shulker Box Tooltip](catalogue/shulkerboxtooltip.md) | [shulkerboxtooltip](https://modrinth.com/mod/shulkerboxtooltip) | `MIT License` | `shulkerboxtooltip-fabric-5.4.2+26.3` | Partly ported ([`shulker-box-tooltip`](mods/shulker-box-tooltip/)) | The contents as text (totals and a slot grid); the graphical 9 by 3 grid needs a draw hook inside tooltips. |
-| [Status Effect Bars](catalogue/status-effect-bars.md) | [status-effect-bars](https://modrinth.com/mod/status-effect-bars) | `GNU Lesser General Public License v3.0 only` | `status-effect-bars-1.0.12` | Partly ported ([`effect-timer`](mods/effect-timer/)) | The timer text only; the duration bars under the icons need a draw hook. |
 | [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`waypoints`](mods/waypoints/)) | Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap. |
 | [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`waypoints`](mods/waypoints/)) | Only the waypoints idea; there is no map screen hook yet. |
 

@@ -1,6 +1,6 @@
 # Better Mount HUD
 
-![Better Mount HUD icon](../../assets/icons/better-mount-hud.svg)
+![Better Mount HUD icon](../../assets/icons/catalogue/better-mount-hud.png)
 
 Numbers for the mount you ride: health, speed in blocks per second, jump height and jump charge.
 

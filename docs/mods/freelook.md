@@ -1,6 +1,6 @@
 # Freelook
 
-![Freelook icon](../../assets/icons/freelook.svg)
+![Freelook icon](../../assets/icons/catalogue/freelook.png)
 
 Hold a key and move the mouse to look around without turning your player.
 

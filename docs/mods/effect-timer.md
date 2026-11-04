@@ -1,8 +1,8 @@
 # Effect Timer
 
-![Effect Timer icon](../../assets/icons/effect-timer.svg)
+![Effect Timer icon](../../assets/icons/catalogue/statuseffecttimer.png)
 
-Your active potion effects and how long each has left, red in the last ten seconds.
+Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.
 
 **Version** 1.0.0 · **Game** 26.3 · **Pinned to Horizon ba6344a, reads game state** · **Licence** MIT · [Source](https://github.com/pxdns/horizon-mods-lib/tree/main/mods/effect-timer) · [Releases](https://github.com/pxdns/horizon-mods-lib/releases?q=effect-timer)
 
@@ -16,6 +16,7 @@ Your active potion effects and how long each has left, red in the last ten secon
 |---|---|
 | Shown | on |
 | Show beacon effects | on |
+| Duration bars under the icons | on |
 
 Switch it on or off in **Options → Mods → Effect Timer**; its settings page has one button per option. Install steps are in
 [Install a mod](../install.md).

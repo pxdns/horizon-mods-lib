@@ -1,6 +1,6 @@
 # Chat Notify
 
-![Chat Notify icon](../../assets/icons/chat-notify.svg)
+![Chat Notify icon](../../assets/icons/catalogue/chatnotify.png)
 
 Plays a sound when someone says your name in chat.
 

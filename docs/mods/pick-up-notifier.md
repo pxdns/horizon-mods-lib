@@ -1,6 +1,6 @@
 # Pick Up Notifier
 
-![Pick Up Notifier icon](../../assets/icons/pick-up-notifier.svg)
+![Pick Up Notifier icon](../../assets/icons/catalogue/pick-up-notifier.png)
 
 +3 Cobblestone: a short list of what you just picked up (and, if you like, dropped).
 

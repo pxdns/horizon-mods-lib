@@ -18,6 +18,22 @@ MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT
 
 ROOT = Path(__file__).resolve().parents[2]
 D = ROOT / "docs"
+
+
+def icon_for(slug):
+    """The project's own SVG when it has one, else its catalogue icon (found through the catalogue's port table)."""
+    import json
+    import re
+    if (ROOT / "assets/icons" / f"{slug}.svg").exists():
+        return f"{slug}.svg"
+    source = (Path(__file__).resolve().parent / "catalog.py").read_text()
+    meta = json.loads((Path(__file__).resolve().parent / "inputs/mods_metadata.json").read_text())
+    for mid, project in re.findall(r'"(\w{8})": \("(?:ported|partial)", "([a-z0-9-]+)"', source):
+        if project == slug and mid in meta:
+            icon = f"catalogue/{meta[mid]['slug']}.png"
+            if (ROOT / "assets/icons" / icon).exists():
+                return icon
+    return "horizon-mods-lib.svg"
 V = "1.0.0"
 
 
@@ -600,7 +616,7 @@ for m in MODS:
     w(f"mods/{m['slug']}.md", f"""
 # {m['name']}
 
-![{m['name']} icon](../../assets/icons/{m['slug']}.svg)
+![{m['name']} icon](../../assets/icons/{icon_for(m['slug'])})
 
 {m['description']}
 

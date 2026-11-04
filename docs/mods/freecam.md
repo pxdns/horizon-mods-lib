@@ -1,6 +1,6 @@
 # Freecam
 
-![Freecam icon](../../assets/icons/freecam.svg)
+![Freecam icon](../../assets/icons/horizon-mods-lib.svg)
 
 Detach the camera and fly it around while your player stands still.
 

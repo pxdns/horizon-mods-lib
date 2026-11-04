@@ -6,6 +6,28 @@ fn effect_timer_hud(
 ) {
     use crate::game::lib_effect_timer as m;
     use horizon_client::extras::Corner;
+    if game.native_on(m::ID) && m::is(|k| game.native_setting(m::ID, k), "bars") {
+        let icons: Vec<m::Icon> = game
+            .potions
+            .effects
+            .list
+            .iter()
+            .filter(|e| e.visible)
+            .map(|e| {
+                let def = horizon_client_core::potions::effect(e.id);
+                m::Icon {
+                    id: e.id.to_owned(),
+                    duration: e.duration,
+                    ambient: e.ambient,
+                    beneficial: def.is_some_and(|d| d.category == horizon_client_core::potions::Category::Beneficial),
+                    color: def.map_or(0xFF_FFFF, |d| d.color as u32),
+                }
+            })
+            .collect();
+        for (rect, ink) in m::bars(batch.width as i32, &icons) {
+            game.native_fill(batch, rect, ink);
+        }
+    }
     if !game.native_on(m::ID) || !game.native_corner_shown(Corner::BottomRight) {
         return;
     }

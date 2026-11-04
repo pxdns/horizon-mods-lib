@@ -1,6 +1,6 @@
 # Crosshair Indicator
 
-![Crosshair Indicator icon](../../assets/icons/crosshair-indicator.svg)
+![Crosshair Indicator icon](../../assets/icons/catalogue/crosshair-indicator.png)
 
 Turns your crosshair red when it is over a living creature.
 
