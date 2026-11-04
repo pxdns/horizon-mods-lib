@@ -2,13 +2,15 @@
 
 ![F5 Split icon](../assets/icons/catalogue/f5-split.svg)
 
-**Status:** No 26.3 build - **Upstream licence:** `see project` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/f5-split)
+**Status:** Ported - **Upstream licence:** `see project` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/f5-split)
+
+**Project:** [`f5-split`](../mods/f5-split/) - [docs](../docs/mods/f5-split.md)
 
 ## Where it stands
 
-No Fabric build for 26.3, the game version Horizon implements.
+Separate back and front view keys, toggle or hold; no per-view field of view
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

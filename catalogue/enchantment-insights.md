@@ -2,13 +2,15 @@
 
 ![Enchantment Insights icon](../assets/icons/catalogue/enchantment-insights.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `Mozilla Public License 2.0` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/enchantment-insights)
+**Status:** Partly ported - **Upstream licence:** `Mozilla Public License 2.0` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/enchantment-insights)
+
+**Project:** [`enchantment-descriptions`](../mods/enchantment-descriptions/) - [docs](../docs/mods/enchantment-descriptions.md)
 
 ## Where it stands
 
-No Fabric build for 26.3, the game version Horizon implements.
+The descriptions under the tooltip; no coloured enchantment names
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

@@ -2,13 +2,15 @@
 
 ![Enchantment Descriptions icon](../assets/icons/catalogue/enchantment-descriptions.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `GNU Lesser General Public License v2.1 only` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/enchantment-descriptions)
+**Status:** Ported - **Upstream licence:** `GNU Lesser General Public License v2.1 only` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/enchantment-descriptions)
+
+**Project:** [`enchantment-descriptions`](../mods/enchantment-descriptions/) - [docs](../docs/mods/enchantment-descriptions.md)
 
 ## Where it stands
 
-No Fabric build for 26.3, the game version Horizon implements.
+A gray line per enchantment under the tooltip saying what it does
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

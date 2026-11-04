@@ -1,0 +1,31 @@
+# Releases the F5 Split native mod (f5-split/) as f5_split-<version>.hnmod.
+#
+# Bump `version` in mods/f5-split/mixins/f5_split/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
+# GitHub release `f5-split-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
+# exists, so ordinary pushes are free. Run it by hand from the Actions tab to test and package without releasing.
+name: release f5-split
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mods/f5-split/**"
+      - "tools/mods.py"
+      - ".github/workflows/_release.yml"
+      - ".github/workflows/release-f5-split.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Create the release even from a manual run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: ./.github/workflows/_release.yml
+    with:
+      slug: f5-split
+      publish: ${{ github.event_name == 'push' || inputs.publish }}

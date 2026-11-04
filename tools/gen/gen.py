@@ -19,7 +19,9 @@ from mods_inv import INV
 from mods_mount import MOUNT
 from mods_map import MAP
 from mods_pass import PASS
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS
+from mods_ench import ENCH
+from mods_f5 import F5
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

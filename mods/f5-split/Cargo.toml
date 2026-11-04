@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-f5-split"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Separate keys for the back and the front third-person view, as a toggle or while held."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/f5_split/runtime.rs"
+
+[workspace]

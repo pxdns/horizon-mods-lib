@@ -1,13 +1,13 @@
 {
  "counts": {
-  "ported": 28,
-  "partial": 2,
-  "builtin": 6,
+  "ported": 31,
+  "partial": 5,
+  "builtin": 8,
   "hook": 15,
   "library": 28,
   "engine": 32,
   "pack": 30,
-  "no-263": 45
+  "no-263": 37
  },
  "labels": {
   "ported": "Ported",
@@ -55,7 +55,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A redstone engine: world logic, which Horizon implements itself and no hook point reaches.",
    "page": "alternate-current",
    "icon": "catalogue/alternate-current.png"
   },
@@ -133,7 +133,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Draws entity hitboxes in the world; there is no entity rendering hook.",
    "page": "betterhitboxes",
    "icon": "catalogue/betterhitboxes.png"
   },
@@ -172,7 +172,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there.",
    "page": "betterf3",
    "icon": "catalogue/betterf3.png"
   },
@@ -237,7 +237,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Keeps chunks beyond the server's view distance: chunk storage and the network layer, no hook.",
    "page": "bobby",
    "icon": "catalogue/bobby.png"
   },
@@ -328,7 +328,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A set of chat features (timestamps, hiding, copying); not started. The chat hooks used by More Chat History reach some of it.",
    "page": "chatpatches",
    "icon": "catalogue/chatpatches.png"
   },
@@ -341,7 +341,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Custom item textures by rules: item rendering has no hook for that choice.",
    "page": "cit-resewn",
    "icon": "catalogue/cit-resewn.png"
   },
@@ -497,7 +497,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Predicts eating on the client before the server confirms; needs entity and packet hooks.",
    "page": "consumableoptimizer",
    "icon": "catalogue/consumableoptimizer.png"
   },
@@ -560,9 +560,9 @@
    "slug": "crosshair-addons-public",
    "licence": "MIT License",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "status": "partial",
+   "project": "crosshair-indicator",
+   "note": "A mark over the crosshair when it is over a living entity; none of the other conditions",
    "page": "crosshair-addons-public",
    "icon": "catalogue/crosshair-addons-public.png"
   },
@@ -588,7 +588,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Predicts end crystal hits on the client; needs entity and packet hooks.",
    "page": "crystal-speed",
    "icon": "catalogue/crystal-speed.png"
   },
@@ -601,7 +601,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Changes how the enchantment glint is drawn; item rendering has no hook for it.",
    "page": "custom-glint",
    "icon": "catalogue/custom-glint.png"
   },
@@ -614,7 +614,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Scales the shield in the hand; the held-item transform has no hook.",
    "page": "shieldscale",
    "icon": "catalogue/shieldscale.png"
   },
@@ -627,7 +627,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Window mode: Horizon owns its window and has its own fullscreen setting.",
    "page": "cubes-without-borders",
    "icon": "catalogue/cubes-without-borders.png"
   },
@@ -781,9 +781,9 @@
    "slug": "enchantment-descriptions",
    "licence": "GNU Lesser General Public License v2.1 only",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "status": "ported",
+   "project": "enchantment-descriptions",
+   "note": "A gray line per enchantment under the tooltip saying what it does",
    "page": "enchantment-descriptions",
    "icon": "catalogue/enchantment-descriptions.png"
   },
@@ -794,9 +794,9 @@
    "slug": "enchantment-insights",
    "licence": "Mozilla Public License 2.0",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "status": "partial",
+   "project": "enchantment-descriptions",
+   "note": "The descriptions under the tooltip; no coloured enchantment names",
    "page": "enchantment-insights",
    "icon": "catalogue/enchantment-insights.png"
   },
@@ -809,7 +809,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Block entity rendering; no hook there.",
    "page": "ebe",
    "icon": "catalogue/ebe.png"
   },
@@ -835,7 +835,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Custom entity models in the OptiFine format; mob rendering has no hook.",
    "page": "entity-model-features",
    "icon": "catalogue/entity-model-features.png"
   },
@@ -872,9 +872,9 @@
    "slug": "f5-split",
    "licence": "see project",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "status": "ported",
+   "project": "f5-split",
+   "note": "Separate back and front view keys, toggle or hold; no per-view field of view",
    "page": "f5-split",
    "icon": "catalogue/f5-split.svg"
   },
@@ -900,7 +900,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Server-side rules and tools; Horizon's native mods are client-side.",
    "page": "carpet",
    "icon": "catalogue/carpet.png"
   },
@@ -1015,9 +1015,9 @@
    "slug": "fullbright",
    "licence": "GPL-3.0-only",
    "build": "-",
-   "status": "no-263",
+   "status": "builtin",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Horizon has a Fullbright extra of its own.",
    "page": "fullbright",
    "icon": "catalogue/fullbright.png"
   },
@@ -1069,7 +1069,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A framework for server-side bot players; not a client mod.",
    "page": "herobot",
    "icon": "catalogue/herobot.png"
   },
@@ -1082,7 +1082,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Moves vanilla HUD elements; Horizon lays them out in functions that can only be replaced whole.",
    "page": "hud-manager",
    "icon": "catalogue/hud-manager.png"
   },
@@ -1160,7 +1160,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Scales items in the hand and in the world; item rendering has no hook for it.",
    "page": "itemscale",
    "icon": "catalogue/itemscale.png"
   },
@@ -1212,7 +1212,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A dynamic lighting engine; lighting is Horizon's own and has no hook.",
    "page": "lambdynamiclights",
    "icon": "catalogue/lambdynamiclights.png"
   },
@@ -1225,7 +1225,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Language file loading performance and fallbacks; Horizon loads languages its own way.",
    "page": "language-reload",
    "icon": "catalogue/language-reload.png"
   },
@@ -1303,7 +1303,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Predicts mace smash hits on the client; needs entity and packet hooks.",
    "page": "mace-optimizer",
    "icon": "catalogue/mace-optimizer.png"
   },
@@ -1342,7 +1342,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Fixes memory leaks in the Java game; Horizon is Rust.",
    "page": "memoryleakfix",
    "icon": "catalogue/memoryleakfix.png"
   },
@@ -1379,9 +1379,9 @@
    "slug": "minihud",
    "licence": "GNU Lesser General Public License v3.0 only",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "status": "partial",
+   "project": "info-hud",
+   "note": "Speed, facing, dimension and angles in Info HUD, coordinates in Custom HUD; no light level, biome or chunk overlays",
    "page": "minihud",
    "icon": "catalogue/minihud.png"
   },
@@ -1394,7 +1394,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Fixes gaps in block models; the mesher has no hook.",
    "page": "modelfix",
    "icon": "catalogue/modelfix.png"
   },
@@ -1483,9 +1483,9 @@
    "slug": "no-death-animation",
    "licence": "MIT",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "status": "ported",
+   "project": "better-hurt-cam",
+   "note": "The death tilt can be switched off in Better Hurt Cam",
    "page": "no-death-animation",
    "icon": "catalogue/no-death-animation.png"
   },
@@ -1524,7 +1524,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "World generation performance; Horizon has its own generator.",
    "page": "noisiumforked",
    "icon": "catalogue/noisiumforked.png"
   },
@@ -1550,7 +1550,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Performance and protocol changes for multiplayer servers; engine and network work.",
    "page": "noxesium",
    "icon": "catalogue/noxesium.png"
   },
@@ -1602,7 +1602,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Particle culling and spawn reduction; the particle system has no hook.",
    "page": "particle-core",
    "icon": "catalogue/particle-core.png"
   },
@@ -1615,7 +1615,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Changes rain particles; the particle system has no hook.",
    "page": "particle-rain",
    "icon": "catalogue/particle-rain.png"
   },
@@ -1693,7 +1693,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A resource-pack feature GUI for OptiFine alternatives; Horizon loads packs itself.",
    "page": "puzzle",
    "icon": "catalogue/puzzle.png"
   },
@@ -1758,7 +1758,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "NVIDIA Reflex latency control through the GPU driver; Horizon renders with wgpu.",
    "page": "reflex-antilag",
    "icon": "catalogue/reflex-antilag.png"
   },
@@ -1810,7 +1810,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A library for searchable lists in Fabric mod screens.",
    "page": "searchables",
    "icon": "catalogue/searchables.png"
   },
@@ -1862,7 +1862,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Colours a shield's state; the shield state is not exposed to the hook points yet. Not started.",
    "page": "shield-statuses",
    "icon": "catalogue/shield-statuses.png"
   },
@@ -1953,7 +1953,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Lets sliders be dragged past their ends; Horizon's option sliders have no hook.",
    "page": "slyde",
    "icon": "catalogue/slyde.png"
   },
@@ -2133,9 +2133,9 @@
    "slug": "tooltipfix",
    "licence": "MIT",
    "build": "-",
-   "status": "no-263",
+   "status": "builtin",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges.",
    "page": "tooltipfix",
    "icon": "catalogue/tooltipfix.png"
   },
@@ -2161,7 +2161,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Changes the totem pop animation; the item activation animation has no hook.",
    "page": "cpvp",
    "icon": "catalogue/cpvp.png"
   },
@@ -2174,7 +2174,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A large collection of client tweaks (placement, restock, hotbar swap); not started, and most of it needs input and inventory hooks.",
    "page": "tweakeroo",
    "icon": "catalogue/tweakeroo.png"
   },
@@ -2291,7 +2291,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A level-of-detail renderer for distant terrain; rendering and chunk storage, no hook.",
    "page": "voxy",
    "icon": "catalogue/voxy.png"
   },
@@ -2304,7 +2304,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "A different renderer; Horizon renders with wgpu.",
    "page": "vulkanmod",
    "icon": "catalogue/vulkanmod.png"
   },
@@ -2369,7 +2369,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Predicts experience bottle throws on the client; needs entity and packet hooks.",
    "page": "xp-bottle-optimizer",
    "icon": "catalogue/xp-bottle-optimizer.png"
   },
@@ -2395,7 +2395,7 @@
    "build": "-",
    "status": "no-263",
    "project": "",
-   "note": "No Fabric build for 26.3, the game version Horizon implements.",
+   "note": "Restores option files that the Java game resets; Horizon keeps its own options.",
    "page": "yosbr",
    "icon": "catalogue/yosbr.png"
   },

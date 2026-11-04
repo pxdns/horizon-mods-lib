@@ -2,13 +2,15 @@
 
 ![No Death Animation icon](../assets/icons/catalogue/no-death-animation.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `MIT` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/no-death-animation)
+**Status:** Ported - **Upstream licence:** `MIT` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/no-death-animation)
+
+**Project:** [`better-hurt-cam`](../mods/better-hurt-cam/) - [docs](../docs/mods/better-hurt-cam.md)
 
 ## Where it stands
 
-No Fabric build for 26.3, the game version Horizon implements.
+The death tilt can be switched off in Better Hurt Cam
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

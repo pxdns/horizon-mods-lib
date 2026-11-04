@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-enchantment-descriptions"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Adds a line to enchanted items' tooltips saying what each enchantment does."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/enchantment_descriptions/runtime.rs"
+
+[workspace]

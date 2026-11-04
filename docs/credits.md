@@ -52,6 +52,8 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`better-mount-hud`](mods/better-mount-hud.md) | Better Mount HUD (bettermounthud) | see the upstream project |
 | [`minimap-plus`](mods/minimap-plus.md) | Xaero's Minimap and Xaero's World Map (the map display) | independent implementation, no upstream code |
 | [`password-hider`](mods/password-hider.md) | the password-hiding in login plugins' clients (an idea, not a port) | independent implementation, no upstream code |
+| [`enchantment-descriptions`](mods/enchantment-descriptions.md) | Enchantment Descriptions (enchdesc) | see the upstream project; the descriptions are written for this mod |
+| [`f5-split`](mods/f5-split.md) | F5 Split (f5split) | see the upstream project |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

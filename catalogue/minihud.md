@@ -2,13 +2,15 @@
 
 ![MiniHUD icon](../assets/icons/catalogue/minihud.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/minihud)
+**Status:** Partly ported - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/minihud)
+
+**Project:** [`info-hud`](../mods/info-hud/) - [docs](../docs/mods/info-hud.md)
 
 ## Where it stands
 
-No Fabric build for 26.3, the game version Horizon implements.
+Speed, facing, dimension and angles in Info HUD, coordinates in Custom HUD; no light level, biome or chunk overlays
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

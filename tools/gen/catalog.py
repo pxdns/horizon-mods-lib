@@ -48,6 +48,14 @@ PORTED = {
     "aC3cM3Vq": ("builtin", "", "Horizon ships Mouse Tweaks as one of its own extras (Options > Extras)."),
     "K0AkAin6": ("builtin", "", "Horizon ships Client Sort as one of its own extras (sort key in Extras)."),
     "wdLuzzEP": ("builtin", "", "Horizon has a Fullbright extra of its own."),
+    "a9H9ZwuV": ("ported", "f5-split", "Separate back and front view keys, toggle or hold; no per-view field of view"),
+    "xLSpHE43": ("partial", "enchantment-descriptions", "The descriptions under the tooltip; no coloured enchantment names"),
+    "2RKFTmiB": ("builtin", "", "Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges."),
+    "UMxybHE8": ("partial", "info-hud", "Speed, facing, dimension and angles in Info HUD, coordinates in Custom HUD; no light level, biome or chunk overlays"),
+    "QrKEZXN9": ("partial", "crosshair-indicator", "A mark over the crosshair when it is over a living entity; none of the other conditions"),
+    "VyxkIxCd": ("builtin", "", "Horizon has a Fullbright extra of its own."),
+    "UVtY3ZAC": ("ported", "enchantment-descriptions", "A gray line per enchantment under the tooltip saying what it does"),
+    "r6VxNyu0": ("ported", "better-hurt-cam", "The death tilt can be switched off in Better Hurt Cam"),
     "Si9Uim4y": ("ported", "armor-hud", "Pieces and durability, the armor value on the bar, and extra rows past 20 points"),
 }
 
@@ -94,6 +102,47 @@ SPECIFIC = {
     "bubOj4AD": "Looks players up on an external tier service and draws the result on name tags; there is no network or name-tag hook.",
 }
 
+# No 26.3 build of the upstream project exists, which does not stop a native port; these are the reasons the entries are still not ported.
+NO263_REASONS = {
+    "r0v8vy1s": "A redstone engine: world logic, which Horizon implements itself and no hook point reaches.",
+    "zqU1uktf": "Draws entity hitboxes in the world; there is no entity rendering hook.",
+    "8shC1gFX": "Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there.",
+    "M08ruV16": "Keeps chunks beyond the server's view distance: chunk storage and the network layer, no hook.",
+    "otVJckYQ": "Custom item textures by rules: item rendering has no hook for that choice.",
+    "TQTTVgYE": "Server-side rules and tools; Horizon's native mods are client-side.",
+    "MOqt4Z5n": "A set of chat features (timestamps, hiding, copying); not started. The chat hooks used by More Chat History reach some of it.",
+    "4alTd2ag": "Predicts eating on the client before the server confirms; needs entity and packet hooks.",
+    "ZkHPmyRx": "Predicts end crystal hits on the client; needs entity and packet hooks.",
+    "ETlrkaYF": "Window mode: Horizon owns its window and has its own fullscreen setting.",
+    "FH4YDbIf": "Changes how the enchantment glint is drawn; item rendering has no hook for it.",
+    "gD9OBTtF": "Scales the shield in the hand; the held-item transform has no hook.",
+    "OVuFYfre": "Block entity rendering; no hook there.",
+    "hbUrCPGQ": "Moves vanilla HUD elements; Horizon lays them out in functions that can only be replaced whole.",
+    "wt23fpWX": "A framework for server-side bot players; not a client mod.",
+    "hYTvGCAq": "Scales items in the hand and in the world; item rendering has no hook for it.",
+    "yBW8D80W": "A dynamic lighting engine; lighting is Horizon's own and has no hook.",
+    "uLbm7CG6": "Language file loading performance and fallbacks; Horizon loads languages its own way.",
+    "1cENlqGZ": "Predicts mace smash hits on the client; needs entity and packet hooks.",
+    "NRjRiSSD": "Fixes memory leaks in the Java game; Horizon is Rust.",
+    "QdG47OkI": "Fixes gaps in block models; the mesher has no hook.",
+    "hasdd01q": "World generation performance; Horizon has its own generator.",
+    "Kw7Sm3Xf": "Performance and protocol changes for multiplayer servers; engine and network work.",
+    "RSeLon5O": "Particle culling and spawn reduction; the particle system has no hook.",
+    "nrikgvxm": "Changes rain particles; the particle system has no hook.",
+    "3IuO68q1": "A resource-pack feature GUI for OptiFine alternatives; Horizon loads packs itself.",
+    "WTVzusYD": "NVIDIA Reflex latency control through the GPU driver; Horizon renders with wgpu.",
+    "fuuu3xnx": "A library for searchable lists in Fabric mod screens.",
+    "GfoMZ9Ly": "Colours a shield's state; the shield state is not exposed to the hook points yet. Not started.",
+    "diCZrsch": "Lets sliders be dragged past their ends; Horizon's option sliders have no hook.",
+    "1cfO6J6t": "Changes the totem pop animation; the item activation animation has no hook.",
+    "t5wuYk45": "A large collection of client tweaks (placement, restock, hotbar swap); not started, and most of it needs input and inventory hooks.",
+    "JYQhtZtO": "A different renderer; Horizon renders with wgpu.",
+    "c5VHeSai": "Predicts experience bottle throws on the client; needs entity and packet hooks.",
+    "WwbubTsV": "Restores option files that the Java game resets; Horizon keeps its own options.",
+    "4I1XuqiY": "Custom entity models in the OptiFine format; mob rendering has no hook.",
+    "fxxUqruK": "A level-of-detail renderer for distant terrain; rendering and chunk storage, no hook.",
+}
+
 
 def classify(name, mid, has263):
     low = name.lower()
@@ -101,7 +150,7 @@ def classify(name, mid, has263):
         s, slug, note = PORTED[mid]
         return s, slug, note
     if not has263:
-        return "no-263", "", "No Fabric build for 26.3, the game version Horizon implements."
+        return "no-263", "", NO263_REASONS.get(mid, "No Fabric build for 26.3, the game version Horizon implements.")
     if any(k in low for k in LIBRARY):
         return "library", "", "A library other Fabric mods load; Horizon's native mods do not use Fabric libraries."
     if any(k in low for k in ENGINE):
@@ -174,7 +223,7 @@ TAKES = {
     "pack": "This is a resource pack, shader, theme or model asset. The Horizon registry lists those as packs, not native mods, so there is no Rust to write.",
     "engine": "This changes how the game engine performs or how a server runs. Horizon is a native rewrite with its own engine, so there is nothing to patch in.",
     "library": "This is a library that other Fabric mods load. Native Horizon mods are self-contained Rust and do not use Fabric libraries.",
-    "no-263": "The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.",
+    "no-263": "The upstream project has no build for Minecraft 26.3, the version Horizon implements. That does not stop a native port by itself; the reason it is not ported is on its page.",
     "partial": "Only part of this fits the hook points; see the project for what is in and what is missing.",
     "builtin": "Horizon already does this itself, so a mod would only duplicate it.",
     "ported": "Ported: a project in this repository re-implements it.",

@@ -6,9 +6,9 @@
 
 ## Where it stands
 
-No Fabric build for 26.3, the game version Horizon implements.
+Restores option files that the Java game resets; Horizon keeps its own options.
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.
+The upstream project has no build for Minecraft 26.3, the version Horizon implements. That does not stop a native port by itself; the reason it is not ported is on its page.
 
 ## Credit
 

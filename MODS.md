@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **28** ported · **2** partly ported · **6** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **31** ported · **5** partly ported · **8** built into horizon · **15** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **37** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -25,7 +25,7 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (28)
+## Ported (31)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -38,13 +38,16 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Crosshair Indicator](catalogue/crosshair-indicator.md) | [crosshair-indicator](https://modrinth.com/mod/crosshair-indicator) | `Creative Commons Zero v1.0 Universal` | `crosshairindicator-1.0.3` | Ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | Crosshair Indicator (raw-hook port: draws over the crosshair) |
 | [Detail Armor Bar Reconstructed](catalogue/detail-armor-bar-reconstructed.md) | [detail-armor-bar-reconstructed](https://modrinth.com/mod/detail-armor-bar-reconstructed) | `MIT License` | `DetailArmorBarReconstructed-5.3.2-26.3-fabric` | Ported ([`armor-hud`](mods/armor-hud/)) | Pieces and durability, the armor value on the bar, and extra rows past 20 points |
 | [Durability Tooltip](catalogue/durability-tooltip.md) | [durability-tooltip](https://modrinth.com/mod/durability-tooltip) | `see project` | `durabilitytooltip-1.2.0-fabric-mc26.3` | Ported ([`durability-tooltip`](mods/durability-tooltip/)) | Durability Tooltip (raw-hook port: returns from stack_tooltip) |
+| [Enchantment Descriptions](catalogue/enchantment-descriptions.md) | [enchantment-descriptions](https://modrinth.com/mod/enchantment-descriptions) | `GNU Lesser General Public License v2.1 only` | `-` | Ported ([`enchantment-descriptions`](mods/enchantment-descriptions/)) | A gray line per enchantment under the tooltip saying what it does |
 | [Entity Crosshair](catalogue/entitycrosshair.md) | [entitycrosshair](https://modrinth.com/mod/entitycrosshair) | `GNU General Public License v3.0 or later` | `EntityCrosshair-2.3.0-26.3+_fabric` | Ported ([`entity-crosshair`](mods/entity-crosshair/)) | Entity Crosshair (raw-hook port: replaces the crosshair shape) |
+| [F5 Split](catalogue/f5-split.md) | [f5-split](https://modrinth.com/mod/f5-split) | `see project` | `-` | Ported ([`f5-split`](mods/f5-split/)) | Separate back and front view keys, toggle or hold; no per-view field of view |
 | [FPS - Display](catalogue/fpsdisplay.md) | [fpsdisplay](https://modrinth.com/mod/fpsdisplay) | `GNU Lesser General Public License v3.0 only` | `fpsdisplay-5.2.0+26.3` | Ported ([`fps-display`](mods/fps-display/)) | FPS Display |
 | [Freecam](catalogue/freecam.md) | [freecam](https://modrinth.com/mod/freecam) | `MIT` | `1.5.0-alpha.2` | Ported ([`freecam`](mods/freecam/)) | Freecam (raw-hook port: detached camera) |
 | [Freelook](catalogue/freelook.md) | [freelook](https://modrinth.com/mod/freelook) | `GNU Affero General Public License v3.0 only` | `freelook-1.4.4` | Ported ([`freelook`](mods/freelook/)) | Freelook (raw-hook port: mouse look and render camera) |
 | [InvMove](catalogue/invmove.md) | [invmove](https://modrinth.com/mod/invmove) | `LGPL-3.0-only` | `0.9.6+26.3-fabric` | Ported ([`invmove`](mods/invmove/)) | InvMove |
 | [Key Overlay](catalogue/keyoverlay.md) | [keyoverlay](https://modrinth.com/mod/keyoverlay) | `see project` | `KeyOverlay-26.3` | Ported ([`key-overlay`](mods/key-overlay/)) | Key Overlay |
 | [More Chat History](catalogue/morechathistory.md) | [morechathistory](https://modrinth.com/mod/morechathistory) | `Creative Commons Zero v1.0 Universal` | `2.0.0` | Ported ([`more-chat-history`](mods/more-chat-history/)) | More Chat History (raw-hook port: raises the chat limits) |
+| [No Death Animation](catalogue/no-death-animation.md) | [no-death-animation](https://modrinth.com/mod/no-death-animation) | `MIT` | `-` | Ported ([`better-hurt-cam`](mods/better-hurt-cam/)) | The death tilt can be switched off in Better Hurt Cam |
 | [Pick Up Notifier](catalogue/pick-up-notifier.md) | [pick-up-notifier](https://modrinth.com/mod/pick-up-notifier) | `Mozilla Public License 2.0` | `pickupnotifier-v26.3.0-mc26.3.x+fabric` | Ported ([`pick-up-notifier`](mods/pick-up-notifier/)) | Pick Up Notifier (raw-hook port: watches the inventory) |
 | [Ping View](catalogue/ping-view.md) | [ping-view](https://modrinth.com/mod/ping-view) | `MIT License` | `pingview-fabric-1.6` | Ported ([`ping-view`](mods/ping-view/)) | Ping View |
 | [PotionCounter](catalogue/potioncounter.md) | [potioncounter](https://modrinth.com/mod/potioncounter) | `MIT License` | `potioncounter-fabric-1.12.1+mc26.3` | Ported ([`potion-counter`](mods/potion-counter/)) | Potion Counter (raw-hook port: reads the inventory) |
@@ -58,23 +61,28 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (2)
+## Partly ported (5)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
+| [Crosshair Addons Public](catalogue/crosshair-addons-public.md) | [crosshair-addons-public](https://modrinth.com/mod/crosshair-addons-public) | `MIT License` | `-` | Partly ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | A mark over the crosshair when it is over a living entity; none of the other conditions |
+| [Enchantment Insights](catalogue/enchantment-insights.md) | [enchantment-insights](https://modrinth.com/mod/enchantment-insights) | `Mozilla Public License 2.0` | `-` | Partly ported ([`enchantment-descriptions`](mods/enchantment-descriptions/)) | The descriptions under the tooltip; no coloured enchantment names |
+| [MiniHUD](catalogue/minihud.md) | [minihud](https://modrinth.com/mod/minihud) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`info-hud`](mods/info-hud/)) | Speed, facing, dimension and angles in Info HUD, coordinates in Custom HUD; no light level, biome or chunk overlays |
 | [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | The map display (corner, size, zoom keys, big map, turning, round) on Horizon's own minimap, plus the waypoints mod; waypoints are not marked on the map and there is no entity radar. |
 | [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | A big-map key that widens Horizon's minimap to its largest view; there is no full-screen map screen to scroll, since Horizon has no hook for a new screen. |
 
-## Built into Horizon (6)
+## Built into Horizon (8)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [Auth Me](catalogue/auth-me.md) | [auth-me](https://modrinth.com/mod/auth-me) | `MIT License` | `authme-fabric-9.3.0+26.3` | Built into Horizon | Horizon has its own account sign-in (a device-code sign-in in its settings). |
 | [Client Sort](catalogue/clientsort.md) | [clientsort](https://modrinth.com/mod/clientsort) | `Apache License 2.0` | `clientsort-fabric-3.104.0+26.3` | Built into Horizon | Horizon ships Client Sort as one of its own extras (sort key in Extras). |
+| [Fullbright](catalogue/fullbright.md) | [fullbright](https://modrinth.com/mod/fullbright) | `GPL-3.0-only` | `-` | Built into Horizon | Horizon has a Fullbright extra of its own. |
 | [Gamma Utils (Fullbright)](catalogue/gamma-utils.md) | [gamma-utils](https://modrinth.com/mod/gamma-utils) | `GNU Lesser General Public License v3.0 only` | `Gamma-Utils-Fabric-3.2.0+mc26.3` | Built into Horizon | Horizon has a Fullbright extra of its own. |
 | [Mod Menu](catalogue/modmenu.md) | [modmenu](https://modrinth.com/mod/modmenu) | `MIT License` | `modmenu-21.0.0` | Built into Horizon | Horizon lists native mods in its own Options > Mods screen, with a settings page for each. |
 | [Mouse Tweaks](catalogue/mouse-tweaks.md) | [mouse-tweaks](https://modrinth.com/mod/mouse-tweaks) | `BSD 3-Clause "New" or "Revised" License` | `MouseTweaks-fabric-mc26.3-2.31` | Built into Horizon | Horizon ships Mouse Tweaks as one of its own extras (Options > Extras). |
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Built into Horizon | Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric. |
+| [ToolTipFix](catalogue/tooltipfix.md) | [tooltipfix](https://modrinth.com/mod/tooltipfix) | `MIT` | `-` | Built into Horizon | Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges. |
 
 ## Needs a hook point (15)
 
@@ -201,53 +209,45 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [YetAnotherConfigLib (YACL)](catalogue/yacl.md) | [yacl](https://modrinth.com/mod/yacl) | `GNU Lesser General Public License v3.0 or later` | `yet_another_config_lib_v3-3.9.7+26.3-fabric` | Library | A library other Fabric mods load; Horizon's native mods do not use Fabric libraries. |
 | [ZConfig](catalogue/zconfig.md) | [zconfig](https://modrinth.com/mod/zconfig) | `Mozilla Public License 2.0` | `zconfig-1.0.0+26.x` | Library | A library other Fabric mods load; Horizon's native mods do not use Fabric libraries. |
 
-## No 26.3 build (45)
+## No 26.3 build (37)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
-| [[EMF] Entity Model Features](catalogue/entity-model-features.md) | [entity-model-features](https://modrinth.com/mod/entity-model-features) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Alternate Current](catalogue/alternate-current.md) | [alternate-current](https://modrinth.com/mod/alternate-current) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Better Hitboxes](catalogue/betterhitboxes.md) | [betterhitboxes](https://modrinth.com/mod/betterhitboxes) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [BetterF3](catalogue/betterf3.md) | [betterf3](https://modrinth.com/mod/betterf3) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Bobby](catalogue/bobby.md) | [bobby](https://modrinth.com/mod/bobby) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Carpet](catalogue/carpet.md) | [carpet](https://modrinth.com/mod/carpet) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Chat Patches](catalogue/chatpatches.md) | [chatpatches](https://modrinth.com/mod/chatpatches) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [CIT Resewn](catalogue/cit-resewn.md) | [cit-resewn](https://modrinth.com/mod/cit-resewn) | `MIT` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Consumable Optimizer](catalogue/consumableoptimizer.md) | [consumableoptimizer](https://modrinth.com/mod/consumableoptimizer) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Crosshair Addons Public](catalogue/crosshair-addons-public.md) | [crosshair-addons-public](https://modrinth.com/mod/crosshair-addons-public) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Crystal Speed](catalogue/crystal-speed.md) | [crystal-speed](https://modrinth.com/mod/crystal-speed) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Cubes Without Borders](catalogue/cubes-without-borders.md) | [cubes-without-borders](https://modrinth.com/mod/cubes-without-borders) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Custom Glint](catalogue/custom-glint.md) | [custom-glint](https://modrinth.com/mod/custom-glint) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Custom Shield Scale](catalogue/shieldscale.md) | [shieldscale](https://modrinth.com/mod/shieldscale) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Enchantment Descriptions](catalogue/enchantment-descriptions.md) | [enchantment-descriptions](https://modrinth.com/mod/enchantment-descriptions) | `GNU Lesser General Public License v2.1 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Enchantment Insights](catalogue/enchantment-insights.md) | [enchantment-insights](https://modrinth.com/mod/enchantment-insights) | `Mozilla Public License 2.0` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Enhanced Block Entities](catalogue/ebe.md) | [ebe](https://modrinth.com/mod/ebe) | `LGPL-3.0-only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [F5 Split](catalogue/f5-split.md) | [f5-split](https://modrinth.com/mod/f5-split) | `see project` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Fullbright](catalogue/fullbright.md) | [fullbright](https://modrinth.com/mod/fullbright) | `GPL-3.0-only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [HeroBot](catalogue/herobot.md) | [herobot](https://modrinth.com/mod/herobot) | `Creative Commons Attribution Non Commercial 4.0 International` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [HUD Manager](catalogue/hud-manager.md) | [hud-manager](https://modrinth.com/mod/hud-manager) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Item Scale](catalogue/itemscale.md) | [itemscale](https://modrinth.com/mod/itemscale) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [LambDynamicLights - Dynamic Lights](catalogue/lambdynamiclights.md) | [lambdynamiclights](https://modrinth.com/mod/lambdynamiclights) | `see project` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Language Reload](catalogue/language-reload.md) | [language-reload](https://modrinth.com/mod/language-reload) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Mace Optimizer](catalogue/mace-optimizer.md) | [mace_optimizer](https://modrinth.com/mod/mace_optimizer) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Memory Leak Fix](catalogue/memoryleakfix.md) | [memoryleakfix](https://modrinth.com/mod/memoryleakfix) | `LGPL-2.1-only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [MiniHUD](catalogue/minihud.md) | [minihud](https://modrinth.com/mod/minihud) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Model Gap Fix](catalogue/modelfix.md) | [modelfix](https://modrinth.com/mod/modelfix) | `GPL-3.0-only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [No Death Animation](catalogue/no-death-animation.md) | [no-death-animation](https://modrinth.com/mod/no-death-animation) | `MIT` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [NoisiumForked](catalogue/noisiumforked.md) | [noisiumforked](https://modrinth.com/mod/noisiumforked) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Noxesium](catalogue/noxesium.md) | [noxesium](https://modrinth.com/mod/noxesium) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Particle Core](catalogue/particle-core.md) | [particle-core](https://modrinth.com/mod/particle-core) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Particle Rain](catalogue/particle-rain.md) | [particle-rain](https://modrinth.com/mod/particle-rain) | `MIT` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Puzzle](catalogue/puzzle.md) | [puzzle](https://modrinth.com/mod/puzzle) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Reflex AntiLag](catalogue/reflex-antilag.md) | [reflex-antilag](https://modrinth.com/mod/reflex-antilag) | `see project` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Searchables](catalogue/searchables.md) | [searchables](https://modrinth.com/mod/searchables) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Shield Statuses](catalogue/shield-statuses.md) | [shield-statuses](https://modrinth.com/mod/shield-statuses) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Slyde](catalogue/slyde.md) | [slyde](https://modrinth.com/mod/slyde) | `MIT License` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [ToolTipFix](catalogue/tooltipfix.md) | [tooltipfix](https://modrinth.com/mod/tooltipfix) | `MIT` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Totem Tweaks](catalogue/cpvp.md) | [cpvp](https://modrinth.com/mod/cpvp) | `see project` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Tweakeroo](catalogue/tweakeroo.md) | [tweakeroo](https://modrinth.com/mod/tweakeroo) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [voxy](catalogue/voxy.md) | [voxy](https://modrinth.com/mod/voxy) | `see project` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [VulkanMod](catalogue/vulkanmod.md) | [vulkanmod](https://modrinth.com/mod/vulkanmod) | `LGPL-3.0-only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Xp Bottle Optimizer](catalogue/xp-bottle-optimizer.md) | [xp-bottle-optimizer](https://modrinth.com/mod/xp-bottle-optimizer) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
-| [Your Options Shall Be Respected (YOSBR)](catalogue/yosbr.md) | [yosbr](https://modrinth.com/mod/yosbr) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | No Fabric build for 26.3, the game version Horizon implements. |
+| [[EMF] Entity Model Features](catalogue/entity-model-features.md) | [entity-model-features](https://modrinth.com/mod/entity-model-features) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | Custom entity models in the OptiFine format; mob rendering has no hook. |
+| [Alternate Current](catalogue/alternate-current.md) | [alternate-current](https://modrinth.com/mod/alternate-current) | `MIT License` | `-` | No 26.3 build | A redstone engine: world logic, which Horizon implements itself and no hook point reaches. |
+| [Better Hitboxes](catalogue/betterhitboxes.md) | [betterhitboxes](https://modrinth.com/mod/betterhitboxes) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Draws entity hitboxes in the world; there is no entity rendering hook. |
+| [BetterF3](catalogue/betterf3.md) | [betterf3](https://modrinth.com/mod/betterf3) | `MIT License` | `-` | No 26.3 build | Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there. |
+| [Bobby](catalogue/bobby.md) | [bobby](https://modrinth.com/mod/bobby) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | Keeps chunks beyond the server's view distance: chunk storage and the network layer, no hook. |
+| [Carpet](catalogue/carpet.md) | [carpet](https://modrinth.com/mod/carpet) | `MIT License` | `-` | No 26.3 build | Server-side rules and tools; Horizon's native mods are client-side. |
+| [Chat Patches](catalogue/chatpatches.md) | [chatpatches](https://modrinth.com/mod/chatpatches) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | A set of chat features (timestamps, hiding, copying); not started. The chat hooks used by More Chat History reach some of it. |
+| [CIT Resewn](catalogue/cit-resewn.md) | [cit-resewn](https://modrinth.com/mod/cit-resewn) | `MIT` | `-` | No 26.3 build | Custom item textures by rules: item rendering has no hook for that choice. |
+| [Consumable Optimizer](catalogue/consumableoptimizer.md) | [consumableoptimizer](https://modrinth.com/mod/consumableoptimizer) | `MIT License` | `-` | No 26.3 build | Predicts eating on the client before the server confirms; needs entity and packet hooks. |
+| [Crystal Speed](catalogue/crystal-speed.md) | [crystal-speed](https://modrinth.com/mod/crystal-speed) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Predicts end crystal hits on the client; needs entity and packet hooks. |
+| [Cubes Without Borders](catalogue/cubes-without-borders.md) | [cubes-without-borders](https://modrinth.com/mod/cubes-without-borders) | `MIT License` | `-` | No 26.3 build | Window mode: Horizon owns its window and has its own fullscreen setting. |
+| [Custom Glint](catalogue/custom-glint.md) | [custom-glint](https://modrinth.com/mod/custom-glint) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Changes how the enchantment glint is drawn; item rendering has no hook for it. |
+| [Custom Shield Scale](catalogue/shieldscale.md) | [shieldscale](https://modrinth.com/mod/shieldscale) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Scales the shield in the hand; the held-item transform has no hook. |
+| [Enhanced Block Entities](catalogue/ebe.md) | [ebe](https://modrinth.com/mod/ebe) | `LGPL-3.0-only` | `-` | No 26.3 build | Block entity rendering; no hook there. |
+| [HeroBot](catalogue/herobot.md) | [herobot](https://modrinth.com/mod/herobot) | `Creative Commons Attribution Non Commercial 4.0 International` | `-` | No 26.3 build | A framework for server-side bot players; not a client mod. |
+| [HUD Manager](catalogue/hud-manager.md) | [hud-manager](https://modrinth.com/mod/hud-manager) | `MIT License` | `-` | No 26.3 build | Moves vanilla HUD elements; Horizon lays them out in functions that can only be replaced whole. |
+| [Item Scale](catalogue/itemscale.md) | [itemscale](https://modrinth.com/mod/itemscale) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Scales items in the hand and in the world; item rendering has no hook for it. |
+| [LambDynamicLights - Dynamic Lights](catalogue/lambdynamiclights.md) | [lambdynamiclights](https://modrinth.com/mod/lambdynamiclights) | `see project` | `-` | No 26.3 build | A dynamic lighting engine; lighting is Horizon's own and has no hook. |
+| [Language Reload](catalogue/language-reload.md) | [language-reload](https://modrinth.com/mod/language-reload) | `MIT License` | `-` | No 26.3 build | Language file loading performance and fallbacks; Horizon loads languages its own way. |
+| [Mace Optimizer](catalogue/mace-optimizer.md) | [mace_optimizer](https://modrinth.com/mod/mace_optimizer) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Predicts mace smash hits on the client; needs entity and packet hooks. |
+| [Memory Leak Fix](catalogue/memoryleakfix.md) | [memoryleakfix](https://modrinth.com/mod/memoryleakfix) | `LGPL-2.1-only` | `-` | No 26.3 build | Fixes memory leaks in the Java game; Horizon is Rust. |
+| [Model Gap Fix](catalogue/modelfix.md) | [modelfix](https://modrinth.com/mod/modelfix) | `GPL-3.0-only` | `-` | No 26.3 build | Fixes gaps in block models; the mesher has no hook. |
+| [NoisiumForked](catalogue/noisiumforked.md) | [noisiumforked](https://modrinth.com/mod/noisiumforked) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | World generation performance; Horizon has its own generator. |
+| [Noxesium](catalogue/noxesium.md) | [noxesium](https://modrinth.com/mod/noxesium) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | Performance and protocol changes for multiplayer servers; engine and network work. |
+| [Particle Core](catalogue/particle-core.md) | [particle-core](https://modrinth.com/mod/particle-core) | `MIT License` | `-` | No 26.3 build | Particle culling and spawn reduction; the particle system has no hook. |
+| [Particle Rain](catalogue/particle-rain.md) | [particle-rain](https://modrinth.com/mod/particle-rain) | `MIT` | `-` | No 26.3 build | Changes rain particles; the particle system has no hook. |
+| [Puzzle](catalogue/puzzle.md) | [puzzle](https://modrinth.com/mod/puzzle) | `MIT License` | `-` | No 26.3 build | A resource-pack feature GUI for OptiFine alternatives; Horizon loads packs itself. |
+| [Reflex AntiLag](catalogue/reflex-antilag.md) | [reflex-antilag](https://modrinth.com/mod/reflex-antilag) | `see project` | `-` | No 26.3 build | NVIDIA Reflex latency control through the GPU driver; Horizon renders with wgpu. |
+| [Searchables](catalogue/searchables.md) | [searchables](https://modrinth.com/mod/searchables) | `MIT License` | `-` | No 26.3 build | A library for searchable lists in Fabric mod screens. |
+| [Shield Statuses](catalogue/shield-statuses.md) | [shield-statuses](https://modrinth.com/mod/shield-statuses) | `MIT License` | `-` | No 26.3 build | Colours a shield's state; the shield state is not exposed to the hook points yet. Not started. |
+| [Slyde](catalogue/slyde.md) | [slyde](https://modrinth.com/mod/slyde) | `MIT License` | `-` | No 26.3 build | Lets sliders be dragged past their ends; Horizon's option sliders have no hook. |
+| [Totem Tweaks](catalogue/cpvp.md) | [cpvp](https://modrinth.com/mod/cpvp) | `see project` | `-` | No 26.3 build | Changes the totem pop animation; the item activation animation has no hook. |
+| [Tweakeroo](catalogue/tweakeroo.md) | [tweakeroo](https://modrinth.com/mod/tweakeroo) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | A large collection of client tweaks (placement, restock, hotbar swap); not started, and most of it needs input and inventory hooks. |
+| [voxy](catalogue/voxy.md) | [voxy](https://modrinth.com/mod/voxy) | `see project` | `-` | No 26.3 build | A level-of-detail renderer for distant terrain; rendering and chunk storage, no hook. |
+| [VulkanMod](catalogue/vulkanmod.md) | [vulkanmod](https://modrinth.com/mod/vulkanmod) | `LGPL-3.0-only` | `-` | No 26.3 build | A different renderer; Horizon renders with wgpu. |
+| [Xp Bottle Optimizer](catalogue/xp-bottle-optimizer.md) | [xp-bottle-optimizer](https://modrinth.com/mod/xp-bottle-optimizer) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Predicts experience bottle throws on the client; needs entity and packet hooks. |
+| [Your Options Shall Be Respected (YOSBR)](catalogue/yosbr.md) | [yosbr](https://modrinth.com/mod/yosbr) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | Restores option files that the Java game resets; Horizon keeps its own options. |
 

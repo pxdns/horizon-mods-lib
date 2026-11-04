@@ -2,13 +2,13 @@
 
 ![ToolTipFix icon](../assets/icons/catalogue/tooltipfix.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `MIT` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/tooltipfix)
+**Status:** Built into Horizon - **Upstream licence:** `MIT` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/tooltipfix)
 
 ## Where it stands
 
-No Fabric build for 26.3, the game version Horizon implements.
+Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges.
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.
+Horizon already does this itself, so a mod would only duplicate it.
 
 ## Credit
 

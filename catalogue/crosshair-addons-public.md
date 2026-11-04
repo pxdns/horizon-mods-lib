@@ -2,13 +2,15 @@
 
 ![Crosshair Addons Public icon](../assets/icons/catalogue/crosshair-addons-public.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `MIT License` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/crosshair-addons-public)
+**Status:** Partly ported - **Upstream licence:** `MIT License` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/crosshair-addons-public)
+
+**Project:** [`crosshair-indicator`](../mods/crosshair-indicator/) - [docs](../docs/mods/crosshair-indicator.md)
 
 ## Where it stands
 
-No Fabric build for 26.3, the game version Horizon implements.
+A mark over the crosshair when it is over a living entity; none of the other conditions
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements, so there is no reference behaviour to port yet.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 
