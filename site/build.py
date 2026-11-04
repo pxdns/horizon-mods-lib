@@ -5,6 +5,7 @@
 
 Marketing pages are written here; documentation pages are the repository's own Markdown, so they read the same on GitHub.
 """
+import hashlib
 import html
 import json
 import posixpath
@@ -57,7 +58,7 @@ DOC_NAV = [
 SPECIAL = {"MODS.md": "docs/catalogue.html", "MODULES.md": "docs/modules.html"}
 SHORT = {"MODS.md": "Status of every mod", "MODULES.md": "Modules and Horizon"}
 TOP = [("Home", "index.html"), ("Mods", "mods/index.html"), ("Why native", "why.html"), ("From Fabric", "from-fabric.html"),
-       ("Trust", "trust.html"), ("Roadmap", "roadmap.html"), ("Docs", "docs/introduction.html")]
+       ("Trust", "trust.html"), ("Roadmap", "roadmap.html"), ("Play", "play.html"), ("Docs", "docs/introduction.html")]
 
 
 def out_path(src):
@@ -257,7 +258,7 @@ def pages():
 <p class="lede rise" style="--delay:120ms">Horizon is a rewrite of Minecraft: Java in Rust, and its mods are not plugins: they are source that gets merged into the
 game and compiled with it. This is a library of them. {n} are done, each one a tiny project with its own tests, its own
 release and a file you can read in five minutes.</p>
-<div class="btns rise" style="--delay:180ms"><a class="btn primary" href="https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip">Download all {n} mods</a><a class="btn" href="mods/index.html">See the mods</a><a class="btn" href="docs/install.html">Install guide</a><a class="btn" href="from-fabric.html">How a Fabric mod becomes Rust</a></div>
+<div class="btns rise" style="--delay:180ms"><a class="btn primary" href="https://github.com/pxdns/horizon-mods-lib/releases/download/all-mods/horizon-mods-all.zip">Download all {n} mods</a><a class="btn" href="play.html">Play Horizon</a><a class="btn" href="mods/index.html">See the mods</a><a class="btn" href="docs/install.html">Install guide</a><a class="btn" href="from-fabric.html">How a Fabric mod becomes Rust</a></div>
 <div class="stats rise" style="--delay:260ms">
 <div class="stat"><b>{n}</b><span>mods shipped</span></div>
 <div class="stat"><b>{tests}</b><span>unit tests across them</span></div>
@@ -389,6 +390,36 @@ are about what you see and press.</p>
 </div></section></main>'''
     write("trust.html", shell("trust.html", "Trust · horizon-mods-lib", trust, active="trust.html"))
 
+
+    # ---- play
+    offline = ROOT / "site/static/horizon-offline.html"
+    size_mb = offline.stat().st_size / 1_000_000
+    digest = hashlib.sha256(offline.read_bytes()).hexdigest()
+    play = f'''<main><section class="hero" style="padding-bottom:1.5rem"><div class="wrap">
+<h1 class="big" style="max-width:20ch">Play Horizon <span class="text-accent">in your browser.</span></h1>
+<p class="lede">The offline build of Horizon: the game code is inside one HTML file, you point it at the folder that holds your game resources, and it runs. Nothing is downloaded while you play.</p>
+<div class="btns"><a class="btn primary" href="horizon-offline.html">Play Horizon (offline)</a><a class="btn" href="horizon-offline.html" download>Download the file</a></div>
+</div></section>
+<section class="block"><div class="wrap">
+<div class="card" style="max-width:46rem"><h3 style="margin-top:0">Horizon (offline)</h3>
+<p>A single HTML file, {size_mb:.1f} MB. It contains the game and its loader; the resources come from your own folder.</p>
+<div class="meta" style="word-break:break-all">horizon-offline.html &middot; SHA-256 {digest}</div></div>
+</div></section>
+<section class="block"><div class="wrap split">
+<div><h2 class="sec">How it starts</h2>
+<ol class="steps" style="grid-template-columns:1fr">
+<li><b>Open the file</b><span>It asks for a folder of game resources: the one that contains <code>boot.tar.gz</code>, <code>manifest.txt</code> and the <code>res</code> folder.</span></li>
+<li><b>Select it</b><span>Your browser may ask you to confirm an upload; per the page, nothing leaves your computer. The resources are saved in this browser the first time, so you pick the folder once.</span></li>
+<li><b>Choose what to keep</b><span>You pick what is saved in the browser (sounds are optional; only UK English is kept). Game saves are kept in the browser too.</span></li>
+</ol></div>
+<div><h2 class="sec">What it needs</h2>
+<div class="note" style="margin-bottom:1.5rem"><b>WebGPU.</b> The file says so itself when it cannot find one. It runs in Chrome and Edge 113 or later on Windows, macOS and ChromeOS; Chrome 121 or later on Android; Safari 26 on macOS, iOS and iPadOS; and Firefox 141 or later on Windows. On Linux, Chrome, Edge and Brave need WebGPU switched on with <code>--enable-unsafe-webgpu --enable-features=Vulkan</code>.</div>
+<h2 class="sec">What to know</h2>
+<div class="note"><b>You bring the resources.</b> The file contains none of Minecraft's resources: the game reads the folder you select, which you prepare from your own copy of Minecraft. <b>No mods built in.</b> The mods in this library are compiled into a game by Horizon's launcher (<a href="docs/install.html">install guide</a>); this single file is a separate build, so do not expect them in it. <b>Unofficial.</b> This site is a community project; Horizon is not approved by or associated with Mojang or Microsoft.</div>
+<p class="sub" style="margin-top:1.2rem">Horizon is MIT licensed. See <a href="docs/credits.html">credits</a> for what the file's own comments name, and the <a href="docs/trademarks.html">disclaimer</a>.</p></div>
+</div></section></main>'''
+    write("play.html", shell("play.html", "Play Horizon in your browser · horizon-mods-lib", play, active="play.html"))
+
     # ---- roadmap
     groups = {}
     for m in DATA["mods"]:
@@ -410,7 +441,7 @@ The most useful contribution this library can make is a pull request to <a href=
 <div class="btns"><a class="btn primary" href="docs/hook-points.html">Hook points today</a><a class="btn" href="docs/contributing.html">Contributing</a></div></div></section></main>'''
     write("roadmap.html", shell("roadmap.html", "Roadmap · horizon-mods-lib", road, active="roadmap.html"))
     for page, title in [("index.html", "Home"), ("why.html", "Why native mods"), ("from-fabric.html", "From Fabric to Horizon"),
-                        ("trust.html", "Trust"), ("roadmap.html", "Roadmap"), ("mods/index.html", "The mods")]:
+                        ("trust.html", "Trust"), ("roadmap.html", "Roadmap"), ("play.html", "Play"), ("mods/index.html", "The mods")]:
         t = strip_tags((OUT / page).read_text().split("<main>", 1)[1].split("</main>", 1)[0])
         SEARCH.append(dict(title=title, url=page, text=t[:4000], excerpt=t[:90]))
 
@@ -444,6 +475,8 @@ def main():
     shutil.copytree(ROOT / "assets/icons", OUT / "assets/icons")
     shutil.copy(ROOT / "site/assets/site.css", OUT / "assets/site.css")
     shutil.copy(ROOT / "site/assets/site.js", OUT / "assets/site.js")
+    for extra in sorted((ROOT / "site/static").glob("*")):
+        shutil.copy(extra, OUT / extra.name)
     docs()
     catalogue_pages()
     pages()

@@ -64,6 +64,12 @@ cross-pack matrix, its licence notes (`docs/MOD-LICENSES.md`) and its 1.16.5 por
   show a placeholder tile instead.
 - If you made one of these icons and want it gone, see [DMCA and takedowns](dmca.md); it is removed without argument.
 
+## The offline Horizon build
+
+`horizon-offline.html` (on the site's Play page) is a single-file offline build of Horizon, added by this repository's owner. Horizon is MIT, by Ludovic Marie and the Horizon contributors. The file's own comments name three projects
+it includes: [xzwasm](https://github.com/SteveSanderson/xzwasm) (an xz decoder), [walloc](https://github.com/wingo/walloc) (a WebAssembly allocator) and [XZ Embedded](https://tukaani.org/xz/embedded.html); see their repositories for
+their terms. The file contains none of Minecraft's resources, and it is not an official release of the Horizon project as far as this repository can tell: it is unverified against Horizon's own releases.
+
 ## Fonts
 
 None are bundled. The site uses the visitor's own system fonts, so it loads no third-party font, script, analytics or tracker.

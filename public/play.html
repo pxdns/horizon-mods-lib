@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-root="./">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play Horizon in your browser · horizon-mods-lib</title>
+<meta name="description" content="Native mods for Horizon, ported to Rust: one small tested project per mod, each released automatically.">
+<meta name="theme-color" content="#100a1f">
+<link rel="icon" href="assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><img src="assets/icons/horizon-mods-lib.svg" alt="" width="28" height="28">horizon-mods-lib</a>
+<nav aria-label="Main"><a href="index.html">Home</a><a href="mods/index.html">Mods</a><a href="why.html">Why native</a><a href="from-fabric.html">From Fabric</a><a href="trust.html">Trust</a><a href="roadmap.html">Roadmap</a><a href="play.html" aria-current=page>Play</a><a href="docs/introduction.html">Docs</a></nav><span class="grow"></span>
+<div class="search"><input id="q" type="search" placeholder="Search  /" aria-label="Search the site" autocomplete="off"><ul id="results" hidden></ul></div>
+<a class="gh" href="https://github.com/pxdns/horizon-mods-lib">GitHub</a>
+</div></header>
+<main><section class="hero" style="padding-bottom:1.5rem"><div class="wrap">
+<h1 class="big" style="max-width:20ch">Play Horizon <span class="text-accent">in your browser.</span></h1>
+<p class="lede">The offline build of Horizon: the game code is inside one HTML file, you point it at the folder that holds your game resources, and it runs. Nothing is downloaded while you play.</p>
+<div class="btns"><a class="btn primary" href="horizon-offline.html">Play Horizon (offline)</a><a class="btn" href="horizon-offline.html" download>Download the file</a></div>
+</div></section>
+<section class="block"><div class="wrap">
+<div class="card" style="max-width:46rem"><h3 style="margin-top:0">Horizon (offline)</h3>
+<p>A single HTML file, 8.0 MB. It contains the game and its loader; the resources come from your own folder.</p>
+<div class="meta" style="word-break:break-all">horizon-offline.html &middot; SHA-256 924a531175b253406ab561a9167e9dc80f4e9080f3072b75faef2352906681a6</div></div>
+</div></section>
+<section class="block"><div class="wrap split">
+<div><h2 class="sec">How it starts</h2>
+<ol class="steps" style="grid-template-columns:1fr">
+<li><b>Open the file</b><span>It asks for a folder of game resources: the one that contains <code>boot.tar.gz</code>, <code>manifest.txt</code> and the <code>res</code> folder.</span></li>
+<li><b>Select it</b><span>Your browser may ask you to confirm an upload; per the page, nothing leaves your computer. The resources are saved in this browser the first time, so you pick the folder once.</span></li>
+<li><b>Choose what to keep</b><span>You pick what is saved in the browser (sounds are optional; only UK English is kept). Game saves are kept in the browser too.</span></li>
+</ol></div>
+<div><h2 class="sec">What it needs</h2>
+<div class="note" style="margin-bottom:1.5rem"><b>WebGPU.</b> The file says so itself when it cannot find one. It runs in Chrome and Edge 113 or later on Windows, macOS and ChromeOS; Chrome 121 or later on Android; Safari 26 on macOS, iOS and iPadOS; and Firefox 141 or later on Windows. On Linux, Chrome, Edge and Brave need WebGPU switched on with <code>--enable-unsafe-webgpu --enable-features=Vulkan</code>.</div>
+<h2 class="sec">What to know</h2>
+<div class="note"><b>You bring the resources.</b> The file contains none of Minecraft's resources: the game reads the folder you select, which you prepare from your own copy of Minecraft. <b>No mods built in.</b> The mods in this library are compiled into a game by Horizon's launcher (<a href="docs/install.html">install guide</a>); this single file is a separate build, so do not expect them in it. <b>Unofficial.</b> This site is a community project; Horizon is not approved by or associated with Mojang or Microsoft.</div>
+<p class="sub" style="margin-top:1.2rem">Horizon is MIT licensed. See <a href="docs/credits.html">credits</a> for what the file's own comments name, and the <a href="docs/trademarks.html">disclaimer</a>.</p></div>
+</div></section></main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><h4>Library</h4><a href="mods/index.html">The mods</a><a href="docs/catalogue.html">Status of every mod</a><a href="roadmap.html">Roadmap</a></div>
+<div><h4>Docs</h4><a href="docs/install.html">Install a mod</a><a href="docs/hook-points.html">Hook points</a><a href="docs/releases.html">Releases</a></div>
+<div><h4>Project</h4><a href="docs/credits.html">Credits</a><a href="docs/licensing.html">Licensing</a><a href="docs/dmca.html">DMCA and takedowns</a><a href="docs/trademarks.html">Trademarks and disclaimer</a></div>
+<div><h4>Horizon</h4><a href="https://github.com/horizon-rust">The organisation</a><a href="https://github.com/horizon-rust/horizon">Horizon</a><a href="https://github.com/horizon-rust/horizon-mods">The registry</a></div>
+</div>
+<p>horizon-mods-lib is an unofficial community project, MIT licensed. It is not made or endorsed by the Horizon project, Mojang or
+Microsoft. Minecraft is a trademark of Mojang Synergies AB. Mod names belong to their authors and are used only to say what a port is a port of.</p>
+</div></footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
