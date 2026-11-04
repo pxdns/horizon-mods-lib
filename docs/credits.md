@@ -47,6 +47,7 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`entity-crosshair`](mods/entity-crosshair.md) | Entity Crosshair (EntityCrosshair) | see the upstream project |
 | [`shulker-box-tooltip`](mods/shulker-box-tooltip.md) | Shulker Box Tooltip (shulkerboxtooltip) | see the upstream project |
 | [`combat-hitboxes`](mods/combat-hitboxes.md) | Combat Hitboxes (combat-hitbox) | see the upstream project |
+| [`ping-view`](mods/ping-view.md) | Ping View (pingview) | see the upstream project |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

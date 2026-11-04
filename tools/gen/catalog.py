@@ -18,6 +18,7 @@ PORTED = {
     "Upv1bw1P": ("ported", "key-overlay", "Key Overlay"),
     "w7ThoJFB": ("ported", "zoomify", "Zoomify"),
     "EYKTeOIO": ("ported", "simple-zoom", "Simple Zoom"),
+    "gvl7lVcV": ("ported", "ping-view", "Ping View"),
     "1bokaNcj": ("partial", "waypoints", "Only the waypoints idea: /wp commands and a tracked-waypoint readout. Horizon ships its own minimap."),
     "NcUtCpym": ("partial", "waypoints", "Only the waypoints idea; there is no map screen hook yet."),
     "JzdjByS4": ("ported", "potion-counter", "Potion Counter (raw-hook port: reads the inventory)"),

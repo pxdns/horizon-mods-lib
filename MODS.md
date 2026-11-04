@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **21** ported · **6** partly ported · **6** built into horizon · **18** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **22** ported · **6** partly ported · **6** built into horizon · **17** needs a hook point · **30** pack or asset · **32** engine or server · **28** library · **45** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -25,7 +25,7 @@ nothing is marked ported unless a project in [`mods/`](mods/) builds and passes 
 Upstream licences are copied from each project's Modrinth page. They are listed for credit and to show that this repository
 copies no upstream code or art: every port is a clean re-implementation of the behaviour.
 
-## Ported (21)
+## Ported (22)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -42,6 +42,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Key Overlay](catalogue/keyoverlay.md) | [keyoverlay](https://modrinth.com/mod/keyoverlay) | `see project` | `KeyOverlay-26.3` | Ported ([`key-overlay`](mods/key-overlay/)) | Key Overlay |
 | [More Chat History](catalogue/morechathistory.md) | [morechathistory](https://modrinth.com/mod/morechathistory) | `Creative Commons Zero v1.0 Universal` | `2.0.0` | Ported ([`more-chat-history`](mods/more-chat-history/)) | More Chat History (raw-hook port: raises the chat limits) |
 | [Pick Up Notifier](catalogue/pick-up-notifier.md) | [pick-up-notifier](https://modrinth.com/mod/pick-up-notifier) | `Mozilla Public License 2.0` | `pickupnotifier-v26.3.0-mc26.3.x+fabric` | Ported ([`pick-up-notifier`](mods/pick-up-notifier/)) | Pick Up Notifier (raw-hook port: watches the inventory) |
+| [Ping View](catalogue/ping-view.md) | [ping-view](https://modrinth.com/mod/ping-view) | `MIT License` | `pingview-fabric-1.6` | Ported ([`ping-view`](mods/ping-view/)) | Ping View |
 | [PotionCounter](catalogue/potioncounter.md) | [potioncounter](https://modrinth.com/mod/potioncounter) | `MIT License` | `potioncounter-fabric-1.12.1+mc26.3` | Ported ([`potion-counter`](mods/potion-counter/)) | Potion Counter (raw-hook port: reads the inventory) |
 | [Simple Zoom](catalogue/zoom-simple.md) | [zoom-simple](https://modrinth.com/mod/zoom-simple) | `MIT License` | `simplezoom-fabric-26.3-1.4.0` | Ported ([`simple-zoom`](mods/simple-zoom/)) | Simple Zoom |
 | [SnappyTappy](catalogue/snappytappy.md) | [snappytappy](https://modrinth.com/mod/snappytappy) | `MIT` | `26.3` | Ported ([`snappy-tappy`](mods/snappy-tappy/)) | Snappy Tappy (raw-hook port: held-key set) |
@@ -73,7 +74,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Mouse Tweaks](catalogue/mouse-tweaks.md) | [mouse-tweaks](https://modrinth.com/mod/mouse-tweaks) | `BSD 3-Clause "New" or "Revised" License` | `MouseTweaks-fabric-mc26.3-2.31` | Built into Horizon | Horizon ships Mouse Tweaks as one of its own extras (Options > Extras). |
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Built into Horizon | Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric. |
 
-## Needs a hook point (18)
+## Needs a hook point (17)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -91,7 +92,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Marlow's Crystal Optimizer](catalogue/marlow-crystal-optimizer.md) | [marlow-crystal-optimizer](https://modrinth.com/mod/marlow-crystal-optimizer) | `MIT License` | `Marlow Crystal Optimizer` | Needs a hook point | Removes an end crystal on the client before the server confirms; it needs hooks in entity and packet handling. |
 | [Multi Key Bindings](catalogue/multi-key-bindings.md) | [multi-key-bindings](https://modrinth.com/mod/multi-key-bindings) | `GNU General Public License v3.0 only` | `multi-key-bindings-1.3.5+26.3` | Needs a hook point | Adds a second binding per action to the Controls screen and the key map; both sit in Horizon's options UI, with no hook. |
 | [Pearl Optimizer](catalogue/pearl-optimizer.md) | [pearl_optimizer](https://modrinth.com/mod/pearl_optimizer) | `see project` | `PearlOptimizer-26.1-26.3` | Needs a hook point | Predicts an ender pearl on the client before the server confirms; it needs hooks in entity and packet handling. |
-| [Ping View](catalogue/ping-view.md) | [ping-view](https://modrinth.com/mod/ping-view) | `MIT License` | `pingview-fabric-1.6` | Needs a hook point | Needs the connection's latest ping; Horizon keeps those samples private (`SampleLogger` has no getter). |
 | [Search Stats](catalogue/searchstats.md) | [searchstats](https://modrinth.com/mod/searchstats) | `Apache License 2.0` | `searchstats-fabric-1.103.0+26.2` | Needs a hook point | Adds a search box to the Statistics screen, which Horizon draws and handles in `stats_screen.rs`; there is no hook for a text field there. |
 | [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Needs a hook point | Looks players up on an external tier service and draws the result on name tags; there is no network or name-tag hook. |
 | [VisualKeys](catalogue/visualkeys.md) | [visualkeys](https://modrinth.com/mod/visualkeys) | `see project` | `VisualKeys-0.0.11+26.3` | Needs a hook point | Adds a keyboard screen to the options; there is no hook for a new screen. |

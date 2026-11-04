@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-ping-view"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Shows your ping to the server: the latest reply, the average of the last 20 and the best and worst."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/ping_view/runtime.rs"
+
+[workspace]

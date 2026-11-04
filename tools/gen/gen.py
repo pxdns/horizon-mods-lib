@@ -14,7 +14,8 @@ from mods_cam import CAM
 from mods_chat import CHAT
 from mods_draw import DRAW
 from mods_hit import HIT
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT
+from mods_ping import PING
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

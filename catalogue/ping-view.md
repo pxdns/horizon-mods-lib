@@ -2,13 +2,15 @@
 
 ![Ping View icon](../assets/icons/catalogue/ping-view.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `pingview-fabric-1.6` - [Modrinth](https://modrinth.com/mod/ping-view)
+**Status:** Ported - **Upstream licence:** `MIT License` - **26.3 build:** `pingview-fabric-1.6` - [Modrinth](https://modrinth.com/mod/ping-view)
+
+**Project:** [`ping-view`](../mods/ping-view/) - [docs](../docs/mods/ping-view.md)
 
 ## Where it stands
 
-Needs the connection's latest ping; Horizon keeps those samples private (`SampleLogger` has no getter).
+Ping View
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Ported: a project in this repository re-implements it.
 
 ## Credit
 

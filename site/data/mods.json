@@ -1,9 +1,9 @@
 {
  "counts": {
-  "ported": 21,
+  "ported": 22,
   "partial": 6,
   "builtin": 6,
-  "hook": 18,
+  "hook": 17,
   "library": 28,
   "engine": 32,
   "pack": 30,
@@ -1652,9 +1652,9 @@
    "slug": "ping-view",
    "licence": "MIT License",
    "build": "pingview-fabric-1.6",
-   "status": "hook",
-   "project": "",
-   "note": "Needs the connection's latest ping; Horizon keeps those samples private (`SampleLogger` has no getter).",
+   "status": "ported",
+   "project": "ping-view",
+   "note": "Ping View",
    "page": "ping-view",
    "icon": "catalogue/ping-view.png"
   },

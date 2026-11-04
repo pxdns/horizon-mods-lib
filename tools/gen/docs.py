@@ -11,7 +11,8 @@ from mods_cam import CAM
 from mods_chat import CHAT
 from mods_draw import DRAW
 from mods_hit import HIT
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT
+from mods_ping import PING
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING
 
 ROOT = Path(__file__).resolve().parents[2]
 D = ROOT / "docs"
@@ -590,7 +591,7 @@ for m in MODS:
         hold = "HOLD: bool = true" in m["runtime_extra"]
         default = "C" if m["id"] == "zoomify" else "V"
         cmd = f"| Key | Default | What it does |\n|---|---|---|\n| Zoom | `{default}` | {'Hold to zoom' if hold else 'Press to turn the zoom on, press again to turn it off'}; the wheel changes it while it is on |"
-    names = {"list": "native_mods", "click": "native_settings_click", "turn": "perspective::turn_player", "camera": "perspective::camera_view", "bob": "fov::bob_matrix", "add": "chat::Chat::add_message", "lines": "chat::Chat::add_lines", "message": "chat::Chat::add_message", "layout": "chat::Chat::layout", "tooltip": "stations::stack_tooltip", "crosshair": "hud_layout::crosshair", "ray": "game::ray_box"}
+    names = {"list": "native_mods", "click": "native_settings_click", "turn": "perspective::turn_player", "camera": "perspective::camera_view", "bob": "fov::bob_matrix", "add": "chat::Chat::add_message", "lines": "chat::Chat::add_lines", "message": "chat::Chat::add_message", "layout": "chat::Chat::layout", "tooltip": "stations::stack_tooltip", "crosshair": "hud_layout::crosshair", "ray": "game::ray_box", "log": "debug_chart::SampleLogger::log"}
     hooks = ", ".join(f"`{names.get(h, 'native_' + h)}`" for h in m["hooks"])
     if m.get("usage"):
         cmd = m["usage"].replace("\\n", "\n")
