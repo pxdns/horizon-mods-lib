@@ -2,13 +2,13 @@
 
 ![Mod Menu icon](../assets/icons/catalogue/modmenu.png)
 
-**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `modmenu-21.0.0` - [Modrinth](https://modrinth.com/mod/modmenu)
+**Status:** Built into Horizon - **Upstream licence:** `MIT License` - **26.3 build:** `modmenu-21.0.0` - [Modrinth](https://modrinth.com/mod/modmenu)
 
 ## Where it stands
 
-Needs a hook point Horizon does not have yet (the current hook points are listed in the docs).
+Horizon lists native mods in its own Options > Mods screen, with a settings page for each.
 
-A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
+Horizon already does this itself, so a mod would only duplicate it.
 
 ## Credit
 

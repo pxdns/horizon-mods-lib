@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-shulker-box-tooltip"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Shows what is inside a shulker box in its tooltip: totals by item, and a slot grid."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/shulker_box_tooltip/runtime.rs"
+
+[workspace]

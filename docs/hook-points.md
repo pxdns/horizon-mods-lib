@@ -49,6 +49,12 @@ Chat and tooltips are Horizon's own code too. `chat-notify`, `more-chat-history`
 adds a RETURN modifier to `stack_tooltip`. A mod that wants the chat module's state from the game crate reaches it through `horizon_client::chat`. A hook that replaces a function copies the original's
 steps, so it needs the same re-check as the others when Horizon changes that function.
 
+## Crosshair and tooltip drawing
+
+`crosshair-indicator` draws a red mark over Horizon's crosshair from the HUD hook point, using `Game::crosshair_living` and the HUD batch's width and height. `entity-crosshair` puts its module in `hud_layout.rs` and adds a RETURN
+modifier to `hud_layout::crosshair`: it drops the crosshair sprite from the draw list (keeping the attack indicator) and appends its own shape as plain fills, with the game telling it each frame what is under the crosshair.
+`shulker-box-tooltip` adds a RETURN modifier to `stack_tooltip` and reads the box's contents from `ItemStack::data`. Horizon has no draw hook inside tooltips, so the contents are text, not the original's picture of the box.
+
 ## What the hook points cannot do yet
 
 No inventory, effects, incoming chat, camera, input injection or world data beyond the player's position. That is the reason

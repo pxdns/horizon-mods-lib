@@ -24,7 +24,7 @@ That has consequences, and this library is built around them:
 
 | | |
 |---|---|
-| [Mods](mods/fps-display.md) | 23 projects in `mods/`, one folder each |
+| [Mods](mods/fps-display.md) | 26 projects in `mods/`, one folder each |
 | [Catalogue](../MODS.md) | The 186 mods in the Tempest cross-pack matrix and where each stands on Horizon |
 | [Modules](../MODULES.md) | Tempest's own module list, and an overview of the Horizon organisation |
 | [Credits](credits.md), [Licensing](licensing.md), [DMCA](dmca.md) | Who made what, under which terms, and how to ask for something to come down |
