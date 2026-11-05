@@ -19,7 +19,7 @@ Switch it on or off in **Options → Mods → BetterGrassify**; its settings pag
 
 ## How it is built
 
-- Hooks: `mesher::Mesher::face`, `native_tick`, `native_mods`, `native_settings`, `native_settings_click`.
+- Hooks: `mesher::lighting::ambient_occlusion`, `mesher::Mesher::quad`, `native_tick`, `native_mods`, `native_settings`, `native_settings_click`.
 - Logic and tests: `mods/bettergrassify/mixins/bettergrassify/runtime.rs`.
 - Pinned: Horizon `ba6344a`, horizon-mixins `d9c83d7`. It reads fields of the game that are not part of the stable hook-point contract, so it must be re-checked when Horizon changes them.
 

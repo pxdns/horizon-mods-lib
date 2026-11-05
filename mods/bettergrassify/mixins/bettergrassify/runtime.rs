@@ -76,8 +76,15 @@ pub fn forget_options() {
 use std::cell::{Cell, RefCell as StateCell};
 use std::collections::BTreeMap;
 
+/// What the lighting hook notes for the face being drawn: the cell (x, y, z), the face's direction and the block state id.
+pub type Pending = (i32, i32, i32, u8, u32);
+
 thread_local! {
     static ON: Cell<bool> = const { Cell::new(true) };
+    /// Set by the lighting hook for a grass side with grass one step down, taken by the quad hook that follows.
+    static PENDING: Cell<Option<Pending>> = const { Cell::new(None) };
+    /// Whether the quad hook is calling the original `quad` itself, which it lets through.
+    static INSIDE: Cell<bool> = const { Cell::new(false) };
     /// Per block state id: the grass top texture layer, or none when the model has no up face.
     static TOP: StateCell<BTreeMap<u32, Option<u32>>> = const { StateCell::new(BTreeMap::new()) };
 }
@@ -89,6 +96,29 @@ pub fn configure(on: bool) {
 
 pub fn on() -> bool {
     ON.with(Cell::get)
+}
+
+/// Notes (or clears) what the face about to be drawn is.
+pub fn set_pending(note: Option<Pending>) {
+    PENDING.with(|c| c.set(note));
+}
+
+/// The note for the quad being drawn, once.
+pub fn take_pending() -> Option<Pending> {
+    PENDING.with(Cell::take)
+}
+
+/// The quad hook is about to call the original itself.
+pub fn enter() {
+    INSIDE.with(|c| c.set(true));
+}
+
+pub fn leave() {
+    INSIDE.with(|c| c.set(false));
+}
+
+pub fn inside() -> bool {
+    INSIDE.with(Cell::get)
 }
 
 /// The remembered top layer of a state: nothing remembered yet, or Some(None) when the model has no up face.
@@ -117,6 +147,29 @@ mod tests {
         assert!(!on());
         configure(true);
         assert!(on());
+    }
+
+    #[test]
+    fn a_note_is_taken_once() {
+        set_pending(Some((1, 2, 3, 4, 5)));
+        assert_eq!(take_pending(), Some((1, 2, 3, 4, 5)));
+        assert_eq!(
+            take_pending(),
+            None,
+            "a quad must not reuse the note of the one before"
+        );
+        set_pending(Some((0, 0, 0, 0, 1)));
+        set_pending(None);
+        assert_eq!(take_pending(), None, "the next face clears a stale note");
+    }
+
+    #[test]
+    fn the_guard_lets_the_originals_own_call_through() {
+        assert!(!inside());
+        enter();
+        assert!(inside());
+        leave();
+        assert!(!inside());
     }
 
     #[test]
