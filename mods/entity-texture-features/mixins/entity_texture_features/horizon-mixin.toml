@@ -18,7 +18,7 @@ visibility = "pub"
 id = "body"
 kind = "HEAD"
 cancellable = true
-target = "horizon_client::mobs::render::body"
+target = "horizon_client_lib::mobs::render::body"
 helper = "body.rs"
 bindings = [
   { name = "m", ty = "&Mob", value = "m" },
@@ -28,10 +28,11 @@ bindings = [
 id = "layers"
 kind = "HEAD"
 cancellable = true
-target = "horizon_client::mobs::render::layers"
+target = "horizon_client_lib::mobs::render::layers"
 helper = "layers.rs"
 bindings = [
   { name = "m", ty = "&Mob", value = "m" },
+  { name = "age", ty = "f32", value = "age" },
 ]
 
 [[injection]]

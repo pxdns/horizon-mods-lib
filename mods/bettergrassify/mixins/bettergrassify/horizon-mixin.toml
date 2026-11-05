@@ -29,7 +29,6 @@ bindings = [
   { name = "origin", ty = "[f32; 3]", value = "origin" },
   { name = "face", ty = "&BakedFace", value = "face" },
   { name = "ao", ty = "bool", value = "ao" },
-  { name = "state", ty = "&Info", value = "state" },
 ]
 
 [[injection]]

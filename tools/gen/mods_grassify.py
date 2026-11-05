@@ -13,10 +13,15 @@ fn better_grassify_face(
     origin: [f32; 3],
     face: &BakedFace,
     ao: bool,
-    state: &Info,
 ) -> std::ops::ControlFlow<()> {
     use lib_better_grassify as m;
-    if !m::on() || !matches!(state.tints[0], Tint::GrassBlock) {
+    if !m::on() {
+        return std::ops::ControlFlow::Continue(());
+    }
+    // The block's id and its facts: `face` takes them as a tuple pattern, which a hook cannot bind.
+    let id = pad.blocks[pi(pos[0], pos[1], pos[2])];
+    let state = &mesher.tables.info[id as usize];
+    if !matches!(state.tints[0], Tint::GrassBlock) {
         return std::ops::ControlFlow::Continue(());
     }
     let q = &face.quad;
@@ -37,7 +42,6 @@ fn better_grassify_face(
     if q.tint_index >= 0 {
         return std::ops::ControlFlow::Break(());
     }
-    let id = pad.blocks[pi(x, y, z)];
     let top = match m::cached(id) {
         Some(layer) => layer,
         None => {
@@ -105,7 +109,7 @@ GRASS.append(dict(
     toml_text=toml_text("better_grassify", "1.0.0", "crates/horizon-client-render/src/mesher.rs", "lib_better_grassify", [
         dict(fields=[("id", '"face"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::mesher::Mesher<\'_>::face"'), ("helper", '"face.rs"')],
              bindings=[("mesher", "&Mesher<'_>", "&*self"), ("pad", "&Padded", "pad"), ("tints", "&mut Tints<'_>", "tints"), ("out", "&mut SectionMesh", "out"),
-                       ("pos", "[i32; 3]", "pos"), ("origin", "[f32; 3]", "origin"), ("face", "&BakedFace", "face"), ("ao", "bool", "ao"), ("state", "&Info", "state")]),
+                       ("pos", "[i32; 3]", "pos"), ("origin", "[f32; 3]", "origin"), ("face", "&BakedFace", "face"), ("ao", "bool", "ao")]),
         native("tick", "native_tick", [G]),
     ] + common_native(False), visibility="pub"),
     runtime_extra=r'''

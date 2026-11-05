@@ -34,7 +34,7 @@ PING.append(dict(
     raw_note=("Horizon keeps the connection's ping samples in a `SampleLogger` that has no getter, so the mod's module lives in `debug_chart.rs` and a HEAD hook on `SampleLogger::log` copies the samples of "
               "the one logger the game tells it about (the ping logger, found by its address). That is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**."),
     toml_text=toml_text("ping_view", "1.0.0", "crates/horizon-client/src/debug_chart.rs", "lib_ping_view", [
-        dict(fields=[("id", '"log"'), ("kind", '"HEAD"'), ("target", '"horizon_client::debug_chart::SampleLogger::log"'), ("helper", '"log.rs"')],
+        dict(fields=[("id", '"log"'), ("kind", '"HEAD"'), ("target", '"horizon_client_lib::debug_chart::SampleLogger::log"'), ("helper", '"log.rs"')],
              bindings=[("logger", "&SampleLogger", "&*self"), ("value", "i64", "value")]),
         native("frame", "native_frame", [G, ("elapsed", "std::time::Duration", "elapsed")]),
         native("hud", "native_hud", [G, ("batch", "&mut horizon_client::hud::HudBatch", "&mut *batch"), ("corners", "&mut horizon_client::extras_hud::Corners", "&mut *corners")]),
