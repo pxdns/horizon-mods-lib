@@ -1,6 +1,7 @@
 // ExperienceOrb.scanForMerges, Clumps' way: any orbs that touch become one orb worth all of them.
-fn clumps_merge(orbs: &mut Vec<ExperienceOrb>) -> std::ops::ControlFlow<()> {
-    use lib_clumps as m;
+fn clumps_merge(game: &mut crate::game::Game<'_>) -> std::ops::ControlFlow<()> {
+    use horizon_client::entities::lib_clumps as m;
+    let orbs = &mut game.orbs;
     if !m::on() {
         return std::ops::ControlFlow::Continue(());
     }

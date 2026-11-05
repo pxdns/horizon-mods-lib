@@ -11,12 +11,12 @@ CLUMPS.append(dict(
     command=None, hooks=["merge", "list", "settings", "click", "tick"],
     options=[("sizes", "Merge orbs of different sizes", True)],
     modpath="horizon_client::entities::lib_clumps",
-    raw_note=("It replaces `entities::merge_orbs`, the experience-orb merge Horizon runs in single player and as a LAN host, with a cancellable HEAD hook that merges every orb touching another (not only equal sizes at matching ids) "
+    raw_note=("It replaces `Game::merge_orbs` (in `game.rs`; it was `entities::merge_orbs` before Horizon moved it), the experience-orb merge Horizon runs in single player and as a LAN host, with a cancellable HEAD hook that merges every orb touching another (not only equal sizes at matching ids) "
               "into one orb whose value is the sum of theirs, so saving and loading keep the total. It is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. "
               "Experience on a multiplayer server is handled by the server, which this does not change. Unlike the original it does not remember the sizes it merged, so Mending repairs once from the total."),
     toml_text=toml_text("clumps", "1.0.0", "crates/horizon-client/src/entities.rs", "lib_clumps", [
-        dict(fields=[("id", '"merge"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client::entities::merge_orbs"'), ("helper", '"merge.rs"')],
-             bindings=[("orbs", "&mut Vec<ExperienceOrb>", "orbs")]),
+        dict(fields=[("id", '"merge"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client::game::Game<\'_>::merge_orbs"'), ("helper", '"merge.rs"')],
+             bindings=[("game", "&mut crate::game::Game<'_>", "&mut *self")]),
     ] + common_native(), visibility="pub"),
     runtime_extra=r'''
 use std::cell::Cell;
@@ -104,8 +104,9 @@ pub fn worth(value: u32, count: u32) -> u32 {
 ''',
     helpers={
         "merge": '''// ExperienceOrb.scanForMerges, Clumps' way: any orbs that touch become one orb worth all of them.
-fn clumps_merge(orbs: &mut Vec<ExperienceOrb>) -> std::ops::ControlFlow<()> {
-    use lib_clumps as m;
+fn clumps_merge(game: &mut crate::game::Game<'_>) -> std::ops::ControlFlow<()> {
+    use horizon_client::entities::lib_clumps as m;
+    let orbs = &mut game.orbs;
     if !m::on() {
         return std::ops::ControlFlow::Continue(());
     }

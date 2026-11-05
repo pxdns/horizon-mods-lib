@@ -24,7 +24,7 @@ bindings = [
   { name = "chat", ty = "&mut Chat", value = "&mut *self" },
   { name = "font", ty = "&crate::font::Font", value = "font" },
   { name = "content", ty = "&Text", value = "&content" },
-  { name = "indicator", ty = "Option<u32>", value = "indicator" },
+  { name = "tag", ty = "&Option<std::sync::Arc<Tag>>", value = "&tag" },
   { name = "source", ty = "ChatSource", value = "source" },
   { name = "ticks", ty = "u64", value = "ticks" },
   { name = "focused", ty = "bool", value = "focused" },

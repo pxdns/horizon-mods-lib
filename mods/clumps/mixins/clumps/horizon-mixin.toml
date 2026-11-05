@@ -18,10 +18,10 @@ visibility = "pub"
 id = "merge"
 kind = "HEAD"
 cancellable = true
-target = "horizon_client::entities::merge_orbs"
+target = "horizon_client::game::Game<'_>::merge_orbs"
 helper = "merge.rs"
 bindings = [
-  { name = "orbs", ty = "&mut Vec<ExperienceOrb>", value = "orbs" },
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
 ]
 
 [[injection]]

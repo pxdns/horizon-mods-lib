@@ -16,7 +16,7 @@ TW.append(dict(
               "It is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. Left out from the original: the handheld totem's size and the equip animation, which need hooks in the hand drawing. "
               "I could not look at the animation on screen; with every setting at its default the pose is the same curve as Horizon's, and the logic is tested."),
     toml_text=toml_text("totem_tweaks", "1.0.0", "crates/horizon-client/src/item_activation.rs", "lib_totem_tweaks", [
-        dict(fields=[("id", '"pose"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client::item_activation::animation_pose"'), ("helper", '"pose.rs"')],
+        dict(fields=[("id", '"pose"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_lib::item_activation::animation_pose"'), ("helper", '"pose.rs"')],
              bindings=[("ticks", "i32", "ticks"), ("partial", "f32", "partial"), ("off_x", "f32", "off_x"), ("off_y", "f32", "off_y"), ("aspect", "f32", "aspect")]),
         native("tick", "native_tick", [G]),
     ] + common_native(False), visibility="pub"),

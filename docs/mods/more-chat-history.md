@@ -17,7 +17,7 @@ Switch it on or off in **Options → Mods → More Chat History**; its settings 
 
 ## How it is built
 
-- Hooks: `chat::Chat::add_message`, `chat::Chat::add_lines`, `native_mods`, `native_settings`, `native_settings_click`, `native_tick`.
+- Hooks: `chat::Chat::add_message`, `native_mods`, `native_settings`, `native_settings_click`, `native_tick`.
 - Logic and tests: `mods/more-chat-history/mixins/more_chat_history/runtime.rs`.
 - Pinned: Horizon `ba6344a`, horizon-mixins `d9c83d7`. It reads fields of the game that are not part of the stable hook-point contract, so it must be re-checked when Horizon changes them.
 

@@ -17,7 +17,7 @@ visibility = "pub"
 [[injection]]
 id = "log"
 kind = "HEAD"
-target = "horizon_client::debug_chart::SampleLogger::log"
+target = "horizon_client_lib::debug_chart::SampleLogger::log"
 helper = "log.rs"
 bindings = [
   { name = "logger", ty = "&SampleLogger", value = "&*self" },

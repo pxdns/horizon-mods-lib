@@ -15,10 +15,10 @@ ETF.append(dict(
               "They are not part of the stable hook-point contract, so the mod is **pinned to one Horizon commit**. **I could not look at the result**: it is checked to compile and its logic is tested, but a mob with variants was not seen on screen. "
               "It covers numbered variants (`name2`, `name3`...) and `_e` emissive textures that sit in the resource pack's `textures/entity`; the original's `.properties` rule files (by biome, name, health, time), `optifine/random` folders, player skins and block entity textures are not included."),
     toml_text=toml_text("entity_texture_features", "1.0.0", "crates/horizon-client/src/mobs/render.rs", "lib_entity_texture_features", [
-        dict(fields=[("id", '"body"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client::mobs::render::body"'), ("helper", '"body.rs"')],
+        dict(fields=[("id", '"body"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_lib::mobs::render::body"'), ("helper", '"body.rs"')],
              bindings=[("m", "&Mob", "m")]),
-        dict(fields=[("id", '"layers"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client::mobs::render::layers"'), ("helper", '"layers.rs"')],
-             bindings=[("m", "&Mob", "m")]),
+        dict(fields=[("id", '"layers"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_lib::mobs::render::layers"'), ("helper", '"layers.rs"')],
+             bindings=[("m", "&Mob", "m"), ("age", "f32", "age")]),
         native("tick", "native_tick", [G]),
     ] + common_native(False), visibility="pub"),
     runtime_extra=r'''
@@ -200,7 +200,7 @@ pub fn glow_of(texture: &str) -> Option<String> {
 ''',
     helpers={
         "body": '''// A mob's body model and texture: the texture may be one of the variants a resource pack adds.
-fn entity_texture_features_body(m: &Mob) -> std::ops::ControlFlow<(String, String)> {
+fn entity_texture_features_body(m: &Mob) -> std::ops::ControlFlow<(Cow<'static, str>, Cow<'_, str>)> {
     use lib_entity_texture_features as r;
     if !r::random_on() || !r::enter_body() {
         return std::ops::ControlFlow::Continue(());
@@ -208,11 +208,11 @@ fn entity_texture_features_body(m: &Mob) -> std::ops::ControlFlow<(String, Strin
     let (model, texture) = body(m);
     r::leave_body();
     let texture = r::pick(&texture, m.id);
-    std::ops::ControlFlow::Break((model, texture))
+    std::ops::ControlFlow::Break((model, Cow::Owned(texture)))
 }
 ''',
         "layers": '''// A mob's extra layers, and its emissive twin of the body texture drawn at full brightness.
-fn entity_texture_features_layers(m: &Mob) -> std::ops::ControlFlow<Vec<Layer>> {
+fn entity_texture_features_layers(m: &Mob, age: f32) -> std::ops::ControlFlow<Vec<Layer>> {
     use lib_entity_texture_features as r;
     if !r::emissive_on() || !r::enter_layers() {
         return std::ops::ControlFlow::Continue(());
@@ -223,9 +223,9 @@ fn entity_texture_features_layers(m: &Mob) -> std::ops::ControlFlow<Vec<Layer>> 
         return std::ops::ControlFlow::Continue(());
     };
     // The original again: the guard lets this call through the hook.
-    let mut layers = layers(m);
+    let mut layers = layers(m, age);
     r::leave_layers();
-    layers.push(Layer { model, texture: glow, color: 0xFFFF_FFFF, full_bright: true, scroll: 0.0 });
+    layers.push(Layer { model, texture: Cow::Owned(glow), color: 0xFFFF_FFFF, full_bright: true, scroll: 0.0 });
     std::ops::ControlFlow::Break(layers)
 }
 ''',

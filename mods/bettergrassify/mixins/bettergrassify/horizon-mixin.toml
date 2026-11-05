@@ -15,21 +15,31 @@ source = "runtime.rs"
 visibility = "pub"
 
 [[injection]]
-id = "face"
+id = "light"
+kind = "HEAD"
+target = "horizon_client_render::mesher::lighting::ambient_occlusion"
+helper = "light.rs"
+bindings = [
+  { name = "pad", ty = "&Padded", value = "pad" },
+  { name = "info", ty = "&[Info]", value = "info" },
+  { name = "own", ty = "&Info", value = "own" },
+  { name = "pos", ty = "[i32; 3]", value = "pos" },
+  { name = "face", ty = "D", value = "face" },
+]
+
+[[injection]]
+id = "quad"
 kind = "HEAD"
 cancellable = true
-target = "horizon_client_render::mesher::Mesher<'_>::face"
-helper = "face.rs"
+target = "horizon_client_render::mesher::Mesher<'_>::quad"
+helper = "quad.rs"
 bindings = [
   { name = "mesher", ty = "&Mesher<'_>", value = "&*self" },
-  { name = "pad", ty = "&Padded", value = "pad" },
-  { name = "tints", ty = "&mut Tints<'_>", value = "tints" },
   { name = "out", ty = "&mut SectionMesh", value = "out" },
-  { name = "pos", ty = "[i32; 3]", value = "pos" },
-  { name = "origin", ty = "[f32; 3]", value = "origin" },
-  { name = "face", ty = "&BakedFace", value = "face" },
-  { name = "ao", ty = "bool", value = "ao" },
-  { name = "state", ty = "&Info", value = "state" },
+  { name = "solid_leaves", ty = "bool", value = "solid_leaves" },
+  { name = "tile", ty = "TileLayer", value = "tile" },
+  { name = "v", ty = "&[TerrainVertex; 4]", value = "&v" },
+  { name = "tint", ty = "Option<u32>", value = "tint" },
 ]
 
 [[injection]]
