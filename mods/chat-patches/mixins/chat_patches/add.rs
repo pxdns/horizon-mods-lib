@@ -3,7 +3,7 @@ fn chat_patches_add(
     chat: &mut Chat,
     font: &crate::font::Font,
     content: &Text,
-    tag: Option<std::sync::Arc<Tag>>,
+    tag: &Option<std::sync::Arc<Tag>>,
     source: ChatSource,
     ticks: u64,
     focused: bool,
@@ -29,7 +29,7 @@ fn chat_patches_add(
         stamped.push(content.clone());
         shown = stamped;
     }
-    chat.add_message(font, shown, tag, source, ticks, focused);
+    chat.add_message(font, shown, tag.clone(), source, ticks, focused);
     m::leave();
     std::ops::ControlFlow::Break(())
 }

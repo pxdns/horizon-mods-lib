@@ -17,7 +17,7 @@ HEADS.append(dict(
     toml_text=toml_text("chat_heads", "1.0.0", "crates/horizon-client-render/src/chat.rs", "lib_chat_heads", [
         dict(fields=[("id", '"add"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::chat::Chat::add_message"'), ("helper", '"add.rs"')],
              bindings=[("chat", "&mut Chat", "&mut *self"), ("font", "&crate::font::Font", "font"), ("content", "&Text", "&content"),
-                       ("tag", "Option<std::sync::Arc<Tag>>", "tag"), ("source", "ChatSource", "source"), ("ticks", "u64", "ticks"), ("focused", "bool", "focused")]),
+                       ("tag", "&Option<std::sync::Arc<Tag>>", "&tag"), ("source", "ChatSource", "source"), ("ticks", "u64", "ticks"), ("focused", "bool", "focused")]),
     ] + common_native(), visibility="pub", priority=240),
     runtime_extra=r'''
 use std::cell::{Cell, RefCell as StateCell};
@@ -161,7 +161,7 @@ fn chat_heads_add(
     chat: &mut Chat,
     font: &crate::font::Font,
     content: &Text,
-    tag: Option<std::sync::Arc<Tag>>,
+    tag: &Option<std::sync::Arc<Tag>>,
     source: ChatSource,
     ticks: u64,
     focused: bool,
@@ -178,7 +178,7 @@ fn chat_heads_add(
     let mut shown = crate::component::to_text(&json, &mut |_| Text::empty());
     shown.push(Text::literal(" "));
     shown.push(content.clone());
-    chat.add_message(font, shown, tag, source, ticks, focused);
+    chat.add_message(font, shown, tag.clone(), source, ticks, focused);
     m::leave();
     std::ops::ControlFlow::Break(())
 }
