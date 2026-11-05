@@ -71,6 +71,8 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`entity-texture-features`](mods/entity-texture-features.md) | Entity Texture Features (etf) | independent implementation from the mod's public description; no upstream code or assets |
 | [`litematica`](mods/litematica.md) | Litematica (litematica) | independent implementation of the public .litematic file layout; no upstream code or assets (the original is LGPL-3.0) |
 | [`tiers`](mods/tiers.md) | Tiers (tiers) | independent implementation; no upstream code or assets (the original is GPL-3.0) |
+| [`totem-tweaks`](mods/totem-tweaks.md) | Totem Tweaks (totem-tweaks) | independent implementation from the mod's public description; no upstream code or assets |
+| [`tweakeroo`](mods/tweakeroo.md) | Tweakeroo (tweakeroo) | independent implementation from the mod's public description; no upstream code or assets (the original is LGPL-3.0) |
 
 The complete list of upstream projects with their authors' licences, as shown on Modrinth, is in the
 [catalogue](../MODS.md). A Modrinth page is the place to find who made a mod and to support them.

@@ -1,13 +1,13 @@
 {
  "counts": {
   "ported": 35,
-  "partial": 19,
-  "builtin": 8,
+  "partial": 21,
+  "builtin": 9,
   "hook": 0,
   "library": 28,
-  "engine": 32,
+  "engine": 31,
   "pack": 30,
-  "no-263": 34
+  "no-263": 32
  },
  "labels": {
   "ported": "Ported",
@@ -716,9 +716,9 @@
    "slug": "dynamic-fps",
    "licence": "MIT License",
    "build": "dynamic-fps-3.11.10+minecraft-26.3.0-fabric",
-   "status": "engine",
+   "status": "builtin",
    "project": "",
-   "note": "Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.",
+   "note": "Horizon has the inactivity frame-rate limit of the newest game (`InactivityFpsLimit` in `options.rs`): the frame rate drops when the window loses focus.",
    "page": "dynamic-fps",
    "icon": "catalogue/dynamic-fps.png"
   },
@@ -2159,9 +2159,9 @@
    "slug": "cpvp",
    "licence": "see project",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "Changes the totem pop animation; the item activation animation has no hook.",
+   "status": "partial",
+   "project": "totem-tweaks",
+   "note": "The pop animation: off, speed, size, spin, rocking and sideways swing; not the handheld size or the equip animation",
    "page": "cpvp",
    "icon": "catalogue/cpvp.png"
   },
@@ -2172,9 +2172,9 @@
    "slug": "tweakeroo",
    "licence": "GNU Lesser General Public License v3.0 only",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "A large collection of client tweaks (placement, restock, hotbar swap); not started, and most of it needs input and inventory hooks.",
+   "status": "partial",
+   "project": "tweakeroo",
+   "note": "Hand restock, hotbar cycle, fast right click and a tool break warning; flexible and accurate placement, fast left click and the rest are not included",
    "page": "tweakeroo",
    "icon": "catalogue/tweakeroo.png"
   },

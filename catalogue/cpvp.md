@@ -2,13 +2,15 @@
 
 ![Totem Tweaks icon](../assets/icons/catalogue/cpvp.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `see project` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/cpvp)
+**Status:** Partly ported - **Upstream licence:** `see project` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/cpvp)
+
+**Project:** [`totem-tweaks`](../mods/totem-tweaks/) - [docs](../docs/mods/totem-tweaks.md)
 
 ## Where it stands
 
-Changes the totem pop animation; the item activation animation has no hook.
+The pop animation: off, speed, size, spin, rocking and sideways swing; not the handheld size or the equip animation
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements. That does not stop a native port by itself; the reason it is not ported is on its page.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

@@ -38,7 +38,8 @@ from mods_grassify import GRASS
 from mods_etf import ETF
 from mods_litematica import LITE
 from mods_tiers import TIERS
-MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS + HIGH + CRAFT + VK + CRYSTAL + HEADS + CTRL + MKB + PEARL + GRASS + ETF + LITE + TIERS
+from mods_tweaks import TW
+MODS = BASE + RAW + CAM + CHAT + DRAW + HIT + PING + INV + MOUNT + MAP + PASS + ENCH + F5 + SHIELD + PATCH + CLUMPS + STATS + BSTATS + HIGH + CRAFT + VK + CRYSTAL + HEADS + CTRL + MKB + PEARL + GRASS + ETF + LITE + TIERS + TW
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = "1.0.0"

@@ -2,13 +2,13 @@
 
 ![Dynamic FPS icon](../assets/icons/catalogue/dynamic-fps.png)
 
-**Status:** Engine or server - **Upstream licence:** `MIT License` - **26.3 build:** `dynamic-fps-3.11.10+minecraft-26.3.0-fabric` - [Modrinth](https://modrinth.com/mod/dynamic-fps)
+**Status:** Built into Horizon - **Upstream licence:** `MIT License` - **26.3 build:** `dynamic-fps-3.11.10+minecraft-26.3.0-fabric` - [Modrinth](https://modrinth.com/mod/dynamic-fps)
 
 ## Where it stands
 
-Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own.
+Horizon has the inactivity frame-rate limit of the newest game (`InactivityFpsLimit` in `options.rs`): the frame rate drops when the window loses focus.
 
-This changes how the game engine performs or how a server runs. Horizon is a native rewrite with its own engine, so there is nothing to patch in.
+Horizon already does this itself, so a mod would only duplicate it.
 
 ## Credit
 

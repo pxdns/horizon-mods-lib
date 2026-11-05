@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-totem-tweaks"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Customise the totem of undying pop animation: off, speed, size, spin, rocking and position."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/totem_tweaks/runtime.rs"
+
+[workspace]

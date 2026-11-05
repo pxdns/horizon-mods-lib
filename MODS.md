@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **35** ported · **19** partly ported · **8** built into horizon · **30** pack or asset · **32** engine or server · **28** library · **34** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **35** ported · **21** partly ported · **9** built into horizon · **30** pack or asset · **31** engine or server · **28** library · **32** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -65,7 +65,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (19)
+## Partly ported (21)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -85,16 +85,19 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Search Stats](catalogue/searchstats.md) | [searchstats](https://modrinth.com/mod/searchstats) | `Apache License 2.0` | `searchstats-fabric-1.103.0+26.2` | Partly ported ([`search-stats`](mods/search-stats/)) | A search box that filters the Items and Mobs lists; the General tab is not filtered |
 | [Shield Statuses](catalogue/shield-statuses.md) | [shield-statuses](https://modrinth.com/mod/shield-statuses) | `MIT License` | `-` | Partly ported ([`shield-statuses`](mods/shield-statuses/)) | Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook |
 | [Tiers](catalogue/tiers.md) | [tiers](https://modrinth.com/mod/tiers) | `GNU General Public License v3.0 only` | `tiers-0.9.0+26.3` | Partly ported ([`tiers`](mods/tiers/)) | /tier <name> looks a player up and prints their tiers; the website interface is a guess, lookups are off until switched on, and there are no name tags |
+| [Totem Tweaks](catalogue/cpvp.md) | [cpvp](https://modrinth.com/mod/cpvp) | `see project` | `-` | Partly ported ([`totem-tweaks`](mods/totem-tweaks/)) | The pop animation: off, speed, size, spin, rocking and sideways swing; not the handheld size or the equip animation |
+| [Tweakeroo](catalogue/tweakeroo.md) | [tweakeroo](https://modrinth.com/mod/tweakeroo) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`tweakeroo`](mods/tweakeroo/)) | Hand restock, hotbar cycle, fast right click and a tool break warning; flexible and accurate placement, fast left click and the rest are not included |
 | [VisualKeys](catalogue/visualkeys.md) | [visualkeys](https://modrinth.com/mod/visualkeys) | `see project` | `VisualKeys-0.0.11+26.3` | Partly ported ([`visual-keys`](mods/visual-keys/)) | The keyboard on the HUD with every key coloured by its binding, plus /keyboard free and /keyboard <key>; not inside the controls screen, no Malilib bindings, no category collapse |
 | [Xaero's Minimap](catalogue/xaeros-minimap.md) | [xaeros-minimap](https://modrinth.com/mod/xaeros-minimap) | `see project` | `xaerominimap-fabric-26.3-26.5.3` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | The map display (corner, size, zoom keys, big map, turning, round) on Horizon's own minimap, plus the waypoints mod; waypoints are not marked on the map and there is no entity radar. |
 | [Xaero's World Map](catalogue/xaeros-world-map.md) | [xaeros-world-map](https://modrinth.com/mod/xaeros-world-map) | `see project` | `xaeroworldmap-fabric-26.3-1.46.4` | Partly ported ([`minimap-plus`](mods/minimap-plus/)) | A big-map key that widens Horizon's minimap to its largest view; there is no full-screen map screen to scroll, since Horizon has no hook for a new screen. |
 
-## Built into Horizon (8)
+## Built into Horizon (9)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [Auth Me](catalogue/auth-me.md) | [auth-me](https://modrinth.com/mod/auth-me) | `MIT License` | `authme-fabric-9.3.0+26.3` | Built into Horizon | Horizon has its own account sign-in (a device-code sign-in in its settings). |
 | [Client Sort](catalogue/clientsort.md) | [clientsort](https://modrinth.com/mod/clientsort) | `Apache License 2.0` | `clientsort-fabric-3.104.0+26.3` | Built into Horizon | Horizon ships Client Sort as one of its own extras (sort key in Extras). |
+| [Dynamic FPS](catalogue/dynamic-fps.md) | [dynamic-fps](https://modrinth.com/mod/dynamic-fps) | `MIT License` | `dynamic-fps-3.11.10+minecraft-26.3.0-fabric` | Built into Horizon | Horizon has the inactivity frame-rate limit of the newest game (`InactivityFpsLimit` in `options.rs`): the frame rate drops when the window loses focus. |
 | [Fullbright](catalogue/fullbright.md) | [fullbright](https://modrinth.com/mod/fullbright) | `GPL-3.0-only` | `-` | Built into Horizon | Horizon has a Fullbright extra of its own. |
 | [Gamma Utils (Fullbright)](catalogue/gamma-utils.md) | [gamma-utils](https://modrinth.com/mod/gamma-utils) | `GNU Lesser General Public License v3.0 only` | `Gamma-Utils-Fabric-3.2.0+mc26.3` | Built into Horizon | Horizon has a Fullbright extra of its own. |
 | [Mod Menu](catalogue/modmenu.md) | [modmenu](https://modrinth.com/mod/modmenu) | `MIT License` | `modmenu-21.0.0` | Built into Horizon | Horizon lists native mods in its own Options > Mods screen, with a settings page for each. |
@@ -137,7 +140,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Visuality](catalogue/visuality.md) | [visuality](https://modrinth.com/mod/visuality) | `MIT License` | `visuality-0.7.15+26.3` | Pack or asset | Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods. |
 | [Wavey Capes](catalogue/wavey-capes.md) | [wavey-capes](https://modrinth.com/mod/wavey-capes) | `see project` | `waveycapes-fabric-1.11.2-mc26.3` | Pack or asset | Resource-pack, shader or rendering-asset territory: the registry lists those as packs, not native mods. |
 
-## Engine or server (32)
+## Engine or server (31)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -146,7 +149,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Continuity](catalogue/continuity.md) | [continuity](https://modrinth.com/mod/continuity) | `GNU Lesser General Public License v3.0 only` | `continuity-3.0.1+26.3` | Engine or server | Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own. |
 | [Crash Assistant](catalogue/crash-assistant.md) | [crash-assistant](https://modrinth.com/mod/crash-assistant) | `see project` | `CrashAssistant-fabric-26.2-26.3-1.11.14` | Engine or server | Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own. |
 | [Debugify](catalogue/debugify.md) | [debugify](https://modrinth.com/mod/debugify) | `GNU Lesser General Public License v3.0 only` | `debugify-26.3.0.0` | Engine or server | Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own. |
-| [Dynamic FPS](catalogue/dynamic-fps.md) | [dynamic-fps](https://modrinth.com/mod/dynamic-fps) | `MIT License` | `dynamic-fps-3.11.10+minecraft-26.3.0-fabric` | Engine or server | Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own. |
 | [e4mc](catalogue/e4mc.md) | [e4mc](https://modrinth.com/mod/e4mc) | `MIT License` | `6.2.3-fabric-modern` | Engine or server | Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own. |
 | [Entity Culling](catalogue/entityculling.md) | [entityculling](https://modrinth.com/mod/entityculling) | `see project` | `entityculling-fabric-1.11.2-mc26.3` | Engine or server | Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own. |
 | [Fast IP Ping](catalogue/fast-ip-ping.md) | [fast-ip-ping](https://modrinth.com/mod/fast-ip-ping) | `GNU Lesser General Public License v3.0 only` | `fast-ip-ping-v1.0.12-mc26.3` | Engine or server | Performance, server or engine work. Horizon is a native rewrite, so the engine already does its own. |
@@ -207,7 +209,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [YetAnotherConfigLib (YACL)](catalogue/yacl.md) | [yacl](https://modrinth.com/mod/yacl) | `GNU Lesser General Public License v3.0 or later` | `yet_another_config_lib_v3-3.9.7+26.3-fabric` | Library | A library other Fabric mods load; Horizon's native mods do not use Fabric libraries. |
 | [ZConfig](catalogue/zconfig.md) | [zconfig](https://modrinth.com/mod/zconfig) | `Mozilla Public License 2.0` | `zconfig-1.0.0+26.x` | Library | A library other Fabric mods load; Horizon's native mods do not use Fabric libraries. |
 
-## No 26.3 build (34)
+## No 26.3 build (32)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -239,8 +241,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Reflex AntiLag](catalogue/reflex-antilag.md) | [reflex-antilag](https://modrinth.com/mod/reflex-antilag) | `see project` | `-` | No 26.3 build | NVIDIA Reflex latency control through the GPU driver; Horizon renders with wgpu. |
 | [Searchables](catalogue/searchables.md) | [searchables](https://modrinth.com/mod/searchables) | `MIT License` | `-` | No 26.3 build | A library for searchable lists in Fabric mod screens. |
 | [Slyde](catalogue/slyde.md) | [slyde](https://modrinth.com/mod/slyde) | `MIT License` | `-` | No 26.3 build | Lets sliders be dragged past their ends; Horizon's option sliders have no hook. |
-| [Totem Tweaks](catalogue/cpvp.md) | [cpvp](https://modrinth.com/mod/cpvp) | `see project` | `-` | No 26.3 build | Changes the totem pop animation; the item activation animation has no hook. |
-| [Tweakeroo](catalogue/tweakeroo.md) | [tweakeroo](https://modrinth.com/mod/tweakeroo) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | A large collection of client tweaks (placement, restock, hotbar swap); not started, and most of it needs input and inventory hooks. |
 | [voxy](catalogue/voxy.md) | [voxy](https://modrinth.com/mod/voxy) | `see project` | `-` | No 26.3 build | A level-of-detail renderer for distant terrain; rendering and chunk storage, no hook. |
 | [VulkanMod](catalogue/vulkanmod.md) | [vulkanmod](https://modrinth.com/mod/vulkanmod) | `LGPL-3.0-only` | `-` | No 26.3 build | A different renderer; Horizon renders with wgpu. |
 | [Xp Bottle Optimizer](catalogue/xp-bottle-optimizer.md) | [xp-bottle-optimizer](https://modrinth.com/mod/xp-bottle-optimizer) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Predicts experience bottle throws on the client; needs entity and packet hooks. |

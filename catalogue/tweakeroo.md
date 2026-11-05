@@ -2,13 +2,15 @@
 
 ![Tweakeroo icon](../assets/icons/catalogue/tweakeroo.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/tweakeroo)
+**Status:** Partly ported - **Upstream licence:** `GNU Lesser General Public License v3.0 only` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/tweakeroo)
+
+**Project:** [`tweakeroo`](../mods/tweakeroo/) - [docs](../docs/mods/tweakeroo.md)
 
 ## Where it stands
 
-A large collection of client tweaks (placement, restock, hotbar swap); not started, and most of it needs input and inventory hooks.
+Hand restock, hotbar cycle, fast right click and a tool break warning; flexible and accurate placement, fast left click and the rest are not included
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements. That does not stop a native port by itself; the reason it is not ported is on its page.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 
