@@ -28,18 +28,6 @@ bindings = [
 ]
 
 [[injection]]
-id = "lines"
-kind = "MODIFY_CONSTANT"
-target = "horizon_client_render::chat::Chat::add_lines"
-selector = "100"
-require = 1
-ordinal = 0
-helper = "lines.rs"
-bindings = [
-  { name = "value", ty = "usize", value = "$value" },
-]
-
-[[injection]]
 id = "list"
 kind = "HEAD"
 target = "horizon_client::game::native_hooks::Game<'_>::native_mods"

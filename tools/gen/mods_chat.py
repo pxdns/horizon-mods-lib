@@ -57,18 +57,14 @@ CHAT.append(dict(
     usage="Nothing to press: chat keeps more of what was said and you scroll back through it. The first button picks how many lines (100, 250, 500, 1000 or 2000).",
     description="Chat remembers up to 2000 lines instead of 100, so you can scroll back through a long conversation.",
     upstream="More Chat History (morechathistory)", upstream_licence="see the upstream project",
-    command=None, hooks=["add", "lines", "list", "settings", "click", "tick"],
+    command=None, hooks=["add", "list", "settings", "click", "tick"],
     options=None, custom_settings=True,
     modpath="horizon_client::chat::lib_more_chat_history",
-    raw_note=("It lives in Horizon's chat module (`crates/horizon-client-render/src/chat.rs`): a cancellable HEAD hook on `Chat::push_message` (every message passes through it, a signed player message too) that does what the original does with a longer limit, and a "
-              "MODIFY_CONSTANT on the wrapped-line limit in `Chat::add_lines`. Neither is part of the stable hook-point contract, so it is **pinned to one Horizon commit**."),
+    raw_note=("It lives in Horizon's chat module (`crates/horizon-client-render/src/chat.rs`): a cancellable HEAD hook on `Chat::push_message` (every message passes through it, a signed player message too) that does what the original does with a longer limit, including the line wrapping (Horizon's `add_lines` has a closure now, so its limit cannot be changed with a constant). It is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**."),
     toml_text=toml_text("more_chat_history", "1.0.0", "crates/horizon-client-render/src/chat.rs", "lib_more_chat_history", [
         dict(fields=[("id", '"add"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::chat::Chat::push_message"'), ("helper", '"add.rs"')],
              bindings=[("chat", "&mut Chat", "&mut *self"), ("font", "&crate::font::Font", "font"), ("message", "&Message", "&message"),
                        ("focused", "bool", "focused")]),
-        dict(fields=[("id", '"lines"'), ("kind", '"MODIFY_CONSTANT"'), ("target", '"horizon_client_render::chat::Chat::add_lines"'), ("selector", '"100"'),
-                     ("require", "1"), ("ordinal", "0"), ("helper", '"lines.rs"')],
-             bindings=[("value", "usize", "$value")]),
     ] + common_native(), visibility="pub"),
     runtime_extra=r'''
 use std::cell::Cell;
@@ -162,17 +158,22 @@ fn more_chat_history_add(
     if chat.log {
         println!("[CHAT] {plain}");
     }
-    chat.add_lines(font, &message, focused);
+    // `add_lines` with the mod's limit (Horizon's own has a closure in it, which a constant cannot be changed in).
+    let icon = if message.tag.as_ref().is_some_and(|tag| tag.icon) { 9 + 4 + 2 } else { 0 };
+    let width = chat.max_width() - icon;
+    let content = chat.displayed(&message.content);
+    for line in font.wrap_components(&content, width) {
+        if focused && chat.scroll > 0 {
+            chat.new_since_scroll = true;
+            chat.scroll_by(1, focused);
+        }
+        chat.lines.insert(0, Line { added: message.added, content: line, tag: message.tag.clone() });
+    }
+    chat.lines.truncate(lib_more_chat_history::limit());
     chat.messages.insert(0, message);
     chat.messages.truncate(lib_more_chat_history::limit());
     chat.received += 1;
     std::ops::ControlFlow::Break(())
-}
-''',
-        "lines": '''// The wrapped-line limit.
-fn more_chat_history_lines(value: usize) -> usize {
-    let _ = value;
-    lib_more_chat_history::limit()
 }
 ''',
         "tick": '''// Once a tick: tell the chat the limit the player picked.

@@ -30,7 +30,7 @@
 <a href="../install.html">Install a mod</a>.</p>
 <h2 id="how-it-is-built">How it is built</h2>
 <ul>
-<li>Hooks: <code>chat::Chat::add_message</code>, <code>chat::Chat::add_lines</code>, <code>native_mods</code>, <code>native_settings</code>, <code>native_settings_click</code>, <code>native_tick</code>.</li>
+<li>Hooks: <code>chat::Chat::add_message</code>, <code>native_mods</code>, <code>native_settings</code>, <code>native_settings_click</code>, <code>native_tick</code>.</li>
 <li>Logic and tests: <code>mods/more-chat-history/mixins/more_chat_history/runtime.rs</code>.</li>
 <li>Pinned: Horizon <code>ba6344a</code>, horizon-mixins <code>d9c83d7</code>. It reads fields of the game that are not part of the stable hook-point contract, so it must be re-checked when Horizon changes them.</li>
 </ul>
