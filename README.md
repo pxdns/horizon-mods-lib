@@ -82,7 +82,7 @@ and its SHA-256. [`ci.yml`](.github/workflows/ci.yml) applies every mod on the p
 
 All 51 mods are unit-tested, formatted, clippy-clean and apply on Horizon `ba6344a` with horizon-mixins `d9c83d7`, where the modded
 game type-checks with warnings denied. CI cannot play the game through a window, so none has been exercised in a live session by CI.
-Of the 186 catalogued mods, 35 are ported, 18 partly, 8 are built into Horizon already and 0 are waiting on hook points Horizon does not have yet (each catalogue page says why; the proposals for [screen, slot and map hooks](proposals/native-screen-hooks.md) and [transport and packet hooks](proposals/native-network-hooks.md) say what would unlock them). See [the hook-point notes](docs/hook-points.md). 41 of the 51 read or hook Horizon's own internals and are pinned to one Horizon commit.
+Of the 186 catalogued mods, 35 are ported, 19 partly, 8 are built into Horizon already and 0 are waiting on hook points Horizon does not have yet (each catalogue page says why; the proposals for [screen, slot and map hooks](proposals/native-screen-hooks.md) and [transport and packet hooks](proposals/native-network-hooks.md) say what would unlock them). See [the hook-point notes](docs/hook-points.md). 41 of the 51 read or hook Horizon's own internals and are pinned to one Horizon commit.
 
 ## Credits, licensing, takedowns
 

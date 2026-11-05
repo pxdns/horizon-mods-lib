@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **35** ported · **18** partly ported · **8** built into horizon · **30** pack or asset · **32** engine or server · **28** library · **35** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **35** ported · **19** partly ported · **8** built into horizon · **30** pack or asset · **32** engine or server · **28** library · **34** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -65,12 +65,13 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (18)
+## Partly ported (19)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [[ETF] Entity Texture Features](catalogue/entitytexturefeatures.md) | [entitytexturefeatures](https://modrinth.com/mod/entitytexturefeatures) | `GNU Lesser General Public License v3.0 only` | `7.2.5-fabric-26.3` | Partly ported ([`entity-texture-features`](mods/entity-texture-features/)) | Random numbered texture variants and emissive layers from a resource pack; not checked visually, and no .properties rules, optifine/random folders or block entity textures |
 | [Better Statistics Screen](catalogue/better-stats.md) | [better-stats](https://modrinth.com/mod/better-stats) | `see project` | `betterstats-5.6.0-beta.1+fn-26.3` | Partly ported ([`better-stats`](mods/better-stats/)) | Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing |
+| [BetterF3](catalogue/betterf3.md) | [betterf3](https://modrinth.com/mod/betterf3) | `MIT License` | `-` | Partly ported ([`custom-hud`](mods/custom-hud/)) | A readable, switchable HUD of FPS, coordinates, facing and clicks per second in Custom HUD, and speed and angles in Info HUD; it does not replace the F3 screen |
 | [BetterGrassify](catalogue/bettergrassify.md) | [bettergrassify](https://modrinth.com/mod/bettergrassify) | `Apache-2.0` | `1.8.8+fabric.26.3` | Partly ported ([`bettergrassify`](mods/bettergrassify/)) | Better Grass (fancy) on plain grass block sides, drawn with the top texture; not checked visually, and no snowy grass, fast mode or better snow |
 | [Chat Patches](catalogue/chatpatches.md) | [chatpatches](https://modrinth.com/mod/chatpatches) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`chat-patches`](mods/chat-patches/)) | Timestamps and an option to drop immediate repeats; not copying, hiding or compact counters |
 | [Controlling](catalogue/controlling.md) | [controlling](https://modrinth.com/mod/controlling) | `MIT License` | `26.3.3` | Partly ported ([`controlling`](mods/controlling/)) | Find bindings by action or key, list conflicts and unbound actions as /keybinds commands; Horizon's own Key Binds page already searches by action name |
@@ -206,14 +207,13 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [YetAnotherConfigLib (YACL)](catalogue/yacl.md) | [yacl](https://modrinth.com/mod/yacl) | `GNU Lesser General Public License v3.0 or later` | `yet_another_config_lib_v3-3.9.7+26.3-fabric` | Library | A library other Fabric mods load; Horizon's native mods do not use Fabric libraries. |
 | [ZConfig](catalogue/zconfig.md) | [zconfig](https://modrinth.com/mod/zconfig) | `Mozilla Public License 2.0` | `zconfig-1.0.0+26.x` | Library | A library other Fabric mods load; Horizon's native mods do not use Fabric libraries. |
 
-## No 26.3 build (35)
+## No 26.3 build (34)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
 | [[EMF] Entity Model Features](catalogue/entity-model-features.md) | [entity-model-features](https://modrinth.com/mod/entity-model-features) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | Custom entity models in the OptiFine format; mob rendering has no hook. |
 | [Alternate Current](catalogue/alternate-current.md) | [alternate-current](https://modrinth.com/mod/alternate-current) | `MIT License` | `-` | No 26.3 build | A redstone engine: world logic, which Horizon implements itself and no hook point reaches. |
 | [Better Hitboxes](catalogue/betterhitboxes.md) | [betterhitboxes](https://modrinth.com/mod/betterhitboxes) | `LicenseRef-All-Rights-Reserved` | `-` | No 26.3 build | Draws entity hitboxes in the world; there is no entity rendering hook. |
-| [BetterF3](catalogue/betterf3.md) | [betterf3](https://modrinth.com/mod/betterf3) | `MIT License` | `-` | No 26.3 build | Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there. |
 | [Bobby](catalogue/bobby.md) | [bobby](https://modrinth.com/mod/bobby) | `GNU Lesser General Public License v3.0 only` | `-` | No 26.3 build | Keeps chunks beyond the server's view distance: chunk storage and the network layer, no hook. |
 | [Carpet](catalogue/carpet.md) | [carpet](https://modrinth.com/mod/carpet) | `MIT License` | `-` | No 26.3 build | Server-side rules and tools; Horizon's native mods are client-side. |
 | [CIT Resewn](catalogue/cit-resewn.md) | [cit-resewn](https://modrinth.com/mod/cit-resewn) | `MIT` | `-` | No 26.3 build | Custom item textures by rules: item rendering has no hook for that choice. |

@@ -1,13 +1,13 @@
 {
  "counts": {
   "ported": 35,
-  "partial": 18,
+  "partial": 19,
   "builtin": 8,
   "hook": 0,
   "library": 28,
   "engine": 32,
   "pack": 30,
-  "no-263": 35
+  "no-263": 34
  },
  "labels": {
   "ported": "Ported",
@@ -170,9 +170,9 @@
    "slug": "betterf3",
    "licence": "MIT License",
    "build": "-",
-   "status": "no-263",
-   "project": "",
-   "note": "Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there.",
+   "status": "partial",
+   "project": "custom-hud",
+   "note": "A readable, switchable HUD of FPS, coordinates, facing and clicks per second in Custom HUD, and speed and angles in Info HUD; it does not replace the F3 screen",
    "page": "betterf3",
    "icon": "catalogue/betterf3.png"
   },

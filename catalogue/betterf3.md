@@ -2,13 +2,15 @@
 
 ![BetterF3 icon](../assets/icons/catalogue/betterf3.png)
 
-**Status:** No 26.3 build - **Upstream licence:** `MIT License` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/betterf3)
+**Status:** Partly ported - **Upstream licence:** `MIT License` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/betterf3)
+
+**Project:** [`custom-hud`](../mods/custom-hud/) - [docs](../docs/mods/custom-hud.md)
 
 ## Where it stands
 
-Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there.
+A readable, switchable HUD of FPS, coordinates, facing and clicks per second in Custom HUD, and speed and angles in Info HUD; it does not replace the F3 screen
 
-The upstream project has no build for Minecraft 26.3, the version Horizon implements. That does not stop a native port by itself; the reason it is not ported is on its page.
+Only part of this fits the hook points; see the project for what is in and what is missing.
 
 ## Credit
 

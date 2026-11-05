@@ -61,6 +61,7 @@ PORTED = {
     "BVzZfTc1": ("partial", "entity-texture-features", "Random numbered texture variants and emissive layers from a resource pack; not checked visually, and no .properties rules, optifine/random folders or block entity textures"),
     "bEpr0Arc": ("partial", "litematica", "Reading .litematic files: info and the material list as /schematic commands; no ghost in the world, no differences view and no placing"),
     "bubOj4AD": ("partial", "tiers", "/tier <name> looks a player up and prints their tiers; the website interface is a guess, lookups are off until switched on, and there are no name tags"),
+    "8shC1gFX": ("partial", "custom-hud", "A readable, switchable HUD of FPS, coordinates, facing and clicks per second in Custom HUD, and speed and angles in Info HUD; it does not replace the F3 screen"),
     "ExI7GmJi": ("partial", "search-stats", "A search box that filters the Items and Mobs lists; the General tab is not filtered"),
     "Wnxd13zP": ("ported", "clumps", "Orbs of any size merge into one orb worth all of them, collected at once"),
     "GfoMZ9Ly": ("partial", "shield-statuses", "Your own shield as ready, blocking or disabled with the seconds left; other players' shields need an entity drawing hook"),
@@ -108,7 +109,6 @@ SPECIFIC = {
 NO263_REASONS = {
     "r0v8vy1s": "A redstone engine: world logic, which Horizon implements itself and no hook point reaches.",
     "zqU1uktf": "Draws entity hitboxes in the world; there is no entity rendering hook.",
-    "8shC1gFX": "Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there.",
     "M08ruV16": "Keeps chunks beyond the server's view distance: chunk storage and the network layer, no hook.",
     "otVJckYQ": "Custom item textures by rules: item rendering has no hook for that choice.",
     "TQTTVgYE": "Server-side rules and tools; Horizon's native mods are client-side.",

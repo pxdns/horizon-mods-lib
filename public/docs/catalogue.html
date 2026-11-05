@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mod catalogue · horizon-mods-lib</title>
-<meta name="description" content="Mod catalogue Every mod in the Tempest project&#x27;s cross-pack matrix ( docs/MOD-MATRIX.md in pxdns/patcher ): 186 mods , 35 ported · 18 partly ported · ">
+<meta name="description" content="Mod catalogue Every mod in the Tempest project&#x27;s cross-pack matrix ( docs/MOD-MATRIX.md in pxdns/patcher ): 186 mods , 35 ported · 19 partly ported · ">
 <meta name="theme-color" content="#100a1f">
 <link rel="icon" href="../assets/icons/horizon-mods-lib.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/site.css">
@@ -22,7 +22,7 @@
 <div class="crumbs"><a href="introduction.html">Docs</a> / Catalogue</div>
 <h1 id="mod-catalogue">Mod catalogue</h1>
 <p>Every mod in the Tempest project's cross-pack matrix (<a href="https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md"><code>docs/MOD-MATRIX.md</code></a>
-in <code>pxdns/patcher</code>): <strong>186 mods</strong>, <strong>35</strong> ported · <strong>18</strong> partly ported · <strong>8</strong> built into horizon · <strong>30</strong> pack or asset · <strong>32</strong> engine or server · <strong>28</strong> library · <strong>35</strong> no 26.3 build.</p>
+in <code>pxdns/patcher</code>): <strong>186 mods</strong>, <strong>35</strong> ported · <strong>19</strong> partly ported · <strong>8</strong> built into horizon · <strong>30</strong> pack or asset · <strong>32</strong> engine or server · <strong>28</strong> library · <strong>34</strong> no 26.3 build.</p>
 <p>Horizon implements Minecraft <strong>26.3</strong>, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's <a href="hook-points.html">native hook points</a> expose (frame, tick, HUD, key, wheel, command, zoom,
 minimap, mods list, settings and the world lifecycle, plus the item panel and recipes), which is why most Fabric mods that
@@ -368,7 +368,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 </tr>
 </tbody>
 </table>
-<h2 id="partly-ported-18">Partly ported (18)</h2>
+<h2 id="partly-ported-19">Partly ported (19)</h2>
 <table>
 <thead>
 <tr>
@@ -396,6 +396,14 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td><code>betterstats-5.6.0-beta.1+fn-26.3</code></td>
 <td>Partly ported (<a href="mods/better-stats.html"><code>better-stats</code></a>)</td>
 <td>Searching, ranking and exporting as /statistics commands, with Search Stats for the search box; not the redesigned grid screen, rendered mobs, grouping or sharing</td>
+</tr>
+<tr>
+<td><a href="../catalogue/betterf3.html">BetterF3</a></td>
+<td><a href="https://modrinth.com/mod/betterf3">betterf3</a></td>
+<td><code>MIT License</code></td>
+<td><code>-</code></td>
+<td>Partly ported (<a href="mods/custom-hud.html"><code>custom-hud</code></a>)</td>
+<td>A readable, switchable HUD of FPS, coordinates, facing and clicks per second in Custom HUD, and speed and angles in Info HUD; it does not replace the F3 screen</td>
 </tr>
 <tr>
 <td><a href="../catalogue/bettergrassify.html">BetterGrassify</a></td>
@@ -1371,7 +1379,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 </tr>
 </tbody>
 </table>
-<h2 id="no-263-build-35">No 26.3 build (35)</h2>
+<h2 id="no-263-build-34">No 26.3 build (34)</h2>
 <table>
 <thead>
 <tr>
@@ -1407,14 +1415,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <td><code>-</code></td>
 <td>No 26.3 build</td>
 <td>Draws entity hitboxes in the world; there is no entity rendering hook.</td>
-</tr>
-<tr>
-<td><a href="../catalogue/betterf3.html">BetterF3</a></td>
-<td><a href="https://modrinth.com/mod/betterf3">betterf3</a></td>
-<td><code>MIT License</code></td>
-<td><code>-</code></td>
-<td>No 26.3 build</td>
-<td>Replaces the F3 debug screen, which Horizon draws in its own code; there is no hook there.</td>
 </tr>
 <tr>
 <td><a href="../catalogue/bobby.html">Bobby</a></td>
@@ -1669,7 +1669,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 <nav class="pager" aria-label="Previous and next"><a class="prev" href="compatibility.html"><small>Previous</small>Compatibility</a><a class="next" href="modules.html"><small>Next</small>Modules and Horizon</a></nav>
 <p class="edit"><a href="https://github.com/pxdns/horizon-mods-lib/edit/main/MODS.md">Edit this page on GitHub</a></p>
 </main>
-<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#status">Status</a><a class="" href="#ported-35">Ported (35)</a><a class="" href="#partly-ported-18">Partly ported (18)</a><a class="" href="#built-into-horizon-8">Built into Horizon (8)</a><a class="" href="#pack-or-asset-30">Pack or asset (30)</a><a class="" href="#engine-or-server-32">Engine or server (32)</a><a class="" href="#library-28">Library (28)</a><a class="" href="#no-263-build-35">No 26.3 build (35)</a></aside>
+<aside class="toc" aria-label="On this page"><h5>On this page</h5><a class="" href="#status">Status</a><a class="" href="#ported-35">Ported (35)</a><a class="" href="#partly-ported-19">Partly ported (19)</a><a class="" href="#built-into-horizon-8">Built into Horizon (8)</a><a class="" href="#pack-or-asset-30">Pack or asset (30)</a><a class="" href="#engine-or-server-32">Engine or server (32)</a><a class="" href="#library-28">Library (28)</a><a class="" href="#no-263-build-34">No 26.3 build (34)</a></aside>
 </div>
 <footer class="site"><div class="wrap">
 <div class="cols">
