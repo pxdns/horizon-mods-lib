@@ -80,7 +80,7 @@ pub fn jump_line(strength: f64, charge: f32) -> (String, u32) {
         lines.push(m::speed_line(mob.position.x - mob.previous.x, mob.position.z - mob.previous.z));
     }
     if m::is(get, "jump") && game.jumpable_mount() {
-        lines.push(m::jump_line(f64::from(mob.jump_power()), game.mount.jump_scale));
+        lines.push(m::jump_line(f64::from(mob.jump_power(&game.mob_world_base(&[]))), game.mount.jump_scale));
     }
 ''') + DRAW_INK.replace("@CORNER@", "Corner::BottomLeft")),
 ))
