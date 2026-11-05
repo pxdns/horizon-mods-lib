@@ -5,7 +5,7 @@ New chat lines slide up into place instead of appearing at once.
 
 Ported from **Chat Animation [Smooth Chat] (chatanimation)** (see the upstream project) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/chat_animation/`). It lives in Horizon's chat module and replaces `Chat::layout` (a cancellable HEAD hook that rebuilds the draw list the same way, with each new line offset by the slide) - not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. The chat only knows whole ticks, so the slide moves in 50 ms steps.
+(`mixins/chat_animation/`). **Retired on current Horizon: its smooth chat is built in.** Horizon's chat now slides a new line in and fades it in by itself (the smooth chat extra, `Chat::smooth`), and `Chat::layout` takes fractional ticks and `Line::tag` where this mod's copy of the layout expects whole ticks and `Line::indicator`, so the mod no longer compiles there. Use Horizon's own setting; this folder stays for the Horizon commit it was written on. It lives in Horizon's chat module and replaces `Chat::layout` (a cancellable HEAD hook that rebuilds the draw list the same way, with each new line offset by the slide) - not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. The chat only knows whole ticks, so the slide moves in 50 ms steps.
 
 ## Install
 

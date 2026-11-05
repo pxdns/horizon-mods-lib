@@ -16,7 +16,7 @@ PATCH.append(dict(
     toml_text=toml_text("chat_patches", "1.0.0", "crates/horizon-client-render/src/chat.rs", "lib_chat_patches", [
         dict(fields=[("id", '"add"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::chat::Chat::add_message"'), ("helper", '"add.rs"')],
              bindings=[("chat", "&mut Chat", "&mut *self"), ("font", "&crate::font::Font", "font"), ("content", "&Text", "&content"),
-                       ("indicator", "Option<u32>", "indicator"), ("source", "ChatSource", "source"), ("ticks", "u64", "ticks"), ("focused", "bool", "focused")]),
+                       ("tag", "Option<std::sync::Arc<Tag>>", "tag"), ("source", "ChatSource", "source"), ("ticks", "u64", "ticks"), ("focused", "bool", "focused")]),
     ] + common_native(), visibility="pub", priority=250),
     runtime_extra=r'''
 use std::cell::Cell;
@@ -127,7 +127,7 @@ fn chat_patches_add(
     chat: &mut Chat,
     font: &crate::font::Font,
     content: &Text,
-    indicator: Option<u32>,
+    tag: Option<std::sync::Arc<Tag>>,
     source: ChatSource,
     ticks: u64,
     focused: bool,
@@ -153,7 +153,7 @@ fn chat_patches_add(
         stamped.push(content.clone());
         shown = stamped;
     }
-    chat.add_message(font, shown, indicator, source, ticks, focused);
+    chat.add_message(font, shown, tag, source, ticks, focused);
     m::leave();
     std::ops::ControlFlow::Break(())
 }

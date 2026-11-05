@@ -18,15 +18,12 @@ visibility = "pub"
 id = "add"
 kind = "HEAD"
 cancellable = true
-target = "horizon_client_render::chat::Chat::add_message"
+target = "horizon_client_render::chat::Chat::push_message"
 helper = "add.rs"
 bindings = [
   { name = "chat", ty = "&mut Chat", value = "&mut *self" },
   { name = "font", ty = "&crate::font::Font", value = "font" },
-  { name = "content", ty = "&Text", value = "&content" },
-  { name = "indicator", ty = "Option<u32>", value = "indicator" },
-  { name = "source", ty = "ChatSource", value = "source" },
-  { name = "ticks", ty = "u64", value = "ticks" },
+  { name = "message", ty = "&Message", value = "&message" },
   { name = "focused", ty = "bool", value = "focused" },
 ]
 

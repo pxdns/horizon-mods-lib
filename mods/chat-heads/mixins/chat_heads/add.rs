@@ -3,7 +3,7 @@ fn chat_heads_add(
     chat: &mut Chat,
     font: &crate::font::Font,
     content: &Text,
-    indicator: Option<u32>,
+    tag: Option<std::sync::Arc<Tag>>,
     source: ChatSource,
     ticks: u64,
     focused: bool,
@@ -20,7 +20,7 @@ fn chat_heads_add(
     let mut shown = crate::component::to_text(&json, &mut |_| Text::empty());
     shown.push(Text::literal(" "));
     shown.push(content.clone());
-    chat.add_message(font, shown, indicator, source, ticks, focused);
+    chat.add_message(font, shown, tag, source, ticks, focused);
     m::leave();
     std::ops::ControlFlow::Break(())
 }

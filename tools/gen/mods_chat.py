@@ -60,12 +60,12 @@ CHAT.append(dict(
     command=None, hooks=["add", "lines", "list", "settings", "click", "tick"],
     options=None, custom_settings=True,
     modpath="horizon_client::chat::lib_more_chat_history",
-    raw_note=("It lives in Horizon's chat module (`crates/horizon-client-render/src/chat.rs`): a cancellable HEAD hook on `Chat::add_message` that does what the original does with a longer limit, and a "
+    raw_note=("It lives in Horizon's chat module (`crates/horizon-client-render/src/chat.rs`): a cancellable HEAD hook on `Chat::push_message` (every message passes through it, a signed player message too) that does what the original does with a longer limit, and a "
               "MODIFY_CONSTANT on the wrapped-line limit in `Chat::add_lines`. Neither is part of the stable hook-point contract, so it is **pinned to one Horizon commit**."),
     toml_text=toml_text("more_chat_history", "1.0.0", "crates/horizon-client-render/src/chat.rs", "lib_more_chat_history", [
-        dict(fields=[("id", '"add"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::chat::Chat::add_message"'), ("helper", '"add.rs"')],
-             bindings=[("chat", "&mut Chat", "&mut *self"), ("font", "&crate::font::Font", "font"), ("content", "&Text", "&content"),
-                       ("indicator", "Option<u32>", "indicator"), ("source", "ChatSource", "source"), ("ticks", "u64", "ticks"), ("focused", "bool", "focused")]),
+        dict(fields=[("id", '"add"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::chat::Chat::push_message"'), ("helper", '"add.rs"')],
+             bindings=[("chat", "&mut Chat", "&mut *self"), ("font", "&crate::font::Font", "font"), ("message", "&Message", "&message"),
+                       ("focused", "bool", "focused")]),
         dict(fields=[("id", '"lines"'), ("kind", '"MODIFY_CONSTANT"'), ("target", '"horizon_client_render::chat::Chat::add_lines"'), ("selector", '"100"'),
                      ("require", "1"), ("ordinal", "0"), ("helper", '"lines.rs"')],
              bindings=[("value", "usize", "$value")]),
@@ -145,25 +145,23 @@ pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static
     }
 ''',
     helpers={
-        "add": '''// ChatComponent.addMessage with the player's own history limit: the original's steps, with `truncate` taking the mod's limit.
+        "add": '''// ChatComponent.addMessage with the player's own history limit: `push_message`'s steps (every message passes through it,
+// a signed player message too), with `truncate` taking the mod's limit.
 fn more_chat_history_add(
     chat: &mut Chat,
     font: &crate::font::Font,
-    content: &Text,
-    indicator: Option<u32>,
-    source: ChatSource,
-    ticks: u64,
+    message: &Message,
     focused: bool,
 ) -> std::ops::ControlFlow<()> {
-    let content = content.clone();
-    if !chat.abilities.shows(source) {
+    let message = message.clone();
+    if !chat.abilities.shows(message.source) {
         return std::ops::ControlFlow::Break(());
     }
-    crate::logging::write_only(log::Level::Info, &format!("[CHAT] {}", content.plain()));
+    let plain = message.content.plain();
+    crate::logging::write_only(log::Level::Info, &format!("[CHAT] {plain}"));
     if chat.log {
-        println!("[CHAT] {}", content.plain());
+        println!("[CHAT] {plain}");
     }
-    let message = Message { added: ticks, content, indicator, source };
     chat.add_lines(font, &message, focused);
     chat.messages.insert(0, message);
     chat.messages.truncate(lib_more_chat_history::limit());
@@ -334,7 +332,10 @@ CHAT.append(dict(
     command=None, hooks=["layout", "list", "settings", "click", "tick"],
     options=[("slide", "Slide in", True)],
     modpath="horizon_client::chat::lib_chat_animation",
-    raw_note=("It lives in Horizon's chat module and replaces `Chat::layout` (a cancellable HEAD hook that rebuilds the draw list the same way, with each new line offset by the slide) - "
+    raw_note=("**Retired on current Horizon: its smooth chat is built in.** Horizon's chat now slides a new line in and fades it in by itself (the smooth chat extra, `Chat::smooth`), "
+              "and `Chat::layout` takes fractional ticks and `Line::tag` where this mod's copy of the layout expects whole ticks and `Line::indicator`, so the mod no longer compiles there. "
+              "Use Horizon's own setting; this folder stays for the Horizon commit it was written on. "
+              "It lives in Horizon's chat module and replaces `Chat::layout` (a cancellable HEAD hook that rebuilds the draw list the same way, with each new line offset by the slide) - "
               "not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. The chat only knows whole ticks, so the slide moves in 50 ms steps."),
     toml_text=toml_text("chat_animation", "1.0.0", "crates/horizon-client-render/src/chat.rs", "lib_chat_animation", [
         dict(fields=[("id", '"layout"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::chat::Chat::layout"'), ("helper", '"layout.rs"')],
