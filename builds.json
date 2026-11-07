@@ -1,0 +1,2508 @@
+{
+  "schema": 1,
+  "builds": [
+    {
+      "key": "fa054cc12523df13",
+      "horizon": "06e405d4654bc2869ee04a43dbfbc160925f6b80",
+      "hooks_api": 399,
+      "mixins": "e8cd0aa38cffef49cb2e088ef716baa107148c02",
+      "built": "2026-11-07T08:35:28+00:00",
+      "mods": [
+        {
+          "id": "apple_skin",
+          "version": "1.0.0",
+          "sha256": "17de951e18c1486f6009c9c4f779a6e5983a6f8b4e5ccf5ab895a363f6f0f8e1",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "apple_skin_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "apple_skin_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "apple_skin_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "apple_skin_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "apple_skin_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "armor_hud",
+          "version": "1.0.0",
+          "sha256": "112f67c4a7999987e37690af3b1c378b14184d41b2de0f9dfca18c1c0ac22b86",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "armor_hud_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "armor_hud_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "armor_hud_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "armor_hud_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "armor_hud_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "better_hurt_cam",
+          "version": "1.0.0",
+          "sha256": "d8ba990df4f754a8e87ac6201167bdea73a08d741b4615c22e5e3143a17fc522",
+          "functions": [
+            {
+              "injection": "bob",
+              "at": "horizon_client::game::fov::Game<'_>::bob_matrix",
+              "kind": "HEAD",
+              "helper": "bob.rs",
+              "function": "better_hurt_cam_bob",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "better_hurt_cam_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "better_hurt_cam_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "better_hurt_cam_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "better_mount_hud",
+          "version": "1.0.0",
+          "sha256": "8cea926b6b2903aa9d7699c00ba6b66ff54b90f72fe1e1048021a409cd0b7aed",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "better_mount_hud_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "better_mount_hud_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "better_mount_hud_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "better_mount_hud_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "better_mount_hud_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "better_stats",
+          "version": "1.0.0",
+          "sha256": "11348849e3daa0c80448e3febc65fbe24568d4ad762d61317a7b441cdea00d49",
+          "functions": [
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "better_stats_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "better_stats_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "better_stats_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "better_stats_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "better_grassify",
+          "version": "1.0.0",
+          "sha256": "b33047ce43d8543f240731d9a195b5a23e21bc75181baf2083db008ed1e99388",
+          "functions": [
+            {
+              "injection": "light",
+              "at": "horizon_client_render::mesher::lighting::ambient_occlusion",
+              "kind": "HEAD",
+              "helper": "light.rs",
+              "function": "better_grassify_light",
+              "applied": true
+            },
+            {
+              "injection": "quad",
+              "at": "horizon_client_render::mesher::Mesher<'_>::quad",
+              "kind": "HEAD",
+              "helper": "quad.rs",
+              "function": "better_grassify_quad",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "bettergrassify_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "bettergrassify_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "bettergrassify_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "bettergrassify_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "chat_heads",
+          "version": "1.0.0",
+          "sha256": "0dbe857b88bad6a6a83c0bae6c17c1a316e1c0646c7c73375afc3a6de35cd773",
+          "functions": [
+            {
+              "injection": "add",
+              "at": "horizon_client_render::chat::Chat::add_message",
+              "kind": "HEAD",
+              "helper": "add.rs",
+              "function": "chat_heads_add",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "chat_heads_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "chat_heads_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "chat_heads_click",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "chat_heads_tick",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "chat_notify",
+          "version": "1.0.0",
+          "sha256": "d3495b7e92d9d5bd2df8d0c7a815748517c25db0b2e35b69665c26f1a9cff0d2",
+          "functions": [
+            {
+              "injection": "message",
+              "at": "horizon_client_render::chat::Chat::add_message",
+              "kind": "HEAD",
+              "helper": "message.rs",
+              "function": "chat_notify_message",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "chat_notify_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "chat_notify_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "chat_notify_click",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "chat_notify_tick",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "chat_patches",
+          "version": "1.0.0",
+          "sha256": "bace0ee58cddc95a0b406ea8bb3cda8d05ad8e2da88e2e50a7c926fa92ff06e4",
+          "functions": [
+            {
+              "injection": "add",
+              "at": "horizon_client_render::chat::Chat::add_message",
+              "kind": "HEAD",
+              "helper": "add.rs",
+              "function": "chat_patches_add",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "chat_patches_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "chat_patches_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "chat_patches_click",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "chat_patches_tick",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "clumps",
+          "version": "1.0.0",
+          "sha256": "8e9d63cee29335b6a8e3bf12f6834f3b6e6de06b30b2aadd519edc49b7a9c4e7",
+          "functions": [
+            {
+              "injection": "merge",
+              "at": "horizon_client::game::Game<'_>::merge_orbs",
+              "kind": "HEAD",
+              "helper": "merge.rs",
+              "function": "clumps_merge",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "clumps_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "clumps_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "clumps_click",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "clumps_tick",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "combat_hitboxes",
+          "version": "1.0.0",
+          "sha256": "d45b56d749598f02286d1f39de3db06cd0334dc740938d5d048888803766a2dc",
+          "functions": [
+            {
+              "injection": "ray",
+              "at": "horizon_client::game::ray_box",
+              "kind": "HEAD",
+              "helper": "ray.rs",
+              "function": "combat_hitboxes_ray",
+              "applied": true
+            },
+            {
+              "injection": "frame",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_frame",
+              "kind": "HEAD",
+              "helper": "frame.rs",
+              "function": "combat_hitboxes_frame",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "combat_hitboxes_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "combat_hitboxes_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "combat_hitboxes_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "controlling",
+          "version": "1.0.0",
+          "sha256": "633bfb7a82dc5d26772c6cfc0c98e03662acdb0a72fc00aa33c64357a3cad63e",
+          "functions": [
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "controlling_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "controlling_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "controlling_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "controlling_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "cps_counter",
+          "version": "1.0.0",
+          "sha256": "8086fa8c87e4af805774e3e5b2dcf0659f81c8664fae55235cd9776e399df505",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "cps_counter_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "cps_counter_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "cps_counter_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "cps_counter_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "cps_counter_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "crafting_tweaks",
+          "version": "1.0.0",
+          "sha256": "be1cb2e7e14050536a780b6583ee37197fba6efc7fbcbbf323516012e8fbf365",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "crafting_tweaks_key",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "crafting_tweaks_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "crafting_tweaks_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "crafting_tweaks_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "crosshair_indicator",
+          "version": "1.0.0",
+          "sha256": "a6b76312c26b6762432cb8f8de76fab8b8652a88475c3c698828c3173d23f68d",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "crosshair_indicator_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "crosshair_indicator_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "crosshair_indicator_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "crosshair_indicator_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "crosshair_indicator_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "crystal_optimizer",
+          "version": "1.0.0",
+          "sha256": "4e4acddd8927509079951c92fe49db44ad8eb457ff9d78fbd8a63974e2f35457",
+          "functions": [
+            {
+              "injection": "send",
+              "at": "horizon_client::game::remote::Game<'_>::send",
+              "kind": "HEAD",
+              "helper": "send.rs",
+              "function": "crystal_optimizer_send",
+              "applied": true
+            },
+            {
+              "injection": "gone",
+              "at": "horizon_client::game::remote_projectiles::Game<'_>::remove_remote_projectile",
+              "kind": "HEAD",
+              "helper": "gone.rs",
+              "function": "crystal_optimizer_gone",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "crystal_optimizer_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "crystal_optimizer_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "crystal_optimizer_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "crystal_optimizer_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "custom_hud",
+          "version": "1.0.0",
+          "sha256": "2a07fdf1b0772a929021115d3e00b1c303bd152df51f87b332a976cb26ff9e99",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "custom_hud_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "custom_hud_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "custom_hud_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "custom_hud_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "custom_hud_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "durability_tooltip",
+          "version": "1.0.0",
+          "sha256": "45eda7e6fef019dd13ccd01fbf99d1e0254fe3e224744324215434a28d73fe1c",
+          "functions": [
+            {
+              "injection": "tooltip",
+              "at": "horizon_client::game::stations::Game<'_>::stack_tooltip",
+              "kind": "RETURN",
+              "helper": "tooltip.rs",
+              "function": "durability_tooltip_tooltip",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "durability_tooltip_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "durability_tooltip_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "durability_tooltip_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "effect_timer",
+          "version": "1.0.0",
+          "sha256": "4c56099024477b01c50736db71ba10aac47a6f560a5bf3f21a9acbf9af847040",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "effect_timer_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "effect_timer_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "effect_timer_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "effect_timer_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "effect_timer_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "enchantment_descriptions",
+          "version": "1.0.0",
+          "sha256": "40bc30fb6c5ebc461d5891c9670740209dfb4b93678a3a0a2a759d7f4057deed",
+          "functions": [
+            {
+              "injection": "tooltip",
+              "at": "horizon_client::game::stations::Game<'_>::stack_tooltip",
+              "kind": "RETURN",
+              "helper": "tooltip.rs",
+              "function": "enchantment_descriptions_tooltip",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "enchantment_descriptions_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "enchantment_descriptions_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "enchantment_descriptions_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "entity_crosshair",
+          "version": "1.0.0",
+          "sha256": "b1b3502011c60595fd72cdd46c5d4dde7883376a7c3c2c8eca16a8f0243bf9e3",
+          "functions": [
+            {
+              "injection": "crosshair",
+              "at": "horizon_client_render::hud_layout::crosshair",
+              "kind": "RETURN",
+              "helper": "crosshair.rs",
+              "function": "entity_crosshair_crosshair",
+              "applied": true
+            },
+            {
+              "injection": "frame",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_frame",
+              "kind": "HEAD",
+              "helper": "frame.rs",
+              "function": "entity_crosshair_frame",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "entity_crosshair_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "entity_crosshair_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "entity_crosshair_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "entity_texture_features",
+          "version": "1.0.0",
+          "sha256": "7c944fcb26c90306339a3968fc7e5b84a4c88a666eecb54ef0395027ff7e0a28",
+          "functions": [
+            {
+              "injection": "body",
+              "at": "horizon_client_lib::mobs::render::body",
+              "kind": "HEAD",
+              "helper": "body.rs",
+              "function": "entity_texture_features_body",
+              "applied": true
+            },
+            {
+              "injection": "layers",
+              "at": "horizon_client_lib::mobs::render::layers",
+              "kind": "HEAD",
+              "helper": "layers.rs",
+              "function": "entity_texture_features_layers",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "entity_texture_features_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "entity_texture_features_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "entity_texture_features_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "entity_texture_features_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "f5_split",
+          "version": "1.0.0",
+          "sha256": "ef2c2e7b1a8d13cc1f98f7f7b3db9f22732cf98ab1dcdd03492706af64a59bdc",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "f5_split_key",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "f5_split_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "f5_split_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "f5_split_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "fps_display",
+          "version": "1.0.0",
+          "sha256": "b8f01f49af8d5ff38f8ecd77a47f1e8ea810fd790045f39b3ade6ef3ab459af9",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "fps_display_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "fps_display_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "fps_display_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "fps_display_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "fps_display_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "freecam",
+          "version": "1.0.0",
+          "sha256": "7bcc6ae3535d45f1362849c354af4b6b2b4b295b4e702f4b5127c968000aa115",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "freecam_key",
+              "applied": true
+            },
+            {
+              "injection": "frame",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_frame",
+              "kind": "HEAD",
+              "helper": "frame.rs",
+              "function": "freecam_frame",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "freecam_tick",
+              "applied": true
+            },
+            {
+              "injection": "turn",
+              "at": "horizon_client::game::perspective::Game<'_>::turn_player",
+              "kind": "HEAD",
+              "helper": "turn.rs",
+              "function": "freecam_turn",
+              "applied": true
+            },
+            {
+              "injection": "camera",
+              "at": "horizon_client::game::perspective::Game<'_>::camera_view",
+              "kind": "HEAD",
+              "helper": "camera.rs",
+              "function": "freecam_camera",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "freecam_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "freecam_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "freecam_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "freelook",
+          "version": "1.0.0",
+          "sha256": "a80a4455a96d6bf2ab02e7b943ae39b320065de2c106c484e55975f74748fe54",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "freelook_key",
+              "applied": true
+            },
+            {
+              "injection": "turn",
+              "at": "horizon_client::game::perspective::Game<'_>::turn_player",
+              "kind": "HEAD",
+              "helper": "turn.rs",
+              "function": "freelook_turn",
+              "applied": true
+            },
+            {
+              "injection": "camera",
+              "at": "horizon_client::game::perspective::Game<'_>::camera_view",
+              "kind": "HEAD",
+              "helper": "camera.rs",
+              "function": "freelook_camera",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "freelook_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "freelook_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "freelook_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "info_hud",
+          "version": "1.0.0",
+          "sha256": "8e2e8677fe2dd71a900e6ebd4ee2a46c32bb76fd334f444cfcd086e4256891db",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "info_hud_hud",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "info_hud_tick",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "info_hud_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "info_hud_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "info_hud_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "info_hud_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "invmove",
+          "version": "1.0.0",
+          "sha256": "04fef2aefd22e6f43b7028e0326bfbfd52b4596ea0ffb8e7664e52ec1e06a6f2",
+          "functions": [
+            {
+              "injection": "walk",
+              "at": "horizon_client::game::Game<'_>::tick",
+              "kind": "HEAD",
+              "helper": "walk.rs",
+              "function": "invmove_walk",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "invmove_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "invmove_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "invmove_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "item_highlighter",
+          "version": "1.0.0",
+          "sha256": "3767b2add13a6ed9b794d8db434b9eada3169bcf9ec827edc8d3c7923eb41c30",
+          "functions": [
+            {
+              "injection": "slot",
+              "at": "horizon_client::game::Game<'_>::draw_slot_item",
+              "kind": "HEAD",
+              "helper": "slot.rs",
+              "function": "item_highlighter_slot",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "item_highlighter_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "item_highlighter_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "item_highlighter_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "item_highlighter_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "key_overlay",
+          "version": "1.0.0",
+          "sha256": "d74d47e7cf2158d2a26244b90558fad35e541b73a60038bbfd7c59d68ed40d1b",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "key_overlay_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "key_overlay_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "key_overlay_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "key_overlay_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "key_overlay_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "litematica",
+          "version": "1.0.0",
+          "sha256": "9fc84ebc4ea02ff3df357635f3533449642794a67db2627e8fe9e07cc5a496c0",
+          "functions": [
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "litematica_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "litematica_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "litematica_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "litematica_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "minimap_plus",
+          "version": "1.0.0",
+          "sha256": "a0e70f974ce1bfe38b9196d8c436202633a246879d0ae77631d8ffe0ee03365f",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "minimap_plus_key",
+              "applied": true
+            },
+            {
+              "injection": "minimap",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_minimap",
+              "kind": "HEAD",
+              "helper": "minimap.rs",
+              "function": "minimap_plus_view",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "minimap_plus_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "minimap_plus_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "minimap_plus_click",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "minimap_plus_command",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "more_chat_history",
+          "version": "1.0.0",
+          "sha256": "02f9e1b06664f2b0b3ec9e7d9f1e24f21181dec896ab7a39f65946e671f6a18d",
+          "functions": [
+            {
+              "injection": "add",
+              "at": "horizon_client_render::chat::Chat::push_message",
+              "kind": "HEAD",
+              "helper": "add.rs",
+              "function": "more_chat_history_add",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "more_chat_history_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "more_chat_history_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "more_chat_history_click",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "more_chat_history_tick",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "multi_key_bindings",
+          "version": "1.0.0",
+          "sha256": "d648373576a1dd0ecac886ce8991462e2de766fc17cae519ad091889b87bb4f5",
+          "functions": [
+            {
+              "injection": "translate",
+              "at": "horizon_client_input::keybinds::KeyBinds::translate_all",
+              "kind": "HEAD",
+              "helper": "translate.rs",
+              "function": "multi_key_bindings_translate",
+              "applied": true
+            },
+            {
+              "injection": "mouse",
+              "at": "horizon_client_input::keybinds::KeyBinds::translate_mouse_all",
+              "kind": "HEAD",
+              "helper": "mouse.rs",
+              "function": "multi_key_bindings_translate_mouse",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "multi_key_bindings_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "multi_key_bindings_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "multi_key_bindings_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "multi_key_bindings_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "password_hider",
+          "version": "1.0.0",
+          "sha256": "8a8f18c6d401cd6be6b390d233c1e69f1cc378850db1f5246006773a911e89bf",
+          "functions": [
+            {
+              "injection": "format",
+              "at": "horizon_client_render::chat::ChatScreen::format",
+              "kind": "HEAD",
+              "helper": "format.rs",
+              "function": "password_hider_format",
+              "applied": true
+            },
+            {
+              "injection": "recent",
+              "at": "horizon_client_render::chat::Chat::add_recent",
+              "kind": "HEAD",
+              "helper": "recent.rs",
+              "function": "password_hider_recent",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "password_hider_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "password_hider_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "password_hider_click",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "password_hider_tick",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "pearl_optimizer",
+          "version": "1.0.0",
+          "sha256": "d8d193ef67f18a4a83922f9d5737204fed7335418e066d4170d463082fef404a",
+          "functions": [
+            {
+              "injection": "send",
+              "at": "horizon_client::game::remote::Game<'_>::send",
+              "kind": "HEAD",
+              "helper": "send.rs",
+              "function": "pearl_optimizer_send",
+              "applied": true
+            },
+            {
+              "injection": "arrive",
+              "at": "horizon_client::game::creatures::Game<'_>::add_projectile",
+              "kind": "HEAD",
+              "helper": "arrive.rs",
+              "function": "pearl_optimizer_add",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "pearl_optimizer_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "pearl_optimizer_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "pearl_optimizer_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "pearl_optimizer_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "pick_up_notifier",
+          "version": "1.0.0",
+          "sha256": "5b579129c0ea820363964039ad163c539e32fe1112db6b7a320b968f73750cbc",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "pick_up_notifier_hud",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "pick_up_notifier_tick",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "pick_up_notifier_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "pick_up_notifier_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "pick_up_notifier_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "pick_up_notifier_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "ping_view",
+          "version": "1.0.0",
+          "sha256": "e300a1a7f17f3111d3feabe717bfb2f40c91dba346d2360dde623a3d3e82b427",
+          "functions": [
+            {
+              "injection": "log",
+              "at": "horizon_client_lib::debug_chart::SampleLogger::log",
+              "kind": "HEAD",
+              "helper": "log.rs",
+              "function": "ping_view_log",
+              "applied": true
+            },
+            {
+              "injection": "frame",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_frame",
+              "kind": "HEAD",
+              "helper": "frame.rs",
+              "function": "ping_view_frame",
+              "applied": true
+            },
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "ping_view_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "ping_view_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "ping_view_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "ping_view_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "ping_view_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "potion_counter",
+          "version": "1.0.0",
+          "sha256": "e6b4b23149a781139985a5f547002ec7e71c6310fa938f5c2d2049b34525acc1",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "potion_counter_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "potion_counter_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "potion_counter_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "potion_counter_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "potion_counter_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "search_stats",
+          "version": "1.0.0",
+          "sha256": "837097586df8dc83fee957b6a47daa813b9397af4f37f74acd3e154f4344eb06",
+          "functions": [
+            {
+              "injection": "items",
+              "at": "horizon_client::game::stats_screen::Game<'_>::stat_items",
+              "kind": "HEAD",
+              "helper": "items.rs",
+              "function": "search_stats_items",
+              "applied": true
+            },
+            {
+              "injection": "mobs",
+              "at": "horizon_client::game::stats_screen::Game<'_>::stat_mobs",
+              "kind": "RETURN",
+              "helper": "mobs.rs",
+              "function": "search_stats_mobs",
+              "applied": true
+            },
+            {
+              "injection": "footer",
+              "at": "horizon_client::game::stats_screen::Game<'_>::draw_stats_footer",
+              "kind": "HEAD",
+              "helper": "footer.rs",
+              "function": "search_stats_footer",
+              "applied": true
+            },
+            {
+              "injection": "open",
+              "at": "horizon_client::game::stats_screen::Game<'_>::open_stats",
+              "kind": "HEAD",
+              "helper": "open.rs",
+              "function": "search_stats_open",
+              "applied": true
+            },
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "search_stats_key",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "search_stats_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "search_stats_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "search_stats_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "shield_statuses",
+          "version": "1.0.0",
+          "sha256": "0e79ed74bd371af54a5ea67580073205cc95324327de7be038ace79b21e3a9d8",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "shield_statuses_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "shield_statuses_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "shield_statuses_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "shield_statuses_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "shield_statuses_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "shulker_box_tooltip",
+          "version": "1.0.0",
+          "sha256": "60916e30e062c0ac11c18314f099ff570d8d7e8998bb690a6464b2276b593d39",
+          "functions": [
+            {
+              "injection": "tooltip",
+              "at": "horizon_client::game::stations::Game<'_>::stack_tooltip",
+              "kind": "RETURN",
+              "helper": "tooltip.rs",
+              "function": "shulker_box_tooltip_tooltip",
+              "applied": true
+            },
+            {
+              "injection": "bundle",
+              "at": "horizon_items::bundle::tooltip_layout",
+              "kind": "HEAD",
+              "helper": "bundle.rs",
+              "function": "shulker_box_tooltip_bundle",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "shulker_box_tooltip_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "shulker_box_tooltip_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "shulker_box_tooltip_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "simple_zoom",
+          "version": "1.0.0",
+          "sha256": "9e794a010c3be3cb5f5d8312da954865ba7d8c548904a5da1ff9f9621ae88989",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "simple_zoom_key",
+              "applied": true
+            },
+            {
+              "injection": "wheel",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_wheel",
+              "kind": "HEAD",
+              "helper": "wheel.rs",
+              "function": "simple_zoom_wheel",
+              "applied": true
+            },
+            {
+              "injection": "zoom",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_zoom",
+              "kind": "HEAD",
+              "helper": "zoom.rs",
+              "function": "simple_zoom_view",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "simple_zoom_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "simple_zoom_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "simple_zoom_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "snappy_tappy",
+          "version": "1.0.0",
+          "sha256": "ea9a501c44efca772410e0728f6ddd52083709b34b9180e2bf82a7c3ea80a977",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "snappy_tappy_key",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "snappy_tappy_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "snappy_tappy_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "snappy_tappy_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "snappy_tappy_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "sprint_indicator",
+          "version": "1.0.0",
+          "sha256": "6678d7d726979998c63a006ea3f16caf938defe8662f8d79b458f0f4bc72589f",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "sprint_indicator_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "sprint_indicator_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "sprint_indicator_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "sprint_indicator_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "sprint_indicator_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "totem_counter",
+          "version": "1.0.0",
+          "sha256": "dbb9c8773980209f62f43ee12c8b3c4557f8633151efcf546de9471545169574",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "totem_counter_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "totem_counter_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "totem_counter_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "totem_counter_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "totem_counter_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "totem_tweaks",
+          "version": "1.0.0",
+          "sha256": "b6a3674beaffcfa7229037ae6bbd64cd536a52cd95b46b68d3a8fbbabf03012a",
+          "functions": [
+            {
+              "injection": "pose",
+              "at": "horizon_client_lib::item_activation::animation_pose",
+              "kind": "HEAD",
+              "helper": "pose.rs",
+              "function": "totem_tweaks_pose",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "totem_tweaks_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "totem_tweaks_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "totem_tweaks_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "totem_tweaks_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "tweakeroo",
+          "version": "1.0.0",
+          "sha256": "4a5df4476fd852ed3e1ebb9ed92c12d1ab5925acb03b63926ec01367cda70c00",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "tweakeroo_key",
+              "applied": true
+            },
+            {
+              "injection": "tick",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_tick",
+              "kind": "HEAD",
+              "helper": "tick.rs",
+              "function": "tweakeroo_tick",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "tweakeroo_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "tweakeroo_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "tweakeroo_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "visual_keys",
+          "version": "1.0.0",
+          "sha256": "0d37b6967f702594f4659487394d858efc445e56f7d98073d14016122750d7ca",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "visual_keys_hud",
+              "applied": true
+            },
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "visual_keys_key",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "visual_keys_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "visual_keys_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "visual_keys_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "visual_keys_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "waypoints",
+          "version": "1.0.0",
+          "sha256": "f77770620c7bb6c539fd6194803cee019136c76c3f327c633558c24b4d9eed04",
+          "functions": [
+            {
+              "injection": "hud",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_hud",
+              "kind": "HEAD",
+              "helper": "hud.rs",
+              "function": "waypoints_hud",
+              "applied": true
+            },
+            {
+              "injection": "command",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_command",
+              "kind": "HEAD",
+              "helper": "command.rs",
+              "function": "waypoints_command",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "waypoints_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "waypoints_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "waypoints_click",
+              "applied": true
+            }
+          ]
+        },
+        {
+          "id": "zoomify",
+          "version": "1.0.0",
+          "sha256": "a4d0c977091875e61fef17f6545f96fd2c8b9af35e1059709a7289a6eb57f772",
+          "functions": [
+            {
+              "injection": "key",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_key",
+              "kind": "HEAD",
+              "helper": "key.rs",
+              "function": "zoomify_key",
+              "applied": true
+            },
+            {
+              "injection": "wheel",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_wheel",
+              "kind": "HEAD",
+              "helper": "wheel.rs",
+              "function": "zoomify_wheel",
+              "applied": true
+            },
+            {
+              "injection": "zoom",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_zoom",
+              "kind": "HEAD",
+              "helper": "zoom.rs",
+              "function": "zoomify_view",
+              "applied": true
+            },
+            {
+              "injection": "list",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_mods",
+              "kind": "HEAD",
+              "helper": "list.rs",
+              "function": "zoomify_listed",
+              "applied": true
+            },
+            {
+              "injection": "settings",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings",
+              "kind": "HEAD",
+              "helper": "settings.rs",
+              "function": "zoomify_page",
+              "applied": true
+            },
+            {
+              "injection": "click",
+              "at": "horizon_client::game::native_hooks::Game<'_>::native_settings_click",
+              "kind": "HEAD",
+              "helper": "click.rs",
+              "function": "zoomify_click",
+              "applied": true
+            }
+          ]
+        }
+      ],
+      "pkg": "fa054cc12523df13/pkg/"
+    }
+  ]
+}

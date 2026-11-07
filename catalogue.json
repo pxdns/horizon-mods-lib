@@ -1,0 +1,522 @@
+{
+  "schema": 1,
+  "mods": [
+    {
+      "id": "apple_skin",
+      "name": "Apple Skin",
+      "description": "Your hunger and saturation as numbers and as overlays on the food bar, and what the food in your hand would restore.",
+      "version": "1.0.0",
+      "file": "mods/apple_skin.hnmod",
+      "size": 6741,
+      "sha256": "17de951e18c1486f6009c9c4f779a6e5983a6f8b4e5ccf5ab895a363f6f0f8e1"
+    },
+    {
+      "id": "armor_hud",
+      "name": "Armor HUD",
+      "description": "Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points.",
+      "version": "1.0.0",
+      "file": "mods/armor_hud.hnmod",
+      "size": 7041,
+      "sha256": "112f67c4a7999987e37690af3b1c378b14184d41b2de0f9dfca18c1c0ac22b86"
+    },
+    {
+      "id": "better_hurt_cam",
+      "name": "Better Hurt Cam",
+      "description": "Tone the camera shake down when you are hit, and switch the death tilt off.",
+      "version": "1.0.0",
+      "file": "mods/better_hurt_cam.hnmod",
+      "size": 4909,
+      "sha256": "d8ba990df4f754a8e87ac6201167bdea73a08d741b4615c22e5e3143a17fc522"
+    },
+    {
+      "id": "better_mount_hud",
+      "name": "Better Mount HUD",
+      "description": "Numbers for the mount you ride: health, speed in blocks per second, jump height and jump charge.",
+      "version": "1.0.0",
+      "file": "mods/better_mount_hud.hnmod",
+      "size": 5960,
+      "sha256": "8cea926b6b2903aa9d7699c00ba6b66ff54b90f72fe1e1048021a409cd0b7aed"
+    },
+    {
+      "id": "better_stats",
+      "name": "Better Stats",
+      "description": "Search, rank and export your statistics from chat: the biggest entries of each kind, a search across all of them, and a text or CSV file.",
+      "version": "1.0.0",
+      "file": "mods/better_stats.hnmod",
+      "size": 6864,
+      "sha256": "11348849e3daa0c80448e3febc65fbe24568d4ad762d61317a7b441cdea00d49"
+    },
+    {
+      "id": "better_grassify",
+      "name": "better_grassify",
+      "description": "",
+      "version": "1.0.0",
+      "file": "mods/bettergrassify.hnmod",
+      "size": 7596,
+      "sha256": "b33047ce43d8543f240731d9a195b5a23e21bc75181baf2083db008ed1e99388"
+    },
+    {
+      "id": "chat_heads",
+      "name": "Chat Heads",
+      "description": "Shows the sender's face in front of each chat line.",
+      "version": "1.0.0",
+      "file": "mods/chat_heads.hnmod",
+      "size": 6396,
+      "sha256": "0dbe857b88bad6a6a83c0bae6c17c1a316e1c0646c7c73375afc3a6de35cd773"
+    },
+    {
+      "id": "chat_notify",
+      "name": "Chat Notify",
+      "description": "Plays a sound when someone says your name in chat.",
+      "version": "1.0.0",
+      "file": "mods/chat_notify.hnmod",
+      "size": 5490,
+      "sha256": "d3495b7e92d9d5bd2df8d0c7a815748517c25db0b2e35b69665c26f1a9cff0d2"
+    },
+    {
+      "id": "chat_patches",
+      "name": "Chat Patches",
+      "description": "Timestamps in front of chat lines, and an option to drop immediate repeats.",
+      "version": "1.0.0",
+      "file": "mods/chat_patches.hnmod",
+      "size": 5757,
+      "sha256": "bace0ee58cddc95a0b406ea8bb3cda8d05ad8e2da88e2e50a7c926fa92ff06e4"
+    },
+    {
+      "id": "clumps",
+      "name": "Clumps",
+      "description": "Groups nearby experience orbs into a single orb, which cuts the entity count and is collected at once.",
+      "version": "1.0.0",
+      "file": "mods/clumps.hnmod",
+      "size": 5521,
+      "sha256": "8e9d63cee29335b6a8e3bf12f6834f3b6e6de06b30b2aadd519edc49b7a9c4e7"
+    },
+    {
+      "id": "combat_hitboxes",
+      "name": "Combat Hitboxes",
+      "description": "Makes entities slightly easier to hit by growing the box your crosshair is tested against.",
+      "version": "1.0.0",
+      "file": "mods/combat_hitboxes.hnmod",
+      "size": 4630,
+      "sha256": "d45b56d749598f02286d1f39de3db06cd0334dc740938d5d048888803766a2dc"
+    },
+    {
+      "id": "controlling",
+      "name": "Controlling",
+      "description": "Find key bindings by action or by key, and list conflicts and unbound actions.",
+      "version": "1.0.0",
+      "file": "mods/controlling.hnmod",
+      "size": 5868,
+      "sha256": "633bfb7a82dc5d26772c6cfc0c98e03662acdb0a72fc00aa33c64357a3cad63e"
+    },
+    {
+      "id": "cps_counter",
+      "name": "CPS Counter",
+      "description": "Your clicks per second in a corner of the screen.",
+      "version": "1.0.0",
+      "file": "mods/cps_counter.hnmod",
+      "size": 5081,
+      "sha256": "8086fa8c87e4af805774e3e5b2dcf0659f81c8664fae55235cd9776e399df505"
+    },
+    {
+      "id": "crafting_tweaks",
+      "name": "Crafting Tweaks",
+      "description": "Keys that rotate, balance and clear the crafting grid.",
+      "version": "1.0.0",
+      "file": "mods/crafting_tweaks.hnmod",
+      "size": 6828,
+      "sha256": "be1cb2e7e14050536a780b6583ee37197fba6efc7fbcbbf323516012e8fbf365"
+    },
+    {
+      "id": "crosshair_indicator",
+      "name": "Crosshair Indicator",
+      "description": "Turns your crosshair red when it is over a living creature.",
+      "version": "1.0.0",
+      "file": "mods/crosshair_indicator.hnmod",
+      "size": 5560,
+      "sha256": "a6b76312c26b6762432cb8f8de76fab8b8652a88475c3c698828c3173d23f68d"
+    },
+    {
+      "id": "crystal_optimizer",
+      "name": "Crystal Optimizer",
+      "description": "Makes End crystals you hit disappear at once on a server, and brings one back if the server did not break it.",
+      "version": "1.0.0",
+      "file": "mods/crystal_optimizer.hnmod",
+      "size": 6011,
+      "sha256": "4e4acddd8927509079951c92fe49db44ad8eb457ff9d78fbd8a63974e2f35457"
+    },
+    {
+      "id": "custom_hud",
+      "name": "Custom HUD",
+      "description": "One box with the lines you pick: FPS, coordinates, facing and clicks per second, on the side you choose.",
+      "version": "1.0.0",
+      "file": "mods/custom_hud.hnmod",
+      "size": 5719,
+      "sha256": "2a07fdf1b0772a929021115d3e00b1c303bd152df51f87b332a976cb26ff9e99"
+    },
+    {
+      "id": "durability_tooltip",
+      "name": "Durability Tooltip",
+      "description": "Adds a Durability line to the tooltip of tools, weapons and armor.",
+      "version": "1.0.0",
+      "file": "mods/durability_tooltip.hnmod",
+      "size": 4785,
+      "sha256": "45eda7e6fef019dd13ccd01fbf99d1e0254fe3e224744324215434a28d73fe1c"
+    },
+    {
+      "id": "effect_timer",
+      "name": "Effect Timer",
+      "description": "Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.",
+      "version": "1.0.0",
+      "file": "mods/effect_timer.hnmod",
+      "size": 7976,
+      "sha256": "4c56099024477b01c50736db71ba10aac47a6f560a5bf3f21a9acbf9af847040"
+    },
+    {
+      "id": "enchantment_descriptions",
+      "name": "Enchantment Descriptions",
+      "description": "Adds a line to enchanted items' tooltips saying what each enchantment does.",
+      "version": "1.0.0",
+      "file": "mods/enchantment_descriptions.hnmod",
+      "size": 6024,
+      "sha256": "40bc30fb6c5ebc461d5891c9670740209dfb4b93678a3a0a2a759d7f4057deed"
+    },
+    {
+      "id": "entity_crosshair",
+      "name": "Entity Crosshair",
+      "description": "Replaces the crosshair with a style and colour of your choice, red over living entities.",
+      "version": "1.0.0",
+      "file": "mods/entity_crosshair.hnmod",
+      "size": 5826,
+      "sha256": "b1b3502011c60595fd72cdd46c5d4dde7883376a7c3c2c8eca16a8f0243bf9e3"
+    },
+    {
+      "id": "entity_texture_features",
+      "name": "Entity Texture Features",
+      "description": "Random texture variants and emissive layers for mobs, from the textures a resource pack provides.",
+      "version": "1.0.0",
+      "file": "mods/entity_texture_features.hnmod",
+      "size": 7499,
+      "sha256": "7c944fcb26c90306339a3968fc7e5b84a4c88a666eecb54ef0395027ff7e0a28"
+    },
+    {
+      "id": "f5_split",
+      "name": "F5 Split",
+      "description": "Separate keys for the back and the front third-person view, as a toggle or while held.",
+      "version": "1.0.0",
+      "file": "mods/f5_split.hnmod",
+      "size": 4694,
+      "sha256": "ef2c2e7b1a8d13cc1f98f7f7b3db9f22732cf98ab1dcdd03492706af64a59bdc"
+    },
+    {
+      "id": "fps_display",
+      "name": "FPS Display",
+      "description": "Frames per second in a corner of the screen, coloured by how smooth they are.",
+      "version": "1.0.0",
+      "file": "mods/fps_display.hnmod",
+      "size": 5362,
+      "sha256": "b8f01f49af8d5ff38f8ecd77a47f1e8ea810fd790045f39b3ade6ef3ab459af9"
+    },
+    {
+      "id": "freecam",
+      "name": "Freecam",
+      "description": "Detach the camera and fly it around while your player stands still.",
+      "version": "1.0.0",
+      "file": "mods/freecam.hnmod",
+      "size": 8191,
+      "sha256": "7bcc6ae3535d45f1362849c354af4b6b2b4b295b4e702f4b5127c968000aa115"
+    },
+    {
+      "id": "freelook",
+      "name": "Freelook",
+      "description": "Hold a key and move the mouse to look around without turning your player.",
+      "version": "1.0.0",
+      "file": "mods/freelook.hnmod",
+      "size": 6135,
+      "sha256": "a80a4455a96d6bf2ab02e7b943ae39b320065de2c106c484e55975f74748fe54"
+    },
+    {
+      "id": "info_hud",
+      "name": "Info HUD",
+      "description": "Your speed, the way you face and your dimension in a corner of the screen, in the spirit of MiniHUD's info lines.",
+      "version": "1.0.0",
+      "file": "mods/info_hud.hnmod",
+      "size": 6489,
+      "sha256": "8e2e8677fe2dd71a900e6ebd4ee2a46c32bb76fd334f444cfcd086e4256891db"
+    },
+    {
+      "id": "invmove",
+      "name": "InvMove",
+      "description": "Keep walking, jumping and sneaking while your inventory is open.",
+      "version": "1.0.0",
+      "file": "mods/invmove.hnmod",
+      "size": 4517,
+      "sha256": "04fef2aefd22e6f43b7028e0326bfbfd52b4596ea0ffb8e7664e52ec1e06a6f2"
+    },
+    {
+      "id": "item_highlighter",
+      "name": "Item Highlighter",
+      "description": "Marks newly picked-up items with a twinkling star in your inventory.",
+      "version": "1.0.0",
+      "file": "mods/item_highlighter.hnmod",
+      "size": 6315,
+      "sha256": "3767b2add13a6ed9b794d8db434b9eada3169bcf9ec827edc8d3c7923eb41c30"
+    },
+    {
+      "id": "key_overlay",
+      "name": "Key Overlay",
+      "description": "Shows W, A, S, D, jump and the mouse buttons on screen and lights the ones you hold.",
+      "version": "1.0.0",
+      "file": "mods/key_overlay.hnmod",
+      "size": 6102,
+      "sha256": "d74d47e7cf2158d2a26244b90558fad35e541b73a60038bbfd7c59d68ed40d1b"
+    },
+    {
+      "id": "litematica",
+      "name": "Litematica",
+      "description": "Read .litematic schematics: info, and the material list of blocks you need.",
+      "version": "1.0.0",
+      "file": "mods/litematica.hnmod",
+      "size": 8425,
+      "sha256": "9fc84ebc4ea02ff3df357635f3533449642794a67db2627e8fe9e07cc5a496c0"
+    },
+    {
+      "id": "minimap_plus",
+      "name": "Minimap Plus",
+      "description": "Turns Horizon's minimap on and shapes it: corner, size, zoom keys, a big-map key, turning and round or square.",
+      "version": "1.0.0",
+      "file": "mods/minimap_plus.hnmod",
+      "size": 6386,
+      "sha256": "a0e70f974ce1bfe38b9196d8c436202633a246879d0ae77631d8ffe0ee03365f"
+    },
+    {
+      "id": "more_chat_history",
+      "name": "More Chat History",
+      "description": "Chat remembers up to 2000 lines instead of 100, so you can scroll back through a long conversation.",
+      "version": "1.0.0",
+      "file": "mods/more_chat_history.hnmod",
+      "size": 4849,
+      "sha256": "02f9e1b06664f2b0b3ec9e7d9f1e24f21181dec896ab7a39f65946e671f6a18d"
+    },
+    {
+      "id": "multi_key_bindings",
+      "name": "Multi Key Bindings",
+      "description": "More than one key for the same action.",
+      "version": "1.0.0",
+      "file": "mods/multi_key_bindings.hnmod",
+      "size": 8108,
+      "sha256": "d648373576a1dd0ecac886ce8991462e2de766fc17cae519ad091889b87bb4f5"
+    },
+    {
+      "id": "password_hider",
+      "name": "Password Hider",
+      "description": "Shows the password in /login, /register and /changepassword as asterisks while you type, and keeps it out of the chat history and its file.",
+      "version": "1.0.0",
+      "file": "mods/password_hider.hnmod",
+      "size": 6164,
+      "sha256": "8a8f18c6d401cd6be6b390d233c1e69f1cc378850db1f5246006773a911e89bf"
+    },
+    {
+      "id": "pearl_optimizer",
+      "name": "Pearl Optimizer",
+      "description": "Shows your thrown ender pearl immediately on a server, before the server's pearl arrives.",
+      "version": "1.0.0",
+      "file": "mods/pearl_optimizer.hnmod",
+      "size": 7125,
+      "sha256": "d8d193ef67f18a4a83922f9d5737204fed7335418e066d4170d463082fef404a"
+    },
+    {
+      "id": "pick_up_notifier",
+      "name": "Pick Up Notifier",
+      "description": "+3 Cobblestone: a short list of what you just picked up (and, if you like, dropped).",
+      "version": "1.0.0",
+      "file": "mods/pick_up_notifier.hnmod",
+      "size": 7014,
+      "sha256": "5b579129c0ea820363964039ad163c539e32fe1112db6b7a320b968f73750cbc"
+    },
+    {
+      "id": "ping_view",
+      "name": "Ping View",
+      "description": "Shows your ping to the server: the latest reply, the average of the last 20 and the best and worst.",
+      "version": "1.0.0",
+      "file": "mods/ping_view.hnmod",
+      "size": 6895,
+      "sha256": "e300a1a7f17f3111d3feabe717bfb2f40c91dba346d2360dde623a3d3e82b427"
+    },
+    {
+      "id": "potion_counter",
+      "name": "Potion Counter",
+      "description": "How many potions, splash potions and lingering potions you carry.",
+      "version": "1.0.0",
+      "file": "mods/potion_counter.hnmod",
+      "size": 5691,
+      "sha256": "e6b4b23149a781139985a5f547002ec7e71c6310fa938f5c2d2049b34525acc1"
+    },
+    {
+      "id": "search_stats",
+      "name": "Search Stats",
+      "description": "Adds a search box to the statistics screen that filters the Items and Mobs lists as you type.",
+      "version": "1.0.0",
+      "file": "mods/search_stats.hnmod",
+      "size": 7288,
+      "sha256": "837097586df8dc83fee957b6a47daa813b9397af4f37f74acd3e154f4344eb06"
+    },
+    {
+      "id": "shield_statuses",
+      "name": "Shield Statuses",
+      "description": "Your shield's state as a coloured line: ready, blocking, or disabled with the seconds left.",
+      "version": "1.0.0",
+      "file": "mods/shield_statuses.hnmod",
+      "size": 5697,
+      "sha256": "0e79ed74bd371af54a5ea67580073205cc95324327de7be038ace79b21e3a9d8"
+    },
+    {
+      "id": "shulker_box_tooltip",
+      "name": "Shulker Box Tooltip",
+      "description": "Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items.",
+      "version": "1.0.0",
+      "file": "mods/shulker_box_tooltip.hnmod",
+      "size": 7081,
+      "sha256": "60916e30e062c0ac11c18314f099ff570d8d7e8998bb690a6464b2276b593d39"
+    },
+    {
+      "id": "simple_zoom",
+      "name": "Simple Zoom",
+      "description": "Press a key to zoom in and press it again to zoom out; the wheel changes the zoom meanwhile.",
+      "version": "1.0.0",
+      "file": "mods/simple_zoom.hnmod",
+      "size": 6150,
+      "sha256": "9e794a010c3be3cb5f5d8312da954865ba7d8c548904a5da1ff9f9621ae88989"
+    },
+    {
+      "id": "snappy_tappy",
+      "name": "Snappy Tappy",
+      "description": "When you hold two opposite movement keys, the one pressed last wins, so you switch direction at once.",
+      "version": "1.0.0",
+      "file": "mods/snappy_tappy.hnmod",
+      "size": 5365,
+      "sha256": "ea9a501c44efca772410e0728f6ddd52083709b34b9180e2bf82a7c3ea80a977"
+    },
+    {
+      "id": "sprint_indicator",
+      "name": "Sprint Indicator",
+      "description": "Shows Sprinting, Walking or Sneaking in a corner of the screen while you move.",
+      "version": "1.0.0",
+      "file": "mods/sprint_indicator.hnmod",
+      "size": 5579,
+      "sha256": "6678d7d726979998c63a006ea3f16caf938defe8662f8d79b458f0f4bc72589f"
+    },
+    {
+      "id": "totem_counter",
+      "name": "Totem Counter",
+      "description": "How many totems of undying you carry, red when you have none.",
+      "version": "1.0.0",
+      "file": "mods/totem_counter.hnmod",
+      "size": 5341,
+      "sha256": "dbb9c8773980209f62f43ee12c8b3c4557f8633151efcf546de9471545169574"
+    },
+    {
+      "id": "totem_tweaks",
+      "name": "Totem Tweaks",
+      "description": "Customise the totem of undying pop animation: off, speed, size, spin, rocking and position.",
+      "version": "1.0.0",
+      "file": "mods/totem_tweaks.hnmod",
+      "size": 6126,
+      "sha256": "b6a3674beaffcfa7229037ae6bbd64cd536a52cd95b46b68d3a8fbbabf03012a"
+    },
+    {
+      "id": "tweakeroo",
+      "name": "Tweakeroo",
+      "description": "Four of Tweakeroo's tweaks: hand restock, hotbar cycle, fast right click and a tool break warning.",
+      "version": "1.0.0",
+      "file": "mods/tweakeroo.hnmod",
+      "size": 6424,
+      "sha256": "4a5df4476fd852ed3e1ebb9ed92c12d1ab5925acb03b63926ec01367cda70c00"
+    },
+    {
+      "id": "visual_keys",
+      "name": "VisualKeys",
+      "description": "An on-screen keyboard that shows what every key is bound to and which keys are free.",
+      "version": "1.0.0",
+      "file": "mods/visual_keys.hnmod",
+      "size": 8546,
+      "sha256": "0d37b6967f702594f4659487394d858efc445e56f7d98073d14016122750d7ca"
+    },
+    {
+      "id": "waypoints",
+      "name": "Waypoints",
+      "description": "Name places with /wp, list them, and track one: its distance and direction show on screen.",
+      "version": "1.0.0",
+      "file": "mods/waypoints.hnmod",
+      "size": 8062,
+      "sha256": "f77770620c7bb6c539fd6194803cee019136c76c3f327c633558c24b4d9eed04"
+    },
+    {
+      "id": "zoomify",
+      "name": "Zoomify",
+      "description": "Hold a key to zoom in, turn the wheel to zoom further, with smooth easing and slower turning.",
+      "version": "1.0.0",
+      "file": "mods/zoomify.hnmod",
+      "size": 6062,
+      "sha256": "a4d0c977091875e61fef17f6545f96fd2c8b9af35e1059709a7289a6eb57f772"
+    }
+  ],
+  "builds": [
+    {
+      "key": "fa054cc12523df13",
+      "mods": [
+        "apple_skin",
+        "armor_hud",
+        "better_hurt_cam",
+        "better_mount_hud",
+        "better_stats",
+        "better_grassify",
+        "chat_heads",
+        "chat_notify",
+        "chat_patches",
+        "clumps",
+        "combat_hitboxes",
+        "controlling",
+        "cps_counter",
+        "crafting_tweaks",
+        "crosshair_indicator",
+        "crystal_optimizer",
+        "custom_hud",
+        "durability_tooltip",
+        "effect_timer",
+        "enchantment_descriptions",
+        "entity_crosshair",
+        "entity_texture_features",
+        "f5_split",
+        "fps_display",
+        "freecam",
+        "freelook",
+        "info_hud",
+        "invmove",
+        "item_highlighter",
+        "key_overlay",
+        "litematica",
+        "minimap_plus",
+        "more_chat_history",
+        "multi_key_bindings",
+        "password_hider",
+        "pearl_optimizer",
+        "pick_up_notifier",
+        "ping_view",
+        "potion_counter",
+        "search_stats",
+        "shield_statuses",
+        "shulker_box_tooltip",
+        "simple_zoom",
+        "snappy_tappy",
+        "sprint_indicator",
+        "totem_counter",
+        "totem_tweaks",
+        "tweakeroo",
+        "visual_keys",
+        "waypoints",
+        "zoomify"
+      ]
+    }
+  ]
+}
