@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-auto-gg"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "A key you press to send a good-game message in chat: pick the message. It only sends when you press the key, with a pause between sends."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/auto_gg/runtime.rs"
+
+[workspace]

@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-crosshair-editor"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Replace the crosshair with your own: shape, size, gap, thickness, colour (or rainbow), an outline and a centre dot."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/crosshair_editor/runtime.rs"
+
+[workspace]
