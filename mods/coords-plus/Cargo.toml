@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-coords-plus"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Your position with the biome you stand in and the matching Nether or Overworld coordinates, in a box on the side you choose."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/coords_plus/runtime.rs"
+
+[workspace]
