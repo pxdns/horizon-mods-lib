@@ -1,4 +1,4 @@
-// Effect Timer, a native Horizon mod: Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.
+// Effect Timer, a native Horizon mod: Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar and the time left (30s, 1:30) under each effect icon.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_effect_timer`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,7 +6,7 @@
 pub const ID: &str = "effect_timer";
 pub const NAME: &str = "Effect Timer";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.";
+pub const DESCRIPTION: &str = "Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar and the time left (30s, 1:30) under each effect icon.";
 
 use std::cell::RefCell;
 
@@ -15,6 +15,7 @@ pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("ambient", "Show beacon effects", true),
     ("bars", "Duration bars under the icons", true),
+    ("times", "Time left under the icons", true),
 ];
 
 thread_local! {
@@ -207,6 +208,44 @@ pub fn layout(w: i32, icons: &[Icon], longest: &[i32]) -> Vec<([f32; 4], u32)> {
     out
 }
 
+/// The time under an icon: `30s` under a minute, `m:ss` after, `h:mm` from an hour; nothing for an endless effect.
+pub fn short(ticks: i32) -> Option<String> {
+    if ticks < 0 {
+        return None;
+    }
+    let s = (ticks + 19) / 20;
+    Some(if s < 60 {
+        format!("{s}s")
+    } else if s < 3600 {
+        format!("{}:{:02}", s / 60, s % 60)
+    } else {
+        format!("{}:{:02}", s / 3600, s / 60 % 60)
+    })
+}
+
+/// The text under each timed icon of the vanilla row: `(text, x of its centre, y, argb)`, in the layout `layout` uses; red
+/// when ten seconds or fewer are left.
+pub fn icon_times(w: i32, icons: &[Icon]) -> Vec<(String, f32, f32, u32)> {
+    let mut order: Vec<usize> = (0..icons.len()).collect();
+    order.sort_by(|&a, &b| icon_order(&icons[b], &icons[a]));
+    let (mut beneficial, mut harmful) = (0, 0);
+    let mut out = Vec::new();
+    for i in order {
+        let icon = &icons[i];
+        let (x, y) = if icon.beneficial {
+            beneficial += 1;
+            (w - 25 * beneficial, 1)
+        } else {
+            harmful += 1;
+            (w - 25 * harmful, 27)
+        };
+        let Some(text) = short(icon.duration) else { continue };
+        let ink = if icon.duration <= 200 { 0xFF_5555 } else { INK };
+        out.push((text, (x + 12) as f32, (y + 25) as f32, ink));
+    }
+    out
+}
+
 thread_local! {
     static LONGEST: std::cell::RefCell<Longest> = std::cell::RefCell::new(Longest::default());
 }
@@ -259,6 +298,29 @@ mod tests {
         assert_eq!(clock(0), "0:00");
         assert_eq!(clock(72_000), "1:00:00");
         assert_eq!(clock(-1), "endless");
+    }
+
+    #[test]
+    fn the_short_time_is_seconds_then_minutes() {
+        assert_eq!(short(600).as_deref(), Some("30s"));
+        assert_eq!(short(1).as_deref(), Some("1s"));
+        assert_eq!(short(1200).as_deref(), Some("1:00"));
+        assert_eq!(short(2390).as_deref(), Some("2:00"));
+        assert_eq!(short(72_000).as_deref(), Some("1:00"));
+        assert_eq!(short(-1), None);
+    }
+
+    #[test]
+    fn times_sit_under_each_icon_and_go_red_at_ten_seconds() {
+        let icon = |id: &str, duration, beneficial| Icon { id: id.into(), duration, ambient: false, beneficial, color: 0xFF_FFFF };
+        let times = icon_times(200, &[icon("a", 600, true), icon("b", 100, true), icon("c", -1, true), icon("d", 400, false)]);
+        assert_eq!(times.len(), 3, "the endless one has no time");
+        let b = times.iter().find(|t| t.0 == "5s").unwrap();
+        assert_eq!(b.3, 0xFF_5555);
+        assert_eq!(b.2, 26.0, "a beneficial icon sits at y 1 and is 24 tall");
+        let d = times.iter().find(|t| t.0 == "20s").unwrap();
+        assert_eq!(d.2, 52.0, "a harmful one sits at y 27");
+        assert_eq!(d.1, 187.0, "the first icon from the right edge: 200 - 25 + 12");
     }
 
     #[test]
