@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-aurora-hud"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "The Aurora client's info lines in one box: the day, the game clock, the light level, the count of the held item and how long you have been in this world."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/aurora_hud/runtime.rs"
+
+[workspace]
