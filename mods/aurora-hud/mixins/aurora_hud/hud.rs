@@ -29,9 +29,9 @@ fn aurora_hud_hud(
     };
     // The stopwatch starts at the first frame in a world; the tick it started on is kept for the run.
     thread_local! {
-        static JOINED: std::cell::Cell<Option<u32>> = const { std::cell::Cell::new(None) };
+        static JOINED: std::cell::Cell<Option<u64>> = const { std::cell::Cell::new(None) };
     }
-    let now = game.ticks;
+    let now: u64 = game.ticks.into();
     let joined = JOINED.with(|j| match j.get() {
         Some(t) if t <= now => t,
         _ => {
@@ -46,7 +46,7 @@ fn aurora_hud_hud(
         day_time: game.native_day_time(),
         light: block.max(sky),
         held,
-        world_ticks: u64::from(now - joined),
+        world_ticks: now - joined,
     };
     let lines = m::lines(reading, show);
     if lines.is_empty() {

@@ -15,7 +15,7 @@ fn crosshair_editor_layer(
         if !m::is(get, "shown") {
             return;
         }
-        m::look(get, game.ticks)
+        m::look(get, game.ticks.into())
     };
     *canceled = true;
     let (cx, cy) = ((batch.width as f32 / 2.0).floor() as i32, (batch.height as f32 / 2.0).floor() as i32);

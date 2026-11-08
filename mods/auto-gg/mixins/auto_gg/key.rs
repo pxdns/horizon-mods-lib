@@ -15,7 +15,7 @@ fn auto_gg_key(game: &mut crate::game::Game<'_>, key: &str, pressed: bool) {
         }
         (m::value(get, "message"), m::value(get, "pause").parse().unwrap_or(5))
     };
-    if let Some(text) = m::send(message, pause, game.ticks) {
+    if let Some(text) = m::send(message, pause, game.ticks.into()) {
         game.send_chat(&text);
     }
 }

@@ -122,7 +122,7 @@ pub struct Look {
 }
 
 /// An opaque colour from a name; `rainbow` turns with `ticks`.
-pub fn colour(name: &str, ticks: u32) -> u32 {
+pub fn colour(name: &str, ticks: u64) -> u32 {
     let rgb = match name {
         "red" => 0xFF_5555,
         "green" => 0x55_FF55,
@@ -132,7 +132,7 @@ pub fn colour(name: &str, ticks: u32) -> u32 {
         "magenta" => 0xFF_55FF,
         "orange" => 0xFF_AA00,
         "black" => 0x00_0000,
-        "rainbow" => hue(ticks.wrapping_mul(3) % 360),
+        "rainbow" => hue((ticks.wrapping_mul(3) % 360) as u32),
         _ => 0xFF_FFFF,
     };
     0xFF00_0000 | rgb
@@ -154,7 +154,7 @@ fn hue(degrees: u32) -> u32 {
 }
 
 /// The settings as a `Look`.
-pub fn look(get: impl Fn(&str) -> Option<String> + Copy, ticks: u32) -> Look {
+pub fn look(get: impl Fn(&str) -> Option<String> + Copy, ticks: u64) -> Look {
     let number = |key: &str| value(get, key).parse().unwrap_or(0);
     Look {
         shape: value(get, "shape"),

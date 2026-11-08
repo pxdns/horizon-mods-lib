@@ -105,16 +105,16 @@ pub const COMMAND: &str = "autogg";
 
 thread_local! {
     /// The tick of the last send, to keep the pause.
-    static LAST: RefCell<Option<u32>> = const { RefCell::new(None) };
+    static LAST: RefCell<Option<u64>> = const { RefCell::new(None) };
 }
 
 /// The message to send at `now` (game ticks) with a `pause` of seconds since the last send, else none. A send is
 /// recorded; a refused one is not.
-pub fn send(message: &str, pause: u32, now: u32) -> Option<String> {
+pub fn send(message: &str, pause: u32, now: u64) -> Option<String> {
     LAST.with_borrow_mut(|last| {
         if let Some(t) = *last
             && now >= t
-            && now - t < pause.saturating_mul(20)
+            && now - t < u64::from(pause) * 20
         {
             return None;
         }
