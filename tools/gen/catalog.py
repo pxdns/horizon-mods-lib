@@ -350,7 +350,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
         "better-stats": "better-stats", "bettergrassify": "bettergrassify", "better-grass": "bettergrassify",
         "chat-heads": "chat-heads", "chatanimation": "chat-animation", "controlling": "controlling",
         "crosshair-plus": "crosshair-editor", "custom-crosshair": "crosshair-editor", "crystal-speed": "crystal-optimizer",
-        "effect-timers": "effect-timer", "entity-texture-features": "entity-texture-features",
+        "effect-timers": "effect-timer", "held-item": "held-item", "no-weather": "no-weather", "xp-bottle-optimizer": "xp-bottle-optimizer", "tempest-info": "info-hud", "entity-texture-features": "entity-texture-features",
         "entitytexturefeatures": "entity-texture-features", "freecam": "freecam", "invmove": "invmove",
         "item-highlighter": "item-highlighter", "more-chat-history": "more-chat-history", "morechathistory": "more-chat-history",
         "red-crosshair-indicator": "crosshair-indicator", "shulkerboxtooltip": "shulker-box-tooltip", "totem-counter": "totem-counter",

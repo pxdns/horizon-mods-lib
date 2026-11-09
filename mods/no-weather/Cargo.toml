@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-no-weather"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Keeps the sky clear in your own worlds: the game's rain and thunder never start. Servers keep their own weather."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/no_weather/runtime.rs"
+
+[workspace]

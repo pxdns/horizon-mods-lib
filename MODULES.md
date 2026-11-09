@@ -34,7 +34,7 @@ and the 1.16.5 port table, with where each one stands on Horizon. The 1.16.5 bro
 | `entitytexturefeatures` | Ported: [`entity-texture-features`](mods/entity-texture-features/) |
 | `freecam` | Ported: [`freecam`](mods/freecam/) |
 | `fullbright` | Horizon has its own fullbright setting; no mod needed |
-| `held-item` | Needs a hook point |
+| `held-item` | Ported: [`held-item`](mods/held-item/) |
 | `hud-editor` | In the game: Options > Mods > HUD boxes (move or hide a box) |
 | `invmove` | Ported: [`invmove`](mods/invmove/) |
 | `item-highlighter` | Ported: [`item-highlighter`](mods/item-highlighter/) |
@@ -44,17 +44,17 @@ and the 1.16.5 port table, with where each one stands on Horizon. The 1.16.5 bro
 | `mouse-tweaks` | Needs a hook point |
 | `no-death-animation` | Needs a hook point |
 | `no-particles` | Needs a hook point |
-| `no-weather` | Needs a hook point |
+| `no-weather` | Ported: [`no-weather`](mods/no-weather/) |
 | `red-crosshair-indicator` | Ported: [`crosshair-indicator`](mods/crosshair-indicator/) |
 | `shulkerboxtooltip` | Ported: [`shulker-box-tooltip`](mods/shulker-box-tooltip/) |
 | `sprint-display` | Ported: [`sprint-indicator`](mods/sprint-indicator/) |
-| `tempest-info` | Needs a hook point |
+| `tempest-info` | Ported: [`info-hud`](mods/info-hud/) |
 | `tooltip-fix` | Needs a hook point |
 | `tooltipfix` | Needs a hook point |
 | `totem-counter` | Ported: [`totem-counter`](mods/totem-counter/) |
 | `transparent-shield` | Needs a hook point |
 | `ukus-armor-hud` | Ported: [`armor-hud`](mods/armor-hud/) |
-| `xp-bottle-optimizer` | Needs a hook point |
+| `xp-bottle-optimizer` | Ported: [`xp-bottle-optimizer`](mods/xp-bottle-optimizer/) |
 | `zoomify` | Ported: [`zoomify`](mods/zoomify/) |
 
 Two projects here have no Tempest module behind them: `cps-counter` and `info-hud` are small utilities written for this
