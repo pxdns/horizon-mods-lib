@@ -9,51 +9,51 @@ and the 1.16.5 port table, with where each one stands on Horizon. The 1.16.5 bro
 
 | Tempest module | Horizon |
 |---|---|
-| `apple-skin` | Needs a hook point |
-| `appleskin` | Needs a hook point |
-| `armor-hud` | Needs a hook point |
-| `better-grass` | Needs a hook point |
-| `better-stats` | Needs a hook point |
-| `bettergrassify` | Needs a hook point |
+| `apple-skin` | Ported: [`apple-skin`](mods/apple-skin/) |
+| `appleskin` | Ported: [`apple-skin`](mods/apple-skin/) |
+| `armor-hud` | Ported: [`armor-hud`](mods/armor-hud/) |
+| `better-grass` | Ported: [`bettergrassify`](mods/bettergrassify/) |
+| `better-stats` | Ported: [`better-stats`](mods/better-stats/) |
+| `bettergrassify` | Ported: [`bettergrassify`](mods/bettergrassify/) |
 | `bobby` | Needs a hook point |
 | `capes` | Needs a hook point |
-| `chat-heads` | Needs a hook point |
-| `chatanimation` | Needs a hook point |
+| `chat-heads` | Ported: [`chat-heads`](mods/chat-heads/) |
+| `chatanimation` | Ported: [`chat-animation`](mods/chat-animation/) |
 | `cit-resewn` | Needs a hook point |
 | `cleanf3` | Needs a hook point |
-| `controlling` | Needs a hook point |
-| `crosshair-plus` | Needs a hook point |
-| `crystal-speed` | Needs a hook point |
-| `custom-crosshair` | Needs a hook point |
+| `controlling` | Ported: [`controlling`](mods/controlling/) |
+| `crosshair-plus` | Ported: [`crosshair-editor`](mods/crosshair-editor/) |
+| `crystal-speed` | Ported: [`crystal-optimizer`](mods/crystal-optimizer/) |
+| `custom-crosshair` | Ported: [`crosshair-editor`](mods/crosshair-editor/) |
 | `customhud` | Ported: [`custom-hud`](mods/custom-hud/) |
 | `dynamic-fps` | Needs a hook point |
-| `effect-timers` | Needs a hook point |
+| `effect-timers` | Ported: [`effect-timer`](mods/effect-timer/) |
 | `enhanced-block-entities` | Needs a hook point |
 | `entity-model-features` | Needs a hook point |
-| `entity-texture-features` | Needs a hook point |
-| `entitytexturefeatures` | Needs a hook point |
-| `freecam` | Needs a hook point |
+| `entity-texture-features` | Ported: [`entity-texture-features`](mods/entity-texture-features/) |
+| `entitytexturefeatures` | Ported: [`entity-texture-features`](mods/entity-texture-features/) |
+| `freecam` | Ported: [`freecam`](mods/freecam/) |
 | `fullbright` | Horizon has its own fullbright setting; no mod needed |
 | `held-item` | Needs a hook point |
-| `hud-editor` | Needs a hook point |
-| `invmove` | Needs a hook point |
-| `item-highlighter` | Needs a hook point |
-| `modmenu-settings` | Needs a hook point |
-| `more-chat-history` | Needs a hook point |
-| `morechathistory` | Needs a hook point |
+| `hud-editor` | In the game: Options > Mods > HUD boxes (move or hide a box) |
+| `invmove` | Ported: [`invmove`](mods/invmove/) |
+| `item-highlighter` | Ported: [`item-highlighter`](mods/item-highlighter/) |
+| `modmenu-settings` | In the game: Options > Mods |
+| `more-chat-history` | Ported: [`more-chat-history`](mods/more-chat-history/) |
+| `morechathistory` | Ported: [`more-chat-history`](mods/more-chat-history/) |
 | `mouse-tweaks` | Needs a hook point |
 | `no-death-animation` | Needs a hook point |
 | `no-particles` | Needs a hook point |
 | `no-weather` | Needs a hook point |
-| `red-crosshair-indicator` | Needs a hook point |
-| `shulkerboxtooltip` | Needs a hook point |
+| `red-crosshair-indicator` | Ported: [`crosshair-indicator`](mods/crosshair-indicator/) |
+| `shulkerboxtooltip` | Ported: [`shulker-box-tooltip`](mods/shulker-box-tooltip/) |
 | `sprint-display` | Ported: [`sprint-indicator`](mods/sprint-indicator/) |
 | `tempest-info` | Needs a hook point |
 | `tooltip-fix` | Needs a hook point |
 | `tooltipfix` | Needs a hook point |
-| `totem-counter` | Needs a hook point |
+| `totem-counter` | Ported: [`totem-counter`](mods/totem-counter/) |
 | `transparent-shield` | Needs a hook point |
-| `ukus-armor-hud` | Needs a hook point |
+| `ukus-armor-hud` | Ported: [`armor-hud`](mods/armor-hud/) |
 | `xp-bottle-optimizer` | Needs a hook point |
 | `zoomify` | Ported: [`zoomify`](mods/zoomify/) |
 
