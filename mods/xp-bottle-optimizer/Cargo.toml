@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-xp-bottle-optimizer"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Your level, the experience points left to the next one and how many bottles of enchanting that takes."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/xp_bottle_optimizer/runtime.rs"
+
+[workspace]
