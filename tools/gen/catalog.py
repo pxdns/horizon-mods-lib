@@ -344,11 +344,21 @@ copies no upstream code or art: every port is a clean re-implementation of the b
     # MODULES.md: Tempest's own module list and where each stands on Horizon.
     sup = json.load(open(INPUTS / "supports.json"))
     mods26 = sorted((INPUTS / "modules-26.2.txt").read_text().split())
-    plan = {
-        "zoomify": ("ported", "zoomify"), "sprint-display": ("ported", "sprint-indicator"), "customhud": ("ported", "custom-hud"),
-        "fullbright": ("builtin", ""), "freecam": ("hook", ""), "invmove": ("hook", ""), "no-death-animation": ("hook", ""),
-        "item-highlighter": ("hook", ""), "morechathistory": ("hook", ""),
+    ported = {
+        "zoomify": "zoomify", "sprint-display": "sprint-indicator", "customhud": "custom-hud",
+        "apple-skin": "apple-skin", "appleskin": "apple-skin", "armor-hud": "armor-hud", "ukus-armor-hud": "armor-hud",
+        "better-stats": "better-stats", "bettergrassify": "bettergrassify", "better-grass": "bettergrassify",
+        "chat-heads": "chat-heads", "chatanimation": "chat-animation", "controlling": "controlling",
+        "crosshair-plus": "crosshair-editor", "custom-crosshair": "crosshair-editor", "crystal-speed": "crystal-optimizer",
+        "effect-timers": "effect-timer", "entity-texture-features": "entity-texture-features",
+        "entitytexturefeatures": "entity-texture-features", "freecam": "freecam", "invmove": "invmove",
+        "item-highlighter": "item-highlighter", "more-chat-history": "more-chat-history", "morechathistory": "more-chat-history",
+        "red-crosshair-indicator": "crosshair-indicator", "shulkerboxtooltip": "shulker-box-tooltip", "totem-counter": "totem-counter",
     }
+    plan = {k: ("ported", v) for k, v in ported.items()}
+    plan["fullbright"] = ("builtin", "")
+    plan["hud-editor"] = ("game", "In the game: Options > Mods > HUD boxes (move or hide a box)")
+    plan["modmenu-settings"] = ("game", "In the game: Options > Mods")
     lines = ["| Tempest module | Horizon |", "|---|---|"]
     for name in sorted(set(sup["modules"]) | set(mods26)):
         st, proj = plan.get(name, ("hook", ""))
@@ -356,6 +366,8 @@ copies no upstream code or art: every port is a clean re-implementation of the b
             cell = f"Ported: [`{proj}`](mods/{proj}/)"
         elif st == "builtin":
             cell = "Horizon has its own fullbright setting; no mod needed"
+        elif st == "game":
+            cell = proj
         else:
             cell = "Needs a hook point"
         lines.append(f"| `{name}` | {cell} |")
