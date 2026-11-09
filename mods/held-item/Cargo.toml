@@ -1,0 +1,13 @@
+[package]
+name = "horizon-mod-held-item"
+version = "1.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Move, tilt and resize the item and hand you hold in first person: offsets, tilt and size, for either or both hands."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/held_item/runtime.rs"
+
+[workspace]
