@@ -54,28 +54,28 @@ def common_native(extra_tick=True):
 # --------------------------------------------------------------------------------------------- more_chat_history
 CHAT.append(dict(
     slug="more-chat-history", id="more_chat_history", name="More Chat History", title="More Chat History", raw=True,
-    usage="Nothing to press: chat keeps more of what was said and you scroll back through it. The first button picks how many lines (100, 250, 500, 1000 or 2000).",
-    description="Chat remembers up to 2000 lines instead of 100, so you can scroll back through a long conversation.",
-    upstream="More Chat History (morechathistory)", upstream_licence="see the upstream project",
-    command=None, hooks=["add", "list", "settings", "click", "tick"],
-    options=None, custom_settings=True,
+    usage="Nothing to press, and nothing to configure (the original has no settings): chat keeps up to 16384 messages and lines instead of vanilla's 100, and you scroll back through them.",
+    description="Increases the maximum length of the chat history, from the vanilla 100 messages to 16384.",
+    upstream="More Chat History (morechathistory) by JackFred", upstream_licence="CC0-1.0",
+    command=None, hooks=["add", "list", "tick"],
+    options=None,
     modpath="horizon_client::chat::lib_more_chat_history",
     raw_note=("It lives in Horizon's chat module (`crates/horizon-client-render/src/chat.rs`): a cancellable HEAD hook on `Chat::push_message` (every message passes through it, a signed player message too) that does what the original does with a longer limit, including the line wrapping (Horizon's `add_lines` has a closure now, so its limit cannot be changed with a constant). It is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**."),
     toml_text=toml_text("more_chat_history", "1.0.0", "crates/horizon-client-render/src/chat.rs", "lib_more_chat_history", [
         dict(fields=[("id", '"add"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::chat::Chat::push_message"'), ("helper", '"add.rs"')],
              bindings=[("chat", "&mut Chat", "&mut *self"), ("font", "&crate::font::Font", "font"), ("message", "&Message", "&message"),
                        ("focused", "bool", "focused")]),
-    ] + common_native(), visibility="pub"),
+    ] + [native("list", "native_mods", LIST_B), native("tick", "native_tick", [G])], visibility="pub"),
     runtime_extra=r'''
 use std::cell::Cell;
 
-/// The line limits the first button cycles through.
-pub const LEVELS: [usize; 5] = [100, 250, 500, 1000, 2000];
-/// Horizon's own limit, and the default here.
-pub const DEFAULT: usize = 1000;
+/// Vanilla's limit.
+pub const VANILLA: usize = 100;
+/// The original's `EXPANDED_MAX_HISTORY`, fixed: it has no setting.
+pub const EXPANDED: usize = 16384;
 
 thread_local! {
-    static LIMIT: Cell<usize> = const { Cell::new(DEFAULT) };
+    static LIMIT: Cell<usize> = const { Cell::new(EXPANDED) };
 }
 
 /// How many messages and wrapped lines chat keeps.
@@ -83,61 +83,38 @@ pub fn limit() -> usize {
     LIMIT.with(Cell::get)
 }
 
-/// Sets the limit from the stored value (the game tells the chat each tick).
-pub fn configure(limit: usize) {
-    LIMIT.with(|l| l.set(limit));
-}
-
-/// The stored `limit`, one of `LEVELS`, else the default.
-pub fn read(get: impl Fn(&str) -> Option<String>) -> usize {
-    get("limit").and_then(|v| v.trim().parse().ok()).filter(|v| LEVELS.contains(v)).unwrap_or(DEFAULT)
-}
-
-pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
-    vec![format!("History: {} lines", read(get))]
-}
-
-/// A click on the settings page: what to store.
-pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
-    if i != 0 {
-        return None;
-    }
-    let current = read(get);
-    let at = LEVELS.iter().position(|&l| l == current).unwrap_or(0);
-    let next = LEVELS[(at + 1) % LEVELS.len()];
-    configure(next);
-    Some(("limit", next.to_string()))
+/// The game tells the chat each tick: the expanded limit while the mod is on, vanilla's while it is off.
+pub fn configure(on: bool) {
+    LIMIT.with(|l| l.set(if on { EXPANDED } else { VANILLA }));
 }
 ''',
     tests=r'''
-    fn none(_: &str) -> Option<String> {
-        None
+    #[test]
+    fn the_limit_is_the_originals_16384() {
+        configure(true);
+        assert_eq!(limit(), 16384);
     }
 
     #[test]
-    fn the_default_is_a_thousand_lines() {
-        assert_eq!(read(none), 1000);
-        assert_eq!(labels(none), ["History: 1000 lines"]);
-    }
-
-    #[test]
-    fn the_button_cycles_through_the_levels_and_sets_the_limit() {
-        let stored = |k: &str| (k == "limit").then(|| "2000".to_owned());
-        let (key, value) = click(stored, 0).unwrap();
-        assert_eq!((key, value.as_str()), ("limit", "100"), "2000 wraps to 100");
+    fn off_gives_vanillas_hundred() {
+        configure(false);
         assert_eq!(limit(), 100);
-        let (_, next) = click(none, 0).unwrap();
-        assert_eq!(next, "2000", "from the default 1000 the next is 2000");
-        assert_eq!(limit(), 2000);
-        assert!(click(none, 3).is_none());
-        configure(DEFAULT);
+        configure(true);
     }
 
     #[test]
-    fn stored_junk_falls_back() {
-        assert_eq!(read(|_| Some("7".to_owned())), DEFAULT);
-        assert_eq!(read(|_| Some("banana".to_owned())), DEFAULT);
-        assert_eq!(read(|_| Some(" 500\n".to_owned())), 500);
+    fn it_follows_the_switch_both_ways() {
+        configure(false);
+        configure(true);
+        assert_eq!(limit(), EXPANDED);
+        configure(false);
+        assert_eq!(limit(), VANILLA);
+        configure(true);
+    }
+
+    #[test]
+    fn the_limit_is_far_above_vanilla() {
+        assert_eq!(EXPANDED / VANILLA, 163);
     }
 ''',
     helpers={
@@ -182,7 +159,7 @@ fn more_chat_history_tick(game: &mut crate::game::Game<'_>) {
     if !game.native_window() {
         return;
     }
-    m::configure(if game.native_on(m::ID) { m::read(|k| game.native_setting(m::ID, k)) } else { 100 });
+    m::configure(game.native_on(m::ID));
 }
 ''',
     },
