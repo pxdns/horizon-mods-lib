@@ -1,11 +1,11 @@
 # Combat Hitboxes (Horizon native mod)
 
-Makes entities slightly easier to hit by growing the box your crosshair is tested against.
+Changes the hitbox colour when the entity is targeted and sets the line widths and the colours of the hitbox parts.
 
 
-Ported from **Combat Hitboxes (combat-hitbox)** (see the upstream project) as an independent implementation for Horizon 26.3;
+Ported from **Combat Hitboxes (combat-hitbox) by Tektonikal and sootysplash** (Apache-2.0) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/combat_hitboxes/`). It puts a cancellable HEAD hook on `ray_box`, the ray-versus-box test in Horizon's `game.rs`, which runs the same test again on a larger box. That function is not part of the stable hook-point contract, so the mod is **pinned to one Horizon commit**. It grows the boxes of everything the crosshair is tested against, and only changes where you aim: it does not change who the server says you hit.
+(`mixins/combat_hitboxes/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
 ## Install
 

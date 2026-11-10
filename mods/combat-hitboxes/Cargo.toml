@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "Makes entities slightly easier to hit by growing the box your crosshair is tested against."
+description = "Changes the hitbox colour when the entity is targeted and sets the line widths and the colours of the hitbox parts."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]
