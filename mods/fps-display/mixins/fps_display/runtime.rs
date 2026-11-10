@@ -6,7 +6,8 @@
 pub const ID: &str = "fps_display";
 pub const NAME: &str = "FPS Display";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Frames per second in a corner of the screen, coloured by how smooth they are.";
+pub const DESCRIPTION: &str =
+    "Frames per second in a corner of the screen, coloured by how smooth they are.";
 
 use std::cell::RefCell;
 
@@ -15,7 +16,7 @@ pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("slowest", "Slowest frame", false),
     ("low", "1% low", false),
-    ("colour", "Colour by rate", true)
+    ("colour", "Colour by rate", true),
 ];
 
 thread_local! {
@@ -124,7 +125,10 @@ mod tests {
     #[test]
     fn lines_grow_with_the_options() {
         assert_eq!(lines(90, 70, 60, false, false), ["90 FPS"]);
-        assert_eq!(lines(90, 70, 60, true, true), ["90 FPS", "Slowest 70", "1% low 60"]);
+        assert_eq!(
+            lines(90, 70, 60, true, true),
+            ["90 FPS", "Slowest 70", "1% low 60"]
+        );
         assert_eq!(lines(90, 70, 60, false, true), ["90 FPS", "1% low 60"]);
     }
 
@@ -132,11 +136,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

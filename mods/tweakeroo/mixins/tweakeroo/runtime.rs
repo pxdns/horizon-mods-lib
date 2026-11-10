@@ -15,7 +15,7 @@ pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("restock", "Hand restock", true),
     ("cycle", "Hotbar cycle key", true),
     ("fast", "Fast right click", false),
-    ("warn", "Tool break warning", true)
+    ("warn", "Tool break warning", true),
 ];
 
 thread_local! {
@@ -117,7 +117,9 @@ pub fn restock(held: (usize, Option<&str>), inventory: &[Option<String>]) -> Opt
 /// The (inventory slot, hotbar slot) swaps that rotate the rows: the hotbar swaps with row 1, then row 2, then row 3, which
 /// moves the hotbar to row 1, row 1 to row 2, row 2 to row 3 and row 3 to the hotbar.
 pub fn cycle_plan() -> Vec<(usize, usize)> {
-    (1..=3).flat_map(|row| (0..9).map(move |i| (9 * row + i, i))).collect()
+    (1..=3)
+        .flat_map(|row| (0..9).map(move |i| (9 * row + i, i)))
+        .collect()
 }
 
 /// Forgets what was held, keeping the warning state (the restock is paused: a screen is open, or it is off).
@@ -147,9 +149,17 @@ mod tests {
     fn a_used_up_stack_is_replaced_from_the_inventory() {
         reset();
         let inventory = inv(&[(3, "stone"), (12, "stone"), (20, "dirt")]);
-        assert_eq!(restock((3, Some("stone")), &inventory), None, "still holding it");
+        assert_eq!(
+            restock((3, Some("stone")), &inventory),
+            None,
+            "still holding it"
+        );
         let after = inv(&[(12, "stone"), (20, "dirt")]);
-        assert_eq!(restock((3, None), &after), Some(12), "the first matching stack past the hotbar");
+        assert_eq!(
+            restock((3, None), &after),
+            Some(12),
+            "the first matching stack past the hotbar"
+        );
         assert_eq!(restock((3, None), &after), None, "once");
     }
 
@@ -161,9 +171,17 @@ mod tests {
         assert_eq!(restock((4, None), &a), None, "the player changed slot");
         reset();
         restock((3, Some("stone")), &a);
-        assert_eq!(restock((3, None), &inv(&[(12, "dirt")])), None, "no stone left");
+        assert_eq!(
+            restock((3, None), &inv(&[(12, "dirt")])),
+            None,
+            "no stone left"
+        );
         reset();
-        assert_eq!(restock((3, None), &a), None, "an empty hand that was never full");
+        assert_eq!(
+            restock((3, None), &a),
+            None,
+            "an empty hand that was never full"
+        );
     }
 
     #[test]
@@ -178,7 +196,11 @@ mod tests {
             slots.swap(inventory, hotbar);
         }
         let rows: Vec<String> = slots.chunks(9).map(|r| r.iter().collect()).collect();
-        assert_eq!(rows, ["ddddddddd", "aaaaaaaaa", "bbbbbbbbb", "ccccccccc"], "the hotbar goes to row 1, each row down, row 3 comes up");
+        assert_eq!(
+            rows,
+            ["ddddddddd", "aaaaaaaaa", "bbbbbbbbb", "ccccccccc"],
+            "the hotbar goes to row 1, each row down, row 3 comes up"
+        );
     }
 
     #[test]
@@ -189,7 +211,10 @@ mod tests {
         assert!(warn(Some(9)), "crossed 10");
         assert!(!warn(Some(8)), "not again");
         assert!(!warn(None));
-        assert!(!warn(Some(9)), "a new tool already below the line does not warn");
+        assert!(
+            !warn(Some(9)),
+            "a new tool already below the line does not warn"
+        );
         assert!(!warn(Some(300)));
         assert!(warn(Some(10)));
         reset();
@@ -199,11 +224,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

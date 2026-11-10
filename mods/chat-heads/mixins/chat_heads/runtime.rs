@@ -13,7 +13,11 @@ use std::cell::RefCell;
 /// The mod's on/off settings: key (the stored file), label and default.
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("hat", "Show the hat layer", true),
-    ("others", "Also find senders in Name: and Name » forms", true)
+    (
+        "others",
+        "Also find senders in Name: and Name » forms",
+        true,
+    ),
 ];
 
 thread_local! {
@@ -148,7 +152,8 @@ pub fn sender(line: &str) -> Option<String> {
     // `[VIP] Name: hi`, `Name » hi`: the last word before the separator.
     let separator = head.find(": ").or_else(|| head.find(" \u{bb} "))?;
     let name = head[..separator].rsplit([' ', ']']).next()?;
-    (valid(name) && ONLINE.with_borrow(|o| o.contains(&name.to_lowercase()))).then(|| name.to_owned())
+    (valid(name) && ONLINE.with_borrow(|o| o.contains(&name.to_lowercase())))
+        .then(|| name.to_owned())
 }
 
 /// The text component Horizon draws as a head.
@@ -169,7 +174,10 @@ mod tests {
     fn the_usual_form_is_found() {
         online(&[]);
         assert_eq!(sender("<Steve> hello"), Some("Steve".to_owned()));
-        assert_eq!(sender("[VIP] <Alex_99> hi there"), Some("Alex_99".to_owned()));
+        assert_eq!(
+            sender("[VIP] <Alex_99> hi there"),
+            Some("Alex_99".to_owned())
+        );
         assert_eq!(sender("<bad name> hi"), None);
         assert_eq!(sender("<> hi"), None);
         assert_eq!(sender("Server restarting in 5 minutes"), None);
@@ -183,7 +191,11 @@ mod tests {
         assert_eq!(sender("Notch: hello"), None, "not online");
         configure(true, true, false);
         assert_eq!(sender("Steve: hello"), None, "switched off");
-        assert_eq!(sender("<Steve> hello"), Some("Steve".to_owned()), "the usual form always counts");
+        assert_eq!(
+            sender("<Steve> hello"),
+            Some("Steve".to_owned()),
+            "the usual form always counts"
+        );
         online(&[]);
     }
 
@@ -203,7 +215,10 @@ mod tests {
     #[test]
     fn the_head_component_is_json() {
         let json = head_json("Steve", false);
-        assert_eq!(json, r#"{"object":"player","player":{"name":"Steve"},"hat":false}"#);
+        assert_eq!(
+            json,
+            r#"{"object":"player","player":{"name":"Steve"},"hat":false}"#
+        );
     }
 
     #[test]
@@ -218,11 +233,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

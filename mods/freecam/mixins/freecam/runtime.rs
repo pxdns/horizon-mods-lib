@@ -11,9 +11,7 @@ pub const DESCRIPTION: &str = "Detach the camera and fly it around while your pl
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("fast", "Fast flight (3x)", false)
-];
+pub const OPTIONS: &[(&str, &str, bool)] = &[("fast", "Fast flight (3x)", false)];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -116,7 +114,13 @@ pub fn key(playing: bool, pressed: bool, yaw: f32, pitch: f32) {
     if STATE.with(Cell::get).is_some() {
         STATE.with(|s| s.set(None));
     } else if playing {
-        STATE.with(|s| s.set(Some(State { yaw, pitch, at: None })));
+        STATE.with(|s| {
+            s.set(Some(State {
+                yaw,
+                pitch,
+                at: None,
+            }))
+        });
     }
 }
 
@@ -143,9 +147,21 @@ pub fn velocity(yaw: f32, pitch: f32, input: Input, fast_option: bool) -> [f64; 
     let forward = [-y.sin() * p.cos(), -p.sin(), y.cos() * p.cos()];
     let right = [-y.cos(), 0.0, -y.sin()];
     let axis = |plus: bool, minus: bool| f64::from(i32::from(plus) - i32::from(minus));
-    let (f, r, u) = (axis(input.forward, input.back), axis(input.right, input.left), axis(input.up, input.down));
-    let speed = if input.fast || fast_option { SPEED * 3.0 } else { SPEED };
-    let v = [forward[0] * f + right[0] * r, forward[1] * f + u, forward[2] * f + right[2] * r];
+    let (f, r, u) = (
+        axis(input.forward, input.back),
+        axis(input.right, input.left),
+        axis(input.up, input.down),
+    );
+    let speed = if input.fast || fast_option {
+        SPEED * 3.0
+    } else {
+        SPEED
+    };
+    let v = [
+        forward[0] * f + right[0] * r,
+        forward[1] * f + u,
+        forward[2] * f + right[2] * r,
+    ];
     let len = v.iter().map(|c| c * c).sum::<f64>().sqrt();
     if len < 1e-9 {
         return [0.0; 3];
@@ -205,7 +221,10 @@ mod tests {
     use super::*;
 
     fn walking(forward: bool) -> Input {
-        Input { forward, ..Input::default() }
+        Input {
+            forward,
+            ..Input::default()
+        }
     }
 
     #[test]
@@ -225,37 +244,93 @@ mod tests {
     #[test]
     fn forward_goes_where_the_camera_looks() {
         let v = velocity(0.0, 0.0, walking(true), false);
-        assert!((v[2] - SPEED).abs() < 1e-9 && v[0].abs() < 1e-9 && v[1].abs() < 1e-9, "yaw 0 faces +Z: {v:?}");
+        assert!(
+            (v[2] - SPEED).abs() < 1e-9 && v[0].abs() < 1e-9 && v[1].abs() < 1e-9,
+            "yaw 0 faces +Z: {v:?}"
+        );
         let west = velocity(90.0, 0.0, walking(true), false);
         assert!((west[0] + SPEED).abs() < 1e-9, "yaw 90 faces -X: {west:?}");
         let down = velocity(0.0, 90.0, walking(true), false);
-        assert!((down[1] + SPEED).abs() < 1e-9, "looking down flies down: {down:?}");
+        assert!(
+            (down[1] + SPEED).abs() < 1e-9,
+            "looking down flies down: {down:?}"
+        );
     }
 
     #[test]
     fn strafing_up_diagonals_and_speed() {
-        let right = velocity(0.0, 0.0, Input { right: true, ..Input::default() }, false);
-        assert!((right[0] + SPEED).abs() < 1e-9, "facing south, right is -X: {right:?}");
-        let up = velocity(0.0, 0.0, Input { up: true, ..Input::default() }, false);
+        let right = velocity(
+            0.0,
+            0.0,
+            Input {
+                right: true,
+                ..Input::default()
+            },
+            false,
+        );
+        assert!(
+            (right[0] + SPEED).abs() < 1e-9,
+            "facing south, right is -X: {right:?}"
+        );
+        let up = velocity(
+            0.0,
+            0.0,
+            Input {
+                up: true,
+                ..Input::default()
+            },
+            false,
+        );
         assert_eq!(up, [0.0, SPEED, 0.0]);
-        let both = velocity(0.0, 0.0, Input { forward: true, right: true, ..Input::default() }, false);
+        let both = velocity(
+            0.0,
+            0.0,
+            Input {
+                forward: true,
+                right: true,
+                ..Input::default()
+            },
+            false,
+        );
         let len = both.iter().map(|c| c * c).sum::<f64>().sqrt();
         assert!((len - SPEED).abs() < 1e-9, "diagonals are not faster");
         let fast = velocity(0.0, 0.0, walking(true), true);
         assert!((fast[2] - SPEED * 3.0).abs() < 1e-9);
         assert_eq!(velocity(0.0, 0.0, Input::default(), false), [0.0; 3]);
-        assert_eq!(velocity(0.0, 0.0, Input { forward: true, back: true, ..Input::default() }, false), [0.0; 3]);
+        assert_eq!(
+            velocity(
+                0.0,
+                0.0,
+                Input {
+                    forward: true,
+                    back: true,
+                    ..Input::default()
+                },
+                false
+            ),
+            [0.0; 3]
+        );
     }
 
     #[test]
     fn the_camera_starts_at_the_players_and_then_flies() {
         forget();
-        assert_eq!(view(Some(([1.0, 2.0, 3.0], 0.0, 0.0))), None, "off: the game's own camera");
+        assert_eq!(
+            view(Some(([1.0, 2.0, 3.0], 0.0, 0.0))),
+            None,
+            "off: the game's own camera"
+        );
         key(true, true, 0.0, 0.0);
-        assert_eq!(view(Some(([1.0, 2.0, 3.0], 5.0, 6.0))).unwrap().0, [1.0, 2.0, 3.0]);
+        assert_eq!(
+            view(Some(([1.0, 2.0, 3.0], 5.0, 6.0))).unwrap().0,
+            [1.0, 2.0, 3.0]
+        );
         step(0.5, walking(true), false);
         let moved = view(Some(([9.0, 9.0, 9.0], 5.0, 6.0))).unwrap().0;
-        assert!((moved[2] - 8.0).abs() < 1e-9 && moved[0] == 1.0, "half a second at 10 b/s: {moved:?}");
+        assert!(
+            (moved[2] - 8.0).abs() < 1e-9 && moved[0] == 1.0,
+            "half a second at 10 b/s: {moved:?}"
+        );
         forget();
     }
 
@@ -276,11 +351,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

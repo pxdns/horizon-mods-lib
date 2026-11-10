@@ -6,7 +6,8 @@
 pub const ID: &str = "chat_patches";
 pub const NAME: &str = "Chat Patches";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Timestamps in front of chat lines, and an option to drop immediate repeats.";
+pub const DESCRIPTION: &str =
+    "Timestamps in front of chat lines, and an option to drop immediate repeats.";
 
 use std::cell::RefCell;
 
@@ -14,7 +15,7 @@ use std::cell::RefCell;
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("timestamps", "Timestamps", true),
     ("seconds", "Seconds in the timestamp", false),
-    ("repeats", "Drop immediate repeats", false)
+    ("repeats", "Drop immediate repeats", false),
 ];
 
 thread_local! {
@@ -112,7 +113,11 @@ pub fn repeats_on() -> bool {
 
 /// `[14:32]` or `[14:32:07]`, with a trailing space.
 pub fn stamp(hour: u32, minute: u32, second: u32, with_seconds: bool) -> String {
-    if with_seconds { format!("[{hour:02}:{minute:02}:{second:02}] ") } else { format!("[{hour:02}:{minute:02}] ") }
+    if with_seconds {
+        format!("[{hour:02}:{minute:02}:{second:02}] ")
+    } else {
+        format!("[{hour:02}:{minute:02}] ")
+    }
 }
 
 /// Marks the nested call; false when the call is the nested one.
@@ -131,7 +136,9 @@ pub fn leave() {
 /// Whether `text` at `ticks` repeats the previous message, and remembers it as the previous one either way.
 pub fn repeat(text: &str, ticks: u64) -> bool {
     LAST.with_borrow_mut(|last| {
-        let same = last.as_ref().is_some_and(|(t, at)| t == text && ticks.saturating_sub(*at) <= REPEAT_TICKS);
+        let same = last
+            .as_ref()
+            .is_some_and(|(t, at)| t == text && ticks.saturating_sub(*at) <= REPEAT_TICKS);
         *last = Some((text.to_owned(), ticks));
         same
     })
@@ -186,11 +193,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

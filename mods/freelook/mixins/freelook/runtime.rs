@@ -6,14 +6,15 @@
 pub const ID: &str = "freelook";
 pub const NAME: &str = "Freelook";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Hold a key and move the mouse to look around without turning your player.";
+pub const DESCRIPTION: &str =
+    "Hold a key and move the mouse to look around without turning your player.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("toggle", "Toggle instead of hold", false),
-    ("invert", "Invert pitch", false)
+    ("invert", "Invert pitch", false),
 ];
 
 thread_local! {
@@ -204,7 +205,11 @@ mod tests {
         assert_eq!(enter().unwrap().1, 90.0, "pitch stops at 90");
         leave();
         assert!(turn(0.0, 10_000.0, true));
-        assert_eq!(enter().unwrap().1, -90.0, "inverted pitch goes the other way");
+        assert_eq!(
+            enter().unwrap().1,
+            -90.0,
+            "inverted pitch goes the other way"
+        );
         leave();
         forget();
     }
@@ -225,11 +230,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

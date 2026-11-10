@@ -11,9 +11,7 @@ pub const DESCRIPTION: &str = "Connected grass: a grass block's side shows the g
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("fancy", "Better grass on grass block sides", true)
-];
+pub const OPTIONS: &[(&str, &str, bool)] = &[("fancy", "Better grass on grass block sides", true)];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -155,7 +153,11 @@ mod tests {
     fn a_note_is_taken_once() {
         set_pending(Some((1, 2, 3, 4, 5)));
         assert_eq!(take_pending(), Some((1, 2, 3, 4, 5)));
-        assert_eq!(take_pending(), None, "a quad must not reuse the note of the one before");
+        assert_eq!(
+            take_pending(),
+            None,
+            "a quad must not reuse the note of the one before"
+        );
         set_pending(Some((0, 0, 0, 0, 1)));
         set_pending(None);
         assert_eq!(take_pending(), None, "the next face clears a stale note");
@@ -177,7 +179,11 @@ mod tests {
         remember(9, Some(42));
         assert_eq!(cached(9), Some(Some(42)));
         remember(10, None);
-        assert_eq!(cached(10), Some(None), "a state without an up face is remembered too");
+        assert_eq!(
+            cached(10),
+            Some(None),
+            "a state without an up face is remembered too"
+        );
         forget();
         assert_eq!(cached(9), None);
     }
@@ -186,11 +192,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

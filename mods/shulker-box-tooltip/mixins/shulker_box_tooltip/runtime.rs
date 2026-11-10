@@ -14,7 +14,7 @@ use std::cell::RefCell;
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("summary", "Totals by item", true),
     ("grid", "Slot grid with item icons", true),
-    ("all", "Other containers too", false)
+    ("all", "Other containers too", false),
 ];
 
 thread_local! {
@@ -102,7 +102,9 @@ pub fn title(id: &str) -> String {
         .filter(|w| !w.is_empty())
         .map(|w| {
             let mut c = w.chars();
-            c.next().map_or(String::new(), |f| f.to_uppercase().collect::<String>() + c.as_str())
+            c.next().map_or(String::new(), |f| {
+                f.to_uppercase().collect::<String>() + c.as_str()
+            })
         })
         .collect::<Vec<_>>()
         .join(" ")
@@ -121,7 +123,11 @@ pub fn summary(slots: &[Slot]) -> Vec<String> {
     }
     let mut rows: Vec<(&str, u32)> = totals.into_iter().collect();
     rows.sort_by(|a, b| b.1.cmp(&a.1).then(a.0.cmp(b.0)));
-    let mut out: Vec<String> = rows.iter().take(MAX_LINES).map(|(id, n)| format!("{n} x {}", title(id))).collect();
+    let mut out: Vec<String> = rows
+        .iter()
+        .take(MAX_LINES)
+        .map(|(id, n)| format!("{n} x {}", title(id)))
+        .collect();
     if rows.len() > MAX_LINES {
         out.push(format!("and {} more kinds", rows.len() - MAX_LINES));
     }
@@ -157,7 +163,10 @@ pub fn slot_at(n: u8, x: f32, y: f32, box_width: f32) -> Option<[f32; 2]> {
         return None;
     }
     let left = x + ((box_width - GRID_WIDTH) / 2.0).floor().max(0.0);
-    Some([left + (n % COLUMNS) as f32 * CELL, y + (n / COLUMNS) as f32 * CELL])
+    Some([
+        left + (n % COLUMNS) as f32 * CELL,
+        y + (n / COLUMNS) as f32 * CELL,
+    ])
 }
 
 #[cfg(test)]
@@ -165,7 +174,11 @@ mod tests {
     use super::*;
 
     fn slot(slot: u8, item: &str, count: u32) -> Slot {
-        Slot { slot, item: item.to_owned(), count }
+        Slot {
+            slot,
+            item: item.to_owned(),
+            count,
+        }
     }
 
     #[test]
@@ -178,14 +191,23 @@ mod tests {
 
     #[test]
     fn the_summary_totals_by_item_most_first() {
-        let slots = [slot(0, "minecraft:cobblestone", 64), slot(1, "minecraft:cobblestone", 20), slot(5, "minecraft:diamond", 3)];
-        assert_eq!(summary(&slots), ["84 x Cobblestone", "3 x Diamond", "3 of 27 slots used"]);
+        let slots = [
+            slot(0, "minecraft:cobblestone", 64),
+            slot(1, "minecraft:cobblestone", 20),
+            slot(5, "minecraft:diamond", 3),
+        ];
+        assert_eq!(
+            summary(&slots),
+            ["84 x Cobblestone", "3 x Diamond", "3 of 27 slots used"]
+        );
         assert_eq!(summary(&[]), ["0 of 27 slots used"]);
     }
 
     #[test]
     fn many_kinds_are_cut_off_with_a_count() {
-        let slots: Vec<Slot> = (0..12).map(|i| slot(i, &format!("minecraft:item_{i:02}"), 1)).collect();
+        let slots: Vec<Slot> = (0..12)
+            .map(|i| slot(i, &format!("minecraft:item_{i:02}"), 1))
+            .collect();
         let lines = summary(&slots);
         assert_eq!(lines.len(), MAX_LINES + 2);
         assert_eq!(lines[MAX_LINES], "and 4 more kinds");
@@ -196,8 +218,16 @@ mod tests {
         assert_eq!(slot_at(0, 10.0, 20.0, 216.0), Some([10.0, 20.0]));
         assert_eq!(slot_at(10, 10.0, 20.0, 216.0), Some([34.0, 44.0]));
         assert_eq!(slot_at(26, 10.0, 20.0, 216.0), Some([202.0, 68.0]));
-        assert_eq!(slot_at(0, 0.0, 0.0, 240.0), Some([12.0, 0.0]), "a wider box centres it");
-        assert_eq!(slot_at(0, 0.0, 0.0, 100.0), Some([0.0, 0.0]), "a narrow box never pushes it left");
+        assert_eq!(
+            slot_at(0, 0.0, 0.0, 240.0),
+            Some([12.0, 0.0]),
+            "a wider box centres it"
+        );
+        assert_eq!(
+            slot_at(0, 0.0, 0.0, 100.0),
+            Some([0.0, 0.0]),
+            "a narrow box never pushes it left"
+        );
         assert_eq!(slot_at(27, 0.0, 0.0, 216.0), None);
         assert_eq!((GRID_WIDTH, GRID_HEIGHT), (216.0, 72.0));
     }
@@ -214,11 +244,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

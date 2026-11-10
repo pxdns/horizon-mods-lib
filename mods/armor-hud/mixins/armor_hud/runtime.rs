@@ -15,7 +15,7 @@ pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("percent", "Show percent", true),
     ("full", "Hide undamaged pieces", false),
-    ("bar", "Armor value on the armor bar", true)
+    ("bar", "Armor value on the armor bar", true),
 ];
 
 thread_local! {
@@ -91,7 +91,9 @@ pub fn title(id: &str) -> String {
         .filter(|w| !w.is_empty())
         .map(|w| {
             let mut c = w.chars();
-            c.next().map_or(String::new(), |f| f.to_uppercase().collect::<String>() + c.as_str())
+            c.next().map_or(String::new(), |f| {
+                f.to_uppercase().collect::<String>() + c.as_str()
+            })
         })
         .collect::<Vec<_>>()
         .join(" ")
@@ -111,7 +113,12 @@ pub struct Piece {
 
 impl Piece {
     pub fn new(slot: &'static str, id: &str, damage: u32, max: u32) -> Self {
-        Self { slot, name: title(id), damage, max }
+        Self {
+            slot,
+            name: title(id),
+            damage,
+            max,
+        }
     }
 
     /// Durability left; unbreakable pieces (max 0) read as full.
@@ -158,7 +165,10 @@ pub fn extra_rows(w: i32, row: i32, armor: i32) -> Vec<([f32; 4], u32)> {
                 break;
             }
             let x = (w / 2 - 91 + n * 8) as f32;
-            out.push(([x, y, if points == 2 { 9.0 } else { 4.0 }, 3.0], INKS[level]));
+            out.push((
+                [x, y, if points == 2 { 9.0 } else { 4.0 }, 3.0],
+                INKS[level],
+            ));
         }
         left -= 20;
         level += 1;
@@ -201,7 +211,11 @@ mod tests {
         assert_eq!(out[0].0, [69.0, 176.0, 9.0, 3.0]);
         assert_eq!(out[2].0[2], 4.0);
         assert_eq!(extra_rows(320, 180, 60).len(), 20, "two rows of ten");
-        assert_eq!(extra_rows(320, 180, 60)[10].0[1], 172.0, "the second row sits above the first");
+        assert_eq!(
+            extra_rows(320, 180, 60)[10].0[1],
+            172.0,
+            "the second row sits above the first"
+        );
         assert_eq!(label(14), "14");
     }
 
@@ -212,7 +226,11 @@ mod tests {
         assert_eq!(p.ink(), 0x55_FF55);
         assert_eq!(Piece::new("Head", "x", 100, 165).ink(), 0xFF_FF55);
         assert_eq!(Piece::new("Head", "x", 160, 165).ink(), 0xFF_5555);
-        assert_eq!(Piece::new("Head", "x", 999, 165).left(), 0, "never below zero");
+        assert_eq!(
+            Piece::new("Head", "x", 999, 165).left(),
+            0,
+            "never below zero"
+        );
         assert_eq!(Piece::new("Head", "x", 5, 0).percent(), 100, "unbreakable");
     }
 
@@ -225,18 +243,17 @@ mod tests {
         assert_eq!(lines(&list, true, false)[0].0, "Head: Iron Helmet 66%");
         assert_eq!(lines(&list, false, false)[1].0, "Feet: Iron Boots 195/195");
         assert_eq!(lines(&list, true, true).len(), 1, "undamaged pieces hidden");
-        assert_eq!(lines(&[Piece::new("Chest", "elytra", 0, 0)], false, false)[0].0, "Chest: Elytra unbreakable");
+        assert_eq!(
+            lines(&[Piece::new("Chest", "elytra", 0, 0)], false, false)[0].0,
+            "Chest: Elytra unbreakable"
+        );
     }
 
     #[test]
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

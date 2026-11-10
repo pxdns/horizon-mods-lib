@@ -6,14 +6,13 @@
 pub const ID: &str = "pearl_optimizer";
 pub const NAME: &str = "Pearl Optimizer";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Shows your thrown ender pearl immediately on a server, before the server's pearl arrives.";
+pub const DESCRIPTION: &str =
+    "Shows your thrown ender pearl immediately on a server, before the server's pearl arrives.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("fast", "Show my pearl at once", true)
-];
+pub const OPTIONS: &[(&str, &str, bool)] = &[("fast", "Show my pearl at once", true)];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -118,7 +117,11 @@ pub fn throw(eye: [f64; 3], yaw: f32, pitch: f32, motion: [f64; 3], on_ground: b
     let dir = look(yaw, pitch);
     Throw {
         position: [eye[0], eye[1] - 0.1, eye[2]],
-        velocity: [dir[0] * SPEED + motion[0], dir[1] * SPEED + if on_ground { 0.0 } else { motion[1] }, dir[2] * SPEED + motion[2]],
+        velocity: [
+            dir[0] * SPEED + motion[0],
+            dir[1] * SPEED + if on_ground { 0.0 } else { motion[1] },
+            dir[2] * SPEED + motion[2],
+        ],
         yaw,
         pitch,
     }
@@ -144,7 +147,9 @@ pub fn step(now: u64) -> (Vec<(u32, Throw)>, Vec<u32>) {
             remove.push(s.local.remove(0).0);
         }
         s.arrived = 0;
-        let (old, keep): (Vec<_>, Vec<_>) = std::mem::take(&mut s.local).into_iter().partition(|(_, at)| now.saturating_sub(*at) >= LIFE_TICKS);
+        let (old, keep): (Vec<_>, Vec<_>) = std::mem::take(&mut s.local)
+            .into_iter()
+            .partition(|(_, at)| now.saturating_sub(*at) >= LIFE_TICKS);
         s.local = keep;
         remove.extend(old.into_iter().map(|(id, _)| id));
         let mut add = Vec::new();
@@ -175,16 +180,25 @@ mod tests {
     fn the_look_vector_follows_yaw_and_pitch() {
         assert!(near(look(0.0, 0.0), [0.0, 0.0, 1.0]), "yaw 0 faces south");
         assert!(near(look(90.0, 0.0), [-1.0, 0.0, 0.0]), "yaw 90 faces west");
-        assert!(near(look(0.0, -90.0), [0.0, 1.0, 0.0]), "pitch -90 looks up");
+        assert!(
+            near(look(0.0, -90.0), [0.0, 1.0, 0.0]),
+            "pitch -90 looks up"
+        );
     }
 
     #[test]
     fn a_throw_starts_below_the_eyes_and_adds_the_players_motion() {
         let t = throw([10.0, 65.62, -3.0], 0.0, 0.0, [0.1, -0.2, 0.05], true);
         assert!(near(t.position, [10.0, 65.52, -3.0]));
-        assert!(near(t.velocity, [0.1, 0.0, 1.5 + 0.05]), "no vertical motion on the ground");
+        assert!(
+            near(t.velocity, [0.1, 0.0, 1.5 + 0.05]),
+            "no vertical motion on the ground"
+        );
         let air = throw([0.0, 0.0, 0.0], 0.0, 0.0, [0.0, -0.4, 0.0], false);
-        assert!((air.velocity[1] + 0.4).abs() < 1e-9, "falling adds to the throw");
+        assert!(
+            (air.velocity[1] + 0.4).abs() < 1e-9,
+            "falling adds to the throw"
+        );
     }
 
     #[test]
@@ -198,7 +212,11 @@ mod tests {
         server_pearl();
         let (add2, remove2) = step(101);
         assert!(add2.is_empty());
-        assert_eq!(remove2, vec![add[0].0], "the server's pearl takes the local one's place");
+        assert_eq!(
+            remove2,
+            vec![add[0].0],
+            "the server's pearl takes the local one's place"
+        );
         assert!(step(102).1.is_empty());
     }
 
@@ -219,18 +237,18 @@ mod tests {
         assert!(add.is_empty() && remove.is_empty());
         thrown(throw([0.0; 3], 0.0, 0.0, [0.0; 3], true));
         let (add, remove) = step(6);
-        assert_eq!((add.len(), remove.len()), (1, 0), "an old arrival does not cancel a new throw");
+        assert_eq!(
+            (add.len(), remove.len()),
+            (1, 0),
+            "an old arrival does not cancel a new throw"
+        );
     }
 
     #[test]
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

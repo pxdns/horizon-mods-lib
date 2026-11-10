@@ -14,7 +14,7 @@ use std::cell::RefCell;
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("speed", "Speed", true),
-    ("jump", "Jump height and charge", true)
+    ("jump", "Jump height and charge", true),
 ];
 
 thread_local! {
@@ -86,7 +86,11 @@ pub const COMMAND: &str = "mount";
 
 /// A mount's health line; red at a quarter or less.
 pub fn health_line(health: f64, max: f64) -> (String, u32) {
-    let ink = if max > 0.0 && health / max <= 0.25 { 0xFF_5555 } else { INK };
+    let ink = if max > 0.0 && health / max <= 0.25 {
+        0xFF_5555
+    } else {
+        INK
+    };
     (format!("Health {:.1} / {:.1}", health.max(0.0), max), ink)
 }
 
@@ -102,12 +106,16 @@ pub fn speed_line(dx: f64, dz: f64) -> (String, u32) {
 /// How high a horse with this jump strength jumps, in blocks (the polynomial fitted to the game's physics).
 pub fn jump_height(strength: f64) -> f64 {
     let s = strength.clamp(0.0, 2.0);
-    (-0.181_758_495_2 * s * s * s + 3.689_713_992 * s * s + 2.128_599_134 * s - 0.343_930_367).max(0.0)
+    (-0.181_758_495_2 * s * s * s + 3.689_713_992 * s * s + 2.128_599_134 * s - 0.343_930_367)
+        .max(0.0)
 }
 
 pub fn jump_line(strength: f64, charge: f32) -> (String, u32) {
     let pct = (charge.clamp(0.0, 1.0) * 100.0).round() as u32;
-    (format!("Jump {:.2} blocks, charge {pct}%", jump_height(strength)), INK)
+    (
+        format!("Jump {:.2} blocks, charge {pct}%", jump_height(strength)),
+        INK,
+    )
 }
 
 #[cfg(test)]
@@ -116,7 +124,10 @@ mod tests {
 
     #[test]
     fn health_goes_red_at_a_quarter() {
-        assert_eq!(health_line(30.0, 30.0), ("Health 30.0 / 30.0".to_owned(), INK));
+        assert_eq!(
+            health_line(30.0, 30.0),
+            ("Health 30.0 / 30.0".to_owned(), INK)
+        );
         assert_eq!(health_line(7.5, 30.0).1, 0xFF_5555);
         assert_eq!(health_line(-1.0, 30.0).0, "Health 0.0 / 30.0");
     }
@@ -130,7 +141,10 @@ mod tests {
     #[test]
     fn a_stronger_horse_jumps_higher() {
         assert!(jump_height(0.5) < jump_height(0.8));
-        assert!((jump_height(1.0) - 5.29).abs() < 0.05, "a top horse clears about five blocks");
+        assert!(
+            (jump_height(1.0) - 5.29).abs() < 0.05,
+            "a top horse clears about five blocks"
+        );
         assert_eq!(jump_height(-3.0), 0.0);
     }
 
@@ -144,11 +158,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

@@ -17,7 +17,7 @@ pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("fps", "FPS", true),
     ("coords", "Coordinates", true),
     ("facing", "Facing", true),
-    ("cps", "Clicks per second", false)
+    ("cps", "Clicks per second", false),
 ];
 
 thread_local! {
@@ -128,7 +128,14 @@ mod tests {
 
     #[test]
     fn only_the_picked_lines_show() {
-        let r = Reading { fps: 120, x: 1.0, y: 64.0, z: -3.5, yaw: 90.0, clicks: 7 };
+        let r = Reading {
+            fps: 120,
+            x: 1.0,
+            y: 64.0,
+            z: -3.5,
+            yaw: 90.0,
+            clicks: 7,
+        };
         assert_eq!(lines(r, [true, false, false, false]), ["FPS 120"]);
         assert_eq!(
             lines(r, [true, true, true, true]),
@@ -148,11 +155,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

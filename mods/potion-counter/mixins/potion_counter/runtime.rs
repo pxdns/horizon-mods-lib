@@ -14,7 +14,7 @@ use std::cell::RefCell;
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("split", "Split by kind", true),
-    ("empty", "Show when none", false)
+    ("empty", "Show when none", false),
 ];
 
 thread_local! {
@@ -142,22 +142,25 @@ mod tests {
 
     #[test]
     fn lines_follow_the_options() {
-        let c = Counts { drink: 2, splash: 4, lingering: 0 };
+        let c = Counts {
+            drink: 2,
+            splash: 4,
+            lingering: 0,
+        };
         assert_eq!(lines(c, true, false), ["Potions 2", "Splash 4"]);
         assert_eq!(lines(c, false, false), ["Potions 6"]);
         assert!(lines(Counts::default(), true, false).is_empty());
-        assert_eq!(lines(Counts::default(), true, true), ["Potions 0", "Splash 0"]);
+        assert_eq!(
+            lines(Counts::default(), true, true),
+            ["Potions 0", "Splash 0"]
+        );
     }
 
     #[test]
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

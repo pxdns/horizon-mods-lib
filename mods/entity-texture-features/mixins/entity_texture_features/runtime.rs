@@ -13,7 +13,7 @@ use std::cell::RefCell;
 /// The mod's on/off settings: key (the stored file), label and default.
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("random", "Random texture variants", true),
-    ("emissive", "Emissive layers", true)
+    ("emissive", "Emissive layers", true),
 ];
 
 thread_local! {
@@ -142,14 +142,19 @@ pub fn split_number(name: &str) -> Option<(&str, u32)> {
 }
 
 /// Builds the index from the names of the textures that exist: variants by base, and which textures have an emissive twin.
-pub fn index<'a>(names: impl Iterator<Item = &'a str>) -> (BTreeMap<String, Vec<String>>, BTreeSet<String>) {
+pub fn index<'a>(
+    names: impl Iterator<Item = &'a str>,
+) -> (BTreeMap<String, Vec<String>>, BTreeSet<String>) {
     let all: BTreeSet<&str> = names.filter(|n| n.starts_with("entity/")).collect();
     let mut variants: BTreeMap<String, Vec<(u32, String)>> = BTreeMap::new();
     for name in &all {
         if let Some((base, n)) = split_number(name)
             && all.contains(base)
         {
-            variants.entry(base.to_owned()).or_default().push((n, (*name).to_owned()));
+            variants
+                .entry(base.to_owned())
+                .or_default()
+                .push((n, (*name).to_owned()));
         }
     }
     let variants = variants
@@ -159,7 +164,12 @@ pub fn index<'a>(names: impl Iterator<Item = &'a str>) -> (BTreeMap<String, Vec<
             (base, list.into_iter().map(|(_, name)| name).collect())
         })
         .collect();
-    let glow = all.iter().filter_map(|n| n.strip_suffix("_e")).filter(|base| all.contains(base)).map(str::to_owned).collect();
+    let glow = all
+        .iter()
+        .filter_map(|n| n.strip_suffix("_e"))
+        .filter(|base| all.contains(base))
+        .map(str::to_owned)
+        .collect();
     (variants, glow)
 }
 
@@ -176,7 +186,11 @@ pub fn pick(base: &str, id: u32) -> String {
             // Mix the id so neighbouring ids do not take neighbouring variants.
             let h = id.wrapping_mul(0x9E37_79B1) >> 7;
             let at = h as usize % (list.len() + 1);
-            if at == 0 { base.to_owned() } else { list[at - 1].clone() }
+            if at == 0 {
+                base.to_owned()
+            } else {
+                list[at - 1].clone()
+            }
         }
         _ => base.to_owned(),
     })
@@ -193,29 +207,65 @@ mod tests {
 
     fn names() -> Vec<&'static str> {
         vec![
-            "entity/zombie/zombie", "entity/zombie/zombie2", "entity/zombie/zombie3", "entity/zombie/zombie_e",
-            "entity/cow/cow", "entity/cow/cow2", "entity/sign/oak", "entity/sign/oak1", "entity/creeper/creeper", "gui/sprites/x2", "entity/chest/normal_e",
+            "entity/zombie/zombie",
+            "entity/zombie/zombie2",
+            "entity/zombie/zombie3",
+            "entity/zombie/zombie_e",
+            "entity/cow/cow",
+            "entity/cow/cow2",
+            "entity/sign/oak",
+            "entity/sign/oak1",
+            "entity/creeper/creeper",
+            "gui/sprites/x2",
+            "entity/chest/normal_e",
         ]
     }
 
     #[test]
     fn numbered_names_split_at_two_and_up() {
-        assert_eq!(split_number("entity/zombie/zombie2"), Some(("entity/zombie/zombie", 2)));
-        assert_eq!(split_number("entity/zombie/zombie12"), Some(("entity/zombie/zombie", 12)));
-        assert_eq!(split_number("entity/sign/oak1"), None, "1 is the base itself");
+        assert_eq!(
+            split_number("entity/zombie/zombie2"),
+            Some(("entity/zombie/zombie", 2))
+        );
+        assert_eq!(
+            split_number("entity/zombie/zombie12"),
+            Some(("entity/zombie/zombie", 12))
+        );
+        assert_eq!(
+            split_number("entity/sign/oak1"),
+            None,
+            "1 is the base itself"
+        );
         assert_eq!(split_number("entity/zombie/zombie"), None);
-        assert_eq!(split_number("entity/zombie/2"), None, "a bare number is not a variant");
+        assert_eq!(
+            split_number("entity/zombie/2"),
+            None,
+            "a bare number is not a variant"
+        );
         assert_eq!(split_number("entity/x/y1234"), None);
     }
 
     #[test]
     fn the_index_keeps_only_entity_textures_whose_base_exists() {
         let (variants, glow) = index(names().into_iter());
-        assert_eq!(variants.get("entity/zombie/zombie").unwrap(), &["entity/zombie/zombie2", "entity/zombie/zombie3"]);
-        assert_eq!(variants.get("entity/cow/cow").unwrap(), &["entity/cow/cow2"]);
-        assert!(!variants.contains_key("entity/sign/oak"), "oak1 is not a variant");
+        assert_eq!(
+            variants.get("entity/zombie/zombie").unwrap(),
+            &["entity/zombie/zombie2", "entity/zombie/zombie3"]
+        );
+        assert_eq!(
+            variants.get("entity/cow/cow").unwrap(),
+            &["entity/cow/cow2"]
+        );
+        assert!(
+            !variants.contains_key("entity/sign/oak"),
+            "oak1 is not a variant"
+        );
         assert!(!variants.contains_key("gui/sprites/x"));
-        assert_eq!(glow.iter().map(String::as_str).collect::<Vec<_>>(), ["entity/zombie/zombie"], "an emissive twin needs its base");
+        assert_eq!(
+            glow.iter().map(String::as_str).collect::<Vec<_>>(),
+            ["entity/zombie/zombie"],
+            "an emissive twin needs its base"
+        );
     }
 
     #[test]
@@ -223,12 +273,22 @@ mod tests {
         let (variants, glow) = index(names().into_iter());
         set_index(variants, glow);
         for id in [1, 17, 4000] {
-            assert_eq!(pick("entity/zombie/zombie", id), pick("entity/zombie/zombie", id), "stable");
+            assert_eq!(
+                pick("entity/zombie/zombie", id),
+                pick("entity/zombie/zombie", id),
+                "stable"
+            );
         }
-        let picked: std::collections::BTreeSet<String> = (0..200).map(|id| pick("entity/zombie/zombie", id)).collect();
+        let picked: std::collections::BTreeSet<String> = (0..200)
+            .map(|id| pick("entity/zombie/zombie", id))
+            .collect();
         assert_eq!(picked.len(), 3, "the base and both variants");
         assert!(picked.contains("entity/zombie/zombie"));
-        assert_eq!(pick("entity/creeper/creeper", 5), "entity/creeper/creeper", "no variants, no change");
+        assert_eq!(
+            pick("entity/creeper/creeper", 5),
+            "entity/creeper/creeper",
+            "no variants, no change"
+        );
         assert_eq!(pick("entity/unknown", 5), "entity/unknown");
     }
 
@@ -236,7 +296,10 @@ mod tests {
     fn the_emissive_twin_is_named_after_the_texture() {
         let (variants, glow) = index(names().into_iter());
         set_index(variants, glow);
-        assert_eq!(glow_of("entity/zombie/zombie"), Some("entity/zombie/zombie_e".to_owned()));
+        assert_eq!(
+            glow_of("entity/zombie/zombie"),
+            Some("entity/zombie/zombie_e".to_owned())
+        );
         assert_eq!(glow_of("entity/cow/cow"), None);
     }
 
@@ -251,7 +314,10 @@ mod tests {
         assert!(!enter_body());
         leave_body();
         assert!(enter_layers());
-        assert!(!enter_layers(), "the layers hook is not entered while it calls the original");
+        assert!(
+            !enter_layers(),
+            "the layers hook is not entered while it calls the original"
+        );
         leave_layers();
     }
 
@@ -259,11 +325,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

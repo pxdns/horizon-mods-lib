@@ -1,4 +1,4 @@
-// Effect Timer, a native Horizon mod: Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.
+// Effect Timer, a native Horizon mod: Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar and the time left (30s, 1:30) under each effect icon.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_effect_timer`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,7 +6,7 @@
 pub const ID: &str = "effect_timer";
 pub const NAME: &str = "Effect Timer";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar under each effect icon.";
+pub const DESCRIPTION: &str = "Your active potion effects and how long each has left, red in the last ten seconds, with a duration bar and the time left (30s, 1:30) under each effect icon.";
 
 use std::cell::RefCell;
 
@@ -14,7 +14,8 @@ use std::cell::RefCell;
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("ambient", "Show beacon effects", true),
-    ("bars", "Duration bars under the icons", true)
+    ("bars", "Duration bars under the icons", true),
+    ("times", "Time left under the icons", true),
 ];
 
 thread_local! {
@@ -90,7 +91,9 @@ pub fn title(id: &str) -> String {
         .filter(|w| !w.is_empty())
         .map(|w| {
             let mut c = w.chars();
-            c.next().map_or(String::new(), |f| f.to_uppercase().collect::<String>() + c.as_str())
+            c.next().map_or(String::new(), |f| {
+                f.to_uppercase().collect::<String>() + c.as_str()
+            })
         })
         .collect::<Vec<_>>()
         .join(" ")
@@ -116,7 +119,11 @@ pub fn clock(ticks: i32) -> String {
     }
     let s = (ticks + 19) / 20;
     let (h, m, s) = (s / 3600, s / 60 % 60, s % 60);
-    if h > 0 { format!("{h}:{m:02}:{s:02}") } else { format!("{m}:{s:02}") }
+    if h > 0 {
+        format!("{h}:{m:02}:{s:02}")
+    } else {
+        format!("{m}:{s:02}")
+    }
 }
 
 /// Roman numerals for the amplifier (0 reads as nothing, 1 as II).
@@ -201,6 +208,44 @@ pub fn layout(w: i32, icons: &[Icon], longest: &[i32]) -> Vec<([f32; 4], u32)> {
     out
 }
 
+/// The time under an icon: `30s` under a minute, `m:ss` after, `h:mm` from an hour; nothing for an endless effect.
+pub fn short(ticks: i32) -> Option<String> {
+    if ticks < 0 {
+        return None;
+    }
+    let s = (ticks + 19) / 20;
+    Some(if s < 60 {
+        format!("{s}s")
+    } else if s < 3600 {
+        format!("{}:{:02}", s / 60, s % 60)
+    } else {
+        format!("{}:{:02}", s / 3600, s / 60 % 60)
+    })
+}
+
+/// The text under each timed icon of the vanilla row: `(text, x of its centre, y, argb)`, in the layout `layout` uses; red
+/// when ten seconds or fewer are left.
+pub fn icon_times(w: i32, icons: &[Icon]) -> Vec<(String, f32, f32, u32)> {
+    let mut order: Vec<usize> = (0..icons.len()).collect();
+    order.sort_by(|&a, &b| icon_order(&icons[b], &icons[a]));
+    let (mut beneficial, mut harmful) = (0, 0);
+    let mut out = Vec::new();
+    for i in order {
+        let icon = &icons[i];
+        let (x, y) = if icon.beneficial {
+            beneficial += 1;
+            (w - 25 * beneficial, 1)
+        } else {
+            harmful += 1;
+            (w - 25 * harmful, 27)
+        };
+        let Some(text) = short(icon.duration) else { continue };
+        let ink = if icon.duration <= 200 { 0xFF_5555 } else { INK };
+        out.push((text, (x + 12) as f32, (y + 25) as f32, ink));
+    }
+    out
+}
+
 thread_local! {
     static LONGEST: std::cell::RefCell<Longest> = std::cell::RefCell::new(Longest::default());
 }
@@ -220,8 +265,16 @@ pub fn lines(list: &[Active], show_ambient: bool) -> Vec<(String, u32)> {
         .map(|e| {
             let name = title(&e.id);
             let tier = level(e.amplifier);
-            let label = if tier.is_empty() { name } else { format!("{name} {tier}") };
-            let ink = if (0..=200).contains(&e.duration) { 0xFF_5555 } else { INK };
+            let label = if tier.is_empty() {
+                name
+            } else {
+                format!("{name} {tier}")
+            };
+            let ink = if (0..=200).contains(&e.duration) {
+                0xFF_5555
+            } else {
+                INK
+            };
             (format!("{label} {}", clock(e.duration)), ink)
         })
         .collect()
@@ -248,6 +301,29 @@ mod tests {
     }
 
     #[test]
+    fn the_short_time_is_seconds_then_minutes() {
+        assert_eq!(short(600).as_deref(), Some("30s"));
+        assert_eq!(short(1).as_deref(), Some("1s"));
+        assert_eq!(short(1200).as_deref(), Some("1:00"));
+        assert_eq!(short(2390).as_deref(), Some("2:00"));
+        assert_eq!(short(72_000).as_deref(), Some("1:00"));
+        assert_eq!(short(-1), None);
+    }
+
+    #[test]
+    fn times_sit_under_each_icon_and_go_red_at_ten_seconds() {
+        let icon = |id: &str, duration, beneficial| Icon { id: id.into(), duration, ambient: false, beneficial, color: 0xFF_FFFF };
+        let times = icon_times(200, &[icon("a", 600, true), icon("b", 100, true), icon("c", -1, true), icon("d", 400, false)]);
+        assert_eq!(times.len(), 3, "the endless one has no time");
+        let b = times.iter().find(|t| t.0 == "5s").unwrap();
+        assert_eq!(b.3, 0xFF_5555);
+        assert_eq!(b.2, 26.0, "a beneficial icon sits at y 1 and is 24 tall");
+        let d = times.iter().find(|t| t.0 == "20s").unwrap();
+        assert_eq!(d.2, 52.0, "a harmful one sits at y 27");
+        assert_eq!(d.1, 187.0, "the first icon from the right edge: 200 - 25 + 12");
+    }
+
+    #[test]
     fn levels_are_roman() {
         assert_eq!(level(0), "");
         assert_eq!(level(1), "II");
@@ -258,12 +334,26 @@ mod tests {
 
     #[test]
     fn bars_follow_the_game_row_and_fill_with_time_left() {
-        let icon = |id: &str, duration, beneficial| Icon { id: id.into(), duration, ambient: false, beneficial, color: 0x33_CC33 };
-        let icons = [icon("speed", 600, true), icon("poison", 100, false), icon("haste", 1200, true)];
+        let icon = |id: &str, duration, beneficial| Icon {
+            id: id.into(),
+            duration,
+            ambient: false,
+            beneficial,
+            color: 0x33_CC33,
+        };
+        let icons = [
+            icon("speed", 600, true),
+            icon("poison", 100, false),
+            icon("haste", 1200, true),
+        ];
         let mut longest = Longest::default();
         assert_eq!(longest.observe(&icons), [600, 100, 1200]);
         // Fifteen seconds in, speed has half left.
-        let later = [icon("speed", 300, true), icon("poison", 50, false), icon("haste", 900, true)];
+        let later = [
+            icon("speed", 300, true),
+            icon("poison", 50, false),
+            icon("haste", 900, true),
+        ];
         let maxes = longest.observe(&later);
         assert_eq!(maxes, [600, 100, 1200], "the longest stays");
         let out = layout(320, &later, &maxes);
@@ -274,15 +364,39 @@ mod tests {
         assert_eq!(out[3].0[2], 10.0);
         // Harmful effects sit on the second row.
         assert_eq!(out[4].0[1], 48.0);
-        assert!(layout(320, &[Icon { duration: -1, ..icon("x", 0, true) }], &[1]).is_empty(), "endless effects have no bar");
+        assert!(
+            layout(
+                320,
+                &[Icon {
+                    duration: -1,
+                    ..icon("x", 0, true)
+                }],
+                &[1]
+            )
+            .is_empty(),
+            "endless effects have no bar"
+        );
         longest.observe(&[]);
-        assert_eq!(longest.observe(&icons), [600, 100, 1200], "an ended effect is forgotten");
+        assert_eq!(
+            longest.observe(&icons),
+            [600, 100, 1200],
+            "an ended effect is forgotten"
+        );
     }
 
     #[test]
     fn lines_sort_colour_and_filter() {
-        let e = |id: &str, duration, amplifier, ambient| Active { id: id.into(), duration, amplifier, ambient };
-        let list = [e("speed", 3600, 1, false), e("poison", 100, 0, false), e("haste", -1, 0, true)];
+        let e = |id: &str, duration, amplifier, ambient| Active {
+            id: id.into(),
+            duration,
+            amplifier,
+            ambient,
+        };
+        let list = [
+            e("speed", 3600, 1, false),
+            e("poison", 100, 0, false),
+            e("haste", -1, 0, true),
+        ];
         let out = lines(&list, true);
         assert_eq!(out[0], ("Poison 0:05".to_owned(), 0xFF_5555));
         assert_eq!(out[1], ("Speed II 3:00".to_owned(), INK));
@@ -294,11 +408,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

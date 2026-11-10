@@ -11,10 +11,8 @@ pub const DESCRIPTION: &str = "How many totems of undying you carry, red when yo
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("shown", "Shown", true),
-    ("hide", "Hide when none", false)
-];
+pub const OPTIONS: &[(&str, &str, bool)] =
+    &[("shown", "Shown", true), ("hide", "Hide when none", false)];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -121,11 +119,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

@@ -11,9 +11,11 @@ pub const DESCRIPTION: &str = "Look up a player's tiers on a tier website with /
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("lookups", "Allow lookups (sends names to the website)", false)
-];
+pub const OPTIONS: &[(&str, &str, bool)] = &[(
+    "lookups",
+    "Allow lookups (sends names to the website)",
+    false,
+)];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -110,7 +112,11 @@ impl Json {
     fn num(&self) -> Option<i64> {
         match self {
             Json::Num(n) if n.is_finite() => Some(*n as i64),
-            Json::Str(s) => s.trim().trim_start_matches(['H', 'L', 'T', 'h', 'l', 't']).parse().ok(),
+            Json::Str(s) => s
+                .trim()
+                .trim_start_matches(['H', 'L', 'T', 'h', 'l', 't'])
+                .parse()
+                .ok(),
             _ => None,
         }
     }
@@ -130,7 +136,15 @@ const MODE_KEYS: [&str; 4] = ["gamemode", "mode", "kit", "name"];
 const LIST_KEYS: [&str; 4] = ["rankings", "tiers", "gamemodes", "modes"];
 
 fn entry_of(mode: &str, v: &Json) -> Option<Entry> {
-    Some(Entry { mode: mode.to_owned(), tier: v.get("tier")?.num()?, pos: v.get("pos").and_then(Json::num), peak: v.get("peak_tier").or_else(|| v.get("peak")).and_then(Json::num) })
+    Some(Entry {
+        mode: mode.to_owned(),
+        tier: v.get("tier")?.num()?,
+        pos: v.get("pos").and_then(Json::num),
+        peak: v
+            .get("peak_tier")
+            .or_else(|| v.get("peak"))
+            .and_then(Json::num),
+    })
 }
 
 /// The gamemodes found in a reply: under `rankings`/`tiers`/`gamemodes`, as an object keyed by mode or a list of objects naming theirs;
@@ -160,7 +174,9 @@ fn collect(v: &Json) -> Vec<Entry> {
             } else {
                 for (key, child) in fields {
                     match child {
-                        Json::Obj(_) if child.get("tier").is_some() => out.extend(entry_of(key, child)),
+                        Json::Obj(_) if child.get("tier").is_some() => {
+                            out.extend(entry_of(key, child))
+                        }
                         Json::Obj(_) | Json::Arr(_) => out.extend(collect(child)),
                         _ => {}
                     }
@@ -197,8 +213,20 @@ pub fn lines(name: &str, reply: &Json) -> Vec<String> {
     if entries.is_empty() {
         return vec![format!("{name}: no tiers found in the reply")];
     }
-    entries.sort_by(|a, b| a.tier.cmp(&b.tier).then(a.pos.cmp(&b.pos)).then(a.mode.cmp(&b.mode)));
-    std::iter::once(format!("{name}: {} gamemodes", entries.len())).chain(entries.iter().take(20).map(|e| format!("{}: {}", e.mode, describe(e)))).collect()
+    entries.sort_by(|a, b| {
+        a.tier
+            .cmp(&b.tier)
+            .then(a.pos.cmp(&b.pos))
+            .then(a.mode.cmp(&b.mode))
+    });
+    std::iter::once(format!("{name}: {} gamemodes", entries.len()))
+        .chain(
+            entries
+                .iter()
+                .take(20)
+                .map(|e| format!("{}: {}", e.mode, describe(e))),
+        )
+        .collect()
 }
 
 /// What the player asked for.
@@ -231,7 +259,10 @@ pub fn check_url(template: &str) -> Result<(), String> {
     if !template.contains("{name}") {
         return Err("The address must contain {name}".to_owned());
     }
-    if template.chars().any(|c| c.is_whitespace() || c.is_control()) {
+    if template
+        .chars()
+        .any(|c| c.is_whitespace() || c.is_control())
+    {
         return Err("The address cannot contain spaces".to_owned());
     }
     Ok(())
@@ -243,7 +274,11 @@ pub fn fill(template: &str, name: &str) -> String {
 
 /// `https://pvptiers.com/api/profile/{name}` as `pvptiers.com`.
 pub fn host_of(url: &str) -> String {
-    url.trim_start_matches("https://").split(['/', '?', '#']).next().unwrap_or("").to_owned()
+    url.trim_start_matches("https://")
+        .split(['/', '?', '#'])
+        .next()
+        .unwrap_or("")
+        .to_owned()
 }
 
 type Reply = (String, Result<Vec<String>, String>);
@@ -260,7 +295,10 @@ pub fn deliver(name: String, reply: Result<Json, String>) {
 
 /// On the game thread: the finished lookups as chat lines, remembered for `CACHE_SECONDS`.
 pub fn take_replies(now: u64) -> Vec<String> {
-    let done: Vec<Reply> = REPLIES.lock().map(|mut q| std::mem::take(&mut *q)).unwrap_or_default();
+    let done: Vec<Reply> = REPLIES
+        .lock()
+        .map(|mut q| std::mem::take(&mut *q))
+        .unwrap_or_default();
     let mut out = Vec::new();
     for (name, result) in done {
         match result {
@@ -279,7 +317,12 @@ pub fn take_replies(now: u64) -> Vec<String> {
 
 /// A reply asked for within `CACHE_SECONDS`.
 pub fn cached(name: &str, now: u64) -> Option<Vec<String>> {
-    CACHE.lock().ok()?.iter().find(|(n, at, _)| n == name && now.saturating_sub(*at) < CACHE_SECONDS).map(|(.., lines)| lines.clone())
+    CACHE
+        .lock()
+        .ok()?
+        .iter()
+        .find(|(n, at, _)| n == name && now.saturating_sub(*at) < CACHE_SECONDS)
+        .map(|(.., lines)| lines.clone())
 }
 
 /// Forgets everything (tests).
@@ -298,30 +341,69 @@ mod tests {
     }
 
     fn mode(tier: f64, pos: f64) -> Json {
-        obj(vec![("tier", Json::Num(tier)), ("pos", Json::Num(pos)), ("peak_tier", Json::Num(tier - 1.0))])
+        obj(vec![
+            ("tier", Json::Num(tier)),
+            ("pos", Json::Num(pos)),
+            ("peak_tier", Json::Num(tier - 1.0)),
+        ])
     }
 
     #[test]
     fn a_rankings_object_keyed_by_mode_is_read() {
-        let reply = obj(vec![("name", Json::Str("Steve".into())), ("rankings", obj(vec![("sword", mode(3.0, 0.0)), ("axe", mode(2.0, 1.0))]))]);
-        assert_eq!(lines("Steve", &reply), ["Steve: 2 gamemodes", "axe: tier 2 (low, peak 1)", "sword: tier 3 (high, peak 2)"]);
+        let reply = obj(vec![
+            ("name", Json::Str("Steve".into())),
+            (
+                "rankings",
+                obj(vec![("sword", mode(3.0, 0.0)), ("axe", mode(2.0, 1.0))]),
+            ),
+        ]);
+        assert_eq!(
+            lines("Steve", &reply),
+            [
+                "Steve: 2 gamemodes",
+                "axe: tier 2 (low, peak 1)",
+                "sword: tier 3 (high, peak 2)"
+            ]
+        );
     }
 
     #[test]
     fn a_list_of_objects_naming_their_mode_is_read() {
-        let reply = obj(vec![("tiers", Json::Arr(vec![obj(vec![("gamemode", Json::Str("crystal".into())), ("tier", Json::Num(1.0))]), obj(vec![("kit", Json::Str("uhc".into())), ("tier", Json::Str("LT4".into()))])]))]);
+        let reply = obj(vec![(
+            "tiers",
+            Json::Arr(vec![
+                obj(vec![
+                    ("gamemode", Json::Str("crystal".into())),
+                    ("tier", Json::Num(1.0)),
+                ]),
+                obj(vec![
+                    ("kit", Json::Str("uhc".into())),
+                    ("tier", Json::Str("LT4".into())),
+                ]),
+            ]),
+        )]);
         let found = extract(&reply);
         assert_eq!(found.len(), 2);
         assert_eq!((found[0].mode.as_str(), found[0].tier), ("crystal", 1));
-        assert_eq!((found[1].mode.as_str(), found[1].tier), ("uhc", 4), "LT4 reads as 4");
+        assert_eq!(
+            (found[1].mode.as_str(), found[1].tier),
+            ("uhc", 4),
+            "LT4 reads as 4"
+        );
     }
 
     #[test]
     fn any_nested_object_with_a_tier_counts_as_a_fallback() {
-        let reply = obj(vec![("data", obj(vec![("profile", obj(vec![("mace", mode(5.0, 1.0))]))]))]);
+        let reply = obj(vec![(
+            "data",
+            obj(vec![("profile", obj(vec![("mace", mode(5.0, 1.0))]))]),
+        )]);
         assert_eq!(extract(&reply).len(), 1);
         assert_eq!(extract(&reply)[0].mode, "mace");
-        assert_eq!(lines("X", &obj(vec![("hello", Json::Str("world".into()))])), ["X: no tiers found in the reply"]);
+        assert_eq!(
+            lines("X", &obj(vec![("hello", Json::Str("world".into()))])),
+            ["X: no tiers found in the reply"]
+        );
         assert!(extract(&Json::Null).is_empty());
     }
 
@@ -330,19 +412,46 @@ mod tests {
         assert_eq!(request(&[], "Me"), Request::Help);
         assert_eq!(request(&["me"], "Alex"), Request::Lookup("Alex".into()));
         assert_eq!(request(&["Steve"], "Alex"), Request::Lookup("Steve".into()));
-        assert_eq!(request(&["../etc/passwd"], "Alex"), Request::Help, "a name is never put in an address unless it is a name");
+        assert_eq!(
+            request(&["../etc/passwd"], "Alex"),
+            Request::Help,
+            "a name is never put in an address unless it is a name"
+        );
         assert_eq!(request(&["a?b=c"], "Alex"), Request::Help);
-        assert_eq!(request(&["url", "https://x.example/{name}"], "A"), Request::SetUrl("https://x.example/{name}".into()));
-        assert!(valid_name("Steve_9") && !valid_name("") && !valid_name("12345678901234567") && !valid_name("a b"));
+        assert_eq!(
+            request(&["url", "https://x.example/{name}"], "A"),
+            Request::SetUrl("https://x.example/{name}".into())
+        );
+        assert!(
+            valid_name("Steve_9")
+                && !valid_name("")
+                && !valid_name("12345678901234567")
+                && !valid_name("a b")
+        );
     }
 
     #[test]
     fn the_address_must_be_https_and_take_the_name() {
         assert!(check_url("https://pvptiers.com/api/profile/{name}").is_ok());
-        assert!(check_url("http://x.example/{name}").unwrap_err().contains("https"));
-        assert!(check_url("https://x.example/").unwrap_err().contains("{name}"));
-        assert!(check_url("https://x.example/{name} z").unwrap_err().contains("spaces"));
-        assert_eq!(fill(DEFAULT_URL, "Steve"), "https://pvptiers.com/api/profile/Steve");
+        assert!(
+            check_url("http://x.example/{name}")
+                .unwrap_err()
+                .contains("https")
+        );
+        assert!(
+            check_url("https://x.example/")
+                .unwrap_err()
+                .contains("{name}")
+        );
+        assert!(
+            check_url("https://x.example/{name} z")
+                .unwrap_err()
+                .contains("spaces")
+        );
+        assert_eq!(
+            fill(DEFAULT_URL, "Steve"),
+            "https://pvptiers.com/api/profile/Steve"
+        );
         assert_eq!(host_of(DEFAULT_URL), "pvptiers.com");
         assert_eq!(host_of("https://a.b:8080/x?y"), "a.b:8080");
     }
@@ -354,7 +463,14 @@ mod tests {
         deliver("Steve".into(), Ok(ok));
         deliver("Bob".into(), Err("timed out".into()));
         let out = take_replies(100);
-        assert_eq!(out, ["Steve: 1 gamemodes", "sword: tier 3 (high, peak 2)", "Bob: lookup failed: timed out"]);
+        assert_eq!(
+            out,
+            [
+                "Steve: 1 gamemodes",
+                "sword: tier 3 (high, peak 2)",
+                "Bob: lookup failed: timed out"
+            ]
+        );
         assert!(take_replies(101).is_empty());
         assert_eq!(cached("Steve", 100 + CACHE_SECONDS - 1).unwrap().len(), 2);
         assert!(cached("Steve", 100 + CACHE_SECONDS).is_none());
@@ -366,11 +482,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

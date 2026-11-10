@@ -16,7 +16,7 @@ pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("speed", "Speed", true),
     ("facing", "Facing", true),
     ("dimension", "Dimension", false),
-    ("angles", "Yaw and pitch", false)
+    ("angles", "Yaw and pitch", false),
 ];
 
 thread_local! {
@@ -194,8 +194,19 @@ mod tests {
     #[test]
     fn lines_follow_the_toggles() {
         assert_eq!(
-            lines(4.32, 180.0, 10.0, "minecraft:the_nether", [true, true, true, true]),
-            ["Speed 4.3 b/s", "Facing North (-Z)", "the nether", "Yaw 180.0 Pitch 10.0"]
+            lines(
+                4.32,
+                180.0,
+                10.0,
+                "minecraft:the_nether",
+                [true, true, true, true]
+            ),
+            [
+                "Speed 4.3 b/s",
+                "Facing North (-Z)",
+                "the nether",
+                "Yaw 180.0 Pitch 10.0"
+            ]
         );
         assert!(lines(0.0, 0.0, 0.0, "x", [false; 4]).is_empty());
     }
@@ -204,11 +215,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

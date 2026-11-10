@@ -14,7 +14,7 @@ use std::cell::RefCell;
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("players", "Player messages", true),
     ("server", "Server messages", false),
-    ("own", "My own messages", false)
+    ("own", "My own messages", false),
 ];
 
 thread_local! {
@@ -107,12 +107,14 @@ pub fn mentions(text: &str, name: &str) -> bool {
     }
     let (t, n) = (text.to_lowercase(), name.to_lowercase());
     let word = |c: Option<char>| c.is_none_or(|c| !(c.is_alphanumeric() || c == '_'));
-    t.match_indices(&n).any(|(at, _)| word(t[..at].chars().next_back()) && word(t[at + n.len()..].chars().next()))
+    t.match_indices(&n)
+        .any(|(at, _)| word(t[..at].chars().next_back()) && word(t[at + n.len()..].chars().next()))
 }
 
 /// Whether the message is the player's own, in the usual `<name> text` form.
 pub fn is_own(text: &str, name: &str) -> bool {
-    text.to_lowercase().starts_with(&format!("<{}>", name.to_lowercase()))
+    text.to_lowercase()
+        .starts_with(&format!("<{}>", name.to_lowercase()))
 }
 
 /// A chat line arrived: remember to ping when it counts. `player` and `server` say where it came from.
@@ -142,10 +144,16 @@ mod tests {
         assert!(mentions("hey Steve, look", "steve"));
         assert!(mentions("STEVE!", "Steve"));
         assert!(mentions("<Alex> steve", "Steve"));
-        assert!(!mentions("steven is here", "steve"), "a longer word is not a mention");
+        assert!(
+            !mentions("steven is here", "steve"),
+            "a longer word is not a mention"
+        );
         assert!(!mentions("nobody", "steve"));
         assert!(!mentions("anything", ""));
-        assert!(!mentions("ping steve_", "steve"), "an underscore continues the word");
+        assert!(
+            !mentions("ping steve_", "steve"),
+            "an underscore continues the word"
+        );
     }
 
     #[test]
@@ -180,11 +188,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

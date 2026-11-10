@@ -6,15 +6,14 @@
 pub const ID: &str = "pick_up_notifier";
 pub const NAME: &str = "Pick Up Notifier";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "+3 Cobblestone: a short list of what you just picked up (and, if you like, dropped).";
+pub const DESCRIPTION: &str =
+    "+3 Cobblestone: a short list of what you just picked up (and, if you like, dropped).";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("shown", "Shown", true),
-    ("losses", "Show losses", false)
-];
+pub const OPTIONS: &[(&str, &str, bool)] =
+    &[("shown", "Shown", true), ("losses", "Show losses", false)];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -89,7 +88,9 @@ pub fn title(id: &str) -> String {
         .filter(|w| !w.is_empty())
         .map(|w| {
             let mut c = w.chars();
-            c.next().map_or(String::new(), |f| f.to_uppercase().collect::<String>() + c.as_str())
+            c.next().map_or(String::new(), |f| {
+                f.to_uppercase().collect::<String>() + c.as_str()
+            })
         })
         .collect::<Vec<_>>()
         .join(" ")
@@ -147,7 +148,11 @@ pub fn tick(carried: Option<Vec<(String, u32)>>) {
             }
             for (id, delta) in changes {
                 // The same item again within a line's life adds to it.
-                if let Some(line) = n.lines.iter_mut().find(|l| l.0 == id && (l.1 > 0) == (delta > 0)) {
+                if let Some(line) = n
+                    .lines
+                    .iter_mut()
+                    .find(|l| l.0 == id && (l.1 > 0) == (delta > 0))
+                {
                     line.1 += delta;
                     line.2 = LIFE;
                 } else {
@@ -169,7 +174,10 @@ pub fn lines(losses: bool) -> Vec<(String, u32)> {
             .filter(|l| losses || l.1 > 0)
             .map(|l| {
                 let sign = if l.1 > 0 { "+" } else { "" };
-                (format!("{sign}{} {}", l.1, title(&l.0)), if l.1 > 0 { 0x55_FF55 } else { 0xFF_5555 })
+                (
+                    format!("{sign}{} {}", l.1, title(&l.0)),
+                    if l.1 > 0 { 0x55_FF55 } else { 0xFF_5555 },
+                )
             })
             .collect()
     })
@@ -248,11 +256,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

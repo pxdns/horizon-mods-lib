@@ -6,14 +6,14 @@
 pub const ID: &str = "item_highlighter";
 pub const NAME: &str = "Item Highlighter";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Marks newly picked-up items with a twinkling star in your inventory.";
+pub const DESCRIPTION: &str =
+    "Marks newly picked-up items with a twinkling star in your inventory.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("clear", "Clear the stars when the inventory closes", true)
-];
+pub const OPTIONS: &[(&str, &str, bool)] =
+    &[("clear", "Clear the stars when the inventory closes", true)];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -143,7 +143,11 @@ pub fn star(millis: u128) -> Vec<([f32; 4], u32)> {
     let gold = 0xFF_FFD83A_u32;
     let pale = 0xFF_FFF2A8_u32;
     let arm = if phase.is_multiple_of(2) { 2.0 } else { 1.0 };
-    let (centre, arms) = if phase < 2 { (gold, pale) } else { (pale, gold) };
+    let (centre, arms) = if phase < 2 {
+        (gold, pale)
+    } else {
+        (pale, gold)
+    };
     vec![
         ([1.0, 1.0, 3.0, 3.0], centre),
         ([2.0 - arm + 1.0, 2.0, arm, 1.0], arms),
@@ -206,7 +210,13 @@ mod tests {
         assert_ne!(a, b);
         assert_eq!(star(800), star(0), "a cycle is 800 ms");
         for (rect, _) in a.iter().chain(b.iter()) {
-            assert!(rect[0] >= 0.0 && rect[1] >= 0.0 && rect[0] + rect[2] <= 8.0 && rect[1] + rect[3] <= 8.0, "{rect:?}");
+            assert!(
+                rect[0] >= 0.0
+                    && rect[1] >= 0.0
+                    && rect[0] + rect[2] <= 8.0
+                    && rect[1] + rect[3] <= 8.0,
+                "{rect:?}"
+            );
         }
     }
 
@@ -214,11 +224,7 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(
-            labels(none).len(),
-            OPTIONS.len(),
-            "one button per option"
-        );
+        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

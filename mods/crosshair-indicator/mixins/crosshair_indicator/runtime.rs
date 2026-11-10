@@ -6,16 +6,25 @@
 pub const ID: &str = "crosshair_indicator";
 pub const NAME: &str = "Crosshair Indicator";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Shows corner brackets around your crosshair when you're aiming at a player.";
+pub const DESCRIPTION: &str =
+    "Shows corner brackets around your crosshair when you're aiming at a player.";
 
 /// The crosshair sprite is 15 by 15 pixels, centred on the screen.
 pub const SPRITE: i32 = 15;
 /// The 12 white pixels of the original's `crosshair.png`: four corner brackets round a 7 by 7 square at (4, 4).
 pub const PIXELS: [(i32, i32); 12] = [
-    (4, 4), (5, 4), (9, 4), (10, 4),
-    (4, 5), (10, 5),
-    (4, 9), (10, 9),
-    (4, 10), (5, 10), (9, 10), (10, 10),
+    (4, 4),
+    (5, 4),
+    (9, 4),
+    (10, 4),
+    (4, 5),
+    (10, 5),
+    (4, 9),
+    (10, 9),
+    (4, 10),
+    (5, 10),
+    (9, 10),
+    (10, 10),
 ];
 
 /// Whether the brackets show: the crosshair is on a player who is not in spectator mode. A mob, an armor stand or
@@ -45,7 +54,13 @@ mod tests {
 
     #[test]
     fn a_mob_or_another_entity_does_not() {
-        for kind in ["minecraft:cow", "minecraft:zombie", "minecraft:armor_stand", "minecraft:item_frame", "minecraft:mannequin"] {
+        for kind in [
+            "minecraft:cow",
+            "minecraft:zombie",
+            "minecraft:armor_stand",
+            "minecraft:item_frame",
+            "minecraft:mannequin",
+        ] {
             assert!(!active(kind, false), "{kind}");
         }
     }
@@ -59,16 +74,34 @@ mod tests {
     #[test]
     fn the_sprite_is_the_originals_twelve_pixels_inside_a_15_square() {
         assert_eq!(PIXELS.len(), 12);
-        assert!(PIXELS.iter().all(|&(x, y)| (0..SPRITE).contains(&x) && (0..SPRITE).contains(&y)));
+        assert!(
+            PIXELS
+                .iter()
+                .all(|&(x, y)| (0..SPRITE).contains(&x) && (0..SPRITE).contains(&y))
+        );
         // Four corner brackets: each is an L of three pixels round a 7 by 7 square from (4, 4) to (10, 10), none inside it.
-        assert!(PIXELS.iter().all(|&(x, y)| (4..=10).contains(&x) && (4..=10).contains(&y)));
-        assert!(PIXELS.iter().all(|&(x, y)| x == 4 || x == 10 || y == 4 || y == 10), "only the square's edge");
+        assert!(
+            PIXELS
+                .iter()
+                .all(|&(x, y)| (4..=10).contains(&x) && (4..=10).contains(&y))
+        );
+        assert!(
+            PIXELS
+                .iter()
+                .all(|&(x, y)| x == 4 || x == 10 || y == 4 || y == 10),
+            "only the square's edge"
+        );
         let mut sorted = PIXELS.to_vec();
         sorted.sort_unstable();
         sorted.dedup();
         assert_eq!(sorted.len(), 12, "no pixel twice");
         // The middle of each side is empty: the brackets leave a gap.
-        assert!(!PIXELS.contains(&(7, 4)) && !PIXELS.contains(&(4, 7)) && !PIXELS.contains(&(10, 7)) && !PIXELS.contains(&(7, 10)));
+        assert!(
+            !PIXELS.contains(&(7, 4))
+                && !PIXELS.contains(&(4, 7))
+                && !PIXELS.contains(&(10, 7))
+                && !PIXELS.contains(&(7, 10))
+        );
     }
 
     #[test]
