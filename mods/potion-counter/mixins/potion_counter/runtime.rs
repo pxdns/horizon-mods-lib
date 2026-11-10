@@ -1,184 +1,128 @@
-// Potion Counter, a native Horizon mod: How many potions, splash potions and lingering potions you carry.
+// PotionCounter, a native Horizon mod: Shows how many potions you have left in your inventory.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_potion_counter`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
 /// The mod's id: its settings folder and its keys' lines.
 pub const ID: &str = "potion_counter";
-pub const NAME: &str = "Potion Counter";
+pub const NAME: &str = "PotionCounter";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "How many potions, splash potions and lingering potions you carry.";
+pub const DESCRIPTION: &str = "Shows how many potions you have left in your inventory.";
 
-use std::cell::RefCell;
-
-/// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("shown", "Shown", true),
-    ("split", "Split by kind", true),
-    ("empty", "Show when none", false),
+/// The potions with an effect, by the name each button switches off.
+pub const POTIONS: [&str; 18] = [
+    "night_vision", "invisibility", "leaping", "fire_resistance", "swiftness", "slowness", "turtle_master", "water_breathing",
+    "healing", "harming", "poison", "regeneration", "strength", "weakness", "slow_falling", "wind_charged", "weaving", "oozing",
 ];
 
-thread_local! {
-    /// Read once through the game's settings files, then kept.
-    static CHOSEN: RefCell<Option<Vec<bool>>> = const { RefCell::new(None) };
+/// `PotionCounterConfig` of the original, with its defaults. `disabled` holds potion names.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Settings {
+    pub enabled: bool,
+    pub show_upgrades: bool,
+    pub disabled: Vec<String>,
 }
 
-/// A stored value: `true` or `false`, else the default.
-pub fn parse(stored: Option<String>, default: bool) -> bool {
-    stored.map_or(default, |v| match v.trim() {
-        "true" => true,
-        "false" => false,
-        _ => default,
-    })
+impl Default for Settings {
+    fn default() -> Self {
+        Self { enabled: true, show_upgrades: true, disabled: Vec::new() }
+    }
 }
 
-fn chosen(get: impl Fn(&str) -> Option<String>) -> Vec<bool> {
-    CHOSEN.with_borrow_mut(|c| {
-        c.get_or_insert_with(|| {
-            OPTIONS
-                .iter()
-                .map(|(key, _, default)| parse(get(key), *default))
-                .collect()
-        })
-        .clone()
-    })
+pub fn names() -> Vec<&'static str> {
+    POTIONS.to_vec()
 }
 
-/// Whether option `key` is on.
-pub fn is(get: impl Fn(&str) -> Option<String>, key: &str) -> bool {
-    OPTIONS
-        .iter()
-        .position(|o| o.0 == key)
-        .is_some_and(|i| chosen(get)[i])
-}
-
-/// The settings page's buttons.
-pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
-    let on = chosen(get);
-    OPTIONS
-        .iter()
-        .zip(on)
-        .map(|((_, label, _), on)| format!("{label}: {}", if on { "ON" } else { "OFF" }))
-        .collect()
-}
-
-/// A click on button `i`: flips it and returns what to store (key, value).
-pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
-    let mut on = chosen(get);
-    let (key, _, _) = *OPTIONS.get(i)?;
-    on[i] = !on[i];
-    let value = on[i].to_string();
-    CHOSEN.with_borrow_mut(|c| *c = Some(on));
-    Some((key, value))
-}
-
-/// Forgets what was read (tests only).
-#[cfg(test)]
-pub fn forget_options() {
-    CHOSEN.with_borrow_mut(|c| *c = None);
-}
-/// Translucent black box, white text with a shadow, as Horizon's own HUD extras.
-pub const BACKGROUND: u32 = 0x7800_0000;
-#[allow(dead_code)]
-pub const INK: u32 = 0xFF_FFFF;
-
-/// Slash command that hides or shows the box.
-pub const COMMAND: &str = "potions";
-
-/// The potion kinds an item can be.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub struct Counts {
-    pub drink: u32,
-    pub splash: u32,
-    pub lingering: u32,
-}
-
-impl Counts {
-    /// Adds a stack of `count` items called `id`.
-    pub fn add(&mut self, id: &str, count: u32) {
-        match id.strip_prefix("minecraft:").unwrap_or(id) {
-            "potion" => self.drink += count,
-            "splash_potion" => self.splash += count,
-            "lingering_potion" => self.lingering += count,
-            _ => {}
+impl Settings {
+    pub fn read(get: impl Fn(&str) -> Option<String>) -> Self {
+        let d = Self::default();
+        let flag = |key: &str, d: bool| get(key).map_or(d, |v| match v.trim() {
+            "true" => true,
+            "false" => false,
+            _ => d,
+        });
+        Self {
+            enabled: flag("enabled", d.enabled),
+            show_upgrades: flag("upgrades", d.show_upgrades),
+            disabled: get("disabled").map(|v| v.split(',').map(str::trim).filter(|p| !p.is_empty()).map(str::to_owned).collect()).unwrap_or_default(),
         }
     }
 
-    pub fn total(&self) -> u32 {
-        self.drink + self.splash + self.lingering
+    pub fn labels(&self) -> Vec<String> {
+        let on = |b: bool| if b { "ON" } else { "OFF" };
+        let mut v = vec![
+            format!("Enabled: {}", on(self.enabled)),
+            format!("Show potion upgrades: {}", on(self.show_upgrades)),
+        ];
+        v.extend(names().into_iter().map(|n| format!("{n}: {}", on(!self.disabled.iter().any(|d| d == n)))));
+        v
+    }
+
+    pub fn click(&mut self, i: usize) -> Option<(&'static str, String)> {
+        match i {
+            0 => {
+                self.enabled = !self.enabled;
+                Some(("enabled", self.enabled.to_string()))
+            }
+            1 => {
+                self.show_upgrades = !self.show_upgrades;
+                Some(("upgrades", self.show_upgrades.to_string()))
+            }
+            n => {
+                let name = *names().get(n.checked_sub(2)?)?;
+                match self.disabled.iter().position(|d| d == name) {
+                    Some(at) => {
+                        self.disabled.remove(at);
+                    }
+                    None => self.disabled.push(name.to_owned()),
+                }
+                Some(("disabled", self.disabled.join(",")))
+            }
+        }
     }
 }
 
-/// The box's lines.
-pub fn lines(c: Counts, split: bool, show_empty: bool) -> Vec<String> {
-    if c.total() == 0 && !show_empty {
-        return Vec::new();
-    }
-    if !split {
-        return vec![format!("Potions {}", c.total())];
-    }
-    let mut out = vec![format!("Potions {}", c.drink)];
-    if c.splash > 0 || show_empty {
-        out.push(format!("Splash {}", c.splash));
-    }
-    if c.lingering > 0 {
-        out.push(format!("Lingering {}", c.lingering));
-    }
-    out
+pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
+    Settings::read(get).labels()
+}
+
+pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
+    Settings::read(get).click(i)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    #[test]
-    fn counts_sort_by_kind() {
-        let mut c = Counts::default();
-        c.add("minecraft:potion", 3);
-        c.add("minecraft:splash_potion", 5);
-        c.add("lingering_potion", 1);
-        c.add("minecraft:glass_bottle", 9);
-        assert_eq!((c.drink, c.splash, c.lingering, c.total()), (3, 5, 1, 9));
+    fn none(_: &str) -> Option<String> {
+        None
     }
 
     #[test]
-    fn lines_follow_the_options() {
-        let c = Counts {
-            drink: 2,
-            splash: 4,
-            lingering: 0,
-        };
-        assert_eq!(lines(c, true, false), ["Potions 2", "Splash 4"]);
-        assert_eq!(lines(c, false, false), ["Potions 6"]);
-        assert!(lines(Counts::default(), true, false).is_empty());
-        assert_eq!(
-            lines(Counts::default(), true, true),
-            ["Potions 0", "Splash 0"]
-        );
+    fn defaults_are_the_originals() {
+        let s = Settings::read(none);
+        assert!(s.enabled && s.show_upgrades && s.disabled.is_empty());
     }
 
     #[test]
-    fn options_default_then_follow_the_stored_files() {
-        forget_options();
-        let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
-        assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
-        forget_options();
-        let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());
-        assert!(!is(stored, OPTIONS[0].0));
-        forget_options();
-        assert!(parse(Some("junk".into()), true));
-        assert!(!parse(Some(" false\n".into()), true));
+    fn a_button_per_potion_follows_the_two_settings() {
+        assert_eq!(labels(none).len(), 2 + 18);
+        assert_eq!(click(none, 0).unwrap(), ("enabled", "false".to_owned()));
+        assert_eq!(click(none, 1).unwrap(), ("upgrades", "false".to_owned()));
+        assert_eq!(click(none, 2).unwrap(), ("disabled", "night_vision".to_owned()));
+        assert!(click(none, 20).is_none());
     }
 
     #[test]
-    fn a_click_flips_and_reports_what_to_store() {
-        forget_options();
-        let none = |_: &str| None;
-        let (key, value) = click(none, 0).expect("button 0 exists");
-        assert_eq!(key, OPTIONS[0].0);
-        assert_eq!(value, (!OPTIONS[0].2).to_string());
-        assert_eq!(is(none, key), !OPTIONS[0].2);
-        assert!(click(none, OPTIONS.len()).is_none());
-        forget_options();
+    fn a_disabled_potion_switches_back_on() {
+        let off = |k: &str| (k == "disabled").then(|| "night_vision,healing".to_owned());
+        assert_eq!(click(off, 2).unwrap().1, "healing");
+        assert!(labels(off)[2].ends_with("OFF") && labels(off)[3].ends_with("ON"));
+    }
+
+    #[test]
+    fn junk_falls_back_to_the_defaults() {
+        let junk = |_: &str| Some("banana".to_owned());
+        let s = Settings::read(junk);
+        assert!(s.enabled && s.show_upgrades);
     }
 }

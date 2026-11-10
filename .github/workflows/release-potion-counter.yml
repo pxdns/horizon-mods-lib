@@ -1,4 +1,4 @@
-# Releases the Potion Counter native mod (potion-counter/) as potion_counter-<version>.hnmod.
+# Releases the PotionCounter native mod (potion-counter/) as potion_counter-<version>.hnmod.
 #
 # Bump `version` in mods/potion-counter/mixins/potion_counter/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
 # GitHub release `potion-counter-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
