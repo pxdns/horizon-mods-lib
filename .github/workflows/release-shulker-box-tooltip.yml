@@ -1,4 +1,4 @@
-# Releases the Shulker Box Tooltip native mod (shulker-box-tooltip/) as shulker_box_tooltip-<version>.hnmod.
+# Releases the ShulkerBoxTooltip native mod (shulker-box-tooltip/) as shulker_box_tooltip-<version>.hnmod.
 #
 # Bump `version` in mods/shulker-box-tooltip/mixins/shulker_box_tooltip/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
 # GitHub release `shulker-box-tooltip-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already

@@ -1,268 +1,211 @@
-// Shulker Box Tooltip, a native Horizon mod: Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items.
+// ShulkerBoxTooltip, a native Horizon mod: View the contents of shulker boxes from your inventory.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_shulker_box_tooltip`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
 /// The mod's id: its settings folder and its keys' lines.
 pub const ID: &str = "shulker_box_tooltip";
-pub const NAME: &str = "Shulker Box Tooltip";
+pub const NAME: &str = "ShulkerBoxTooltip";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items.";
+pub const DESCRIPTION: &str = "View the contents of shulker boxes from your inventory.";
 
-use std::cell::RefCell;
-
-/// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("summary", "Totals by item", true),
-    ("grid", "Slot grid with item icons", true),
-    ("all", "Other containers too", false),
+const KEYS: [&str; 5] = [
+    "key.keyboard.left.shift",
+    "key.keyboard.left.alt",
+    "key.keyboard.left.control",
+    "key.keyboard.right.shift",
+    "key.keyboard.right.alt",
 ];
+const POSITIONS: [&str; 4] = ["inside", "outside", "outside_top", "outside_bottom"];
+const MERGES: [&str; 3] = ["separate", "first_item", "ignore"];
+const ORDERS: [&str; 2] = ["stack_size", "preview_order"];
+const TYPES: [&str; 3] = ["mod", "vanilla", "none"];
 
-thread_local! {
-    /// Read once through the game's settings files, then kept.
-    static CHOSEN: RefCell<Option<Vec<bool>>> = const { RefCell::new(None) };
+/// `ClientConfiguration`'s settings the port has, with the original's defaults.
+#[derive(Clone, Debug, PartialEq)]
+pub struct Settings {
+    pub enable: bool,
+    pub always_on: bool,
+    pub swap_modes: bool,
+    pub merge: String,
+    pub order: String,
+    pub max_row_size: u32,
+    pub position: String,
+    pub short_item_counts: bool,
+    pub generic_container: bool,
+    pub colored: bool,
+    pub tooltip_type: String,
+    pub show_key_hints: bool,
+    pub preview_key: String,
+    pub full_preview_key: String,
 }
 
-/// A stored value: `true` or `false`, else the default.
-pub fn parse(stored: Option<String>, default: bool) -> bool {
-    stored.map_or(default, |v| match v.trim() {
-        "true" => true,
-        "false" => false,
-        _ => default,
-    })
+impl Default for Settings {
+    fn default() -> Self {
+        Self {
+            enable: true,
+            always_on: false,
+            swap_modes: false,
+            merge: "separate".into(),
+            order: "stack_size".into(),
+            max_row_size: 9,
+            position: "inside".into(),
+            short_item_counts: true,
+            generic_container: true,
+            colored: true,
+            tooltip_type: "mod".into(),
+            show_key_hints: true,
+            preview_key: KEYS[0].into(),
+            full_preview_key: KEYS[1].into(),
+        }
+    }
 }
 
-fn chosen(get: impl Fn(&str) -> Option<String>) -> Vec<bool> {
-    CHOSEN.with_borrow_mut(|c| {
-        c.get_or_insert_with(|| {
-            OPTIONS
-                .iter()
-                .map(|(key, _, default)| parse(get(key), *default))
-                .collect()
-        })
-        .clone()
-    })
+fn pick(get: &impl Fn(&str) -> Option<String>, key: &str, allowed: &[&str], d: &str) -> String {
+    get(key).map(|v| v.trim().to_owned()).filter(|v| allowed.contains(&v.as_str())).unwrap_or_else(|| d.to_owned())
 }
 
-/// Whether option `key` is on.
-pub fn is(get: impl Fn(&str) -> Option<String>, key: &str) -> bool {
-    OPTIONS
-        .iter()
-        .position(|o| o.0 == key)
-        .is_some_and(|i| chosen(get)[i])
+fn next(list: &[&str], now: &str) -> String {
+    let at = list.iter().position(|v| *v == now).map_or(0, |p| (p + 1) % list.len());
+    list[at].to_owned()
 }
 
-/// The settings page's buttons.
+impl Settings {
+    pub fn read(get: impl Fn(&str) -> Option<String>) -> Self {
+        let d = Self::default();
+        let flag = |key: &str, d: bool| get(key).map_or(d, |v| match v.trim() {
+            "true" => true,
+            "false" => false,
+            _ => d,
+        });
+        Self {
+            enable: flag("enable", d.enable),
+            always_on: flag("always_on", d.always_on),
+            swap_modes: flag("swap_modes", d.swap_modes),
+            merge: pick(&get, "merge", &MERGES, &d.merge),
+            order: pick(&get, "order", &ORDERS, &d.order),
+            max_row_size: get("max_row_size").and_then(|v| v.trim().parse().ok()).filter(|v| *v > 0 && *v <= 27).unwrap_or(d.max_row_size),
+            position: pick(&get, "position", &POSITIONS, &d.position),
+            short_item_counts: flag("short_counts", d.short_item_counts),
+            generic_container: flag("generic", d.generic_container),
+            colored: flag("colored", d.colored),
+            tooltip_type: pick(&get, "tooltip_type", &TYPES, &d.tooltip_type),
+            show_key_hints: flag("key_hints", d.show_key_hints),
+            preview_key: pick(&get, "preview_key", &KEYS, &d.preview_key),
+            full_preview_key: pick(&get, "full_preview_key", &KEYS, &d.full_preview_key),
+        }
+    }
+
+    pub fn labels(&self) -> Vec<String> {
+        let on = |b: bool| if b { "ON" } else { "OFF" };
+        vec![
+            format!("Enable Preview: {}", on(self.enable)),
+            format!("Always On: {}", on(self.always_on)),
+            format!("Swap Modes: {}", on(self.swap_modes)),
+            format!("Compact Preview Item Components: {}", self.merge),
+            format!("Compact Preview Item Order: {}", self.order),
+            format!("Maximum Row Size: {}", self.max_row_size),
+            format!("Window Position: {}", self.position),
+            format!("Abbreviate large item counts: {}", on(self.short_item_counts)),
+            format!("Generic Container Preview: {}", on(self.generic_container)),
+            format!("Colored Preview Window: {}", on(self.colored)),
+            format!("Tooltip Type: {}", self.tooltip_type),
+            format!("Show Key Hints: {}", on(self.show_key_hints)),
+            format!("Open Stack Preview: {}", self.preview_key),
+            format!("Open Stack Full Preview: {}", self.full_preview_key),
+        ]
+    }
+
+    pub fn click(&mut self, i: usize) -> Option<(&'static str, String)> {
+        let flip = |v: &mut bool, key: &'static str| {
+            *v = !*v;
+            Some((key, v.to_string()))
+        };
+        match i {
+            0 => flip(&mut self.enable, "enable"),
+            1 => flip(&mut self.always_on, "always_on"),
+            2 => flip(&mut self.swap_modes, "swap_modes"),
+            3 => {
+                self.merge = next(&MERGES, &self.merge);
+                Some(("merge", self.merge.clone()))
+            }
+            4 => {
+                self.order = next(&ORDERS, &self.order);
+                Some(("order", self.order.clone()))
+            }
+            5 => {
+                self.max_row_size = if self.max_row_size >= 9 { 3 } else { self.max_row_size + 3 };
+                Some(("max_row_size", self.max_row_size.to_string()))
+            }
+            6 => {
+                self.position = next(&POSITIONS, &self.position);
+                Some(("position", self.position.clone()))
+            }
+            7 => flip(&mut self.short_item_counts, "short_counts"),
+            8 => flip(&mut self.generic_container, "generic"),
+            9 => flip(&mut self.colored, "colored"),
+            10 => {
+                self.tooltip_type = next(&TYPES, &self.tooltip_type);
+                Some(("tooltip_type", self.tooltip_type.clone()))
+            }
+            11 => flip(&mut self.show_key_hints, "key_hints"),
+            12 => {
+                self.preview_key = next(&KEYS, &self.preview_key);
+                Some(("preview_key", self.preview_key.clone()))
+            }
+            13 => {
+                self.full_preview_key = next(&KEYS, &self.full_preview_key);
+                Some(("full_preview_key", self.full_preview_key.clone()))
+            }
+            _ => None,
+        }
+    }
+}
+
 pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
-    let on = chosen(get);
-    OPTIONS
-        .iter()
-        .zip(on)
-        .map(|((_, label, _), on)| format!("{label}: {}", if on { "ON" } else { "OFF" }))
-        .collect()
+    Settings::read(get).labels()
 }
 
-/// A click on button `i`: flips it and returns what to store (key, value).
 pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
-    let mut on = chosen(get);
-    let (key, _, _) = *OPTIONS.get(i)?;
-    on[i] = !on[i];
-    let value = on[i].to_string();
-    CHOSEN.with_borrow_mut(|c| *c = Some(on));
-    Some((key, value))
-}
-
-/// Forgets what was read (tests only).
-#[cfg(test)]
-pub fn forget_options() {
-    CHOSEN.with_borrow_mut(|c| *c = None);
-}
-
-use std::collections::BTreeMap;
-
-/// How many item lines the totals show before `and N more kinds`.
-pub const MAX_LINES: usize = 8;
-/// A shulker box holds 27 slots, three rows of nine.
-pub const COLUMNS: usize = 9;
-pub const SLOTS: usize = 27;
-
-/// One filled slot.
-#[derive(Clone, Debug, PartialEq, Eq)]
-pub struct Slot {
-    pub slot: u8,
-    pub item: String,
-    pub count: u32,
-}
-
-/// `minecraft:purple_shulker_box` as `Purple Shulker Box`.
-pub fn title(id: &str) -> String {
-    id.rsplit(':')
-        .next()
-        .unwrap_or(id)
-        .split('_')
-        .filter(|w| !w.is_empty())
-        .map(|w| {
-            let mut c = w.chars();
-            c.next().map_or(String::new(), |f| {
-                f.to_uppercase().collect::<String>() + c.as_str()
-            })
-        })
-        .collect::<Vec<_>>()
-        .join(" ")
-}
-
-/// Whether the item is a shulker box of any colour.
-pub fn is_shulker(id: &str) -> bool {
-    id.ends_with("shulker_box")
-}
-
-/// The contents totalled by item, most first: `64 x Cobblestone`, then `and N more kinds` past `MAX_LINES`, then the slots used.
-pub fn summary(slots: &[Slot]) -> Vec<String> {
-    let mut totals: BTreeMap<&str, u32> = BTreeMap::new();
-    for s in slots {
-        *totals.entry(s.item.as_str()).or_insert(0) += s.count;
-    }
-    let mut rows: Vec<(&str, u32)> = totals.into_iter().collect();
-    rows.sort_by(|a, b| b.1.cmp(&a.1).then(a.0.cmp(b.0)));
-    let mut out: Vec<String> = rows
-        .iter()
-        .take(MAX_LINES)
-        .map(|(id, n)| format!("{n} x {}", title(id)))
-        .collect();
-    if rows.len() > MAX_LINES {
-        out.push(format!("and {} more kinds", rows.len() - MAX_LINES));
-    }
-    out.push(format!("{} of {SLOTS} slots used", slots.len()));
-    out
-}
-
-thread_local! {
-    /// Whether the tooltip being built should get the item grid (set while its lines are made).
-    static GRID: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
-}
-
-pub fn set_grid(on: bool) {
-    GRID.with(|g| g.set(on));
-}
-
-pub fn grid_on() -> bool {
-    GRID.with(std::cell::Cell::get)
-}
-
-/// A slot's cell in the grid is this many pixels square, like a bundle's.
-pub const CELL: f32 = 24.0;
-/// The grid's size: nine cells across, three down.
-pub const GRID_WIDTH: f32 = COLUMNS as f32 * CELL;
-pub const GRID_HEIGHT: f32 = (SLOTS / COLUMNS) as f32 * CELL;
-/// Spaces on a line of their own that make the tooltip wide enough for the grid.
-pub const PAD: usize = 60;
-
-/// The top-left of slot `n` for a tooltip whose box starts at `(x, y)` and is `box_width` wide, the grid centred in it.
-pub fn slot_at(n: u8, x: f32, y: f32, box_width: f32) -> Option<[f32; 2]> {
-    let n = usize::from(n);
-    if n >= SLOTS {
-        return None;
-    }
-    let left = x + ((box_width - GRID_WIDTH) / 2.0).floor().max(0.0);
-    Some([
-        left + (n % COLUMNS) as f32 * CELL,
-        y + (n / COLUMNS) as f32 * CELL,
-    ])
+    Settings::read(get).click(i)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    fn slot(slot: u8, item: &str, count: u32) -> Slot {
-        Slot {
-            slot,
-            item: item.to_owned(),
-            count,
-        }
+    fn none(_: &str) -> Option<String> {
+        None
     }
 
     #[test]
-    fn ids_become_titles_and_shulkers_are_found() {
-        assert_eq!(title("minecraft:purple_shulker_box"), "Purple Shulker Box");
-        assert!(is_shulker("minecraft:shulker_box"));
-        assert!(is_shulker("minecraft:red_shulker_box"));
-        assert!(!is_shulker("minecraft:chest"));
+    fn defaults_are_the_originals() {
+        let s = Settings::read(none);
+        assert!(s.enable && !s.always_on && !s.swap_modes && s.short_item_counts && s.generic_container && s.colored && s.show_key_hints);
+        assert_eq!((s.merge.as_str(), s.order.as_str(), s.max_row_size, s.position.as_str(), s.tooltip_type.as_str()), ("separate", "stack_size", 9, "inside", "mod"));
+        assert_eq!((s.preview_key.as_str(), s.full_preview_key.as_str()), ("key.keyboard.left.shift", "key.keyboard.left.alt"));
     }
 
     #[test]
-    fn the_summary_totals_by_item_most_first() {
-        let slots = [
-            slot(0, "minecraft:cobblestone", 64),
-            slot(1, "minecraft:cobblestone", 20),
-            slot(5, "minecraft:diamond", 3),
-        ];
-        assert_eq!(
-            summary(&slots),
-            ["84 x Cobblestone", "3 x Diamond", "3 of 27 slots used"]
-        );
-        assert_eq!(summary(&[]), ["0 of 27 slots used"]);
+    fn there_is_a_button_for_every_setting() {
+        assert_eq!(labels(none).len(), 14);
+        assert_eq!(click(none, 0).unwrap(), ("enable", "false".to_owned()));
+        assert_eq!(click(none, 3).unwrap(), ("merge", "first_item".to_owned()));
+        assert_eq!(click(none, 6).unwrap(), ("position", "outside".to_owned()));
+        assert_eq!(click(none, 12).unwrap(), ("preview_key", "key.keyboard.left.alt".to_owned()));
+        assert!(click(none, 14).is_none());
     }
 
     #[test]
-    fn many_kinds_are_cut_off_with_a_count() {
-        let slots: Vec<Slot> = (0..12)
-            .map(|i| slot(i, &format!("minecraft:item_{i:02}"), 1))
-            .collect();
-        let lines = summary(&slots);
-        assert_eq!(lines.len(), MAX_LINES + 2);
-        assert_eq!(lines[MAX_LINES], "and 4 more kinds");
+    fn cycles_wrap_around() {
+        let last = |k: &str| (k == "position").then(|| "outside_bottom".to_owned());
+        assert_eq!(click(last, 6).unwrap().1, "inside");
+        let wide = |k: &str| (k == "max_row_size").then(|| "9".to_owned());
+        assert_eq!(click(wide, 5).unwrap().1, "3", "the row size steps 3, 6, 9 and wraps");
     }
 
     #[test]
-    fn slots_sit_on_a_nine_by_three_grid_centred_in_the_box() {
-        assert_eq!(slot_at(0, 10.0, 20.0, 216.0), Some([10.0, 20.0]));
-        assert_eq!(slot_at(10, 10.0, 20.0, 216.0), Some([34.0, 44.0]));
-        assert_eq!(slot_at(26, 10.0, 20.0, 216.0), Some([202.0, 68.0]));
-        assert_eq!(
-            slot_at(0, 0.0, 0.0, 240.0),
-            Some([12.0, 0.0]),
-            "a wider box centres it"
-        );
-        assert_eq!(
-            slot_at(0, 0.0, 0.0, 100.0),
-            Some([0.0, 0.0]),
-            "a narrow box never pushes it left"
-        );
-        assert_eq!(slot_at(27, 0.0, 0.0, 216.0), None);
-        assert_eq!((GRID_WIDTH, GRID_HEIGHT), (216.0, 72.0));
-    }
-
-    #[test]
-    fn the_grid_flag_is_per_tooltip() {
-        set_grid(true);
-        assert!(grid_on());
-        set_grid(false);
-        assert!(!grid_on());
-    }
-
-    #[test]
-    fn options_default_then_follow_the_stored_files() {
-        forget_options();
-        let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
-        assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
-        forget_options();
-        let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());
-        assert!(!is(stored, OPTIONS[0].0));
-        forget_options();
-        assert!(parse(Some("junk".into()), true));
-        assert!(!parse(Some(" false\n".into()), true));
-    }
-
-    #[test]
-    fn a_click_flips_and_reports_what_to_store() {
-        forget_options();
-        let none = |_: &str| None;
-        let (key, value) = click(none, 0).expect("button 0 exists");
-        assert_eq!(key, OPTIONS[0].0);
-        assert_eq!(value, (!OPTIONS[0].2).to_string());
-        assert_eq!(is(none, key), !OPTIONS[0].2);
-        assert!(click(none, OPTIONS.len()).is_none());
-        forget_options();
+    fn junk_falls_back_to_the_defaults() {
+        let junk = |_: &str| Some("banana".to_owned());
+        assert_eq!(Settings::read(junk), Settings::default());
     }
 }

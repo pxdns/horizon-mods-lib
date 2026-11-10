@@ -1,18 +1,18 @@
-# Shulker Box Tooltip (Horizon native mod)
+# ShulkerBoxTooltip (Horizon native mod)
 
-Shows what is inside a shulker box in its tooltip: totals by item, and a graphical 9 by 3 grid of the items.
+View the contents of shulker boxes from your inventory.
 
 
-Ported from **Shulker Box Tooltip (shulkerboxtooltip)** (see the upstream project) as an independent implementation for Horizon 26.3;
+Ported from **Shulker Box Tooltip (shulkerboxtooltip) by MisterPeModder** (MIT) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/shulker_box_tooltip/`). It adds a RETURN modifier to `Game::stack_tooltip` (the totals) and a cancellable HEAD hook on `bundle::tooltip_layout`, the function Horizon uses to lay out a bundle's item grid in its tooltip, which it answers for a shulker box with a 9 by 3 grid; Horizon then draws the real item icons and counts itself. It reads the item's container contents (`ItemStack::data`). None of this is part of the stable hook-point contract, so it is **pinned to one Horizon commit**.
+(`mixins/shulker_box_tooltip/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
 ## Install
 
 Download `shulker_box_tooltip-1.0.0.hnmod` and its `.sha256` from this project's
 [releases](https://github.com/pxdns/horizon-mods-lib/releases?q=shulker-box-tooltip), check the hash, unzip the bundle into a folder and build it
 into a game with `horizon-launcher native-build FOLDER --instance NAME --trust-native-code`. Then switch it on or off in the game
-under Options → Mods → Shulker Box Tooltip. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
+under Options → Mods → ShulkerBoxTooltip. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
 and Horizon's [native mods](https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md) page says what a build does and trusts.
 
 ## Files
