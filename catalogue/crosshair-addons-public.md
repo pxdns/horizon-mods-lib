@@ -2,15 +2,13 @@
 
 ![Crosshair Addons Public icon](../assets/icons/catalogue/crosshair-addons-public.png)
 
-**Status:** Partly ported - **Upstream licence:** `MIT License` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/crosshair-addons-public)
-
-**Project:** [`crosshair-indicator`](../mods/crosshair-indicator/) - [docs](../docs/mods/crosshair-indicator.md)
+**Status:** Needs a hook point - **Upstream licence:** `MIT License` - **26.3 build:** `-` - [Modrinth](https://modrinth.com/mod/crosshair-addons-public)
 
 ## Where it stands
 
-A mark over the crosshair when it is over a living entity; none of the other conditions
+Elytra indicator, projectile hit markers and a player and mob indicator round the crosshair: not ported yet
 
-Only part of this fits the hook points; see the project for what is in and what is missing.
+A port needs data or a hook that Horizon's stable hook points do not give a mod. It can still be written as a raw-hook port pinned to one Horizon commit; that is tracked in the roadmap.
 
 ## Credit
 

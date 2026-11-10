@@ -8,7 +8,7 @@
 
 ## Where it stands
 
-Crosshair Indicator (raw-hook port: draws over the crosshair)
+Corner brackets round the crosshair when it is on a player who is not a spectator (needs NATIVE_HOOKS_API 400)
 
 Ported: a project in this repository re-implements it.
 

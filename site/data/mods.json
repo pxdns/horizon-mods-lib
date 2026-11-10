@@ -1,9 +1,9 @@
 {
  "counts": {
   "ported": 35,
-  "partial": 21,
+  "partial": 20,
   "builtin": 9,
-  "hook": 0,
+  "hook": 1,
   "library": 28,
   "engine": 31,
   "pack": 30,
@@ -560,9 +560,9 @@
    "slug": "crosshair-addons-public",
    "licence": "MIT License",
    "build": "-",
-   "status": "partial",
-   "project": "crosshair-indicator",
-   "note": "A mark over the crosshair when it is over a living entity; none of the other conditions",
+   "status": "hook",
+   "project": "",
+   "note": "Elytra indicator, projectile hit markers and a player and mob indicator round the crosshair: not ported yet",
    "page": "crosshair-addons-public",
    "icon": "catalogue/crosshair-addons-public.png"
   },
@@ -575,7 +575,7 @@
    "build": "crosshairindicator-1.0.3",
    "status": "ported",
    "project": "crosshair-indicator",
-   "note": "Crosshair Indicator (raw-hook port: draws over the crosshair)",
+   "note": "Corner brackets round the crosshair when it is on a player who is not a spectator (needs NATIVE_HOOKS_API 400)",
    "page": "crosshair-indicator",
    "icon": "catalogue/crosshair-indicator.png"
   },

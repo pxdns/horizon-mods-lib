@@ -45,7 +45,7 @@ and the 1.16.5 port table, with where each one stands on Horizon. The 1.16.5 bro
 | `no-death-animation` | Needs a hook point |
 | `no-particles` | Needs a hook point |
 | `no-weather` | Ported: [`no-weather`](mods/no-weather/) |
-| `red-crosshair-indicator` | Ported: [`crosshair-indicator`](mods/crosshair-indicator/) |
+| `red-crosshair-indicator` | Needs a hook point |
 | `shulkerboxtooltip` | Ported: [`shulker-box-tooltip`](mods/shulker-box-tooltip/) |
 | `sprint-display` | Ported: [`sprint-indicator`](mods/sprint-indicator/) |
 | `tempest-info` | Ported: [`info-hud`](mods/info-hud/) |

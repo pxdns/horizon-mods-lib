@@ -43,7 +43,7 @@ by their authors. The authors are credited here because the idea, the name and t
 | [`chat-notify`](mods/chat-notify.md) | Chat Notify (chatnotify) | see the upstream project |
 | [`chat-animation`](mods/chat-animation.md) | Chat Animation [Smooth Chat] (chatanimation) | see the upstream project |
 | [`durability-tooltip`](mods/durability-tooltip.md) | Durability Tooltip (durabilitytooltip) | see the upstream project |
-| [`crosshair-indicator`](mods/crosshair-indicator.md) | Crosshair Indicator (crosshairindicator) | CC0-1.0 |
+| [`crosshair-indicator`](mods/crosshair-indicator.md) | Crosshair Indicator (crosshairindicator) by SwimmingDog1 and MGC8 | CC0-1.0 |
 | [`entity-crosshair`](mods/entity-crosshair.md) | Entity Crosshair (EntityCrosshair) | see the upstream project |
 | [`shulker-box-tooltip`](mods/shulker-box-tooltip.md) | Shulker Box Tooltip (shulkerboxtooltip) | see the upstream project |
 | [`combat-hitboxes`](mods/combat-hitboxes.md) | Combat Hitboxes (combat-hitbox) | see the upstream project |

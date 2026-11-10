@@ -51,7 +51,7 @@ steps, so it needs the same re-check as the others when Horizon changes that fun
 
 ## Crosshair and tooltip drawing
 
-`crosshair-indicator` draws a red mark over Horizon's crosshair from the HUD hook point, using `Game::crosshair_living` and the HUD batch's width and height. `entity-crosshair` puts its module in `hud_layout.rs` and adds a RETURN
+`crosshair-indicator` draws the original's corner brackets round the crosshair, through the crosshair's own inverting blend, from the HUD hook point; it asks the game what the crosshair is on with `native_crosshair_target` (API 400). `entity-crosshair` puts its module in `hud_layout.rs` and adds a RETURN
 modifier to `hud_layout::crosshair`: it drops the crosshair sprite from the draw list (keeping the attack indicator) and appends its own shape as plain fills, with the game telling it each frame what is under the crosshair.
 `shulker-box-tooltip` adds a RETURN modifier to `stack_tooltip` and reads the box's contents from `ItemStack::data`. Horizon has no draw hook inside tooltips, so the contents are text, not the original's picture of the box.
 

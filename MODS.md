@@ -1,7 +1,7 @@
 # Mod catalogue
 
 Every mod in the Tempest project's cross-pack matrix ([`docs/MOD-MATRIX.md`](https://github.com/pxdns/patcher/blob/main/docs/MOD-MATRIX.md)
-in `pxdns/patcher`): **186 mods**, **35** ported · **21** partly ported · **9** built into horizon · **30** pack or asset · **31** engine or server · **28** library · **32** no 26.3 build.
+in `pxdns/patcher`): **186 mods**, **35** ported · **20** partly ported · **9** built into horizon · **1** needs a hook point · **30** pack or asset · **31** engine or server · **28** library · **32** no 26.3 build.
 
 Horizon implements Minecraft **26.3**, so the 26.3 column decides what can be ported at all. A native Horizon mod can
 only use what Horizon's [native hook points](docs/hook-points.md) expose (frame, tick, HUD, key, wheel, command, zoom,
@@ -37,7 +37,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Chat Notify](catalogue/chatnotify.md) | [chatnotify](https://modrinth.com/mod/chatnotify) | `Apache License 2.0` | `chatnotify-fabric-3.104.0+26.3` | Ported ([`chat-notify`](mods/chat-notify/)) | Chat Notify (raw-hook port: hooks Chat::add_message) |
 | [Clumps](catalogue/clumps.md) | [clumps](https://modrinth.com/mod/clumps) | `MIT License` | `Clumps-fabric-26.3-26.3.2` | Ported ([`clumps`](mods/clumps/)) | Orbs of any size merge into one orb worth all of them, collected at once |
 | [Combat Hitboxes](catalogue/combat-hitboxes.md) | [combat-hitboxes](https://modrinth.com/mod/combat-hitboxes) | `Apache License 2.0` | `combat-hitbox-1.0.11` | Ported ([`combat-hitboxes`](mods/combat-hitboxes/)) | Combat Hitboxes (raw-hook port: wraps the ray-versus-box test) |
-| [Crosshair Indicator](catalogue/crosshair-indicator.md) | [crosshair-indicator](https://modrinth.com/mod/crosshair-indicator) | `Creative Commons Zero v1.0 Universal` | `crosshairindicator-1.0.3` | Ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | Crosshair Indicator (raw-hook port: draws over the crosshair) |
+| [Crosshair Indicator](catalogue/crosshair-indicator.md) | [crosshair-indicator](https://modrinth.com/mod/crosshair-indicator) | `Creative Commons Zero v1.0 Universal` | `crosshairindicator-1.0.3` | Ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | Corner brackets round the crosshair when it is on a player who is not a spectator (needs NATIVE_HOOKS_API 400) |
 | [Detail Armor Bar Reconstructed](catalogue/detail-armor-bar-reconstructed.md) | [detail-armor-bar-reconstructed](https://modrinth.com/mod/detail-armor-bar-reconstructed) | `MIT License` | `DetailArmorBarReconstructed-5.3.2-26.3-fabric` | Ported ([`armor-hud`](mods/armor-hud/)) | Pieces and durability, the armor value on the bar, and extra rows past 20 points |
 | [Durability Tooltip](catalogue/durability-tooltip.md) | [durability-tooltip](https://modrinth.com/mod/durability-tooltip) | `see project` | `durabilitytooltip-1.2.0-fabric-mc26.3` | Ported ([`durability-tooltip`](mods/durability-tooltip/)) | Durability Tooltip (raw-hook port: returns from stack_tooltip) |
 | [Enchantment Descriptions](catalogue/enchantment-descriptions.md) | [enchantment-descriptions](https://modrinth.com/mod/enchantment-descriptions) | `GNU Lesser General Public License v2.1 only` | `-` | Ported ([`enchantment-descriptions`](mods/enchantment-descriptions/)) | A gray line per enchantment under the tooltip saying what it does |
@@ -65,7 +65,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [uku's Armor HUD](catalogue/ukus-armor-hud.md) | [ukus-armor-hud](https://modrinth.com/mod/ukus-armor-hud) | `MIT License` | `ukus-armor-hud-fabric-0.13.0+mc26.3` | Ported ([`armor-hud`](mods/armor-hud/)) | Armor HUD (raw-hook port: reads the worn armor) |
 | [Zoomify (Zoom)](catalogue/zoomify.md) | [zoomify](https://modrinth.com/mod/zoomify) | `GNU Lesser General Public License v3.0 only` | `zoomify-2.16.3+26.3` | Ported ([`zoomify`](mods/zoomify/)) | Zoomify |
 
-## Partly ported (21)
+## Partly ported (20)
 
 | Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
 |---|---|---|---|---|---|
@@ -76,7 +76,6 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Chat Patches](catalogue/chatpatches.md) | [chatpatches](https://modrinth.com/mod/chatpatches) | `GNU Lesser General Public License v3.0 only` | `-` | Partly ported ([`chat-patches`](mods/chat-patches/)) | Timestamps and an option to drop immediate repeats; not copying, hiding or compact counters |
 | [Controlling](catalogue/controlling.md) | [controlling](https://modrinth.com/mod/controlling) | `MIT License` | `26.3.3` | Partly ported ([`controlling`](mods/controlling/)) | Find bindings by action or key, list conflicts and unbound actions as /keybinds commands; Horizon's own Key Binds page already searches by action name |
 | [Crafting Tweaks](catalogue/crafting-tweaks.md) | [crafting-tweaks](https://modrinth.com/mod/crafting-tweaks) | `see project` | `craftingtweaks-fabric-26.3-26.3.0.1` | Partly ported ([`crafting-tweaks`](mods/crafting-tweaks/)) | Rotate, balance and clear as keys, for single player and LAN hosts; no buttons, full-stack result click, hold-W transfer or compress keys |
-| [Crosshair Addons Public](catalogue/crosshair-addons-public.md) | [crosshair-addons-public](https://modrinth.com/mod/crosshair-addons-public) | `MIT License` | `-` | Partly ported ([`crosshair-indicator`](mods/crosshair-indicator/)) | A mark over the crosshair when it is over a living entity; none of the other conditions |
 | [Enchantment Insights](catalogue/enchantment-insights.md) | [enchantment-insights](https://modrinth.com/mod/enchantment-insights) | `Mozilla Public License 2.0` | `-` | Partly ported ([`enchantment-descriptions`](mods/enchantment-descriptions/)) | The descriptions under the tooltip; no coloured enchantment names |
 | [Litematica](catalogue/litematica.md) | [litematica](https://modrinth.com/mod/litematica) | `GNU Lesser General Public License v3.0 only` | `litematica-fabric-26.3-0.29.0` | Partly ported ([`litematica`](mods/litematica/)) | Reading .litematic files: info and the material list as /schematic commands; no ghost in the world, no differences view and no placing |
 | [Marlow's Crystal Optimizer](catalogue/marlow-crystal-optimizer.md) | [marlow-crystal-optimizer](https://modrinth.com/mod/marlow-crystal-optimizer) | `MIT License` | `Marlow Crystal Optimizer` | Partly ported ([`crystal-optimizer`](mods/crystal-optimizer/)) | A crystal you hit vanishes at once on a server and returns if the server does not break it; no crystal placement prediction |
@@ -104,6 +103,12 @@ copies no upstream code or art: every port is a clean re-implementation of the b
 | [Mouse Tweaks](catalogue/mouse-tweaks.md) | [mouse-tweaks](https://modrinth.com/mod/mouse-tweaks) | `BSD 3-Clause "New" or "Revised" License` | `MouseTweaks-fabric-mc26.3-2.31` | Built into Horizon | Horizon ships Mouse Tweaks as one of its own extras (Options > Extras). |
 | [No Chat Reports](catalogue/no-chat-reports.md) | [no-chat-reports](https://modrinth.com/mod/no-chat-reports) | `Do What The F*ck You Want To Public License` | `NoChatReports-FABRIC-26.3-v2.21.0` | Built into Horizon | Horizon already sends chat unsigned (its `send_chat` signs nothing), which is what this mod does for Fabric. |
 | [ToolTipFix](catalogue/tooltipfix.md) | [tooltipfix](https://modrinth.com/mod/tooltipfix) | `MIT` | `-` | Built into Horizon | Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges. |
+
+## Needs a hook point (1)
+
+| Mod | Modrinth | Upstream licence | 26.3 build | Status | Note |
+|---|---|---|---|---|---|
+| [Crosshair Addons Public](catalogue/crosshair-addons-public.md) | [crosshair-addons-public](https://modrinth.com/mod/crosshair-addons-public) | `MIT License` | `-` | Needs a hook point | Elytra indicator, projectile hit markers and a player and mob indicator round the crosshair: not ported yet |
 
 ## Pack or asset (30)
 

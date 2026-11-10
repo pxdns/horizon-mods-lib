@@ -266,8 +266,8 @@ path = "mixins/{{ID}}/runtime.rs"
 '''
 
 
-def compat_json(raw=False):
-    hooks = "" if raw else '  "hooks": 1,\n'
+def compat_json(raw=False, api=1):
+    hooks = "" if raw else f'  "hooks": {api},\n'
     return f'''{{
   "game": "{GAME}",
 {hooks}  "horizon_repository": "https://github.com/horizon-rust/horizon",

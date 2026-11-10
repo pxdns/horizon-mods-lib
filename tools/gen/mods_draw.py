@@ -5,73 +5,87 @@ from mods import opts
 DRAW = []
 
 # ------------------------------------------------------------------------------------------------ crosshair_indicator
+# The real Crosshair Indicator (Modrinth zLAdIOH7, SwimmingDog1 and MGC8, CC0-1.0), read from its jar: one mixin,
+# `@Inject(method = "extractCrosshair", at = @At("TAIL"))`, that blits a 15 x 15 sprite at the screen's centre through
+# `RenderPipelines.CROSSHAIR` when `minecraft.crosshairPickEntity instanceof Player`. No settings, no keys, no commands.
 DRAW.append(dict(
-    slug="crosshair-indicator", id="crosshair_indicator", name="Crosshair Indicator", title="Crosshair Indicator", raw=True,
-    usage="Nothing to press: when your crosshair is over a living, alive entity, a red mark is drawn over it. The settings page can swap the cross for a dot.",
-    description="Turns your crosshair red when it is over a living creature.",
-    upstream="Crosshair Indicator (crosshairindicator)", upstream_licence="CC0-1.0",
-    command="indicator", hooks=["hud", "command", "list", "settings", "click"],
-    options=[("shown", "Shown", True), ("dot", "Dot instead of cross", False)],
-    raw_note=("It reads which entity is under the crosshair from `Game::crosshair_living` and the camera type from the `Game`, and draws over Horizon's crosshair from the HUD hook point. "
-              "Those fields are not part of the stable hook-point contract, so it is **pinned to one Horizon commit**."),
+    slug="crosshair-indicator", id="crosshair_indicator", name="Crosshair Indicator", title="Crosshair Indicator",
+    usage="Nothing to press and nothing to set: switch it on in Options > Mods, and corner brackets show round your crosshair whenever you aim at another player.",
+    description="Shows corner brackets around your crosshair when you're aiming at a player.",
+    upstream="Crosshair Indicator (crosshairindicator) by SwimmingDog1 and MGC8", upstream_licence="CC0-1.0",
+    command=None, hooks=["hud", "list"], options=None, needs_api=400,
+    hook_note=("It asks the game what the crosshair is on with `native_crosshair_target` (**`NATIVE_HOOKS_API` 400**, added on the client-modpack-port branch of the Horizon fork) "
+               "and draws in the HUD hook point, through the crosshair's own inverting blend. It is not part of upstream Horizon's hook points yet, so it needs a Horizon that has API 400."),
     runtime_extra='''
-/// Slash command that hides or shows the indicator.
-pub const COMMAND: &str = "indicator";
-/// A red mark.
-pub const RED: u32 = 0xFFFF_3030;
 /// The crosshair sprite is 15 by 15 pixels, centred on the screen.
 pub const SPRITE: i32 = 15;
+/// The 12 white pixels of the original's `crosshair.png`: four corner brackets round a 7 by 7 square at (4, 4).
+pub const PIXELS: [(i32, i32); 12] = [
+    (4, 4), (5, 4), (9, 4), (10, 4),
+    (4, 5), (10, 5),
+    (4, 9), (10, 9),
+    (4, 10), (5, 10), (9, 10), (10, 10),
+];
 
-/// A rectangle (x, y, width, height) in pixels, from the crosshair sprite's top-left corner.
-pub type Rect = (i32, i32, i32, i32);
-
-/// Whether the indicator shows: over a living, alive entity (`crosshairPickEntity`).
-pub fn active(living: Option<bool>) -> bool {
-    living == Some(true)
+/// Whether the brackets show: the crosshair is on a player who is not in spectator mode. A mob, an armor stand or
+/// anything else does not count, and neither does a block or nothing (the game then gives no target).
+pub fn active(kind: &str, spectator: bool) -> bool {
+    kind == "minecraft:player" && !spectator
 }
 
-/// The mark's rectangles: a cross through the crosshair's centre, or a dot on it.
-pub fn rects(dot: bool) -> Vec<Rect> {
-    if dot {
-        vec![(6, 6, 3, 3)]
-    } else {
-        vec![(3, 7, 9, 1), (7, 3, 1, 9)]
-    }
-}
-
-/// The sprite's top-left corner for a screen of `width` by `height` GUI pixels: `Hud.extractCrosshair`'s `(w - 15) / 2`.
+/// The sprite's top-left corner for a screen of `width` by `height` GUI pixels: `Gui.extractCrosshair`'s `(w - 15) / 2`.
 pub fn corner(width: i32, height: i32) -> (i32, i32) {
     ((width - SPRITE) / 2, (height - SPRITE) / 2)
 }
 ''',
     tests='''
     #[test]
-    fn only_a_living_alive_target_counts() {
-        assert!(active(Some(true)));
-        assert!(!active(Some(false)), "a dead entity");
-        assert!(!active(None), "nothing there");
+    fn a_player_shows_the_brackets() {
+        assert!(active("minecraft:player", false));
     }
 
     #[test]
-    fn the_marks_sit_inside_the_sprite_on_its_centre() {
-        for dot in [false, true] {
-            for (x, y, w, h) in rects(dot) {
-                assert!(x >= 0 && y >= 0 && x + w <= SPRITE && y + h <= SPRITE, "{x} {y} {w} {h}");
-            }
+    fn a_player_in_spectator_mode_does_not() {
+        assert!(!active("minecraft:player", true));
+    }
+
+    #[test]
+    fn a_mob_or_another_entity_does_not() {
+        for kind in ["minecraft:cow", "minecraft:zombie", "minecraft:armor_stand", "minecraft:item_frame", "minecraft:mannequin"] {
+            assert!(!active(kind, false), "{kind}");
         }
-        // The cross's bars cross on the centre pixel (7, 7).
-        let cross = rects(false);
-        assert!(cross.iter().all(|&(x, y, w, h)| x <= 7 && 7 < x + w && y <= 7 && 7 < y + h));
+    }
+
+    #[test]
+    fn no_target_and_a_block_give_nothing_to_ask() {
+        // The game answers `None` for a block and for nothing, so the hook never reaches `active`; an empty kind is no player.
+        assert!(!active("", false));
+    }
+
+    #[test]
+    fn the_sprite_is_the_originals_twelve_pixels_inside_a_15_square() {
+        assert_eq!(PIXELS.len(), 12);
+        assert!(PIXELS.iter().all(|&(x, y)| (0..SPRITE).contains(&x) && (0..SPRITE).contains(&y)));
+        // Four corner brackets: each is an L of three pixels round a 7 by 7 square from (4, 4) to (10, 10), none inside it.
+        assert!(PIXELS.iter().all(|&(x, y)| (4..=10).contains(&x) && (4..=10).contains(&y)));
+        assert!(PIXELS.iter().all(|&(x, y)| x == 4 || x == 10 || y == 4 || y == 10), "only the square's edge");
+        let mut sorted = PIXELS.to_vec();
+        sorted.sort_unstable();
+        sorted.dedup();
+        assert_eq!(sorted.len(), 12, "no pixel twice");
+        // The middle of each side is empty: the brackets leave a gap.
+        assert!(!PIXELS.contains(&(7, 4)) && !PIXELS.contains(&(4, 7)) && !PIXELS.contains(&(10, 7)) && !PIXELS.contains(&(7, 10)));
     }
 
     #[test]
     fn the_corner_matches_the_games_integer_division() {
         assert_eq!(corner(1920, 1080), (952, 532));
         assert_eq!(corner(427, 240), (206, 112));
+        assert_eq!(corner(854, 480), (419, 232));
     }
 ''',
     helpers={
-        "hud": '''// A red mark over the crosshair while it is over a living entity.
+        "hud": '''// The brackets round the crosshair, drawn after it through its inverting blend.
 fn crosshair_indicator_hud(
     game: &mut crate::game::Game<'_>,
     batch: &mut horizon_client::hud::HudBatch,
@@ -79,17 +93,21 @@ fn crosshair_indicator_hud(
 ) {
     use crate::game::lib_crosshair_indicator as m;
     let _ = &corners;
-    if !game.native_on(m::ID) || !game.native_playing() || !game.camera_type.first_person() {
+    if !game.native_on(m::ID) || !game.native_playing() {
         return;
     }
-    let get = |k: &str| game.native_setting(m::ID, k);
-    if !m::is(get, "shown") || !m::active(game.crosshair_living()) {
+    let Some(target) = game.native_crosshair_target() else {
+        return;
+    };
+    if !m::active(&target.kind, target.spectator) {
         return;
     }
     let (x0, y0) = m::corner(batch.width as i32, batch.height as i32);
-    for (x, y, w, h) in m::rects(m::is(get, "dot")) {
-        game.native_fill(batch, [(x0 + x) as f32, (y0 + y) as f32, w as f32, h as f32], m::RED);
+    let start = batch.vertices.len();
+    for (x, y) in m::PIXELS {
+        game.native_fill(batch, [(x0 + x) as f32, (y0 + y) as f32, 1.0, 1.0], 0xFFFF_FFFF);
     }
+    batch.invert_since(start);
 }
 ''',
     },

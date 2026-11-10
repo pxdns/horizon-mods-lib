@@ -112,7 +112,7 @@ def readme(mod):
 {cmd}
 Ported from **{mod["upstream"]}** ({mod["upstream_licence"]}) as an independent implementation for Horizon {c.GAME};
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/{mod["id"]}/`). {mod.get("raw_note", RAWNOTE) if mod.get("raw") else HOOKNOTE}
+(`mixins/{mod["id"]}/`). {mod.get("raw_note", RAWNOTE) if mod.get("raw") else mod.get("hook_note", HOOKNOTE)}
 
 ## Install
 
@@ -160,7 +160,7 @@ def main():
             shutil.rmtree(d)
         bundle = d / "mixins" / mod["id"]
         write(d / "Cargo.toml", c.cargo_toml(mod["slug"], VERSION, mod["description"]).replace("{ID}", mod["id"]))
-        write(d / "compatibility.json", c.compat_json(mod.get("raw", False)))
+        write(d / "compatibility.json", c.compat_json(mod.get("raw", False), mod.get("needs_api", 1)))
         write(d / "LICENSE", c.LICENSE)
         write(d / "README.md", readme(mod))
         write(bundle / "horizon-mixin.toml", mod["toml_text"] if mod.get("toml_text") else c.toml(mod["id"], mod["hooks"], "lib_" + mod["id"], VERSION))

@@ -1,12 +1,11 @@
 # Crosshair Indicator (Horizon native mod)
 
-Turns your crosshair red when it is over a living creature.
+Shows corner brackets around your crosshair when you're aiming at a player.
 
-- `/indicator` hides or shows it.
 
-Ported from **Crosshair Indicator (crosshairindicator)** (CC0-1.0) as an independent implementation for Horizon 26.3;
+Ported from **Crosshair Indicator (crosshairindicator) by SwimmingDog1 and MGC8** (CC0-1.0) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/crosshair_indicator/`). It reads which entity is under the crosshair from `Game::crosshair_living` and the camera type from the `Game`, and draws over Horizon's crosshair from the HUD hook point. Those fields are not part of the stable hook-point contract, so it is **pinned to one Horizon commit**.
+(`mixins/crosshair_indicator/`). It asks the game what the crosshair is on with `native_crosshair_target` (**`NATIVE_HOOKS_API` 400**, added on the client-modpack-port branch of the Horizon fork) and draws in the HUD hook point, through the crosshair's own inverting blend. It is not part of upstream Horizon's hook points yet, so it needs a Horizon that has API 400.
 
 ## Install
 

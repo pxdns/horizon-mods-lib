@@ -1,4 +1,4 @@
-// A red mark over the crosshair while it is over a living entity.
+// The brackets round the crosshair, drawn after it through its inverting blend.
 fn crosshair_indicator_hud(
     game: &mut crate::game::Game<'_>,
     batch: &mut horizon_client::hud::HudBatch,
@@ -6,15 +6,19 @@ fn crosshair_indicator_hud(
 ) {
     use crate::game::lib_crosshair_indicator as m;
     let _ = &corners;
-    if !game.native_on(m::ID) || !game.native_playing() || !game.camera_type.first_person() {
+    if !game.native_on(m::ID) || !game.native_playing() {
         return;
     }
-    let get = |k: &str| game.native_setting(m::ID, k);
-    if !m::is(get, "shown") || !m::active(game.crosshair_living()) {
+    let Some(target) = game.native_crosshair_target() else {
+        return;
+    };
+    if !m::active(&target.kind, target.spectator) {
         return;
     }
     let (x0, y0) = m::corner(batch.width as i32, batch.height as i32);
-    for (x, y, w, h) in m::rects(m::is(get, "dot")) {
-        game.native_fill(batch, [(x0 + x) as f32, (y0 + y) as f32, w as f32, h as f32], m::RED);
+    let start = batch.vertices.len();
+    for (x, y) in m::PIXELS {
+        game.native_fill(batch, [(x0 + x) as f32, (y0 + y) as f32, 1.0, 1.0], 0xFFFF_FFFF);
     }
+    batch.invert_since(start);
 }

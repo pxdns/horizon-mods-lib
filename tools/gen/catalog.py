@@ -38,7 +38,7 @@ PORTED = {
     "Iudurxl8": ("ported", "chat-notify", "Chat Notify (raw-hook port: hooks Chat::add_message)"),
     "8qkXwOnk": ("ported", "more-chat-history", "More Chat History (raw-hook port: raises the chat limits)"),
     "smUP7V3r": ("ported", "durability-tooltip", "Durability Tooltip (raw-hook port: returns from stack_tooltip)"),
-    "zLAdIOH7": ("ported", "crosshair-indicator", "Crosshair Indicator (raw-hook port: draws over the crosshair)"),
+    "zLAdIOH7": ("ported", "crosshair-indicator", "Corner brackets round the crosshair when it is on a player who is not a spectator (needs NATIVE_HOOKS_API 400)"),
     "HBz1jJcy": ("ported", "entity-crosshair", "Entity Crosshair (raw-hook port: replaces the crosshair shape)"),
     "2M01OLQq": ("ported", "shulker-box-tooltip", "Totals by item and a graphical 9 by 3 grid with real item icons"),
     "mOgUt4GM": ("builtin", "", "Horizon lists native mods in its own Options > Mods screen, with a settings page for each."),
@@ -73,7 +73,7 @@ PORTED = {
     "xLSpHE43": ("partial", "enchantment-descriptions", "The descriptions under the tooltip; no coloured enchantment names"),
     "2RKFTmiB": ("builtin", "", "Horizon already keeps a tooltip on screen: its tooltip placement moves it back from the screen's edges."),
     "UMxybHE8": ("partial", "info-hud", "Speed, facing, dimension and angles in Info HUD, coordinates in Custom HUD; no light level, biome or chunk overlays"),
-    "QrKEZXN9": ("partial", "crosshair-indicator", "A mark over the crosshair when it is over a living entity; none of the other conditions"),
+    "QrKEZXN9": ("hook", "", "Elytra indicator, projectile hit markers and a player and mob indicator round the crosshair: not ported yet"),
     "VyxkIxCd": ("builtin", "", "Horizon has a Fullbright extra of its own."),
     "UVtY3ZAC": ("ported", "enchantment-descriptions", "A gray line per enchantment under the tooltip saying what it does"),
     "r6VxNyu0": ("ported", "better-hurt-cam", "The death tilt can be switched off in Better Hurt Cam"),
@@ -353,7 +353,7 @@ copies no upstream code or art: every port is a clean re-implementation of the b
         "effect-timers": "effect-timer", "held-item": "held-item", "no-weather": "no-weather", "xp-bottle-optimizer": "xp-bottle-optimizer", "tempest-info": "info-hud", "entity-texture-features": "entity-texture-features",
         "entitytexturefeatures": "entity-texture-features", "freecam": "freecam", "invmove": "invmove",
         "item-highlighter": "item-highlighter", "more-chat-history": "more-chat-history", "morechathistory": "more-chat-history",
-        "red-crosshair-indicator": "crosshair-indicator", "shulkerboxtooltip": "shulker-box-tooltip", "totem-counter": "totem-counter",
+        "shulkerboxtooltip": "shulker-box-tooltip", "totem-counter": "totem-counter",
     }
     plan = {k: ("ported", v) for k, v in ported.items()}
     plan["fullbright"] = ("builtin", "")
