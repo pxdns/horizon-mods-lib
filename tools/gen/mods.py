@@ -915,7 +915,6 @@ fn @ID@_view(game: &crate::game::Game<'_>, zoom: &mut Option<crate::game::native
 
 for slug, id_, name, desc, upstream, hold, key, level in [
     ("zoomify", "zoomify", "Zoomify", "Hold a key to zoom in, turn the wheel to zoom further, with smooth easing and slower turning.", "Zoomify (zoomify)", True, "key.keyboard.c", 4),
-    ("simple-zoom", "simple_zoom", "Simple Zoom", "Press a key to zoom in and press it again to zoom out; the wheel changes the zoom meanwhile.", "Simple Zoom (simplezoom)", False, "key.keyboard.v", 3),
 ]:
     MODS.append(dict(
         slug=slug, id=id_, name=name, title=name, description=desc,

@@ -1,11 +1,9 @@
 # Simple Zoom (Horizon native mod)
 
-Press a key to zoom in and press it again to zoom out; the wheel changes the zoom meanwhile.
+A simple zoom: hold a key, scroll to change the magnification. No unnecessary stuff.
 
-- Zoom key (press to toggle): `key.keyboard.v` by default, changed in Options > Mods > Simple Zoom.
-- The mouse wheel changes the zoom while it is on.
 
-Ported from **Simple Zoom (simplezoom)** (see the upstream project) as an independent implementation for Horizon 26.3;
+Ported from **Simple Zoom (zoom-simple) by MrRockis** (MIT) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
 (`mixins/simple_zoom/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
