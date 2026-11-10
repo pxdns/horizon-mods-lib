@@ -303,79 +303,169 @@ fn chat_notify_tick(game: &mut crate::game::Game<'_>) {
 
 # --------------------------------------------------------------------------------------------- chat_animation
 CHAT.append(dict(
-    slug="chat-animation", id="chat_animation", name="Chat Animation", title="Chat Animation", raw=True,
-    usage="Nothing to press: new chat lines slide up into place. The settings page switches the slide on or off.",
-    description="New chat lines slide up into place instead of appearing at once.",
-    upstream="Chat Animation [Smooth Chat] (chatanimation)", upstream_licence="see the upstream project",
-    command=None, hooks=["layout", "list", "settings", "click", "tick"],
-    options=[("slide", "Slide in", True)],
-    modpath="horizon_client::chat::lib_chat_animation",
-    raw_note=("**Retired on current Horizon: its smooth chat is built in.** Horizon's chat now slides a new line in and fades it in by itself (the smooth chat extra, `Chat::smooth`), "
-              "and `Chat::layout` takes fractional ticks and `Line::tag` where this mod's copy of the layout expects whole ticks and `Line::indicator`, so the mod no longer compiles there. "
-              "Use Horizon's own setting; this folder stays for the Horizon commit it was written on. "
-              "It lives in Horizon's chat module and replaces `Chat::layout` (a cancellable HEAD hook that rebuilds the draw list the same way, with each new line offset by the slide) - "
-              "not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. The chat only knows whole ticks, so the slide moves in 50 ms steps."),
-    toml_text=toml_text("chat_animation", "1.0.0", "crates/horizon-client-render/src/chat.rs", "lib_chat_animation", [
-        dict(fields=[("id", '"layout"'), ("kind", '"HEAD"'), ("cancellable", "true"), ("target", '"horizon_client_render::chat::Chat::layout"'), ("helper", '"layout.rs"')],
-             bindings=[("chat", "&Chat", "&*self"), ("height", "i32", "height"), ("ticks", "u64", "ticks"), ("focused", "bool", "focused")]),
-    ] + common_native(), visibility="pub"),
+    slug="chat-animation", id="chat_animation", name="Chat Animation", title="Chat Animation", raw=False, needs_api=404,
+    usage="Nothing to press: new messages rise into place and fade in, the input field slides up when chat opens, and the indicator line is hidden. The settings page has Animate Messages, Duration, Hide Indicator Line, Animate Opacity, Animate Input Field and Duration.",
+    description="Makes chat messages appear with a smooth animation.",
+    upstream="Chat Animation [Smooth Chat] (chatanimation) by Ezzenix", upstream_licence="MIT",
+    command=None, hooks=["list", "settings", "click", "tick"],
+    options=None, custom_settings=True,
     runtime_extra=r'''
-use std::cell::Cell;
+/// The durations the two Duration buttons step through, in milliseconds (the original takes any number; the `message_ms` and
+/// `input_ms` files do too).
+pub const STEPS: [i32; 8] = [0, 50, 100, 150, 170, 300, 500, 1000];
 
-/// How long a line slides, in ticks.
-pub const SLIDE_TICKS: u64 = 6;
-
-thread_local! {
-    static ON: Cell<bool> = const { Cell::new(true) };
+/// The settings of `ModConfig`, with its defaults, in the original's order.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Settings {
+    /// `Animate Messages`.
+    pub animate_messages: bool,
+    /// `Duration` of the messages' animation.
+    pub message_ms: i32,
+    /// `Hide Indicator Line`: "Hide the indicator line on the left of messages."
+    pub hide_indicator: bool,
+    /// `Animate Opacity`.
+    pub animate_opacity: bool,
+    /// `Animate Input Field`.
+    pub animate_input: bool,
+    /// `Duration` of the input field's animation.
+    pub input_ms: i32,
 }
 
-/// Switches the slide on or off (the game tells the chat each tick).
-pub fn configure(on: bool) {
-    ON.with(|o| o.set(on));
+impl Default for Settings {
+    fn default() -> Self {
+        Self { animate_messages: true, message_ms: 150, hide_indicator: true, animate_opacity: true, animate_input: true, input_ms: 170 }
+    }
 }
 
-/// Pixels a line added at `added` is still below its place at tick `ticks`: the whole line height at first, easing to nothing.
-pub fn slide(ticks: u64, added: u64, line_height: i32) -> i32 {
-    if !ON.with(Cell::get) {
-        return 0;
+impl Settings {
+    pub fn read(get: impl Fn(&str) -> Option<String>) -> Self {
+        let d = Self::default();
+        let flag = |key: &str, d: bool| get(key).map_or(d, |v| match v.trim() {
+            "true" => true,
+            "false" => false,
+            _ => d,
+        });
+        let ms = |key: &str, d: i32| get(key).and_then(|v| v.trim().parse::<i32>().ok()).map_or(d, |v| v.max(0));
+        Self {
+            animate_messages: flag("animate_messages", d.animate_messages),
+            message_ms: ms("message_ms", d.message_ms),
+            hide_indicator: flag("hide_indicator", d.hide_indicator),
+            animate_opacity: flag("animate_opacity", d.animate_opacity),
+            animate_input: flag("animate_input", d.animate_input),
+            input_ms: ms("input_ms", d.input_ms),
+        }
     }
-    let age = ticks.saturating_sub(added);
-    if age >= SLIDE_TICKS {
-        return 0;
+
+    pub fn labels(&self) -> Vec<String> {
+        let on = |b: bool| if b { "ON" } else { "OFF" };
+        vec![
+            format!("Animate Messages: {}", on(self.animate_messages)),
+            format!("Messages Duration: {} ms", self.message_ms),
+            format!("Hide Indicator Line: {}", on(self.hide_indicator)),
+            format!("Animate Opacity: {}", on(self.animate_opacity)),
+            format!("Animate Input Field: {}", on(self.animate_input)),
+            format!("Input Field Duration: {} ms", self.input_ms),
+        ]
     }
-    let left = 1.0 - age as f32 / SLIDE_TICKS as f32;
-    // Ease out: fast at the start, settling at the end.
-    (left * left * line_height as f32).round() as i32
+
+    pub fn click(&mut self, i: usize) -> Option<(&'static str, String)> {
+        let step = |v: i32| *STEPS.iter().find(|&&s| s > v).unwrap_or(&STEPS[0]);
+        match i {
+            0 => {
+                self.animate_messages = !self.animate_messages;
+                Some(("animate_messages", self.animate_messages.to_string()))
+            }
+            1 => {
+                self.message_ms = step(self.message_ms);
+                Some(("message_ms", self.message_ms.to_string()))
+            }
+            2 => {
+                self.hide_indicator = !self.hide_indicator;
+                Some(("hide_indicator", self.hide_indicator.to_string()))
+            }
+            3 => {
+                self.animate_opacity = !self.animate_opacity;
+                Some(("animate_opacity", self.animate_opacity.to_string()))
+            }
+            4 => {
+                self.animate_input = !self.animate_input;
+                Some(("animate_input", self.animate_input.to_string()))
+            }
+            5 => {
+                self.input_ms = step(self.input_ms);
+                Some(("input_ms", self.input_ms.to_string()))
+            }
+            _ => None,
+        }
+    }
+}
+
+pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
+    Settings::read(get).labels()
+}
+
+pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
+    Settings::read(get).click(i)
 }
 ''',
     tests=r'''
-    #[test]
-    fn a_new_line_starts_a_full_line_below_and_settles() {
-        configure(true);
-        assert_eq!(slide(10, 10, 9), 9);
-        assert!(slide(11, 10, 9) < 9 && slide(11, 10, 9) > slide(12, 10, 9));
-        assert_eq!(slide(10 + SLIDE_TICKS, 10, 9), 0);
-        assert_eq!(slide(500, 10, 9), 0, "old lines do not move");
-        assert_eq!(slide(5, 10, 9), 9, "a line from the future counts as new");
+    fn none(_: &str) -> Option<String> {
+        None
     }
 
     #[test]
-    fn the_slide_can_be_switched_off() {
-        configure(false);
-        assert_eq!(slide(10, 10, 9), 0);
-        configure(true);
+    fn defaults_are_the_originals() {
+        let s = Settings::read(none);
+        assert_eq!((s.animate_messages, s.message_ms, s.hide_indicator), (true, 150, true));
+        assert_eq!((s.animate_opacity, s.animate_input, s.input_ms), (true, true, 170));
+        assert_eq!(s.labels().len(), 6);
+    }
+
+    #[test]
+    fn stored_values_are_read_and_junk_falls_back() {
+        let stored = |k: &str| match k {
+            "message_ms" => Some("300".to_owned()),
+            "animate_input" => Some("false".to_owned()),
+            _ => None,
+        };
+        let s = Settings::read(stored);
+        assert_eq!((s.message_ms, s.animate_input), (300, false));
+        let junk = |_: &str| Some("banana".to_owned());
+        assert_eq!(Settings::read(junk), Settings::default());
+        let neg = |k: &str| (k == "input_ms").then(|| "-5".to_owned());
+        assert_eq!(Settings::read(neg).input_ms, 0);
+    }
+
+    #[test]
+    fn the_labels_follow_the_originals_order() {
+        let l = labels(none);
+        assert!(l[0].starts_with("Animate Messages") && l[1].starts_with("Messages Duration") && l[2].starts_with("Hide Indicator Line"));
+        assert!(l[3].starts_with("Animate Opacity") && l[4].starts_with("Animate Input Field") && l[5].starts_with("Input Field Duration"));
+    }
+
+    #[test]
+    fn the_buttons_flip_and_the_durations_step_and_wrap() {
+        let (key, value) = click(none, 0).unwrap();
+        assert_eq!((key, value.as_str()), ("animate_messages", "false"));
+        let (key, value) = click(none, 1).unwrap();
+        assert_eq!((key, value.as_str()), ("message_ms", "170"), "150 steps to 170");
+        let top = |k: &str| (k == "input_ms").then(|| "1000".to_owned());
+        assert_eq!(click(top, 5).unwrap().1, "0", "1000 wraps to 0");
+        let (key, value) = click(none, 2).unwrap();
+        assert_eq!((key, value.as_str()), ("hide_indicator", "false"));
+        assert!(click(none, 9).is_none());
     }
 ''',
     helpers={
-        "layout": None,  # filled from Horizon's own source below
-        "tick": '''// Once a tick: give the chat module the player's setting.
+        "tick": '''// Once a tick: hand the game the chat animation these settings give (vanilla chat when the mod is off).
 fn chat_animation_tick(game: &mut crate::game::Game<'_>) {
-    use horizon_client::chat::lib_chat_animation as m;
-    if !game.native_window() {
+    use crate::game::lib_chat_animation as m;
+    if !game.native_on(m::ID) {
+        game.native_chat_animation_clear();
         return;
     }
-    let on = game.native_on(m::ID) && m::is(|k| game.native_setting(m::ID, k), "slide");
-    m::configure(on);
+    let s = m::Settings::read(|k| game.native_setting(m::ID, k));
+    game.native_chat_animation(s.animate_messages, s.message_ms, s.animate_opacity, s.hide_indicator, s.animate_input, s.input_ms);
 }
 ''',
     },

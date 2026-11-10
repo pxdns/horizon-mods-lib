@@ -1,6 +1,6 @@
 // A click on the settings page: flip the option and keep it.
 fn chat_animation_click(game: &mut crate::game::Game<'_>, mod_id: &str, button: usize) {
-    use horizon_client::chat::lib_chat_animation as m;
+    use crate::game::lib_chat_animation as m;
     if mod_id != m::ID {
         return;
     }

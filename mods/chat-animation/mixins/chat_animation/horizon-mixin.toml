@@ -3,29 +3,16 @@ id = "chat_animation"
 version = "1.0.0"
 priority = 100
 
-# The commit it was tested on. It hooks functions that are not Horizon's stable hook points, so it only builds on this commit.
+# The commit it was tested on. It uses only the native hook points (hooks 1 in
+# compatibility.json): the launcher builds it on any Horizon that has them.
 [compatibility]
 horizon_revision = "ba6344a59cb9e755b730dcf02285fc0d33b97d3c"
 
 [[module]]
 id = "runtime"
-file = "crates/horizon-client-render/src/chat.rs"
+file = "crates/horizon-client/src/game.rs"
 name = "lib_chat_animation"
 source = "runtime.rs"
-visibility = "pub"
-
-[[injection]]
-id = "layout"
-kind = "HEAD"
-cancellable = true
-target = "horizon_client_render::chat::Chat::layout"
-helper = "layout.rs"
-bindings = [
-  { name = "chat", ty = "&Chat", value = "&*self" },
-  { name = "height", ty = "i32", value = "height" },
-  { name = "ticks", ty = "u64", value = "ticks" },
-  { name = "focused", ty = "bool", value = "focused" },
-]
 
 [[injection]]
 id = "list"
