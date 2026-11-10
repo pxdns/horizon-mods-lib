@@ -1,4 +1,4 @@
-// Armor HUD, a native Horizon mod: Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points.
+// Armor HUD, a native Horizon mod: Minimalist vanilla-like widget to display your armor items and their durability.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_armor_hud`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,272 +6,123 @@
 pub const ID: &str = "armor_hud";
 pub const NAME: &str = "Armor HUD";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points.";
+pub const DESCRIPTION: &str = "Minimalist vanilla-like widget to display your armor items and their durability.";
 
-use std::cell::RefCell;
+/// The toggle key's name in Controls; unbound by default (the original registers it as unknown).
+pub const KEY: &str = "toggle";
+pub const DEFAULT_KEY: &str = "key.keyboard.unknown";
 
-/// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("shown", "Shown", true),
-    ("percent", "Show percent", true),
-    ("full", "Hide undamaged pieces", false),
-    ("bar", "Armor value on the armor bar", true),
+/// One setting: its key in the mod's file, its label (the original's), and what its button steps through.
+pub enum Kind {
+    Flag,
+    Cycle(&'static [&'static str]),
+}
+
+pub struct Row {
+    pub key: &'static str,
+    pub label: &'static str,
+    pub kind: Kind,
+    pub default: &'static str,
+}
+
+const NUMBERS: &[&str] = &["0", "2", "5", "10", "20", "50"];
+
+/// `ArmorHudConfig`'s settings the port applies, in the original's order, with its defaults.
+pub const ROWS: &[Row] = &[
+    Row { key: "enabled", label: "Enabled", kind: Kind::Flag, default: "true" },
+    Row { key: "anchor", label: "Anchor", kind: Kind::Cycle(&["hotbar", "top_center", "top", "vertical_center", "bottom"]), default: "hotbar" },
+    Row { key: "side", label: "Side", kind: Kind::Cycle(&["left", "right"]), default: "left" },
+    Row { key: "offset_x", label: "X Offset", kind: Kind::Cycle(NUMBERS), default: "0" },
+    Row { key: "offset_y", label: "Y Offset", kind: Kind::Cycle(NUMBERS), default: "0" },
+    Row { key: "style", label: "Style", kind: Kind::Cycle(&["hotbar", "rounded_corners", "rounded"]), default: "hotbar" },
+    Row { key: "orientation", label: "Orientation", kind: Kind::Cycle(&["horizontal", "vertical"]), default: "horizontal" },
+    Row { key: "widget_shown", label: "Show Widget", kind: Kind::Cycle(&["not_empty", "always", "if_any_present", "damaged_pieces"]), default: "not_empty" },
+    Row { key: "offhand_slot", label: "Offhand Slot", kind: Kind::Cycle(&["adhere", "always_ignore", "always_leave_space"]), default: "adhere" },
+    Row { key: "durability", label: "Durability Display", kind: Kind::Cycle(&["bar", "numeric", "percentage"]), default: "bar" },
+    Row { key: "mainhand_durability", label: "Show Main Hand Durability", kind: Kind::Flag, default: "false" },
+    Row { key: "offhand_durability", label: "Show Offhand Durability", kind: Kind::Flag, default: "true" },
+    Row { key: "reversed", label: "Reversed", kind: Kind::Flag, default: "false" },
+    Row { key: "icons", label: "Show Icons", kind: Kind::Flag, default: "true" },
+    Row { key: "warning", label: "Show Warning", kind: Kind::Flag, default: "true" },
+    Row { key: "min_value", label: "Min Durability", kind: Kind::Cycle(&["20", "0", "10", "50", "100"]), default: "20" },
+    Row { key: "min_percent", label: "Min Durability (percent)", kind: Kind::Cycle(&["0.1", "0", "0.05", "0.2", "0.3"]), default: "0.1" },
+    Row { key: "bob", label: "Icon Bob Intensity", kind: Kind::Cycle(&["3", "0", "1", "2", "4", "5"]), default: "3" },
 ];
 
-thread_local! {
-    /// Read once through the game's settings files, then kept.
-    static CHOSEN: RefCell<Option<Vec<bool>>> = const { RefCell::new(None) };
+/// A setting's value from the file, or its default when missing or not one of the row's.
+pub fn value(get: &impl Fn(&str) -> Option<String>, row: &Row) -> String {
+    let v = get(row.key).map(|v| v.trim().to_owned());
+    match (&row.kind, v) {
+        (Kind::Flag, Some(v)) if v == "true" || v == "false" => v,
+        (Kind::Cycle(list), Some(v)) if list.contains(&v.as_str()) => v,
+        _ => row.default.to_owned(),
+    }
 }
 
-/// A stored value: `true` or `false`, else the default.
-pub fn parse(stored: Option<String>, default: bool) -> bool {
-    stored.map_or(default, |v| match v.trim() {
-        "true" => true,
-        "false" => false,
-        _ => default,
-    })
-}
-
-fn chosen(get: impl Fn(&str) -> Option<String>) -> Vec<bool> {
-    CHOSEN.with_borrow_mut(|c| {
-        c.get_or_insert_with(|| {
-            OPTIONS
-                .iter()
-                .map(|(key, _, default)| parse(get(key), *default))
-                .collect()
-        })
-        .clone()
-    })
-}
-
-/// Whether option `key` is on.
-pub fn is(get: impl Fn(&str) -> Option<String>, key: &str) -> bool {
-    OPTIONS
-        .iter()
-        .position(|o| o.0 == key)
-        .is_some_and(|i| chosen(get)[i])
-}
-
-/// The settings page's buttons.
 pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
-    let on = chosen(get);
-    OPTIONS
-        .iter()
-        .zip(on)
-        .map(|((_, label, _), on)| format!("{label}: {}", if on { "ON" } else { "OFF" }))
-        .collect()
-}
-
-/// A click on button `i`: flips it and returns what to store (key, value).
-pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
-    let mut on = chosen(get);
-    let (key, _, _) = *OPTIONS.get(i)?;
-    on[i] = !on[i];
-    let value = on[i].to_string();
-    CHOSEN.with_borrow_mut(|c| *c = Some(on));
-    Some((key, value))
-}
-
-/// Forgets what was read (tests only).
-#[cfg(test)]
-pub fn forget_options() {
-    CHOSEN.with_borrow_mut(|c| *c = None);
-}
-/// Translucent black box, white text with a shadow, as Horizon's own HUD extras.
-pub const BACKGROUND: u32 = 0x7800_0000;
-#[allow(dead_code)]
-pub const INK: u32 = 0xFF_FFFF;
-
-/// `minecraft:diamond_helmet` as `Diamond Helmet`.
-pub fn title(id: &str) -> String {
-    id.rsplit(':')
-        .next()
-        .unwrap_or(id)
-        .split('_')
-        .filter(|w| !w.is_empty())
-        .map(|w| {
-            let mut c = w.chars();
-            c.next().map_or(String::new(), |f| {
-                f.to_uppercase().collect::<String>() + c.as_str()
-            })
-        })
-        .collect::<Vec<_>>()
-        .join(" ")
-}
-
-/// Slash command that hides or shows the box.
-pub const COMMAND: &str = "armor";
-
-/// One worn piece.
-#[derive(Clone, Debug, PartialEq)]
-pub struct Piece {
-    pub slot: &'static str,
-    pub name: String,
-    pub damage: u32,
-    pub max: u32,
-}
-
-impl Piece {
-    pub fn new(slot: &'static str, id: &str, damage: u32, max: u32) -> Self {
-        Self {
-            slot,
-            name: title(id),
-            damage,
-            max,
-        }
-    }
-
-    /// Durability left; unbreakable pieces (max 0) read as full.
-    pub fn left(&self) -> u32 {
-        self.max.saturating_sub(self.damage)
-    }
-
-    /// 0 to 100.
-    pub fn percent(&self) -> u32 {
-        (self.left() * 100).checked_div(self.max).unwrap_or(100)
-    }
-
-    /// Green above half, yellow above a quarter, red below.
-    pub fn ink(&self) -> u32 {
-        match self.percent() {
-            51.. => 0x55_FF55,
-            26..=50 => 0xFF_FF55,
-            _ => 0xFF_5555,
-        }
-    }
-
-    pub fn is_full(&self) -> bool {
-        self.damage == 0
-    }
-}
-
-/// The armor value written beside the armor bar.
-pub fn label(armor: i32) -> String {
-    armor.to_string()
-}
-
-/// Rectangles `([x, y, w, h], argb)` for armor past the ten vanilla icons (20 points): one row of small bars
-/// above the bar per further 20 points, a half bar for an odd point. `row` is the y of the vanilla armor row.
-pub fn extra_rows(w: i32, row: i32, armor: i32) -> Vec<([f32; 4], u32)> {
-    const INKS: [u32; 4] = [0xFF_8FB8FF, 0xFF_C28FFF, 0xFF_FF9FD0, 0xFF_FFE08F];
-    let mut out = Vec::new();
-    let mut left = armor - 20;
-    let mut level = 0;
-    while left > 0 && level < INKS.len() {
-        let y = (row - 4 - 4 * level as i32) as f32;
-        for n in 0..10 {
-            let points = (left - 2 * n).clamp(0, 2);
-            if points == 0 {
-                break;
-            }
-            let x = (w / 2 - 91 + n * 8) as f32;
-            out.push((
-                [x, y, if points == 2 { 9.0 } else { 4.0 }, 3.0],
-                INKS[level],
-            ));
-        }
-        left -= 20;
-        level += 1;
-    }
-    out
-}
-
-/// The box's lines with their colours.
-pub fn lines(pieces: &[Piece], as_percent: bool, hide_full: bool) -> Vec<(String, u32)> {
-    pieces
-        .iter()
-        .filter(|p| !(hide_full && p.is_full()))
-        .map(|p| {
-            let value = match (p.max, as_percent) {
-                (0, _) => "unbreakable".to_owned(),
-                (_, true) => format!("{}%", p.percent()),
-                (_, false) => format!("{}/{}", p.left(), p.max),
+    ROWS.iter()
+        .map(|r| {
+            let v = value(&get, r);
+            let shown = match r.kind {
+                Kind::Flag => (if v == "true" { "ON" } else { "OFF" }).to_owned(),
+                Kind::Cycle(_) => v,
             };
-            (format!("{}: {} {}", p.slot, p.name, value), p.ink())
+            format!("{}: {shown}", r.label)
         })
         .collect()
+}
+
+/// A press on button `i`: the setting to write and its next value.
+pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
+    let row = ROWS.get(i)?;
+    let now = value(&get, row);
+    let next = match row.kind {
+        Kind::Flag => (now != "true").to_string(),
+        Kind::Cycle(list) => list[list.iter().position(|v| *v == now).map_or(0, |p| (p + 1) % list.len())].to_owned(),
+    };
+    Some((row.key, next))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    #[test]
-    fn ids_become_titles() {
-        assert_eq!(title("minecraft:diamond_helmet"), "Diamond Helmet");
-        assert_eq!(title("totem_of_undying"), "Totem Of Undying");
-        assert_eq!(title(""), "");
+    fn none(_: &str) -> Option<String> {
+        None
     }
 
     #[test]
-    fn armor_past_twenty_gets_extra_rows() {
-        assert!(extra_rows(320, 180, 20).is_empty());
-        let out = extra_rows(320, 180, 25);
-        assert_eq!(out.len(), 3, "two full bars and a half");
-        assert_eq!(out[0].0, [69.0, 176.0, 9.0, 3.0]);
-        assert_eq!(out[2].0[2], 4.0);
-        assert_eq!(extra_rows(320, 180, 60).len(), 20, "two rows of ten");
-        assert_eq!(
-            extra_rows(320, 180, 60)[10].0[1],
-            172.0,
-            "the second row sits above the first"
-        );
-        assert_eq!(label(14), "14");
+    fn defaults_are_the_originals() {
+        let get = none;
+        let v = |k: &str| value(&get, ROWS.iter().find(|r| r.key == k).unwrap());
+        assert_eq!((v("enabled").as_str(), v("anchor").as_str(), v("side").as_str(), v("style").as_str()), ("true", "hotbar", "left", "hotbar"));
+        assert_eq!((v("widget_shown").as_str(), v("offhand_slot").as_str(), v("durability").as_str()), ("not_empty", "adhere", "bar"));
+        assert_eq!((v("min_value").as_str(), v("min_percent").as_str(), v("bob").as_str()), ("20", "0.1", "3"));
+        assert_eq!((v("mainhand_durability").as_str(), v("offhand_durability").as_str()), ("false", "true"));
     }
 
     #[test]
-    fn durability_reads_as_left_percent_and_colour() {
-        let p = Piece::new("Head", "minecraft:iron_helmet", 55, 165);
-        assert_eq!((p.left(), p.percent()), (110, 66));
-        assert_eq!(p.ink(), 0x55_FF55);
-        assert_eq!(Piece::new("Head", "x", 100, 165).ink(), 0xFF_FF55);
-        assert_eq!(Piece::new("Head", "x", 160, 165).ink(), 0xFF_5555);
-        assert_eq!(
-            Piece::new("Head", "x", 999, 165).left(),
-            0,
-            "never below zero"
-        );
-        assert_eq!(Piece::new("Head", "x", 5, 0).percent(), 100, "unbreakable");
+    fn there_is_a_button_for_each_setting_in_the_originals_order() {
+        let l = labels(none);
+        assert_eq!(l.len(), 18);
+        assert_eq!(l[0], "Enabled: ON");
+        assert_eq!(l[1], "Anchor: hotbar");
+        assert_eq!(l[9], "Durability Display: bar");
+        assert_eq!(l[17], "Icon Bob Intensity: 3");
     }
 
     #[test]
-    fn lines_follow_the_options() {
-        let list = vec![
-            Piece::new("Head", "minecraft:iron_helmet", 55, 165),
-            Piece::new("Feet", "minecraft:iron_boots", 0, 195),
-        ];
-        assert_eq!(lines(&list, true, false)[0].0, "Head: Iron Helmet 66%");
-        assert_eq!(lines(&list, false, false)[1].0, "Feet: Iron Boots 195/195");
-        assert_eq!(lines(&list, true, true).len(), 1, "undamaged pieces hidden");
-        assert_eq!(
-            lines(&[Piece::new("Chest", "elytra", 0, 0)], false, false)[0].0,
-            "Chest: Elytra unbreakable"
-        );
+    fn a_button_flips_or_steps_to_the_next_value_and_wraps() {
+        assert_eq!(click(none, 0).unwrap(), ("enabled", "false".to_owned()));
+        assert_eq!(click(none, 1).unwrap(), ("anchor", "top_center".to_owned()));
+        let last = |k: &str| (k == "anchor").then(|| "bottom".to_owned());
+        assert_eq!(click(last, 1).unwrap().1, "hotbar");
+        assert!(click(none, 18).is_none());
     }
 
     #[test]
-    fn options_default_then_follow_the_stored_files() {
-        forget_options();
-        let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
-        assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
-        forget_options();
-        let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());
-        assert!(!is(stored, OPTIONS[0].0));
-        forget_options();
-        assert!(parse(Some("junk".into()), true));
-        assert!(!parse(Some(" false\n".into()), true));
-    }
-
-    #[test]
-    fn a_click_flips_and_reports_what_to_store() {
-        forget_options();
-        let none = |_: &str| None;
-        let (key, value) = click(none, 0).expect("button 0 exists");
-        assert_eq!(key, OPTIONS[0].0);
-        assert_eq!(value, (!OPTIONS[0].2).to_string());
-        assert_eq!(is(none, key), !OPTIONS[0].2);
-        assert!(click(none, OPTIONS.len()).is_none());
-        forget_options();
+    fn junk_in_the_file_falls_back_to_the_default() {
+        let junk = |_: &str| Some("banana".to_owned());
+        assert_eq!(labels(junk), labels(none));
     }
 }

@@ -15,28 +15,6 @@ name = "lib_armor_hud"
 source = "runtime.rs"
 
 [[injection]]
-id = "hud"
-kind = "HEAD"
-target = "horizon_client::game::native_hooks::Game<'_>::native_hud"
-helper = "hud.rs"
-bindings = [
-  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
-  { name = "batch", ty = "&mut horizon_client::hud::HudBatch", value = "&mut *batch" },
-  { name = "corners", ty = "&mut horizon_client::extras_hud::Corners", value = "&mut *corners" },
-]
-
-[[injection]]
-id = "command"
-kind = "HEAD"
-target = "horizon_client::game::native_hooks::Game<'_>::native_command"
-helper = "command.rs"
-bindings = [
-  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
-  { name = "command", ty = "&str", value = "command" },
-  { name = "ran", ty = "&mut bool", value = "&mut *ran" },
-]
-
-[[injection]]
 id = "list"
 kind = "HEAD"
 target = "horizon_client::game::native_hooks::Game<'_>::native_mods"
@@ -65,4 +43,24 @@ bindings = [
   { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
   { name = "mod_id", ty = "&str", value = "mod_id" },
   { name = "button", ty = "usize", value = "button" },
+]
+
+[[injection]]
+id = "tick"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_tick"
+helper = "tick.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+]
+
+[[injection]]
+id = "key"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_key"
+helper = "key.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "key", ty = "&str", value = "key" },
+  { name = "pressed", ty = "bool", value = "pressed" },
 ]

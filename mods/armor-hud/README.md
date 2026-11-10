@@ -1,12 +1,11 @@
 # Armor HUD (Horizon native mod)
 
-Your armor pieces and how much durability each has left, in a corner of the screen, and your armor value on the armor bar, with extra rows past 20 points.
+Minimalist vanilla-like widget to display your armor items and their durability.
 
-- `/armor` hides or shows it.
 
-Ported from **uku's Armor HUD and Detail Armor Bar Reconstructed** (see the upstream projects) as an independent implementation for Horizon 26.3;
+Ported from **uku's Armor HUD (ukus-armor-hud), a fork of Armor HUD by BerdinskiyBear** (MIT) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/armor_hud/`). It uses the stable HUD hook point but **reads Horizon's own game state** (inventory, armor, effects, food), which the hook-point contract does not promise. It is therefore **pinned to one Horizon commit** (`ba6344a`) and has to be re-checked whenever Horizon changes those fields; `tools/mods.py check` does that.
+(`mixins/armor_hud/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
 ## Install
 
