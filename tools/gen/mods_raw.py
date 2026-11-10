@@ -325,61 +325,6 @@ pub fn lines(c: Counts, split: bool, show_empty: bool) -> Vec<String> {
 ''') + DRAW_INK.replace("@CORNER@", "Corner::BottomLeft")),
 ))
 
-# ---------------------------------------------------------------------------------------------- totem_counter
-RAW.append(dict(
-    slug="totem-counter", id="totem_counter", name="Totem Counter", title="Totem Counter", raw=True,
-    description="How many totems of undying you carry, red when you have none.",
-    upstream="TotemCounter (totemcounter)", upstream_licence="see the upstream project",
-    command="totems", hooks=["hud", "command", "list", "settings", "click"],
-    options=[("shown", "Shown", True), ("hide", "Hide when none", False)],
-    runtime_extra=BOX_HEAD + r'''
-/// Slash command that hides or shows the box.
-pub const COMMAND: &str = "totems";
-/// The item the box counts.
-pub const TOTEM: &str = "minecraft:totem_of_undying";
-
-/// Whether `id` is a totem of undying.
-pub fn is_totem(id: &str) -> bool {
-    id == TOTEM || id == "totem_of_undying"
-}
-
-/// The line and its colour: white with totems, red with none; nothing when `hide_none` and there are none.
-pub fn line(count: u32, hide_none: bool) -> Option<(String, u32)> {
-    match (count, hide_none) {
-        (0, true) => None,
-        (0, false) => Some(("Totems 0".to_owned(), 0xFF_5555)),
-        (n, _) => Some((format!("Totems {n}"), INK)),
-    }
-}
-''',
-    tests=r'''
-    #[test]
-    fn only_totems_count() {
-        assert!(is_totem("minecraft:totem_of_undying"));
-        assert!(is_totem("totem_of_undying"));
-        assert!(!is_totem("minecraft:diamond"));
-    }
-
-    #[test]
-    fn the_line_goes_red_at_zero_and_can_hide() {
-        assert_eq!(line(3, false), Some(("Totems 3".into(), INK)));
-        assert_eq!(line(0, false), Some(("Totems 0".into(), 0xFF_5555)));
-        assert_eq!(line(0, true), None);
-    }
-''',
-    hud=lambda: HUD_BOX.replace("@CORNERDOC@", "the bottom-left corner").replace("@DATA@", hud_guard("Corner::BottomLeft", '''    let hide = m::is(|k| game.native_setting(m::ID, k), "hide");
-    let count: u32 = game
-        .inventory
-        .iter()
-        .flatten()
-        .chain(game.offhand.iter())
-        .filter(|s| m::is_totem(&s.item))
-        .map(|s| s.count)
-        .sum();
-    let lines: Vec<(String, u32)> = m::line(count, hide).into_iter().collect();
-''') + DRAW_INK.replace("@CORNER@", "Corner::BottomLeft")),
-))
-
 # ---------------------------------------------------------------------------------------------- effect_timer
 RAW.append(dict(
     slug="effect-timer", id="effect_timer", name="Effect Timer", title="Effect Timer", raw=True,

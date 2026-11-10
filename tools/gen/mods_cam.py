@@ -1888,3 +1888,257 @@ fn shulker_box_tooltip_tick(game: &mut crate::game::Game<'_>) {
 ''',
     },
 ))
+
+# ------------------------------------------------------------------------------------------------ totem_counter
+CAM.append(dict(
+    usage="Nothing to press: a totem icon with how many totems you carry shows over the experience bar, and popped totems are counted per player after their name tag. Press C (changeable) or type /resetcounter [player] to reset, /showpops [player] to list. The settings page has Enabled, Colors, Show In Player List and Separator for the pop counter, and Totem Display, Default Totem Icon, Display Colors, Colored XP Bar, Always Show Colored Bar, Show Own Pops and Position. Counts clear when a round-end line shows in chat. Resetting on death and a custom position are not in this version.",
+    slug="totem-counter", id="totem_counter", name="TotemCounter", title="TotemCounter", raw=False, needs_api=412,
+    description="Counts the amounts of skill issues (totem pops).",
+    upstream="TotemCounter (totemcounter) by uku", upstream_licence="MIT",
+    command="resetcounter", hooks=["list", "settings", "click", "tick", "command", "key"],
+    options=None, custom_settings=True,
+    keys_expr='vec![[m::KEY.into(), "Reset Pop Counter".into(), m::DEFAULT_KEY.into()]]',
+    runtime_extra=r'''
+/// The reset key's name in Controls, and its default (C).
+pub const KEY: &str = "totemcounter_reset";
+pub const DEFAULT_KEY: &str = "key.keyboard.c";
+/// `TotemCounter.PREFIX`, in section codes.
+pub const PREFIX: &str = "\u{a7}e\u{a7}lTotem\u{a7}a\u{a7}lCounter\u{a7}7\u{a7}l \u{bb} \u{a7}r";
+pub const HEADER: &str = " \u{a7}7======\u{a7}e\u{a7}lTotem\u{a7}a\u{a7}lCounter\u{a7}7 ======\u{a7}r";
+
+/// `ModConfig` of the original, with its defaults.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Settings {
+    pub counter_enabled: bool,
+    pub counter_colors: bool,
+    pub show_in_tab: bool,
+    pub separator: bool,
+    pub display_enabled: bool,
+    pub use_default_totem: bool,
+    pub display_colors: bool,
+    pub colored_xp_bar: bool,
+    pub always_show_bar: bool,
+    pub show_pop_counter: bool,
+    /// 0 is the default place over the experience bar, 1 the top left corner.
+    pub position: u8,
+}
+
+impl Default for Settings {
+    fn default() -> Self {
+        Self {
+            counter_enabled: true,
+            counter_colors: true,
+            show_in_tab: false,
+            separator: true,
+            display_enabled: true,
+            use_default_totem: false,
+            display_colors: true,
+            colored_xp_bar: false,
+            always_show_bar: false,
+            show_pop_counter: false,
+            position: 0,
+        }
+    }
+}
+
+impl Settings {
+    pub fn read(get: impl Fn(&str) -> Option<String>) -> Self {
+        let d = Self::default();
+        let flag = |key: &str, d: bool| get(key).map_or(d, |v| match v.trim() {
+            "true" => true,
+            "false" => false,
+            _ => d,
+        });
+        Self {
+            counter_enabled: flag("counter", d.counter_enabled),
+            counter_colors: flag("counter_colors", d.counter_colors),
+            show_in_tab: flag("tab", d.show_in_tab),
+            separator: flag("separator", d.separator),
+            display_enabled: flag("display", d.display_enabled),
+            use_default_totem: flag("default_totem", d.use_default_totem),
+            display_colors: flag("display_colors", d.display_colors),
+            colored_xp_bar: flag("xp_bar", d.colored_xp_bar),
+            always_show_bar: flag("always_bar", d.always_show_bar),
+            show_pop_counter: flag("own_pops", d.show_pop_counter),
+            position: get("position").and_then(|v| v.trim().parse().ok()).filter(|v| *v <= 1).unwrap_or(d.position),
+        }
+    }
+
+    pub fn labels(&self) -> Vec<String> {
+        let on = |b: bool| if b { "ON" } else { "OFF" };
+        vec![
+            format!("Pop Counter Enabled: {}", on(self.counter_enabled)),
+            format!("Pop Counter Colors: {}", on(self.counter_colors)),
+            format!("Show In Player List: {}", on(self.show_in_tab)),
+            format!("Separator: {}", on(self.separator)),
+            format!("Totem Display Enabled: {}", on(self.display_enabled)),
+            format!("Default Totem Icon: {}", on(self.use_default_totem)),
+            format!("Display Colors: {}", on(self.display_colors)),
+            format!("Colored XP Bar: {}", on(self.colored_xp_bar)),
+            format!("Always Show Colored Bar: {}", on(self.always_show_bar)),
+            format!("Show Own Pops: {}", on(self.show_pop_counter)),
+            format!("Position: {}", if self.position == 0 { "default" } else { "top left" }),
+        ]
+    }
+
+    pub fn click(&mut self, i: usize) -> Option<(&'static str, String)> {
+        let flip = |v: &mut bool, key: &'static str| {
+            *v = !*v;
+            Some((key, v.to_string()))
+        };
+        match i {
+            0 => flip(&mut self.counter_enabled, "counter"),
+            1 => flip(&mut self.counter_colors, "counter_colors"),
+            2 => flip(&mut self.show_in_tab, "tab"),
+            3 => flip(&mut self.separator, "separator"),
+            4 => flip(&mut self.display_enabled, "display"),
+            5 => flip(&mut self.use_default_totem, "default_totem"),
+            6 => flip(&mut self.display_colors, "display_colors"),
+            7 => flip(&mut self.colored_xp_bar, "xp_bar"),
+            8 => flip(&mut self.always_show_bar, "always_bar"),
+            9 => flip(&mut self.show_pop_counter, "own_pops"),
+            10 => {
+                self.position = 1 - self.position;
+                Some(("position", self.position.to_string()))
+            }
+            _ => None,
+        }
+    }
+}
+
+pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
+    Settings::read(get).labels()
+}
+
+pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
+    Settings::read(get).click(i)
+}
+
+/// `/showpops` and `/resetcounter`: what they say. `pops` is everyone's, most first.
+pub fn show(player: Option<&str>, pops: &[(String, i32)]) -> Vec<String> {
+    match player {
+        Some(name) => match pops.iter().find(|(n, _)| n == name) {
+            Some((_, n)) => vec![format!("{PREFIX}{name} popped {n} totem(s)!")],
+            None => vec![format!("{PREFIX}{name} never popped a totem. Simply built different.")],
+        },
+        None if pops.is_empty() => vec![format!("{PREFIX}No one popped totems D:")],
+        None => {
+            let mut lines = vec![HEADER.to_owned()];
+            lines.extend(pops.iter().map(|(n, c)| format!("{n}: {c}")));
+            lines
+        }
+    }
+}
+
+pub fn reset_message(player: Option<&str>, found: bool) -> String {
+    match (player, found) {
+        (None, _) => "\u{a7}bSuccessfully reset the pop counter!".to_owned(),
+        (Some(name), true) => format!("\u{a7}bSuccessfully reset counter for {name}\u{a7}b!"),
+        (Some(name), false) => format!("{PREFIX}{name} has no pops to reset."),
+    }
+}
+''',
+    tests=r'''
+    fn none(_: &str) -> Option<String> {
+        None
+    }
+
+    #[test]
+    fn defaults_are_the_originals() {
+        let s = Settings::read(none);
+        assert!(s.counter_enabled && s.counter_colors && s.separator && s.display_enabled && s.display_colors);
+        assert!(!s.show_in_tab && !s.use_default_totem && !s.colored_xp_bar && !s.always_show_bar && !s.show_pop_counter);
+        assert_eq!(s.position, 0);
+    }
+
+    #[test]
+    fn there_is_a_button_for_every_setting() {
+        assert_eq!(labels(none).len(), 11);
+        assert_eq!(click(none, 0).unwrap(), ("counter", "false".to_owned()));
+        assert_eq!(click(none, 7).unwrap(), ("xp_bar", "true".to_owned()));
+        assert_eq!(click(none, 10).unwrap(), ("position", "1".to_owned()));
+        assert!(click(none, 11).is_none());
+    }
+
+    #[test]
+    fn showpops_says_what_the_original_says() {
+        let pops = vec![("alex".to_owned(), 3), ("sam".to_owned(), 1)];
+        assert!(show(None, &[])[0].ends_with("No one popped totems D:"));
+        assert!(show(Some("alex"), &pops)[0].ends_with("alex popped 3 totem(s)!"));
+        assert!(show(Some("bob"), &pops)[0].ends_with("bob never popped a totem. Simply built different."));
+        let all = show(None, &pops);
+        assert_eq!((all.len(), all[1].as_str(), all[2].as_str()), (3, "alex: 3", "sam: 1"));
+    }
+
+    #[test]
+    fn reset_messages_match() {
+        assert_eq!(reset_message(None, true), "\u{a7}bSuccessfully reset the pop counter!");
+        assert_eq!(reset_message(Some("sam"), true), "\u{a7}bSuccessfully reset counter for sam\u{a7}b!");
+    }
+
+    #[test]
+    fn junk_falls_back_to_the_defaults() {
+        let junk = |_: &str| Some("banana".to_owned());
+        assert_eq!(Settings::read(junk), Settings::default());
+    }
+''',
+    helpers={
+        "tick": '''// Once a tick: switch TotemCounter on with these settings (off with the mod); it also reads the totems carried.
+fn totem_counter_tick(game: &mut crate::game::Game<'_>) {
+    use crate::game::lib_totem_counter as m;
+    if !game.native_on(m::ID) {
+        game.native_totem_counter(None);
+        return;
+    }
+    let s = m::Settings::read(|k| game.native_setting(m::ID, k));
+    let (x, y) = if s.position == 1 { (4, 4) } else { (-1, -1) };
+    game.native_totem_counter(Some(horizon_client::totem_counter::Config {
+        display_enabled: s.display_enabled,
+        x,
+        y,
+        use_default_totem: s.use_default_totem,
+        display_colors: s.display_colors,
+        colored_xp_bar: s.colored_xp_bar,
+        always_show_bar: s.always_show_bar,
+        show_pop_counter: s.show_pop_counter,
+        counter_enabled: s.counter_enabled,
+        separator: s.separator,
+        counter_colors: s.counter_colors,
+        show_in_tab: s.show_in_tab,
+    }));
+}
+''',
+        "key": '''// The reset key went down.
+fn totem_counter_key(game: &mut crate::game::Game<'_>, key: &str, pressed: bool) {
+    use crate::game::lib_totem_counter as m;
+    if !pressed || !game.native_on(m::ID) || key != game.native_mod_key(m::ID, m::KEY, m::DEFAULT_KEY) {
+        return;
+    }
+    game.native_totem_counter_reset(None);
+    game.native_chat(&m::reset_message(None, true));
+}
+''',
+        "command": '''// `/resetcounter [player]` and `/showpops [player]`.
+fn totem_counter_command(game: &mut crate::game::Game<'_>, command: &str, ran: &mut bool) {
+    use crate::game::lib_totem_counter as m;
+    let mut words = command.split(' ');
+    let name = words.next().unwrap_or("");
+    if !game.native_on(m::ID) || !matches!(name, "resetcounter" | "showpops") {
+        return;
+    }
+    *ran = true;
+    let player = words.next().filter(|p| !p.is_empty());
+    if name == "resetcounter" {
+        let found = game.native_totem_counter_reset(player);
+        game.native_chat(&m::reset_message(player, found));
+    } else {
+        let pops = horizon_client::totem_counter::all_pops();
+        for line in m::show(player, &pops) {
+            game.native_chat(&line);
+        }
+    }
+}
+''',
+    },
+))
+CAM[-1]["command_body"] = CAM[-1]["helpers"]["command"]

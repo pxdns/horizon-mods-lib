@@ -1,4 +1,4 @@
-# Releases the Totem Counter native mod (totem-counter/) as totem_counter-<version>.hnmod.
+# Releases the TotemCounter native mod (totem-counter/) as totem_counter-<version>.hnmod.
 #
 # Bump `version` in mods/totem-counter/mixins/totem_counter/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
 # GitHub release `totem-counter-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already
