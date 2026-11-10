@@ -1,4 +1,4 @@
-// Ping View, a native Horizon mod: Shows your ping to the server: the latest reply, the average of the last 20 and the best and worst.
+// Ping View, a native Horizon mod: Displays your and other players ping in the tab list, with color.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_ping_view`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,259 +6,151 @@
 pub const ID: &str = "ping_view";
 pub const NAME: &str = "Ping View";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "Shows your ping to the server: the latest reply, the average of the last 20 and the best and worst.";
+pub const DESCRIPTION: &str = "Displays your and other players ping in the tab list, with color.";
 
-use std::cell::RefCell;
-
-/// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("shown", "Shown", true),
-    ("average", "Average of the last 20", true),
-    ("range", "Best and worst", false),
-    ("colour", "Colour by ping", true),
+/// The colours the five colour buttons cycle through (the original takes any `#RRGGBB`; the colour files do too). Each default is in it.
+pub const PALETTE: [&str; 8] = ["#1EFF00", "#FFF100", "#FF9500", "#FF3B3B", "#555555", "#FFFFFF", "#55FFFF", "#AA00AA"];
+/// The files and labels of the colours, in the original's order.
+pub const COLOURS: [(&str, &str); 5] = [
+    ("good", "Good Ping Color"),
+    ("ok", "Ok Ping Color"),
+    ("bad", "Bad Ping Color"),
+    ("terrible", "Terrible Ping Color"),
+    ("unknown", "Unknown Ping Color"),
 ];
 
-thread_local! {
-    /// Read once through the game's settings files, then kept.
-    static CHOSEN: RefCell<Option<Vec<bool>>> = const { RefCell::new(None) };
+/// The settings of `PingViewConfig`, with its defaults.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Settings {
+    /// good, ok, bad, terrible, unknown as `#RRGGBB` text.
+    pub colors: [String; 5],
+    /// `showMs`.
+    pub show_ms: bool,
+    /// `showNametagPing`.
+    pub show_nametag: bool,
+    /// `textShadow`.
+    pub text_shadow: bool,
 }
 
-/// A stored value: `true` or `false`, else the default.
-pub fn parse(stored: Option<String>, default: bool) -> bool {
-    stored.map_or(default, |v| match v.trim() {
-        "true" => true,
-        "false" => false,
-        _ => default,
-    })
+impl Default for Settings {
+    fn default() -> Self {
+        Self { colors: ["#1EFF00", "#FFF100", "#FF9500", "#FF3B3B", "#555555"].map(str::to_owned), show_ms: true, show_nametag: false, text_shadow: true }
+    }
 }
 
-fn chosen(get: impl Fn(&str) -> Option<String>) -> Vec<bool> {
-    CHOSEN.with_borrow_mut(|c| {
-        c.get_or_insert_with(|| {
-            OPTIONS
-                .iter()
-                .map(|(key, _, default)| parse(get(key), *default))
-                .collect()
-        })
-        .clone()
-    })
+/// `PingViewConfig.parseColor`: an optional `#`, then hex digits; white when it does not parse.
+pub fn parse_color(text: &str) -> u32 {
+    let digits = text.strip_prefix('#').unwrap_or(text);
+    u32::from_str_radix(digits, 16).unwrap_or(0xFF_FFFF)
 }
 
-/// Whether option `key` is on.
-pub fn is(get: impl Fn(&str) -> Option<String>, key: &str) -> bool {
-    OPTIONS
-        .iter()
-        .position(|o| o.0 == key)
-        .is_some_and(|i| chosen(get)[i])
-}
-
-/// The settings page's buttons.
-pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
-    let on = chosen(get);
-    OPTIONS
-        .iter()
-        .zip(on)
-        .map(|((_, label, _), on)| format!("{label}: {}", if on { "ON" } else { "OFF" }))
-        .collect()
-}
-
-/// A click on button `i`: flips it and returns what to store (key, value).
-pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
-    let mut on = chosen(get);
-    let (key, _, _) = *OPTIONS.get(i)?;
-    on[i] = !on[i];
-    let value = on[i].to_string();
-    CHOSEN.with_borrow_mut(|c| *c = Some(on));
-    Some((key, value))
-}
-
-/// Forgets what was read (tests only).
-#[cfg(test)]
-pub fn forget_options() {
-    CHOSEN.with_borrow_mut(|c| *c = None);
-}
-
-use std::cell::Cell;
-use std::collections::VecDeque;
-
-/// Slash command that hides or shows the box.
-pub const COMMAND: &str = "ping";
-pub const BACKGROUND: u32 = 0x7800_0000;
-pub const INK: u32 = 0xFF_FFFF;
-/// How many replies the average and range look at.
-pub const WINDOW: usize = 20;
-
-thread_local! {
-    /// The address of the ping logger, set by the game each frame.
-    static WATCH: Cell<usize> = const { Cell::new(0) };
-    static SAMPLES: RefCell<VecDeque<i64>> = const { RefCell::new(VecDeque::new()) };
-}
-
-/// The game tells the mod which logger is the ping logger (its address).
-pub fn watch(address: usize) {
-    WATCH.with(|w| {
-        if w.get() != address {
-            w.set(address);
-            SAMPLES.with_borrow_mut(VecDeque::clear);
-        }
-    });
-}
-
-/// A logger took a sample: keep it when the logger is the ping logger.
-pub fn sample(address: usize, value: i64) {
-    if address != 0 && address == WATCH.with(Cell::get) {
-        SAMPLES.with_borrow_mut(|s| {
-            if s.len() == WINDOW {
-                s.pop_front();
-            }
-            s.push_back(value.max(0));
+impl Settings {
+    pub fn read(get: impl Fn(&str) -> Option<String>) -> Self {
+        let d = Self::default();
+        let flag = |key: &str, d: bool| get(key).map_or(d, |v| match v.trim() {
+            "true" => true,
+            "false" => false,
+            _ => d,
         });
+        let mut colors = d.colors.clone();
+        for (i, (key, _)) in COLOURS.iter().enumerate() {
+            if let Some(v) = get(key) {
+                colors[i] = v.trim().to_owned();
+            }
+        }
+        Self { colors, show_ms: flag("show_ms", d.show_ms), show_nametag: flag("show_nametag", d.show_nametag), text_shadow: flag("text_shadow", d.text_shadow) }
+    }
+
+    pub fn labels(&self) -> Vec<String> {
+        let on = |b: bool| if b { "ON" } else { "OFF" };
+        let mut out: Vec<String> = COLOURS.iter().zip(&self.colors).map(|((_, label), c)| format!("{label}: {c}")).collect();
+        out.push(format!("Show 'ms' suffix: {}", on(self.show_ms)));
+        out.push(format!("Show ping on nametags: {}", on(self.show_nametag)));
+        out.push(format!("Text shadow: {}", on(self.text_shadow)));
+        out
+    }
+
+    pub fn click(&mut self, i: usize) -> Option<(&'static str, String)> {
+        match i {
+            0..=4 => {
+                let now = self.colors[i].to_uppercase();
+                let at = PALETTE.iter().position(|p| *p == now).map_or(0, |p| (p + 1) % PALETTE.len());
+                self.colors[i] = PALETTE[at].to_owned();
+                Some((COLOURS[i].0, self.colors[i].clone()))
+            }
+            5 => {
+                self.show_ms = !self.show_ms;
+                Some(("show_ms", self.show_ms.to_string()))
+            }
+            6 => {
+                self.show_nametag = !self.show_nametag;
+                Some(("show_nametag", self.show_nametag.to_string()))
+            }
+            7 => {
+                self.text_shadow = !self.text_shadow;
+                Some(("text_shadow", self.text_shadow.to_string()))
+            }
+            _ => None,
+        }
+    }
+
+    /// The colours as the game takes them, 0xRRGGBB.
+    pub fn rgb(&self) -> [u32; 5] {
+        std::array::from_fn(|i| parse_color(&self.colors[i]))
     }
 }
 
-/// What the box shows.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct Stats {
-    pub last: i64,
-    pub average: i64,
-    pub best: i64,
-    pub worst: i64,
+pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
+    Settings::read(get).labels()
 }
 
-/// The stats of the replies kept; None before the first.
-pub fn stats() -> Option<Stats> {
-    SAMPLES.with_borrow(|s| {
-        let last = *s.back()?;
-        let sum: i64 = s.iter().sum();
-        Some(Stats {
-            last,
-            average: sum / s.len() as i64,
-            best: *s.iter().min()?,
-            worst: *s.iter().max()?,
-        })
-    })
-}
-
-/// Green under 80 ms, yellow under 150, red above; white when colouring is off.
-pub fn ink(ms: i64, coloured: bool) -> u32 {
-    match (coloured, ms) {
-        (false, _) => INK,
-        (true, ..=79) => 0x55_FF55,
-        (true, 80..=149) => 0xFF_FF55,
-        (true, _) => 0xFF_5555,
-    }
-}
-
-/// The box's lines.
-pub fn lines(s: Stats, average: bool, range: bool, coloured: bool) -> Vec<(String, u32)> {
-    let mut out = vec![(format!("Ping {} ms", s.last), ink(s.last, coloured))];
-    if average {
-        out.push((
-            format!("Average {} ms", s.average),
-            ink(s.average, coloured),
-        ));
-    }
-    if range {
-        out.push((format!("Best {} / worst {} ms", s.best, s.worst), INK));
-    }
-    out
-}
-
-/// Forgets everything (tests only).
-#[cfg(test)]
-pub fn forget_samples() {
-    WATCH.with(|w| w.set(0));
-    SAMPLES.with_borrow_mut(VecDeque::clear);
+pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
+    Settings::read(get).click(i)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    #[test]
-    fn only_the_watched_logger_is_kept() {
-        forget_samples();
-        watch(0x1000);
-        sample(0x2000, 5_000_000);
-        assert_eq!(stats(), None, "another logger (frame times)");
-        sample(0x1000, 40);
-        assert_eq!(stats().unwrap().last, 40);
-        sample(0, 1);
-        assert_eq!(stats().unwrap().last, 40, "address 0 means unwatched");
-        forget_samples();
+    fn none(_: &str) -> Option<String> {
+        None
     }
 
     #[test]
-    fn stats_cover_the_last_twenty_replies() {
-        forget_samples();
-        watch(7);
-        for ms in 1..=25 {
-            sample(7, ms * 10);
-        }
-        let s = stats().unwrap();
-        assert_eq!(
-            (s.last, s.best, s.worst),
-            (250, 60, 250),
-            "the first five fell out"
-        );
-        assert_eq!(s.average, (60..=250).step_by(10).sum::<i64>() / 20);
-        sample(7, -5);
-        assert_eq!(stats().unwrap().last, 0, "never negative");
-        forget_samples();
+    fn defaults_are_the_originals() {
+        let s = Settings::read(none);
+        assert_eq!(s.colors, ["#1EFF00", "#FFF100", "#FF9500", "#FF3B3B", "#555555"]);
+        assert_eq!((s.show_ms, s.show_nametag, s.text_shadow), (true, false, true));
+        assert_eq!(s.rgb(), [0x1E_FF00, 0xFF_F100, 0xFF_9500, 0xFF_3B3B, 0x55_5555]);
     }
 
     #[test]
-    fn a_different_logger_resets_the_samples() {
-        forget_samples();
-        watch(1);
-        sample(1, 30);
-        watch(2);
-        assert_eq!(stats(), None);
-        forget_samples();
+    fn colours_parse_with_or_without_a_hash_and_fall_back_to_white() {
+        assert_eq!(parse_color("#FF9500"), 0xFF_9500);
+        assert_eq!(parse_color("ff9500"), 0xFF_9500);
+        assert_eq!(parse_color("nope"), 0xFF_FFFF);
+        let bad = |k: &str| (k == "good").then(|| "zzz".to_owned());
+        assert_eq!(Settings::read(bad).rgb()[0], 0xFF_FFFF);
     }
 
     #[test]
-    fn colours_and_lines_follow_the_options() {
-        assert_eq!(ink(30, true), 0x55_FF55);
-        assert_eq!(ink(80, true), 0xFF_FF55);
-        assert_eq!(ink(150, true), 0xFF_5555);
-        assert_eq!(ink(30, false), INK);
-        let s = Stats {
-            last: 42,
-            average: 55,
-            best: 30,
-            worst: 120,
-        };
-        assert_eq!(lines(s, false, false, true).len(), 1);
-        let all = lines(s, true, true, true);
-        assert_eq!(all[0].0, "Ping 42 ms");
-        assert_eq!(all[1].0, "Average 55 ms");
-        assert_eq!(all[2].0, "Best 30 / worst 120 ms");
+    fn the_colour_buttons_walk_the_palette_and_report_the_file() {
+        let (file, value) = click(none, 0).unwrap();
+        assert_eq!((file, value.as_str()), ("good", "#FFF100"), "the default is the first palette entry, so the next one follows");
+        let last = |k: &str| (k == "unknown").then(|| "#AA00AA".to_owned());
+        assert_eq!(click(last, 4).unwrap().1, "#1EFF00", "the palette wraps");
+        let custom = |k: &str| (k == "bad").then(|| "#123456".to_owned());
+        assert_eq!(click(custom, 2).unwrap().1, "#1EFF00", "a colour typed into the file starts the walk again");
     }
 
     #[test]
-    fn options_default_then_follow_the_stored_files() {
-        forget_options();
-        let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
-        assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
-        forget_options();
-        let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());
-        assert!(!is(stored, OPTIONS[0].0));
-        forget_options();
-        assert!(parse(Some("junk".into()), true));
-        assert!(!parse(Some(" false\n".into()), true));
-    }
-
-    #[test]
-    fn a_click_flips_and_reports_what_to_store() {
-        forget_options();
-        let none = |_: &str| None;
-        let (key, value) = click(none, 0).expect("button 0 exists");
-        assert_eq!(key, OPTIONS[0].0);
-        assert_eq!(value, (!OPTIONS[0].2).to_string());
-        assert_eq!(is(none, key), !OPTIONS[0].2);
-        assert!(click(none, OPTIONS.len()).is_none());
-        forget_options();
+    fn the_switches_flip_in_the_originals_order() {
+        assert_eq!(click(none, 5).unwrap(), ("show_ms", "false".to_owned()));
+        assert_eq!(click(none, 6).unwrap(), ("show_nametag", "true".to_owned()));
+        assert_eq!(click(none, 7).unwrap(), ("text_shadow", "false".to_owned()));
+        assert!(click(none, 8).is_none());
+        let l = labels(none);
+        assert_eq!(l.len(), 8);
+        assert!(l[0].starts_with("Good Ping Color") && l[4].starts_with("Unknown Ping Color") && l[5].starts_with("Show 'ms'"));
     }
 }

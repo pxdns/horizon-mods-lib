@@ -1,6 +1,6 @@
 // A click on the settings page: flip the option and keep it.
 fn ping_view_click(game: &mut crate::game::Game<'_>, mod_id: &str, button: usize) {
-    use horizon_client::debug_chart::lib_ping_view as m;
+    use crate::game::lib_ping_view as m;
     if mod_id != m::ID {
         return;
     }

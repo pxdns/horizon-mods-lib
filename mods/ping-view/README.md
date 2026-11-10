@@ -1,12 +1,11 @@
 # Ping View (Horizon native mod)
 
-Shows your ping to the server: the latest reply, the average of the last 20 and the best and worst.
+Displays your and other players ping in the tab list, with color.
 
-- `/ping` hides or shows it.
 
-Ported from **Ping View (pingview)** (see the upstream project) as an independent implementation for Horizon 26.3;
+Ported from **Ping View (pingview) by karlssonsmp** (MIT) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/ping_view/`). Horizon keeps the connection's ping samples in a `SampleLogger` that has no getter, so the mod's module lives in `debug_chart.rs` and a HEAD hook on `SampleLogger::log` copies the samples of the one logger the game tells it about (the ping logger, found by its address). That is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**.
+(`mixins/ping_view/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
 ## Install
 
