@@ -543,34 +543,3 @@ fn durability_tooltip_tooltip(
 ''',
     },
 ))
-
-
-def _layout_helper():
-    """Chat::layout rebuilt from Horizon's own source with each new line offset by the slide."""
-    import re
-    import os
-    from pathlib import Path
-    here = Path(__file__).resolve().parent
-    root = Path(os.environ.get("HORIZON_SRC") or here.parents[1] / "target/horizon" / REV)
-    chat = root / "crates/horizon-client-render/src/chat.rs"
-    if not chat.is_file():
-        raise SystemExit(f"Horizon {REV[:7]} is not downloaded: run `python3 tools/mods.py fetch` (or set HORIZON_SRC to a checkout of that commit)")
-    src = chat.read_text()
-    start = src.index("    pub fn layout(&self, height: i32, ticks: u64, focused: bool) -> Vec<GuiDraw> {")
-    end = src.index("    /// Draws [`Chat::layout`] into the HUD batch")
-    body = src[start:end].rstrip()
-    body = body[body.index("{") + 1: body.rindex("}")]
-    body = body.replace("self.", "chat.")
-    body = body.replace("return Vec::new();", "return std::ops::ControlFlow::Break(Vec::new());")
-    body = re.sub(r"\n        out\n$", "\n        std::ops::ControlFlow::Break(out)\n", body.rstrip() + "\n")
-    bg = ("        for &(i, _, alpha) in &lines {\n            let bottom = chat_bottom - i as i32 * entry_height;",
-          "        for &(i, line, alpha) in &lines {\n            let bottom = chat_bottom - i as i32 * entry_height + lib_chat_animation::slide(ticks, line.added, entry_height);")
-    fg = ("        for &(i, line, alpha) in &lines {\n            let bottom = chat_bottom - i as i32 * entry_height;\n            let opacity",
-          "        for &(i, line, alpha) in &lines {\n            let bottom = chat_bottom - i as i32 * entry_height + lib_chat_animation::slide(ticks, line.added, entry_height);\n            let opacity")
-    assert bg[0] in body and fg[0] in body, "the layout source changed"
-    body = body.replace(fg[0], fg[1]).replace(bg[0], bg[1])
-    return ("// Chat::layout, rebuilt: the same draw list with each line that was just added still sliding up into its place.\n"
-            "fn chat_animation_layout(chat: &Chat, height: i32, ticks: u64, focused: bool) -> std::ops::ControlFlow<Vec<GuiDraw>> {" + body + "}\n")
-
-
-CHAT[2]["helpers"]["layout"] = _layout_helper()

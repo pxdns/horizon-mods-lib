@@ -1,6 +1,6 @@
 // The mod's row in Options > Mods.
 fn search_stats_listed(mods: &mut Vec<crate::game::native_hooks::NativeMod>) {
-    use crate::game::stats_screen::lib_search_stats as m;
+    use crate::game::lib_search_stats as m;
     mods.push(crate::game::native_hooks::NativeMod {
         id: m::ID.into(),
         title: format!("{} {}", m::NAME, m::VERSION),

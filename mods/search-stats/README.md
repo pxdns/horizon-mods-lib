@@ -1,18 +1,18 @@
-# Search Stats (Horizon native mod)
+# SearchStats (Horizon native mod)
 
-Adds a search box to the statistics screen that filters the Items and Mobs lists as you type.
+Adds a search bar to the statistics screen to quickly find specific entries.
 
 
-Ported from **SearchStats (searchstats)** (Apache-2.0) as an independent implementation for Horizon 26.3;
+Ported from **SearchStats (searchstats) by TerminalMC** (Apache-2.0) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/search_stats/`). It replaces the Items list builder of Horizon's statistics screen (`stat_items`, rebuilt from its source with the filter added) with a cancellable HEAD hook, adds a RETURN modifier to the Mobs list builder (`stat_mobs`), and draws the box from a HEAD hook on `draw_stats_footer`, in `game/stats_screen.rs`. Typing arrives through the stable key hook as key names, so only the US letters, digits, space and minus are read. None of these functions is part of the stable hook-point contract, so the mod is **pinned to one Horizon commit**. The General tab is not filtered: its rows are drawn inline in the screen's drawing function, which this does not replace.
+(`mixins/search_stats/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
 ## Install
 
 Download `search_stats-1.0.0.hnmod` and its `.sha256` from this project's
 [releases](https://github.com/pxdns/horizon-mods-lib/releases?q=search-stats), check the hash, unzip the bundle into a folder and build it
 into a game with `horizon-launcher native-build FOLDER --instance NAME --trust-native-code`. Then switch it on or off in the game
-under Options → Mods → Search Stats. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
+under Options → Mods → SearchStats. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
 and Horizon's [native mods](https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md) page says what a build does and trusts.
 
 ## Files

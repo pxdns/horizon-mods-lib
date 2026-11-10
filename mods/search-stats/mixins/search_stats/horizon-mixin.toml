@@ -3,66 +3,16 @@ id = "search_stats"
 version = "1.0.0"
 priority = 100
 
-# The commit it was tested on. It hooks functions that are not Horizon's stable hook points, so it only builds on this commit.
+# The commit it was tested on. It uses only the native hook points (hooks 1 in
+# compatibility.json): the launcher builds it on any Horizon that has them.
 [compatibility]
 horizon_revision = "ba6344a59cb9e755b730dcf02285fc0d33b97d3c"
 
 [[module]]
 id = "runtime"
-file = "crates/horizon-client/src/game/stats_screen.rs"
+file = "crates/horizon-client/src/game.rs"
 name = "lib_search_stats"
 source = "runtime.rs"
-
-[[injection]]
-id = "items"
-kind = "HEAD"
-cancellable = true
-target = "horizon_client::game::stats_screen::Game<'_>::stat_items"
-helper = "items.rs"
-bindings = [
-  { name = "game", ty = "&crate::game::Game<'_>", value = "&*self" },
-]
-
-[[injection]]
-id = "mobs"
-kind = "RETURN"
-target = "horizon_client::game::stats_screen::Game<'_>::stat_mobs"
-helper = "mobs.rs"
-bindings = [
-  { name = "mobs", ty = "Vec<String>", value = "$value" },
-]
-
-[[injection]]
-id = "footer"
-kind = "HEAD"
-target = "horizon_client::game::stats_screen::Game<'_>::draw_stats_footer"
-helper = "footer.rs"
-bindings = [
-  { name = "game", ty = "&crate::game::Game<'_>", value = "&*self" },
-  { name = "batch", ty = "&mut HudBatch", value = "&mut *batch" },
-  { name = "w", ty = "f32", value = "w" },
-  { name = "h", ty = "f32", value = "h" },
-]
-
-[[injection]]
-id = "open"
-kind = "HEAD"
-target = "horizon_client::game::stats_screen::Game<'_>::open_stats"
-helper = "open.rs"
-bindings = [
-  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
-]
-
-[[injection]]
-id = "key"
-kind = "HEAD"
-target = "horizon_client::game::native_hooks::Game<'_>::native_key"
-helper = "key.rs"
-bindings = [
-  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
-  { name = "key", ty = "&str", value = "key" },
-  { name = "pressed", ty = "bool", value = "pressed" },
-]
 
 [[injection]]
 id = "list"
@@ -74,23 +24,10 @@ bindings = [
 ]
 
 [[injection]]
-id = "settings"
+id = "tick"
 kind = "HEAD"
-target = "horizon_client::game::native_hooks::Game<'_>::native_settings"
-helper = "settings.rs"
+target = "horizon_client::game::native_hooks::Game<'_>::native_tick"
+helper = "tick.rs"
 bindings = [
   { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
-  { name = "mod_id", ty = "&str", value = "mod_id" },
-  { name = "buttons", ty = "&mut Vec<String>", value = "&mut *buttons" },
-]
-
-[[injection]]
-id = "click"
-kind = "HEAD"
-target = "horizon_client::game::native_hooks::Game<'_>::native_settings_click"
-helper = "click.rs"
-bindings = [
-  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
-  { name = "mod_id", ty = "&str", value = "mod_id" },
-  { name = "button", ty = "usize", value = "button" },
 ]

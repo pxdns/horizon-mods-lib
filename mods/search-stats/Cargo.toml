@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "Adds a search box to the statistics screen that filters the Items and Mobs lists as you type."
+description = "Adds a search bar to the statistics screen to quickly find specific entries."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]
