@@ -6,14 +6,15 @@
 pub const ID: &str = "shield_statuses";
 pub const NAME: &str = "Shield Statuses";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Your shield's state as a coloured line: ready, blocking, or disabled with the seconds left.";
+pub const DESCRIPTION: &str = "Your shield's state as a coloured line: ready, blocking, or disabled with the seconds left.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] =
-    &[("shown", "Shown", true), ("hide", "Hide when ready", false)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("shown", "Shown", true),
+    ("hide", "Hide when ready", false)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -108,10 +109,7 @@ pub fn line(status: Status, hide_ready: bool) -> Option<(String, u32)> {
         Status::Ready if hide_ready => None,
         Status::Ready => Some(("Shield: ready".to_owned(), 0x55_FF55)),
         Status::Blocking => Some(("Shield: blocking".to_owned(), 0x55_FFFF)),
-        Status::Disabled(ticks) => Some((
-            format!("Shield: disabled {:.1} s", f64::from(ticks) / 20.0),
-            0xFF_5555,
-        )),
+        Status::Disabled(ticks) => Some((format!("Shield: disabled {:.1} s", f64::from(ticks) / 20.0), 0xFF_5555)),
     }
 }
 
@@ -124,39 +122,27 @@ mod tests {
         assert_eq!(status(false, 0), Status::Ready);
         assert_eq!(status(true, 0), Status::Blocking);
         assert_eq!(status(false, 70), Status::Disabled(70));
-        assert_eq!(
-            status(true, 70),
-            Status::Disabled(70),
-            "a disabled shield is not blocking"
-        );
+        assert_eq!(status(true, 70), Status::Disabled(70), "a disabled shield is not blocking");
     }
 
     #[test]
     fn lines_and_colours() {
-        assert_eq!(
-            line(Status::Ready, false),
-            Some(("Shield: ready".into(), 0x55_FF55))
-        );
+        assert_eq!(line(Status::Ready, false), Some(("Shield: ready".into(), 0x55_FF55)));
         assert_eq!(line(Status::Ready, true), None);
-        assert_eq!(
-            line(Status::Blocking, true),
-            Some(("Shield: blocking".into(), 0x55_FFFF))
-        );
-        assert_eq!(
-            line(Status::Disabled(70), false),
-            Some(("Shield: disabled 3.5 s".into(), 0xFF_5555))
-        );
-        assert_eq!(
-            line(Status::Disabled(1), false).unwrap().0,
-            "Shield: disabled 0.1 s"
-        );
+        assert_eq!(line(Status::Blocking, true), Some(("Shield: blocking".into(), 0x55_FFFF)));
+        assert_eq!(line(Status::Disabled(70), false), Some(("Shield: disabled 3.5 s".into(), 0xFF_5555)));
+        assert_eq!(line(Status::Disabled(1), false).unwrap().0, "Shield: disabled 0.1 s");
     }
 
     #[test]
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

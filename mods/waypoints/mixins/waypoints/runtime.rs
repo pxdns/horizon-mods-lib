@@ -6,13 +6,14 @@
 pub const ID: &str = "waypoints";
 pub const NAME: &str = "Waypoints";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Name places with /wp, list them, and track one: its distance and direction show on screen.";
+pub const DESCRIPTION: &str = "Name places with /wp, list them, and track one: its distance and direction show on screen.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[("shown", "Show tracked waypoint", true)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("shown", "Show tracked waypoint", true)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -129,18 +130,12 @@ pub fn decode(text: &str) -> Vec<Waypoint> {
 /// A name is 1 to 24 letters, digits, `_` or `-`.
 pub fn name_ok(name: &str) -> bool {
     (1..=24).contains(&name.len())
-        && name
-            .chars()
-            .all(|c| c.is_ascii_alphanumeric() || c == '_' || c == '-')
+        && name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_' || c == '-')
 }
 
 /// Blocks from `here` to the waypoint.
 pub fn distance(here: &Here, w: &Waypoint) -> f64 {
-    let (dx, dy, dz) = (
-        f64::from(w.x) + 0.5 - here.x,
-        f64::from(w.y) - here.y,
-        f64::from(w.z) + 0.5 - here.z,
-    );
+    let (dx, dy, dz) = (f64::from(w.x) + 0.5 - here.x, f64::from(w.y) - here.y, f64::from(w.z) + 0.5 - here.z);
     (dx * dx + dy * dy + dz * dz).sqrt()
 }
 
@@ -157,27 +152,13 @@ pub fn relative(yaw: f32, bearing: f32) -> &'static str {
     if d > 180.0 {
         d -= 360.0;
     }
-    let names = [
-        "ahead",
-        "ahead right",
-        "right",
-        "behind right",
-        "behind",
-        "behind left",
-        "left",
-        "ahead left",
-    ];
+    let names = ["ahead", "ahead right", "right", "behind right", "behind", "behind left", "left", "ahead left"];
     names[((d / 45.0).round() as i32).rem_euclid(8) as usize]
 }
 
 /// `home 128 m ahead right`.
 pub fn line(here: &Here, yaw: f32, w: &Waypoint) -> String {
-    format!(
-        "{} {:.0} m {}",
-        w.name,
-        distance(here, w),
-        relative(yaw, bearing(here, w))
-    )
+    format!("{} {:.0} m {}", w.name, distance(here, w), relative(yaw, bearing(here, w)))
 }
 
 #[derive(Default)]
@@ -213,10 +194,7 @@ pub fn run(args: &str, here: Option<&Here>, yaw: f32) -> Outcome {
     let mut words = args.split_whitespace();
     let verb = words.next().unwrap_or("");
     let name = words.next().unwrap_or("");
-    let say = |text: String| Outcome {
-        chat: vec![text],
-        save: None,
-    };
+    let say = |text: String| Outcome { chat: vec![text], save: None };
     STATE.with_borrow_mut(|s| match verb {
         "add" | "set" => {
             let Some(here) = here else {
@@ -235,10 +213,7 @@ pub fn run(args: &str, here: Option<&Here>, yaw: f32) -> Outcome {
             let said = format!("Waypoint {name} set at {} {} {}", place.x, place.y, place.z);
             s.list.retain(|w| w.name != name);
             s.list.push(place);
-            Outcome {
-                chat: vec![said],
-                save: Some(encode(&s.list)),
-            }
+            Outcome { chat: vec![said], save: Some(encode(&s.list)) }
         }
         "del" | "remove" => {
             let before = s.list.len();
@@ -249,10 +224,7 @@ pub fn run(args: &str, here: Option<&Here>, yaw: f32) -> Outcome {
             if s.tracked.as_deref() == Some(name) {
                 s.tracked = None;
             }
-            Outcome {
-                chat: vec![format!("Waypoint {name} deleted")],
-                save: Some(encode(&s.list)),
-            }
+            Outcome { chat: vec![format!("Waypoint {name} deleted")], save: Some(encode(&s.list)) }
         }
         "list" | "" => {
             if s.list.is_empty() {
@@ -265,15 +237,7 @@ pub fn run(args: &str, here: Option<&Here>, yaw: f32) -> Outcome {
                     let away = here
                         .filter(|h| h.dimension == w.dimension)
                         .map_or(String::new(), |h| format!(", {} m", distance(h, w).round()));
-                    format!(
-                        "{}: {} {} {} ({}{})",
-                        w.name,
-                        w.x,
-                        w.y,
-                        w.z,
-                        w.dimension.trim_start_matches("minecraft:"),
-                        away
-                    )
+                    format!("{}: {} {} {} ({}{})", w.name, w.x, w.y, w.z, w.dimension.trim_start_matches("minecraft:"), away)
                 })
                 .collect();
             Outcome { chat, save: None }
@@ -283,17 +247,10 @@ pub fn run(args: &str, here: Option<&Here>, yaw: f32) -> Outcome {
                 return say(format!("No waypoint {name}"));
             }
             s.tracked = Some(name.to_owned());
-            say(
-                match here.and_then(|h| {
-                    s.list
-                        .iter()
-                        .find(|w| w.name == name)
-                        .map(|w| line(h, yaw, w))
-                }) {
-                    Some(l) => format!("Tracking {l}"),
-                    None => format!("Tracking {name}"),
-                },
-            )
+            say(match here.and_then(|h| s.list.iter().find(|w| w.name == name).map(|w| line(h, yaw, w))) {
+                Some(l) => format!("Tracking {l}"),
+                None => format!("Tracking {name}"),
+            })
         }
         "untrack" => {
             s.tracked = None;
@@ -323,39 +280,18 @@ mod tests {
     use super::*;
 
     fn here(x: f64, y: f64, z: f64) -> Here {
-        Here {
-            x,
-            y,
-            z,
-            dimension: "minecraft:overworld".into(),
-        }
+        Here { x, y, z, dimension: "minecraft:overworld".into() }
     }
 
     #[test]
     fn waypoints_round_trip_through_the_file() {
         let list = vec![
-            Waypoint {
-                name: "home".into(),
-                x: 1,
-                y: 64,
-                z: -3,
-                dimension: "minecraft:overworld".into(),
-            },
-            Waypoint {
-                name: "end-base".into(),
-                x: -10,
-                y: 70,
-                z: 22,
-                dimension: "minecraft:the_end".into(),
-            },
+            Waypoint { name: "home".into(), x: 1, y: 64, z: -3, dimension: "minecraft:overworld".into() },
+            Waypoint { name: "end-base".into(), x: -10, y: 70, z: 22, dimension: "minecraft:the_end".into() },
         ];
         assert_eq!(decode(&encode(&list)), list);
         assert_eq!(decode("bad line\nhome\t1\t2"), vec![]);
-        assert_eq!(
-            decode("a b\t1\t2\t3\tx"),
-            vec![],
-            "spaces are not allowed in names"
-        );
+        assert_eq!(decode("a b\t1\t2\t3\tx"), vec![], "spaces are not allowed in names");
     }
 
     #[test]
@@ -369,31 +305,18 @@ mod tests {
     #[test]
     fn bearing_faces_the_target_in_vanilla_yaw() {
         let p = here(0.5, 64.0, 0.5);
-        let at = |x, z| Waypoint {
-            name: "w".into(),
-            x,
-            y: 64,
-            z,
-            dimension: "minecraft:overworld".into(),
-        };
+        let at = |x, z| Waypoint { name: "w".into(), x, y: 64, z, dimension: "minecraft:overworld".into() };
         assert!((bearing(&p, &at(0, 10)) - 0.0).abs() < 0.01, "south is +Z");
         assert!((bearing(&p, &at(-10, 0)) - 90.0).abs() < 0.01, "west is -X");
         assert!((bearing(&p, &at(10, 0)) + 90.0).abs() < 0.01, "east is +X");
-        assert!(
-            (bearing(&p, &at(0, -10)).abs() - 180.0).abs() < 0.01,
-            "north is -Z"
-        );
+        assert!((bearing(&p, &at(0, -10)).abs() - 180.0).abs() < 0.01, "north is -Z");
         assert_eq!(distance(&p, &at(3, 4)).round(), 5.0);
     }
 
     #[test]
     fn direction_is_relative_to_where_you_face() {
         assert_eq!(relative(0.0, 0.0), "ahead");
-        assert_eq!(
-            relative(0.0, 90.0),
-            "right",
-            "facing south, west is on the right hand"
-        );
+        assert_eq!(relative(0.0, 90.0), "right", "facing south, west is on the right hand");
         assert_eq!(relative(0.0, -90.0), "left");
         assert_eq!(relative(0.0, 180.0), "behind");
         assert_eq!(relative(160.0, -160.0), "ahead right");
@@ -406,34 +329,18 @@ mod tests {
         let p = here(10.7, 64.0, -3.2);
         let added = run("add home", Some(&p), 0.0);
         assert_eq!(added.chat, ["Waypoint home set at 10 64 -4"]);
-        assert!(
-            added
-                .save
-                .as_deref()
-                .is_some_and(|s| s.starts_with("home\t10\t64\t-4"))
-        );
+        assert!(added.save.as_deref().is_some_and(|s| s.starts_with("home\t10\t64\t-4")));
         assert_eq!(run("add bad!", Some(&p), 0.0).save, None);
         assert_eq!(run("add home", None, 0.0).chat, ["Not in a world"]);
         let listed = run("list", Some(&p), 0.0);
         assert!(listed.chat[0].starts_with("home: 10 64 -4 (overworld, "));
         assert_eq!(tracked_line(&p, 0.0), None);
         assert!(run("track home", Some(&p), 0.0).chat[0].starts_with("Tracking home"));
-        assert!(
-            tracked_line(&here(0.0, 64.0, 0.0), 0.0)
-                .unwrap()
-                .starts_with("home ")
-        );
-        let nether = Here {
-            dimension: "minecraft:the_nether".into(),
-            ..p.clone()
-        };
+        assert!(tracked_line(&here(0.0, 64.0, 0.0), 0.0).unwrap().starts_with("home "));
+        let nether = Here { dimension: "minecraft:the_nether".into(), ..p.clone() };
         assert_eq!(tracked_line(&nether, 0.0), None, "another dimension");
         assert_eq!(run("del home", Some(&p), 0.0).save.as_deref(), Some(""));
-        assert_eq!(
-            tracked_line(&p, 0.0),
-            None,
-            "deleted waypoints are not tracked"
-        );
+        assert_eq!(tracked_line(&p, 0.0), None, "deleted waypoints are not tracked");
         assert_eq!(run("del home", Some(&p), 0.0).chat, ["No waypoint home"]);
         forget();
     }
@@ -451,7 +358,11 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

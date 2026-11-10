@@ -6,8 +6,7 @@
 pub const ID: &str = "totem_tweaks";
 pub const NAME: &str = "Totem Tweaks";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Customise the totem of undying pop animation: off, speed, size, spin, rocking and position.";
+pub const DESCRIPTION: &str = "Customise the totem of undying pop animation: off, speed, size, spin, rocking and position.";
 
 use std::cell::Cell;
 
@@ -31,14 +30,7 @@ pub struct Settings {
 
 impl Default for Settings {
     fn default() -> Self {
-        Self {
-            pop: true,
-            speed: 1.0,
-            size: 100,
-            spin: true,
-            rock: true,
-            swing: true,
-        }
+        Self { pop: true, speed: 1.0, size: 100, spin: true, rock: true, swing: true }
     }
 }
 
@@ -67,22 +59,9 @@ fn flag(get: &impl Fn(&str) -> Option<String>, key: &str) -> bool {
 
 /// The stored settings; anything that does not read is the default.
 pub fn read(get: impl Fn(&str) -> Option<String>) -> Settings {
-    let speed = get("speed")
-        .and_then(|v| v.trim().parse::<f32>().ok())
-        .filter(|v| SPEEDS.contains(v))
-        .unwrap_or(1.0);
-    let size = get("size")
-        .and_then(|v| v.trim().parse().ok())
-        .filter(|v| SIZES.contains(v))
-        .unwrap_or(100);
-    Settings {
-        pop: flag(&get, "pop"),
-        speed,
-        size,
-        spin: flag(&get, "spin"),
-        rock: flag(&get, "rock"),
-        swing: flag(&get, "swing"),
-    }
+    let speed = get("speed").and_then(|v| v.trim().parse::<f32>().ok()).filter(|v| SPEEDS.contains(v)).unwrap_or(1.0);
+    let size = get("size").and_then(|v| v.trim().parse().ok()).filter(|v| SIZES.contains(v)).unwrap_or(100);
+    Settings { pop: flag(&get, "pop"), speed, size, spin: flag(&get, "spin"), rock: flag(&get, "rock"), swing: flag(&get, "swing") }
 }
 
 fn on_off(v: bool) -> &'static str {
@@ -134,15 +113,7 @@ pub struct Pose {
 /// `ScreenEffectRenderer.renderItemActivationAnimation` with the player's settings: the same quintic brings the totem from 10 blocks
 /// out to 1 and back; `speed` plays it faster, and past its end (or with the pop off) the totem is not drawn.
 pub fn pose(ticks: i32, partial: f32, off_x: f32, off_y: f32, aspect: f32, s: &Settings) -> Pose {
-    let hidden = Pose {
-        x: 0.0,
-        y: 0.0,
-        z: -10.0,
-        scale: 0.0,
-        spin: 0.0,
-        rock_x: 0.0,
-        rock_z: 0.0,
-    };
+    let hidden = Pose { x: 0.0, y: 0.0, z: -10.0, scale: 0.0, spin: 0.0, rock_x: 0.0, rock_z: 0.0 };
     let t = ((LENGTH - ticks) as f32 + partial) / LENGTH as f32 * s.speed;
     if !s.pop || t >= 1.0 {
         return hidden;
@@ -150,22 +121,14 @@ pub fn pose(ticks: i32, partial: f32, off_x: f32, off_y: f32, aspect: f32, s: &S
     let (t2, t3) = (t * t, t * t * t);
     let curve = 10.25 * t3 * t2 - 24.95 * t2 * t2 + 25.5 * t3 - 13.8 * t2 + 4.0 * t;
     let angle = curve * std::f32::consts::PI;
-    let swing = if s.swing {
-        (angle * 2.0).sin().abs()
-    } else {
-        0.0
-    };
+    let swing = if s.swing { (angle * 2.0).sin().abs() } else { 0.0 };
     let rock = if s.rock { 6.0 * (t * 8.0).cos() } else { 0.0 };
     Pose {
         x: off_x * 0.3 * aspect * swing,
         y: off_y * 0.3 * swing,
         z: -10.0 + 9.0 * angle.sin(),
         scale: 0.8 * s.size as f32 / 100.0,
-        spin: if s.spin {
-            900.0 * angle.sin().abs()
-        } else {
-            0.0
-        },
+        spin: if s.spin { 900.0 * angle.sin().abs() } else { 0.0 },
         rock_x: rock,
         rock_z: rock,
     }
@@ -182,70 +145,32 @@ mod tests {
     #[test]
     fn the_defaults_are_vanillas_curve() {
         let p = pose(40, 0.0, 0.5, -0.5, 16.0 / 9.0, &Settings::default());
-        assert_eq!(
-            (p.x, p.y, p.z),
-            (0.0, 0.0, -10.0),
-            "first tick: straight ahead, 10 out"
-        );
+        assert_eq!((p.x, p.y, p.z), (0.0, 0.0, -10.0), "first tick: straight ahead, 10 out");
         assert!((p.scale - 0.8).abs() < 1e-6);
         let mid = pose(20, 0.0, 0.5, -0.5, 16.0 / 9.0, &Settings::default());
-        assert!(
-            (mid.z + 1.0).abs() < 1e-2,
-            "halfway it is about 1 out: {}",
-            mid.z
-        );
+        assert!((mid.z + 1.0).abs() < 1e-2, "halfway it is about 1 out: {}", mid.z);
         let a = 0.498_437_5 * std::f32::consts::PI;
         assert!((mid.x - 0.5 * 0.3 * (16.0 / 9.0) * (a * 2.0).sin().abs()).abs() < 1e-5);
     }
 
     #[test]
     fn off_hides_it_and_speed_ends_it_sooner() {
-        let off = Settings {
-            pop: false,
-            ..Settings::default()
-        };
+        let off = Settings { pop: false, ..Settings::default() };
         assert_eq!(pose(30, 0.0, 0.0, 0.0, 1.0, &off).scale, 0.0);
-        let fast = Settings {
-            speed: 2.0,
-            ..Settings::default()
-        };
-        assert!(
-            pose(30, 0.0, 0.0, 0.0, 1.0, &fast).scale > 0.0,
-            "a quarter of the way in, still showing"
-        );
-        assert_eq!(
-            pose(20, 0.0, 0.0, 0.0, 1.0, &fast).scale,
-            0.0,
-            "at double speed it is over at tick 20"
-        );
-        let slow = Settings {
-            speed: 0.5,
-            ..Settings::default()
-        };
-        assert!(
-            pose(2, 0.0, 0.0, 0.0, 1.0, &slow).scale > 0.0,
-            "slow motion lasts to the end"
-        );
+        let fast = Settings { speed: 2.0, ..Settings::default() };
+        assert!(pose(30, 0.0, 0.0, 0.0, 1.0, &fast).scale > 0.0, "a quarter of the way in, still showing");
+        assert_eq!(pose(20, 0.0, 0.0, 0.0, 1.0, &fast).scale, 0.0, "at double speed it is over at tick 20");
+        let slow = Settings { speed: 0.5, ..Settings::default() };
+        assert!(pose(2, 0.0, 0.0, 0.0, 1.0, &slow).scale > 0.0, "slow motion lasts to the end");
     }
 
     #[test]
     fn size_spin_rocking_and_swing_follow_the_settings() {
-        let big = Settings {
-            size: 200,
-            ..Settings::default()
-        };
+        let big = Settings { size: 200, ..Settings::default() };
         assert!((pose(25, 0.0, 0.3, 0.3, 1.0, &big).scale - 1.6).abs() < 1e-6);
-        let still = Settings {
-            spin: false,
-            rock: false,
-            swing: false,
-            ..Settings::default()
-        };
+        let still = Settings { spin: false, rock: false, swing: false, ..Settings::default() };
         let p = pose(25, 0.0, 0.7, 0.7, 1.7, &still);
-        assert_eq!(
-            (p.spin, p.rock_x, p.rock_z, p.x, p.y),
-            (0.0, 0.0, 0.0, 0.0, 0.0)
-        );
+        assert_eq!((p.spin, p.rock_x, p.rock_z, p.x, p.y), (0.0, 0.0, 0.0, 0.0, 0.0));
         let full = pose(25, 0.0, 0.7, 0.7, 1.7, &Settings::default());
         assert!(full.spin > 0.0 && full.x != 0.0);
         assert_eq!(full.z, p.z, "the flight in and out is not touched");
@@ -261,21 +186,9 @@ mod tests {
         let last = |k: &str| (k == "speed").then(|| "3".to_owned());
         assert_eq!(click(last, 1), Some(("speed", "0.5".to_owned())), "wraps");
         let junk = |_: &str| Some("banana".to_owned());
-        assert_eq!(
-            read(junk),
-            Settings {
-                pop: true,
-                ..Settings::default()
-            }
-        );
+        assert_eq!(read(junk), Settings { pop: true, ..Settings::default() });
         assert_eq!(labels(none)[1], "Speed: 1x");
-        configure(
-            true,
-            Settings {
-                size: 50,
-                ..Settings::default()
-            },
-        );
+        configure(true, Settings { size: 50, ..Settings::default() });
         assert!(active() && current().size == 50);
         configure(false, Settings::default());
     }

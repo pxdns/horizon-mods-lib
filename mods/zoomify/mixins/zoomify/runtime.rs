@@ -6,8 +6,7 @@
 pub const ID: &str = "zoomify";
 pub const NAME: &str = "Zoomify";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Hold a key to zoom in, turn the wheel to zoom further, with smooth easing and slower turning.";
+pub const DESCRIPTION: &str = "Hold a key to zoom in, turn the wheel to zoom further, with smooth easing and slower turning.";
 
 use std::cell::RefCell;
 

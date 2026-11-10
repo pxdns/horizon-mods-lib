@@ -6,8 +6,7 @@
 pub const ID: &str = "entity_crosshair";
 pub const NAME: &str = "Entity Crosshair";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Replaces the crosshair with a style and colour of your choice, red over living entities.";
+pub const DESCRIPTION: &str = "Replaces the crosshair with a style and colour of your choice, red over living entities.";
 
 use std::cell::Cell;
 
@@ -37,11 +36,7 @@ pub struct Settings {
 
 impl Default for Settings {
     fn default() -> Self {
-        Self {
-            style: 0,
-            colour: 0,
-            red: true,
-        }
+        Self { style: 0, colour: 0, red: true }
     }
 }
 
@@ -49,10 +44,7 @@ impl Settings {
     pub fn read(get: impl Fn(&str) -> Option<String>) -> Self {
         let d = Self::default();
         let index = |key: &str, len: usize, default: usize| {
-            get(key)
-                .and_then(|v| v.trim().parse::<usize>().ok())
-                .filter(|&i| i < len)
-                .unwrap_or(default)
+            get(key).and_then(|v| v.trim().parse::<usize>().ok()).filter(|&i| i < len).unwrap_or(default)
         };
         Self {
             style: index("style", STYLES.len(), d.style),
@@ -105,11 +97,7 @@ pub fn shape(style: usize) -> Vec<Rect> {
 
 /// The colour to draw in.
 pub fn colour(s: Settings, over_living: bool) -> u32 {
-    if s.red && over_living {
-        RED
-    } else {
-        COLOURS[s.colour].1
-    }
+    if s.red && over_living { RED } else { COLOURS[s.colour].1 }
 }
 
 thread_local! {
@@ -154,10 +142,7 @@ mod tests {
     fn every_shape_fits_in_the_sprite_and_stays_on_its_centre() {
         for style in 0..STYLES.len() {
             for (x, y, w, h) in shape(style) {
-                assert!(
-                    x >= 0 && y >= 0 && x + w <= 15 && y + h <= 15,
-                    "style {style}: {x} {y} {w} {h}"
-                );
+                assert!(x >= 0 && y >= 0 && x + w <= 15 && y + h <= 15, "style {style}: {x} {y} {w} {h}");
             }
         }
         // The plus, small plus and dot are symmetric around the centre pixel.

@@ -6,13 +6,14 @@
 pub const ID: &str = "visual_keys";
 pub const NAME: &str = "VisualKeys";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "An on-screen keyboard that shows what every key is bound to and which keys are free.";
+pub const DESCRIPTION: &str = "An on-screen keyboard that shows what every key is bound to and which keys are free.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[("shown", "Show the keyboard", false)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("shown", "Show the keyboard", false)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -99,88 +100,26 @@ pub struct Cell {
 /// Rows of (name, label, width in key units): a US layout.
 pub const ROWS: [&[(&str, &str, f32)]; 6] = [
     &[
-        ("escape", "Esc", 1.5),
-        ("f1", "1", 1.0),
-        ("f2", "2", 1.0),
-        ("f3", "3", 1.0),
-        ("f4", "4", 1.0),
-        ("f5", "5", 1.0),
-        ("f6", "6", 1.0),
-        ("f7", "7", 1.0),
-        ("f8", "8", 1.0),
-        ("f9", "9", 1.0),
-        ("f10", "10", 1.0),
-        ("f11", "11", 1.0),
-        ("f12", "12", 1.0),
+        ("escape", "Esc", 1.5), ("f1", "1", 1.0), ("f2", "2", 1.0), ("f3", "3", 1.0), ("f4", "4", 1.0), ("f5", "5", 1.0), ("f6", "6", 1.0),
+        ("f7", "7", 1.0), ("f8", "8", 1.0), ("f9", "9", 1.0), ("f10", "10", 1.0), ("f11", "11", 1.0), ("f12", "12", 1.0),
     ],
     &[
-        ("grave.accent", "`", 1.0),
-        ("1", "1", 1.0),
-        ("2", "2", 1.0),
-        ("3", "3", 1.0),
-        ("4", "4", 1.0),
-        ("5", "5", 1.0),
-        ("6", "6", 1.0),
-        ("7", "7", 1.0),
-        ("8", "8", 1.0),
-        ("9", "9", 1.0),
-        ("0", "0", 1.0),
-        ("minus", "-", 1.0),
-        ("equal", "=", 1.0),
-        ("backspace", "<-", 2.0),
+        ("grave.accent", "`", 1.0), ("1", "1", 1.0), ("2", "2", 1.0), ("3", "3", 1.0), ("4", "4", 1.0), ("5", "5", 1.0), ("6", "6", 1.0), ("7", "7", 1.0),
+        ("8", "8", 1.0), ("9", "9", 1.0), ("0", "0", 1.0), ("minus", "-", 1.0), ("equal", "=", 1.0), ("backspace", "<-", 2.0),
     ],
     &[
-        ("tab", "Tab", 1.5),
-        ("q", "Q", 1.0),
-        ("w", "W", 1.0),
-        ("e", "E", 1.0),
-        ("r", "R", 1.0),
-        ("t", "T", 1.0),
-        ("y", "Y", 1.0),
-        ("u", "U", 1.0),
-        ("i", "I", 1.0),
-        ("o", "O", 1.0),
-        ("p", "P", 1.0),
-        ("left.bracket", "[", 1.0),
-        ("right.bracket", "]", 1.0),
-        ("backslash", "\\", 1.5),
+        ("tab", "Tab", 1.5), ("q", "Q", 1.0), ("w", "W", 1.0), ("e", "E", 1.0), ("r", "R", 1.0), ("t", "T", 1.0), ("y", "Y", 1.0), ("u", "U", 1.0),
+        ("i", "I", 1.0), ("o", "O", 1.0), ("p", "P", 1.0), ("left.bracket", "[", 1.0), ("right.bracket", "]", 1.0), ("backslash", "\\", 1.5),
     ],
     &[
-        ("caps.lock", "Cap", 1.75),
-        ("a", "A", 1.0),
-        ("s", "S", 1.0),
-        ("d", "D", 1.0),
-        ("f", "F", 1.0),
-        ("g", "G", 1.0),
-        ("h", "H", 1.0),
-        ("j", "J", 1.0),
-        ("k", "K", 1.0),
-        ("l", "L", 1.0),
-        ("semicolon", ";", 1.0),
-        ("apostrophe", "'", 1.0),
-        ("enter", "Ent", 2.25),
+        ("caps.lock", "Cap", 1.75), ("a", "A", 1.0), ("s", "S", 1.0), ("d", "D", 1.0), ("f", "F", 1.0), ("g", "G", 1.0), ("h", "H", 1.0), ("j", "J", 1.0),
+        ("k", "K", 1.0), ("l", "L", 1.0), ("semicolon", ";", 1.0), ("apostrophe", "'", 1.0), ("enter", "Ent", 2.25),
     ],
     &[
-        ("left.shift", "Sh", 2.25),
-        ("z", "Z", 1.0),
-        ("x", "X", 1.0),
-        ("c", "C", 1.0),
-        ("v", "V", 1.0),
-        ("b", "B", 1.0),
-        ("n", "N", 1.0),
-        ("m", "M", 1.0),
-        ("comma", ",", 1.0),
-        ("period", ".", 1.0),
-        ("slash", "/", 1.0),
-        ("right.shift", "Sh", 2.75),
+        ("left.shift", "Sh", 2.25), ("z", "Z", 1.0), ("x", "X", 1.0), ("c", "C", 1.0), ("v", "V", 1.0), ("b", "B", 1.0), ("n", "N", 1.0), ("m", "M", 1.0),
+        ("comma", ",", 1.0), ("period", ".", 1.0), ("slash", "/", 1.0), ("right.shift", "Sh", 2.75),
     ],
-    &[
-        ("left.control", "Ctl", 1.5),
-        ("left.alt", "Alt", 1.5),
-        ("space", "", 7.0),
-        ("right.alt", "Alt", 1.5),
-        ("right.control", "Ctl", 1.5),
-    ],
+    &[("left.control", "Ctl", 1.5), ("left.alt", "Alt", 1.5), ("space", "", 7.0), ("right.alt", "Alt", 1.5), ("right.control", "Ctl", 1.5)],
 ];
 
 const UNIT: f32 = 11.0;
@@ -192,14 +131,7 @@ pub fn cells() -> Vec<Cell> {
     for (r, row) in ROWS.iter().enumerate() {
         let mut x = 0.0;
         for (name, label, units) in row.iter() {
-            out.push(Cell {
-                name: format!("key.keyboard.{name}"),
-                label: (*label).to_owned(),
-                x,
-                y: r as f32 * ROW_H,
-                w: units * UNIT - 1.0,
-                h: ROW_H - 1.0,
-            });
+            out.push(Cell { name: format!("key.keyboard.{name}"), label: (*label).to_owned(), x, y: r as f32 * ROW_H, w: units * UNIT - 1.0, h: ROW_H - 1.0 });
             x += units * UNIT;
         }
     }
@@ -256,35 +188,20 @@ pub fn colour(key: &str, map: &BTreeMap<String, String>, down: bool) -> u32 {
 
 /// `key.forward` as `forward`, `key.hotbar.3` as `hotbar 3`.
 pub fn action_name(action: &str) -> String {
-    action
-        .strip_prefix("key.")
-        .unwrap_or(action)
-        .replace('.', " ")
+    action.strip_prefix("key.").unwrap_or(action).replace('.', " ")
 }
 
 /// A key as the player types it (`q`, `f9`, `left.shift`) or in full, as its vanilla name.
 fn full(key: &str) -> String {
-    if key.starts_with("key.") {
-        key.to_owned()
-    } else {
-        format!("key.keyboard.{}", key.to_lowercase())
-    }
+    if key.starts_with("key.") { key.to_owned() } else { format!("key.keyboard.{}", key.to_lowercase()) }
 }
 
 /// What a key does: `bindings` are (action, bound key name).
 pub fn describe(key: &str, bindings: &[(String, String)]) -> String {
     let name = full(key);
-    let actions: Vec<String> = bindings
-        .iter()
-        .filter(|(_, k)| *k == name)
-        .map(|(a, _)| action_name(a))
-        .collect();
+    let actions: Vec<String> = bindings.iter().filter(|(_, k)| *k == name).map(|(a, _)| action_name(a)).collect();
     let shown = name.trim_start_matches("key.keyboard.");
-    if actions.is_empty() {
-        format!("{shown}: no binding")
-    } else {
-        format!("{shown}: {}", actions.join(", "))
-    }
+    if actions.is_empty() { format!("{shown}: no binding") } else { format!("{shown}: {}", actions.join(", ")) }
 }
 
 /// The letters, digits and function keys that nothing is bound to.
@@ -294,18 +211,9 @@ pub fn free_keys(bindings: &[(String, String)]) -> String {
         .into_iter()
         .filter(|c| !used.contains(c.name.as_str()))
         .map(|c| c.name.trim_start_matches("key.keyboard.").to_owned())
-        .filter(|n| {
-            n.len() == 1 && n.chars().all(|c| c.is_ascii_alphanumeric())
-                || (n.starts_with('f')
-                    && n.len() <= 3
-                    && n[1..].chars().all(|c| c.is_ascii_digit()))
-        })
+        .filter(|n| n.len() == 1 && n.chars().all(|c| c.is_ascii_alphanumeric()) || (n.starts_with('f') && n.len() <= 3 && n[1..].chars().all(|c| c.is_ascii_digit())))
         .collect();
-    if free.is_empty() {
-        "Every letter, digit and function key has a binding".to_owned()
-    } else {
-        format!("Free keys: {}", free.join(" "))
-    }
+    if free.is_empty() { "Every letter, digit and function key has a binding".to_owned() } else { format!("Free keys: {}", free.join(" ")) }
 }
 
 #[cfg(test)]
@@ -313,15 +221,9 @@ mod tests {
     use super::*;
 
     fn binds() -> Vec<(String, String)> {
-        [
-            ("key.forward", "key.keyboard.w"),
-            ("key.back", "key.keyboard.s"),
-            ("key.inventory", "key.keyboard.e"),
-            ("key.sneak", "key.keyboard.left.shift"),
-            ("key.sprint", "key.keyboard.left.shift"),
-        ]
-        .map(|(a, k)| (a.to_owned(), k.to_owned()))
-        .to_vec()
+        [("key.forward", "key.keyboard.w"), ("key.back", "key.keyboard.s"), ("key.inventory", "key.keyboard.e"), ("key.sneak", "key.keyboard.left.shift"), ("key.sprint", "key.keyboard.left.shift")]
+            .map(|(a, k)| (a.to_owned(), k.to_owned()))
+            .to_vec()
     }
 
     #[test]
@@ -334,10 +236,7 @@ mod tests {
         for c in &cells {
             assert!(c.x >= 0.0 && c.x + c.w <= w + 0.01, "{c:?}");
         }
-        let space = cells
-            .iter()
-            .find(|c| c.name == "key.keyboard.space")
-            .unwrap();
+        let space = cells.iter().find(|c| c.name == "key.keyboard.space").unwrap();
         assert!(space.w > 70.0, "the space bar is wide");
     }
 
@@ -357,22 +256,11 @@ mod tests {
 
     #[test]
     fn colours_follow_the_category_and_the_press() {
-        let map = bind_map(&[
-            ("movement".into(), "key.keyboard.w".into()),
-            ("inventory".into(), "key.keyboard.e".into()),
-        ]);
+        let map = bind_map(&[("movement".into(), "key.keyboard.w".into()), ("inventory".into(), "key.keyboard.e".into())]);
         assert_eq!(colour("key.keyboard.w", &map, false), 0xD0_2E8B57);
         assert_eq!(colour("key.keyboard.e", &map, false), 0xD0_3A6EB0);
-        assert_eq!(
-            colour("key.keyboard.z", &map, false),
-            0xB0_202020,
-            "unbound is dark"
-        );
-        assert_eq!(
-            colour("key.keyboard.w", &map, true),
-            0xFF_FFFFFF,
-            "held is bright"
-        );
+        assert_eq!(colour("key.keyboard.z", &map, false), 0xB0_202020, "unbound is dark");
+        assert_eq!(colour("key.keyboard.w", &map, true), 0xFF_FFFFFF, "held is bright");
     }
 
     #[test]
@@ -386,21 +274,12 @@ mod tests {
     #[test]
     fn describing_and_listing_free_keys() {
         assert_eq!(describe("w", &binds()), "w: forward");
-        assert_eq!(
-            describe("left.shift", &binds()),
-            "left.shift: sneak, sprint"
-        );
+        assert_eq!(describe("left.shift", &binds()), "left.shift: sneak, sprint");
         assert_eq!(describe("Z", &binds()), "z: no binding");
         assert_eq!(describe("key.keyboard.e", &binds()), "e: inventory");
         let free = free_keys(&binds());
         assert!(free.starts_with("Free keys: "));
-        assert!(
-            free.contains(" z")
-                && free.contains(" q")
-                && !free.contains(" w ")
-                && !free.ends_with(" w"),
-            "{free}"
-        );
+        assert!(free.contains(" z") && free.contains(" q") && !free.contains(" w ") && !free.ends_with(" w"), "{free}");
         assert!(free.contains("f9"), "function keys count");
     }
 
@@ -414,7 +293,11 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

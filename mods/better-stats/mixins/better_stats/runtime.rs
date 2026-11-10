@@ -11,7 +11,9 @@ pub const DESCRIPTION: &str = "Search, rank and export your statistics from chat
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[("csv", "Also write a CSV when exporting", false)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("csv", "Also write a CSV when exporting", false)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -106,16 +108,10 @@ pub enum Request {
 pub fn request(args: &[&str]) -> Request {
     match args {
         ["top", kind, rest @ ..] => {
-            let n = rest
-                .first()
-                .and_then(|n| n.parse::<usize>().ok())
-                .unwrap_or(10)
-                .clamp(1, 50);
+            let n = rest.first().and_then(|n| n.parse::<usize>().ok()).unwrap_or(10).clamp(1, 50);
             Request::Top((*kind).to_lowercase(), n)
         }
-        ["find", terms @ ..] if !terms.is_empty() => {
-            Request::Find(terms.iter().map(|t| t.to_lowercase()).collect())
-        }
+        ["find", terms @ ..] if !terms.is_empty() => Request::Find(terms.iter().map(|t| t.to_lowercase()).collect()),
         ["export"] => Request::Export,
         _ => Request::Help,
     }
@@ -126,13 +122,7 @@ pub fn entries(values: &BTreeMap<String, BTreeMap<String, i32>>) -> Vec<Entry> {
     let bare = |s: &str| s.strip_prefix("minecraft:").unwrap_or(s).to_owned();
     values
         .iter()
-        .flat_map(|(kind, map)| {
-            map.iter().map(move |(id, v)| Entry {
-                kind: bare(kind),
-                id: bare(id),
-                value: *v,
-            })
-        })
+        .flat_map(|(kind, map)| map.iter().map(move |(id, v)| Entry { kind: bare(kind), id: bare(id), value: *v }))
         .filter(|e| e.value != 0)
         .collect()
 }
@@ -156,9 +146,7 @@ pub fn title(id: &str) -> String {
         .filter(|w| !w.is_empty())
         .map(|w| {
             let mut c = w.chars();
-            c.next().map_or(String::new(), |f| {
-                f.to_uppercase().collect::<String>() + c.as_str()
-            })
+            c.next().map_or(String::new(), |f| f.to_uppercase().collect::<String>() + c.as_str())
         })
         .collect::<Vec<_>>()
         .join(" ")
@@ -168,45 +156,22 @@ pub fn title(id: &str) -> String {
 pub fn top(entries: &[Entry], kind: &str, n: usize) -> Vec<String> {
     let mut of: Vec<&Entry> = entries.iter().filter(|e| e.kind == kind).collect();
     if of.is_empty() {
-        return vec![format!(
-            "Nothing recorded for `{kind}`. Kinds: mined, crafted, used, broken, picked_up, dropped, killed, killed_by, custom"
-        )];
+        return vec![format!("Nothing recorded for `{kind}`. Kinds: mined, crafted, used, broken, picked_up, dropped, killed, killed_by, custom")];
     }
     of.sort_by(|a, b| b.value.cmp(&a.value).then(a.id.cmp(&b.id)));
     let mut out = vec![format!("Top {} {kind}:", n.min(of.len()))];
-    out.extend(of.iter().take(n).enumerate().map(|(i, e)| {
-        format!(
-            "{}. {}: {}",
-            i + 1,
-            title(&e.id),
-            grouped(i64::from(e.value))
-        )
-    }));
+    out.extend(of.iter().take(n).enumerate().map(|(i, e)| format!("{}. {}: {}", i + 1, title(&e.id), grouped(i64::from(e.value)))));
     out
 }
 
 /// Entries whose name has every term, grouped by kind, at most 30 lines.
 pub fn find(entries: &[Entry], terms: &[String]) -> Vec<String> {
-    let matching: Vec<&Entry> = entries
-        .iter()
-        .filter(|e| {
-            terms
-                .iter()
-                .all(|t| e.id.replace('_', " ").contains(t.as_str()))
-        })
-        .collect();
+    let matching: Vec<&Entry> = entries.iter().filter(|e| terms.iter().all(|t| e.id.replace('_', " ").contains(t.as_str()))).collect();
     if matching.is_empty() {
         return vec![format!("No statistic matches `{}`", terms.join(" "))];
     }
     let mut out = vec![format!("{} matches:", matching.len())];
-    out.extend(matching.iter().take(30).map(|e| {
-        format!(
-            "{} {}: {}",
-            e.kind,
-            title(&e.id),
-            grouped(i64::from(e.value))
-        )
-    }));
+    out.extend(matching.iter().take(30).map(|e| format!("{} {}: {}", e.kind, title(&e.id), grouped(i64::from(e.value)))));
     if matching.len() > 30 {
         out.push(format!("... and {} more", matching.len() - 30));
     }
@@ -216,12 +181,7 @@ pub fn find(entries: &[Entry], terms: &[String]) -> Vec<String> {
 /// Every statistic as `kind<TAB>id<TAB>value` lines under a header, sorted by kind then biggest first.
 pub fn export_text(entries: &[Entry]) -> String {
     let mut sorted: Vec<&Entry> = entries.iter().collect();
-    sorted.sort_by(|a, b| {
-        a.kind
-            .cmp(&b.kind)
-            .then(b.value.cmp(&a.value))
-            .then(a.id.cmp(&b.id))
-    });
+    sorted.sort_by(|a, b| a.kind.cmp(&b.kind).then(b.value.cmp(&a.value)).then(a.id.cmp(&b.id)));
     let mut out = String::from("kind\tid\tvalue\n");
     for e in sorted {
         out.push_str(&format!("{}\t{}\t{}\n", e.kind, e.id, e.value));
@@ -239,41 +199,18 @@ mod tests {
     use super::*;
 
     fn sample() -> Vec<Entry> {
-        let e = |kind: &str, id: &str, value| Entry {
-            kind: kind.into(),
-            id: id.into(),
-            value,
-        };
-        vec![
-            e("mined", "stone", 1500),
-            e("mined", "diamond_ore", 12),
-            e("mined", "dirt", 3000),
-            e("killed", "zombie", 40),
-            e("custom", "jump", 99),
-        ]
+        let e = |kind: &str, id: &str, value| Entry { kind: kind.into(), id: id.into(), value };
+        vec![e("mined", "stone", 1500), e("mined", "diamond_ore", 12), e("mined", "dirt", 3000), e("killed", "zombie", 40), e("custom", "jump", 99)]
     }
 
     #[test]
     fn arguments_parse() {
         assert_eq!(request(&[]), Request::Help);
         assert_eq!(request(&["top", "Mined"]), Request::Top("mined".into(), 10));
-        assert_eq!(
-            request(&["top", "mined", "3"]),
-            Request::Top("mined".into(), 3)
-        );
-        assert_eq!(
-            request(&["top", "mined", "999"]),
-            Request::Top("mined".into(), 50),
-            "capped"
-        );
-        assert_eq!(
-            request(&["top", "mined", "x"]),
-            Request::Top("mined".into(), 10)
-        );
-        assert_eq!(
-            request(&["find", "Dia", "ore"]),
-            Request::Find(vec!["dia".into(), "ore".into()])
-        );
+        assert_eq!(request(&["top", "mined", "3"]), Request::Top("mined".into(), 3));
+        assert_eq!(request(&["top", "mined", "999"]), Request::Top("mined".into(), 50), "capped");
+        assert_eq!(request(&["top", "mined", "x"]), Request::Top("mined".into(), 10));
+        assert_eq!(request(&["find", "Dia", "ore"]), Request::Find(vec!["dia".into(), "ore".into()]));
         assert_eq!(request(&["find"]), Request::Help);
         assert_eq!(request(&["export"]), Request::Export);
         assert_eq!(request(&["nonsense"]), Request::Help);
@@ -290,10 +227,7 @@ mod tests {
 
     #[test]
     fn top_ranks_biggest_first() {
-        assert_eq!(
-            top(&sample(), "mined", 2),
-            ["Top 2 mined:", "1. Dirt: 3,000", "2. Stone: 1,500"]
-        );
+        assert_eq!(top(&sample(), "mined", 2), ["Top 2 mined:", "1. Dirt: 3,000", "2. Stone: 1,500"]);
         assert_eq!(top(&sample(), "mined", 10)[0], "Top 3 mined:");
         assert!(top(&sample(), "crafted", 5)[0].starts_with("Nothing recorded for `crafted`"));
     }
@@ -302,30 +236,14 @@ mod tests {
     fn find_needs_every_word_and_names_the_kind() {
         let found = find(&sample(), &["ore".into(), "diamond".into()]);
         assert_eq!(found, ["1 matches:", "mined Diamond Ore: 12"]);
-        assert_eq!(
-            find(&sample(), &["emerald".into()]),
-            ["No statistic matches `emerald`"]
-        );
+        assert_eq!(find(&sample(), &["emerald".into()]), ["No statistic matches `emerald`"]);
     }
 
     #[test]
     fn entries_drop_zero_and_strip_the_namespace() {
         let mut values = BTreeMap::new();
-        values.insert(
-            "minecraft:mined".to_owned(),
-            BTreeMap::from([
-                ("minecraft:stone".to_owned(), 5),
-                ("minecraft:dirt".to_owned(), 0),
-            ]),
-        );
-        assert_eq!(
-            entries(&values),
-            vec![Entry {
-                kind: "mined".into(),
-                id: "stone".into(),
-                value: 5
-            }]
-        );
+        values.insert("minecraft:mined".to_owned(), BTreeMap::from([("minecraft:stone".to_owned(), 5), ("minecraft:dirt".to_owned(), 0)]));
+        assert_eq!(entries(&values), vec![Entry { kind: "mined".into(), id: "stone".into(), value: 5 }]);
     }
 
     #[test]
@@ -343,7 +261,11 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

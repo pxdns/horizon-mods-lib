@@ -11,8 +11,9 @@ pub const DESCRIPTION: &str = "Keys that rotate, balance and clear the crafting 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] =
-    &[("say", "Say in chat when an action cannot be done", true)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("say", "Say in chat when an action cannot be done", true)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -117,10 +118,7 @@ pub fn rotate(cells: &[Cell], n: usize) -> Result<Vec<Click>, String> {
         return Err("Nothing to rotate".to_owned());
     }
     let last = ring[ring.len() - 1];
-    let mut clicks = vec![Click {
-        cell: last,
-        button: 0,
-    }];
+    let mut clicks = vec![Click { cell: last, button: 0 }];
     clicks.extend(ring.iter().map(|&cell| Click { cell, button: 0 }));
     Ok(clicks)
 }
@@ -137,11 +135,7 @@ pub fn balance(cells: &[Cell], max: impl Fn(&str) -> u32) -> Result<Vec<Click>, 
     let mut clicks = Vec::new();
     let mut too_big = false;
     for kind in kinds {
-        let spots: Vec<(usize, u32)> = cells
-            .iter()
-            .enumerate()
-            .filter_map(|(i, c)| c.as_ref().filter(|(k, _)| k == kind).map(|(_, n)| (i, *n)))
-            .collect();
+        let spots: Vec<(usize, u32)> = cells.iter().enumerate().filter_map(|(i, c)| c.as_ref().filter(|(k, _)| k == kind).map(|(_, n)| (i, *n))).collect();
         if spots.len() < 2 {
             continue;
         }
@@ -162,24 +156,14 @@ pub fn balance(cells: &[Cell], max: impl Fn(&str) -> u32) -> Result<Vec<Click>, 
         }
     }
     if clicks.is_empty() {
-        return Err(if too_big {
-            "Cannot balance: the stacks do not fit in one"
-        } else {
-            "Nothing to balance"
-        }
-        .to_owned());
+        return Err(if too_big { "Cannot balance: the stacks do not fit in one" } else { "Nothing to balance" }.to_owned());
     }
     Ok(clicks)
 }
 
 /// The cells to move out, for Clear.
 pub fn clear(cells: &[Cell]) -> Vec<usize> {
-    cells
-        .iter()
-        .enumerate()
-        .filter(|(_, c)| c.is_some())
-        .map(|(i, _)| i)
-        .collect()
+    cells.iter().enumerate().filter(|(_, c)| c.is_some()).map(|(i, _)| i).collect()
 }
 
 #[cfg(test)]
@@ -226,10 +210,7 @@ mod tests {
     fn rotating_a_full_ring_and_a_two_by_two() {
         let cells: Vec<Cell> = ["a", "b", "c", "d"].iter().map(|k| cell(k, 1)).collect();
         let after = play(&cells, &rotate(&cells, 2).unwrap());
-        assert_eq!(
-            after,
-            vec![cell("c", 1), cell("a", 1), cell("d", 1), cell("b", 1)]
-        );
+        assert_eq!(after, vec![cell("c", 1), cell("a", 1), cell("d", 1), cell("b", 1)]);
     }
 
     #[test]
@@ -243,67 +224,28 @@ mod tests {
 
     #[test]
     fn balancing_evens_out_one_kind() {
-        let cells = vec![
-            cell("log", 7),
-            None,
-            cell("log", 1),
-            cell("stick", 3),
-            None,
-            None,
-            None,
-            None,
-            None,
-        ];
+        let cells = vec![cell("log", 7), None, cell("log", 1), cell("stick", 3), None, None, None, None, None];
         let clicks = balance(&cells, |_| 64).unwrap();
         // 8 logs in two cells: 4 and 4. Both picked up, then four put down in each.
-        assert_eq!(
-            clicks
-                .iter()
-                .filter(|c| c.button == 1 && c.cell == 0)
-                .count(),
-            4
-        );
-        assert_eq!(
-            clicks
-                .iter()
-                .filter(|c| c.button == 1 && c.cell == 2)
-                .count(),
-            4
-        );
+        assert_eq!(clicks.iter().filter(|c| c.button == 1 && c.cell == 0).count(), 4);
+        assert_eq!(clicks.iter().filter(|c| c.button == 1 && c.cell == 2).count(), 4);
         assert_eq!(clicks.iter().filter(|c| c.button == 0).count(), 2);
-        assert!(
-            clicks.iter().all(|c| c.cell != 3),
-            "a single stick is left alone"
-        );
+        assert!(clicks.iter().all(|c| c.cell != 3), "a single stick is left alone");
     }
 
     #[test]
     fn the_remainder_goes_to_the_first_cells() {
         let cells = vec![cell("log", 1), cell("log", 1), cell("log", 5)];
         let clicks = balance(&cells, |_| 64).unwrap();
-        let put = |cell| {
-            clicks
-                .iter()
-                .filter(|c| c.button == 1 && c.cell == cell)
-                .count()
-        };
+        let put = |cell| clicks.iter().filter(|c| c.button == 1 && c.cell == cell).count();
         assert_eq!((put(0), put(1), put(2)), (3, 2, 2), "7 over three cells");
     }
 
     #[test]
     fn balancing_says_why_it_did_nothing() {
-        assert_eq!(
-            balance(&[cell("log", 2), cell("log", 2)], |_| 64),
-            Err("Nothing to balance".to_owned())
-        );
-        assert_eq!(
-            balance(&[cell("log", 60), cell("log", 60)], |_| 64),
-            Err("Cannot balance: the stacks do not fit in one".to_owned())
-        );
-        assert_eq!(
-            balance(&[cell("pick", 1), cell("pick", 1)], |_| 1),
-            Err("Cannot balance: the stacks do not fit in one".to_owned())
-        );
+        assert_eq!(balance(&[cell("log", 2), cell("log", 2)], |_| 64), Err("Nothing to balance".to_owned()));
+        assert_eq!(balance(&[cell("log", 60), cell("log", 60)], |_| 64), Err("Cannot balance: the stacks do not fit in one".to_owned()));
+        assert_eq!(balance(&[cell("pick", 1), cell("pick", 1)], |_| 1), Err("Cannot balance: the stacks do not fit in one".to_owned()));
     }
 
     #[test]
@@ -316,7 +258,11 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

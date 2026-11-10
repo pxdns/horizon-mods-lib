@@ -11,8 +11,9 @@ pub const DESCRIPTION: &str = "More than one key for the same action.";
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] =
-    &[("say", "Say in chat when an extra key changes", true)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("say", "Say in chat when an extra key changes", true)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -91,19 +92,11 @@ pub fn loaded() -> bool {
 
 /// The stored extras, `key.forward=key.keyboard.up` per line.
 pub fn decode(text: &str) -> Vec<(String, String)> {
-    text.lines()
-        .filter_map(|l| l.split_once('='))
-        .map(|(a, k)| (a.trim().to_owned(), k.trim().to_owned()))
-        .filter(|(a, k)| !a.is_empty() && !k.is_empty())
-        .collect()
+    text.lines().filter_map(|l| l.split_once('=')).map(|(a, k)| (a.trim().to_owned(), k.trim().to_owned())).filter(|(a, k)| !a.is_empty() && !k.is_empty()).collect()
 }
 
 pub fn encode(extras: &[(String, String)]) -> String {
-    extras
-        .iter()
-        .map(|(a, k)| format!("{a}={k}"))
-        .collect::<Vec<_>>()
-        .join("\n")
+    extras.iter().map(|(a, k)| format!("{a}={k}")).collect::<Vec<_>>().join("\n")
 }
 
 /// Loads the stored extras (once) from the setting's text.
@@ -119,20 +112,13 @@ pub fn extras() -> Vec<(String, String)> {
 
 /// The actions an extra key drives, by their vanilla mapping names.
 pub fn actions_for(key_name: &str) -> Vec<String> {
-    EXTRAS.with_borrow(|e| {
-        e.iter()
-            .filter(|(_, k)| k == key_name)
-            .map(|(a, _)| a.clone())
-            .collect()
-    })
+    EXTRAS.with_borrow(|e| e.iter().filter(|(_, k)| k == key_name).map(|(a, _)| a.clone()).collect())
 }
 
 /// What the player typed as a key (`up`, `space`, `mouse.4`, `key.keyboard.up`) as its vanilla name.
 pub fn key_full(typed: &str) -> Option<String> {
     let t = typed.to_lowercase();
-    let ok = !t.is_empty()
-        && t.chars()
-            .all(|c| c.is_ascii_alphanumeric() || c == '.' || c == '_');
+    let ok = !t.is_empty() && t.chars().all(|c| c.is_ascii_alphanumeric() || c == '.' || c == '_');
     if !ok {
         return None;
     }
@@ -148,15 +134,8 @@ pub fn key_full(typed: &str) -> Option<String> {
 /// The mapping name for what the player typed (`forward`, `key.forward`), among `actions`.
 pub fn action_full(typed: &str, actions: &[&str]) -> Option<String> {
     let t = typed.to_lowercase();
-    let full = if t.starts_with("key.") {
-        t
-    } else {
-        format!("key.{t}")
-    };
-    actions
-        .iter()
-        .find(|a| a.to_lowercase() == full)
-        .map(|a| (*a).to_owned())
+    let full = if t.starts_with("key.") { t } else { format!("key.{t}") };
+    actions.iter().find(|a| a.to_lowercase() == full).map(|a| (*a).to_owned())
 }
 
 /// Runs the arguments after `/multikey`: the chat lines, and the text to store when the extras changed.
@@ -175,10 +154,7 @@ pub fn run(args: &[&str], actions: &[&str]) -> (Vec<String>, Option<String>) {
                 }
                 encode(e)
             });
-            (
-                vec![format!("{} now also on {}", short(&a), short_key(&k))],
-                Some(text),
-            )
+            (vec![format!("{} now also on {}", short(&a), short_key(&k))], Some(text))
         }
         ["remove", action, rest @ ..] => {
             let Some(a) = action_full(action, actions) else {
@@ -190,50 +166,26 @@ pub fn run(args: &[&str], actions: &[&str]) -> (Vec<String>, Option<String>) {
                 e.retain(|(x, k)| !(*x == a && key.as_ref().is_none_or(|key| key == k)));
                 (before - e.len(), encode(e))
             });
-            if removed == 0 {
-                (vec![format!("{} has no extra key", short(&a))], None)
-            } else {
-                (
-                    vec![format!("Removed {removed} extra key(s) of {}", short(&a))],
-                    Some(text),
-                )
-            }
+            if removed == 0 { (vec![format!("{} has no extra key", short(&a))], None) } else { (vec![format!("Removed {removed} extra key(s) of {}", short(&a))], Some(text)) }
         }
         ["list"] => {
             let e = extras();
             if e.is_empty() {
-                (
-                    vec!["No extra keys. /multikey add <action> <key>".to_owned()],
-                    None,
-                )
+                (vec!["No extra keys. /multikey add <action> <key>".to_owned()], None)
             } else {
-                (
-                    e.iter()
-                        .map(|(a, k)| format!("{}: {}", short(a), short_key(k)))
-                        .collect(),
-                    None,
-                )
+                (e.iter().map(|(a, k)| format!("{}: {}", short(a), short_key(k))).collect(), None)
             }
         }
-        _ => (
-            vec!["Usage: /multikey add <action> <key> | remove <action> [key] | list".to_owned()],
-            None,
-        ),
+        _ => (vec!["Usage: /multikey add <action> <key> | remove <action> [key] | list".to_owned()], None),
     }
 }
 
 fn short(action: &str) -> String {
-    action
-        .strip_prefix("key.")
-        .unwrap_or(action)
-        .replace('.', " ")
+    action.strip_prefix("key.").unwrap_or(action).replace('.', " ")
 }
 
 fn short_key(key: &str) -> String {
-    key.strip_prefix("key.keyboard.")
-        .or_else(|| key.strip_prefix("key."))
-        .unwrap_or(key)
-        .replace('.', " ")
+    key.strip_prefix("key.keyboard.").or_else(|| key.strip_prefix("key.")).unwrap_or(key).replace('.', " ")
 }
 
 /// The mod is off: the extra keys do nothing, and are read again when it is turned on.
@@ -258,25 +210,13 @@ mod tests {
     #[test]
     fn typed_names_become_vanilla_names() {
         assert_eq!(key_full("Up"), Some("key.keyboard.up".to_owned()));
-        assert_eq!(
-            key_full("left.shift"),
-            Some("key.keyboard.left.shift".to_owned())
-        );
+        assert_eq!(key_full("left.shift"), Some("key.keyboard.left.shift".to_owned()));
         assert_eq!(key_full("mouse.4"), Some("key.mouse.4".to_owned()));
-        assert_eq!(
-            key_full("key.keyboard.f9"),
-            Some("key.keyboard.f9".to_owned())
-        );
+        assert_eq!(key_full("key.keyboard.f9"), Some("key.keyboard.f9".to_owned()));
         assert_eq!(key_full(""), None);
         assert_eq!(key_full("a b"), None);
-        assert_eq!(
-            action_full("Forward", &ACTIONS),
-            Some("key.forward".to_owned())
-        );
-        assert_eq!(
-            action_full("hotbar.1", &ACTIONS),
-            Some("key.hotbar.1".to_owned())
-        );
+        assert_eq!(action_full("Forward", &ACTIONS), Some("key.forward".to_owned()));
+        assert_eq!(action_full("hotbar.1", &ACTIONS), Some("key.hotbar.1".to_owned()));
         assert_eq!(action_full("nothing", &ACTIONS), None);
     }
 
@@ -289,19 +229,12 @@ mod tests {
         assert_eq!(actions_for("key.keyboard.up"), ["key.forward"]);
         run(&["add", "forward", "up"], &ACTIONS);
         run(&["add", "jump", "up"], &ACTIONS);
-        assert_eq!(
-            actions_for("key.keyboard.up"),
-            ["key.forward", "key.jump"],
-            "no duplicates, and a key can drive two actions"
-        );
+        assert_eq!(actions_for("key.keyboard.up"), ["key.forward", "key.jump"], "no duplicates, and a key can drive two actions");
         let (lines, save) = run(&["remove", "forward", "up"], &ACTIONS);
         assert_eq!(lines, ["Removed 1 extra key(s) of forward"]);
         assert_eq!(save.as_deref(), Some("key.jump=key.keyboard.up"));
         let (lines, save) = run(&["remove", "inventory"], &ACTIONS);
-        assert_eq!(
-            (lines, save),
-            (vec!["inventory has no extra key".to_owned()], None)
-        );
+        assert_eq!((lines, save), (vec!["inventory has no extra key".to_owned()], None));
         let (_, save) = run(&["remove", "jump"], &ACTIONS);
         assert_eq!(save.as_deref(), Some(""), "all removed");
         assert!(actions_for("key.keyboard.up").is_empty());
@@ -310,14 +243,8 @@ mod tests {
     #[test]
     fn bad_input_changes_nothing() {
         forget();
-        assert_eq!(
-            run(&["add", "nonsense", "up"], &ACTIONS).0,
-            ["Unknown action `nonsense`"]
-        );
-        assert_eq!(
-            run(&["add", "forward", "a b"], &ACTIONS).0,
-            ["Not a key name: `a b`"]
-        );
+        assert_eq!(run(&["add", "nonsense", "up"], &ACTIONS).0, ["Unknown action `nonsense`"]);
+        assert_eq!(run(&["add", "forward", "a b"], &ACTIONS).0, ["Not a key name: `a b`"]);
         assert!(run(&["add", "forward"], &ACTIONS).0[0].starts_with("Usage"));
         assert!(extras().is_empty());
     }
@@ -327,23 +254,21 @@ mod tests {
         forget();
         run(&["add", "forward", "up"], &ACTIONS);
         run(&["add", "inventory", "mouse.4"], &ACTIONS);
-        assert_eq!(
-            run(&["list"], &ACTIONS).0,
-            ["forward: up", "inventory: mouse 4"]
-        );
+        assert_eq!(run(&["list"], &ACTIONS).0, ["forward: up", "inventory: mouse 4"]);
         let text = encode(&extras());
         assert_eq!(decode(&text), extras());
-        assert_eq!(
-            decode("garbage\n=x\nkey.a=\nkey.b=key.keyboard.k"),
-            vec![("key.b".to_owned(), "key.keyboard.k".to_owned())]
-        );
+        assert_eq!(decode("garbage\n=x\nkey.a=\nkey.b=key.keyboard.k"), vec![("key.b".to_owned(), "key.keyboard.k".to_owned())]);
     }
 
     #[test]
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

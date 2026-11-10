@@ -13,7 +13,7 @@ use std::cell::RefCell;
 /// The mod's on/off settings: key (the stored file), label and default.
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("percent", "Show percent", true),
-    ("full", "Show on undamaged items", false),
+    ("full", "Show on undamaged items", false)
 ];
 
 thread_local! {
@@ -92,11 +92,7 @@ pub fn line(damage: u32, max: u32, show_percent: bool, show_full: bool) -> Optio
         26..=50 => (255, 255, 85),
         _ => (255, 85, 85),
     };
-    let text = if show_percent {
-        format!("Durability: {left} / {max} ({percent}%)")
-    } else {
-        format!("Durability: {left} / {max}")
-    };
+    let text = if show_percent { format!("Durability: {left} / {max} ({percent}%)") } else { format!("Durability: {left} / {max}") };
     Some((text, colour))
 }
 
@@ -108,35 +104,26 @@ mod tests {
     fn only_damaged_wearing_items_get_a_line() {
         assert_eq!(line(0, 250, true, false), None);
         assert_eq!(line(10, 0, true, false), None, "no durability");
-        assert_eq!(
-            line(0, 250, true, true).unwrap().0,
-            "Durability: 250 / 250 (100%)"
-        );
+        assert_eq!(line(0, 250, true, true).unwrap().0, "Durability: 250 / 250 (100%)");
     }
 
     #[test]
     fn the_line_and_colour_follow_what_is_left() {
-        assert_eq!(
-            line(130, 250, true, false),
-            Some(("Durability: 120 / 250 (48%)".to_owned(), (255, 255, 85)))
-        );
-        assert_eq!(
-            line(10, 250, false, false),
-            Some(("Durability: 240 / 250".to_owned(), (85, 255, 85)))
-        );
+        assert_eq!(line(130, 250, true, false), Some(("Durability: 120 / 250 (48%)".to_owned(), (255, 255, 85))));
+        assert_eq!(line(10, 250, false, false), Some(("Durability: 240 / 250".to_owned(), (85, 255, 85))));
         assert_eq!(line(240, 250, true, false).unwrap().1, (255, 85, 85));
-        assert_eq!(
-            line(999, 250, true, false).unwrap().0,
-            "Durability: 0 / 250 (0%)",
-            "never below zero"
-        );
+        assert_eq!(line(999, 250, true, false).unwrap().0, "Durability: 0 / 250 (0%)", "never below zero");
     }
 
     #[test]
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

@@ -62,26 +62,10 @@ fn flag(get: &impl Fn(&str) -> Option<String>, key: &str, default: bool) -> bool
 
 /// The stored settings; anything that does not read falls back to the default.
 pub fn read(get: impl Fn(&str) -> Option<String>) -> Config {
-    let size = get("size")
-        .and_then(|v| v.trim().parse().ok())
-        .filter(|v| SIZES.contains(v))
-        .unwrap_or(128);
-    let zoom = get("zoom")
-        .and_then(|v| v.trim().parse::<f32>().ok())
-        .filter(|v| ZOOMS.contains(v))
-        .unwrap_or(1.0);
-    let corner = get("corner")
-        .and_then(|v| v.trim().parse().ok())
-        .filter(|v| *v < CORNERS.len())
-        .unwrap_or(0);
-    Config {
-        shown: flag(&get, "shown", true),
-        size,
-        zoom,
-        corner,
-        rotate: flag(&get, "rotate", true),
-        round: flag(&get, "round", false),
-    }
+    let size = get("size").and_then(|v| v.trim().parse().ok()).filter(|v| SIZES.contains(v)).unwrap_or(128);
+    let zoom = get("zoom").and_then(|v| v.trim().parse::<f32>().ok()).filter(|v| ZOOMS.contains(v)).unwrap_or(1.0);
+    let corner = get("corner").and_then(|v| v.trim().parse().ok()).filter(|v| *v < CORNERS.len()).unwrap_or(0);
+    Config { shown: flag(&get, "shown", true), size, zoom, corner, rotate: flag(&get, "rotate", true), round: flag(&get, "round", false) }
 }
 
 /// What Horizon's minimap should look like: corner index, side, blocks per pixel, turning, round; none when hidden.
@@ -89,25 +73,14 @@ pub fn view(config: &Config, big: bool) -> Option<(usize, f32, f32, bool, bool)>
     if !config.shown {
         return None;
     }
-    let (size, zoom) = if big {
-        (BIG_SIZE, BIG_ZOOM)
-    } else {
-        (config.size as f32, config.zoom)
-    };
+    let (size, zoom) = if big { (BIG_SIZE, BIG_ZOOM) } else { (config.size as f32, config.zoom) };
     Some((config.corner, size, zoom, config.rotate, config.round))
 }
 
 /// The next zoom step: closer (fewer blocks per pixel) or further; the ends stay.
 pub fn step_zoom(current: f32, closer: bool) -> f32 {
-    let at = ZOOMS
-        .iter()
-        .position(|z| (*z - current).abs() < 1e-6)
-        .unwrap_or(1);
-    let next = if closer {
-        at.saturating_sub(1)
-    } else {
-        (at + 1).min(ZOOMS.len() - 1)
-    };
+    let at = ZOOMS.iter().position(|z| (*z - current).abs() < 1e-6).unwrap_or(1);
+    let next = if closer { at.saturating_sub(1) } else { (at + 1).min(ZOOMS.len() - 1) };
     ZOOMS[next]
 }
 
@@ -157,10 +130,7 @@ mod tests {
     #[test]
     fn the_defaults_are_a_turning_square_map_top_right() {
         let c = read(none);
-        assert_eq!(
-            (c.shown, c.size, c.zoom, c.corner, c.rotate, c.round),
-            (true, 128, 1.0, 0, true, false)
-        );
+        assert_eq!((c.shown, c.size, c.zoom, c.corner, c.rotate, c.round), (true, 128, 1.0, 0, true, false));
         assert_eq!(view(&c, false), Some((0, 128.0, 1.0, true, false)));
     }
 
@@ -187,11 +157,7 @@ mod tests {
         assert_eq!(step_zoom(0.5, true), 0.5);
         assert_eq!(step_zoom(4.0, false), 4.0);
         assert_eq!(step_zoom(2.0, false), 3.0);
-        assert_eq!(
-            step_zoom(7.0, false),
-            2.0,
-            "an unknown value counts as the default step"
-        );
+        assert_eq!(step_zoom(7.0, false), 2.0, "an unknown value counts as the default step");
     }
 
     #[test]
@@ -204,22 +170,12 @@ mod tests {
         assert_eq!(click(none, 5), Some(("round", "true".to_owned())));
         assert_eq!(click(none, 6), None);
         let last = |k: &str| (k == "corner").then(|| "3".to_owned());
-        assert_eq!(
-            click(last, 3),
-            Some(("corner", "0".to_owned())),
-            "the corners wrap"
-        );
+        assert_eq!(click(last, 3), Some(("corner", "0".to_owned())), "the corners wrap");
     }
 
     #[test]
     fn junk_settings_fall_back() {
-        let junk = |k: &str| {
-            Some(if k == "zoom" {
-                "9".to_owned()
-            } else {
-                "banana".to_owned()
-            })
-        };
+        let junk = |k: &str| Some(if k == "zoom" { "9".to_owned() } else { "banana".to_owned() });
         assert_eq!(read(junk), read(none));
         assert_eq!(labels(none)[2], "Zoom: 1 blocks per pixel");
     }

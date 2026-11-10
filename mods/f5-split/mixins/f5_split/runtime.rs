@@ -6,13 +6,14 @@
 pub const ID: &str = "f5_split";
 pub const NAME: &str = "F5 Split";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Separate keys for the back and the front third-person view, as a toggle or while held.";
+pub const DESCRIPTION: &str = "Separate keys for the back and the front third-person view, as a toggle or while held.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[("hold", "Hold the key instead of toggling", false)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("hold", "Hold the key instead of toggling", false)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -107,39 +108,27 @@ mod tests {
     #[test]
     fn a_toggle_flips_on_press_and_ignores_release() {
         assert_eq!(after(View::First, View::Back, true, false), View::Back);
-        assert_eq!(
-            after(View::Back, View::Back, true, false),
-            View::First,
-            "the same key again"
-        );
-        assert_eq!(
-            after(View::Back, View::Front, true, false),
-            View::Front,
-            "the other key switches"
-        );
-        assert_eq!(
-            after(View::Back, View::Back, false, false),
-            View::Back,
-            "release does nothing"
-        );
+        assert_eq!(after(View::Back, View::Back, true, false), View::First, "the same key again");
+        assert_eq!(after(View::Back, View::Front, true, false), View::Front, "the other key switches");
+        assert_eq!(after(View::Back, View::Back, false, false), View::Back, "release does nothing");
     }
 
     #[test]
     fn held_lasts_while_the_key_is_down() {
         assert_eq!(after(View::First, View::Front, true, true), View::Front);
         assert_eq!(after(View::Front, View::Front, false, true), View::First);
-        assert_eq!(
-            after(View::Back, View::Front, false, true),
-            View::Back,
-            "letting go of a key that is not the current view changes nothing"
-        );
+        assert_eq!(after(View::Back, View::Front, false, true), View::Back, "letting go of a key that is not the current view changes nothing");
     }
 
     #[test]
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

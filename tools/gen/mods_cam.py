@@ -1457,8 +1457,8 @@ fn sprint_indicator_tick(game: &mut crate::game::Game<'_>) {
 
 # ------------------------------------------------------------------------------------------------ apple_skin
 CAM.append(dict(
-    usage="Nothing to press: the food bar shows your saturation, an exhaustion strip under it, and, holding food you could eat, how much hunger, saturation and health it would give, pulsing. The settings page has Show hunger restored from held food, Show overlays for food in off-hand, Show estimated health overlay, Show exhaustion underlay, Show saturation overlay, Animate HUD icons to match Minecraft and Max alpha of flashing HUD icons. The tooltip and F3 parts of AppleSkin are not in this version.",
-    slug="apple-skin", id="apple_skin", name="AppleSkin", title="AppleSkin", raw=False, needs_api=409,
+    usage="Nothing to press: the food bar shows your saturation, an exhaustion strip under it, and, holding food you could eat, how much hunger, saturation and health it would give, pulsing. The settings page has Show hunger restored from held food, Show overlays for food in off-hand, Show estimated health overlay, Show exhaustion underlay, Show saturation overlay, Animate HUD icons to match Minecraft and Max alpha of flashing HUD icons. Food in an inventory or hotbar shows its hunger and saturation icons in its tooltip (with Shift, or always), and F3 has a hunger/sat/exh line. The settings page also has Show food values in tooltip, Always show food values in tooltip and Show food values in Debug Screen.",
+    slug="apple-skin", id="apple_skin", name="AppleSkin", title="AppleSkin", raw=False, needs_api=410,
     description="Food/hunger-related HUD improvements.",
     upstream="AppleSkin (appleskin) by squeek502", upstream_licence="Unlicense",
     command=None, hooks=["list", "settings", "click", "tick"],
@@ -1470,6 +1470,9 @@ pub const ALPHAS: [f32; 5] = [0.25, 0.5, 0.65, 0.75, 1.0];
 /// The HUD settings of `ModConfig`, in the order of its screen, with the defaults.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Settings {
+    pub show_food_values_in_tooltip: bool,
+    pub show_food_values_in_tooltip_always: bool,
+    pub show_food_debug_info: bool,
     pub show_food_values_hud_overlay: bool,
     pub show_food_values_hud_overlay_when_offhand: bool,
     pub show_food_health_hud_overlay: bool,
@@ -1482,6 +1485,9 @@ pub struct Settings {
 impl Default for Settings {
     fn default() -> Self {
         Self {
+            show_food_values_in_tooltip: true,
+            show_food_values_in_tooltip_always: true,
+            show_food_debug_info: true,
             show_food_values_hud_overlay: true,
             show_food_values_hud_overlay_when_offhand: true,
             show_food_health_hud_overlay: true,
@@ -1502,6 +1508,9 @@ impl Settings {
             _ => d,
         });
         Self {
+            show_food_values_in_tooltip: flag("tooltip", d.show_food_values_in_tooltip),
+            show_food_values_in_tooltip_always: flag("tooltip_always", d.show_food_values_in_tooltip_always),
+            show_food_debug_info: flag("debug_info", d.show_food_debug_info),
             show_food_values_hud_overlay: flag("held_food", d.show_food_values_hud_overlay),
             show_food_values_hud_overlay_when_offhand: flag("offhand", d.show_food_values_hud_overlay_when_offhand),
             show_food_health_hud_overlay: flag("health", d.show_food_health_hud_overlay),
@@ -1518,11 +1527,14 @@ impl Settings {
     pub fn labels(&self) -> Vec<String> {
         let on = |b: bool| if b { "ON" } else { "OFF" };
         vec![
+            format!("Show food values in tooltip: {}", on(self.show_food_values_in_tooltip)),
+            format!("Always show food values in tooltip: {}", on(self.show_food_values_in_tooltip_always)),
             format!("Show hunger restored from held food: {}", on(self.show_food_values_hud_overlay)),
             format!("Show overlays for food in off-hand: {}", on(self.show_food_values_hud_overlay_when_offhand)),
             format!("Show estimated health overlay: {}", on(self.show_food_health_hud_overlay)),
             format!("Show exhaustion underlay: {}", on(self.show_food_exhaustion_hud_underlay)),
             format!("Show saturation overlay: {}", on(self.show_saturation_hud_overlay)),
+            format!("Show food values in Debug Screen: {}", on(self.show_food_debug_info)),
             format!("Animate HUD icons to match Minecraft: {}", on(self.show_vanilla_animations_overlay)),
             format!("Max alpha of flashing HUD icons: {}", self.max_hud_overlay_flash_alpha),
         ]
@@ -1534,13 +1546,16 @@ impl Settings {
             Some((key, v.to_string()))
         };
         match i {
-            0 => flip(&mut self.show_food_values_hud_overlay, "held_food"),
-            1 => flip(&mut self.show_food_values_hud_overlay_when_offhand, "offhand"),
-            2 => flip(&mut self.show_food_health_hud_overlay, "health"),
-            3 => flip(&mut self.show_food_exhaustion_hud_underlay, "exhaustion"),
-            4 => flip(&mut self.show_saturation_hud_overlay, "saturation"),
-            5 => flip(&mut self.show_vanilla_animations_overlay, "animations"),
-            6 => {
+            0 => flip(&mut self.show_food_values_in_tooltip, "tooltip"),
+            1 => flip(&mut self.show_food_values_in_tooltip_always, "tooltip_always"),
+            2 => flip(&mut self.show_food_values_hud_overlay, "held_food"),
+            3 => flip(&mut self.show_food_values_hud_overlay_when_offhand, "offhand"),
+            4 => flip(&mut self.show_food_health_hud_overlay, "health"),
+            5 => flip(&mut self.show_food_exhaustion_hud_underlay, "exhaustion"),
+            6 => flip(&mut self.show_saturation_hud_overlay, "saturation"),
+            7 => flip(&mut self.show_food_debug_info, "debug_info"),
+            8 => flip(&mut self.show_vanilla_animations_overlay, "animations"),
+            9 => {
                 let at = ALPHAS.iter().position(|a| (*a - self.max_hud_overlay_flash_alpha).abs() < 1e-6).map_or(0, |p| (p + 1) % ALPHAS.len());
                 self.max_hud_overlay_flash_alpha = ALPHAS[at];
                 Some(("flash_alpha", self.max_hud_overlay_flash_alpha.to_string()))
@@ -1567,6 +1582,7 @@ pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static
     fn defaults_are_the_originals() {
         let s = Settings::read(none);
         assert!(s.show_food_values_hud_overlay && s.show_food_values_hud_overlay_when_offhand && s.show_food_health_hud_overlay);
+        assert!(s.show_food_values_in_tooltip && s.show_food_values_in_tooltip_always && s.show_food_debug_info);
         assert!(s.show_food_exhaustion_hud_underlay && s.show_saturation_hud_overlay && s.show_vanilla_animations_overlay);
         assert_eq!(s.max_hud_overlay_flash_alpha, 0.65);
     }
@@ -1574,18 +1590,19 @@ pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static
     #[test]
     fn the_buttons_flip_in_the_screens_order() {
         let l = labels(none);
-        assert_eq!(l.len(), 7);
-        assert!(l[0].starts_with("Show hunger restored") && l[3].starts_with("Show exhaustion underlay") && l[6].starts_with("Max alpha"));
-        assert_eq!(click(none, 0).unwrap(), ("held_food", "false".to_owned()));
-        assert_eq!(click(none, 4).unwrap(), ("saturation", "false".to_owned()));
-        assert!(click(none, 9).is_none());
+        assert_eq!(l.len(), 10);
+        assert!(l[0].starts_with("Show food values in tooltip") && l[2].starts_with("Show hunger restored") && l[5].starts_with("Show exhaustion underlay") && l[9].starts_with("Max alpha"));
+        assert_eq!(click(none, 0).unwrap(), ("tooltip", "false".to_owned()));
+        assert_eq!(click(none, 6).unwrap(), ("saturation", "false".to_owned()));
+        assert_eq!(click(none, 7).unwrap(), ("debug_info", "false".to_owned()));
+        assert!(click(none, 12).is_none());
     }
 
     #[test]
     fn the_alpha_button_walks_its_steps_and_wraps() {
-        assert_eq!(click(none, 6).unwrap(), ("flash_alpha", "0.75".to_owned()), "0.65 is third, 0.75 follows");
+        assert_eq!(click(none, 9).unwrap(), ("flash_alpha", "0.75".to_owned()), "0.65 is third, 0.75 follows");
         let top = |k: &str| (k == "flash_alpha").then(|| "1".to_owned());
-        assert_eq!(click(top, 6).unwrap().1, "0.25");
+        assert_eq!(click(top, 9).unwrap().1, "0.25");
     }
 
     #[test]
@@ -1604,6 +1621,9 @@ fn apple_skin_tick(game: &mut crate::game::Game<'_>) {
     }
     let s = m::Settings::read(|k| game.native_setting(m::ID, k));
     game.native_appleskin(Some(horizon_client::appleskin::Config {
+        show_food_values_in_tooltip: s.show_food_values_in_tooltip,
+        show_food_values_in_tooltip_always: s.show_food_values_in_tooltip_always,
+        show_food_debug_info: s.show_food_debug_info,
         show_saturation_hud_overlay: s.show_saturation_hud_overlay,
         show_food_values_hud_overlay: s.show_food_values_hud_overlay,
         show_food_values_hud_overlay_when_offhand: s.show_food_values_hud_overlay_when_offhand,

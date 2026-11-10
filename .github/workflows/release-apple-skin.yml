@@ -1,4 +1,4 @@
-# Releases the Apple Skin native mod (apple-skin/) as apple_skin-<version>.hnmod.
+# Releases the AppleSkin native mod (apple-skin/) as apple_skin-<version>.hnmod.
 #
 # Bump `version` in mods/apple-skin/mixins/apple_skin/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
 # GitHub release `apple-skin-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already

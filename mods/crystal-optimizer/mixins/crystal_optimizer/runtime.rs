@@ -11,7 +11,9 @@ pub const DESCRIPTION: &str = "Makes End crystals you hit disappear at once on a
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[("hide", "Hide a hit crystal at once", true)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("hide", "Hide a hit crystal at once", true)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -120,9 +122,7 @@ pub fn confirmed(id: u32) {
 /// The crystals the server did not remove in time, to put back.
 pub fn expired(now: u64) -> Vec<Box<dyn Any>> {
     STATE.with_borrow_mut(|s| {
-        let (old, rest): (Vec<_>, Vec<_>) = std::mem::take(&mut s.kept)
-            .into_iter()
-            .partition(|(_, at, _)| now.saturating_sub(*at) >= RESTORE_TICKS);
+        let (old, rest): (Vec<_>, Vec<_>) = std::mem::take(&mut s.kept).into_iter().partition(|(_, at, _)| now.saturating_sub(*at) >= RESTORE_TICKS);
         s.kept = rest;
         old.into_iter().map(|(.., c)| c).collect()
     })
@@ -168,10 +168,7 @@ mod tests {
         keep(7, 100, Box::new(1));
         confirmed(7);
         assert_eq!(held(), 0);
-        assert!(
-            expired(1000).is_empty(),
-            "nothing comes back after the server removed it"
-        );
+        assert!(expired(1000).is_empty(), "nothing comes back after the server removed it");
         hit(8);
         confirmed(8);
         assert!(take_requests().is_empty());
@@ -185,10 +182,7 @@ mod tests {
         assert!(expired(129).is_empty());
         let back = expired(130);
         assert_eq!(back.len(), 1);
-        assert_eq!(
-            back[0].downcast_ref::<String>().map(String::as_str),
-            Some("seven")
-        );
+        assert_eq!(back[0].downcast_ref::<String>().map(String::as_str), Some("seven"));
         assert_eq!(held(), 1, "the later one is still waiting");
         assert_eq!(expired(150).len(), 1);
         reset();
@@ -198,7 +192,11 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

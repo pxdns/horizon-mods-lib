@@ -1,4 +1,4 @@
-# Releases the Better Hurt Cam native mod (better-hurt-cam/) as better_hurt_cam-<version>.hnmod.
+# Releases the BetterHurtCam native mod (better-hurt-cam/) as better_hurt_cam-<version>.hnmod.
 #
 # Bump `version` in mods/better-hurt-cam/mixins/better_hurt_cam/horizon-mixin.toml and push to main: the mod is tested, packaged, and a
 # GitHub release `better-hurt-cam-v<version>` is created with the .hnmod and its SHA-256. Nothing is released when that tag already

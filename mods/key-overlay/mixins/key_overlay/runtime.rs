@@ -6,8 +6,7 @@
 pub const ID: &str = "key_overlay";
 pub const NAME: &str = "Key Overlay";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Shows W, A, S, D, jump and the mouse buttons on screen and lights the ones you hold.";
+pub const DESCRIPTION: &str = "Shows W, A, S, D, jump and the mouse buttons on screen and lights the ones you hold.";
 
 use std::cell::RefCell;
 
@@ -15,7 +14,7 @@ use std::cell::RefCell;
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("shown", "Shown", true),
     ("mouse", "Mouse buttons", true),
-    ("space", "Jump bar", true),
+    ("space", "Jump bar", true)
 ];
 
 thread_local! {
@@ -106,78 +105,27 @@ const GAP: f32 = 2.0;
 pub fn cells(mouse: bool, space: bool) -> Vec<Cell> {
     let step = KEY + GAP;
     let mut out = vec![
-        Cell {
-            mapping: "key.forward",
-            fixed: None,
-            x: step,
-            y: 0.0,
-            w: KEY,
-            h: KEY,
-        },
-        Cell {
-            mapping: "key.left",
-            fixed: None,
-            x: 0.0,
-            y: step,
-            w: KEY,
-            h: KEY,
-        },
-        Cell {
-            mapping: "key.back",
-            fixed: None,
-            x: step,
-            y: step,
-            w: KEY,
-            h: KEY,
-        },
-        Cell {
-            mapping: "key.right",
-            fixed: None,
-            x: 2.0 * step,
-            y: step,
-            w: KEY,
-            h: KEY,
-        },
+        Cell { mapping: "key.forward", fixed: None, x: step, y: 0.0, w: KEY, h: KEY },
+        Cell { mapping: "key.left", fixed: None, x: 0.0, y: step, w: KEY, h: KEY },
+        Cell { mapping: "key.back", fixed: None, x: step, y: step, w: KEY, h: KEY },
+        Cell { mapping: "key.right", fixed: None, x: 2.0 * step, y: step, w: KEY, h: KEY },
     ];
     let mut y = 2.0 * step;
     if space {
-        out.push(Cell {
-            mapping: "key.jump",
-            fixed: Some("SPACE"),
-            x: 0.0,
-            y,
-            w: 3.0 * KEY + 2.0 * GAP,
-            h: 12.0,
-        });
+        out.push(Cell { mapping: "key.jump", fixed: Some("SPACE"), x: 0.0, y, w: 3.0 * KEY + 2.0 * GAP, h: 12.0 });
         y += 12.0 + GAP;
     }
     if mouse {
         let w = (3.0 * KEY + 2.0 * GAP - GAP) / 2.0;
-        out.push(Cell {
-            mapping: "key.attack",
-            fixed: Some("LMB"),
-            x: 0.0,
-            y,
-            w,
-            h: 14.0,
-        });
-        out.push(Cell {
-            mapping: "key.use",
-            fixed: Some("RMB"),
-            x: w + GAP,
-            y,
-            w,
-            h: 14.0,
-        });
+        out.push(Cell { mapping: "key.attack", fixed: Some("LMB"), x: 0.0, y, w, h: 14.0 });
+        out.push(Cell { mapping: "key.use", fixed: Some("RMB"), x: w + GAP, y, w, h: 14.0 });
     }
     out
 }
 
 /// The overlay's width and height.
 pub fn bounds(cells: &[Cell]) -> (f32, f32) {
-    cells.iter().fold((0.0, 0.0), |(w, h), c| {
-        (f32::max(w, c.x + c.w), f32::max(h, c.y + c.h))
-    })
+    cells.iter().fold((0.0, 0.0), |(w, h), c| (f32::max(w, c.x + c.w), f32::max(h, c.y + c.h)))
 }
 
 /// A key's label as drawn: at most four characters, upper case.
@@ -197,10 +145,7 @@ mod tests {
             for (i, a) in cells.iter().enumerate() {
                 assert!(a.x + a.w <= w && a.y + a.h <= h);
                 for b in &cells[i + 1..] {
-                    let apart = a.x + a.w <= b.x
-                        || b.x + b.w <= a.x
-                        || a.y + a.h <= b.y
-                        || b.y + b.h <= a.y;
+                    let apart = a.x + a.w <= b.x || b.x + b.w <= a.x || a.y + a.h <= b.y || b.y + b.h <= a.y;
                     assert!(apart, "{} overlaps {}", a.mapping, b.mapping);
                 }
             }
@@ -224,7 +169,11 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

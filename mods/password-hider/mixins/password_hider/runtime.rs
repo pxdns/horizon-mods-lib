@@ -13,7 +13,7 @@ use std::cell::RefCell;
 /// The mod's on/off settings: key (the stored file), label and default.
 pub const OPTIONS: &[(&str, &str, bool)] = &[
     ("input", "Mask the password while typing", true),
-    ("history", "Keep it out of the history and its file", true),
+    ("history", "Keep it out of the history and its file", true)
 ];
 
 thread_local! {
@@ -79,17 +79,7 @@ pub fn forget_options() {
 use std::cell::Cell;
 
 /// The commands whose arguments are secret, the common ones of login plugins (AuthMe and its relatives).
-pub const COMMANDS: [&str; 9] = [
-    "login",
-    "l",
-    "log",
-    "register",
-    "reg",
-    "changepassword",
-    "cp",
-    "unregister",
-    "unreg",
-];
+pub const COMMANDS: [&str; 9] = ["login", "l", "log", "register", "reg", "changepassword", "cp", "unregister", "unreg"];
 
 thread_local! {
     static INPUT: Cell<bool> = const { Cell::new(true) };
@@ -116,9 +106,7 @@ pub fn secret_start(text: &str) -> Option<usize> {
     let rest = text.strip_prefix('/')?;
     let word_end = rest.find(' ')?;
     let word = rest[..word_end].to_ascii_lowercase();
-    COMMANDS
-        .contains(&word.as_str())
-        .then(|| text[..word_end + 2].chars().count())
+    COMMANDS.contains(&word.as_str()).then(|| text[..word_end + 2].chars().count())
 }
 
 /// Whether `text` is a covered command with something after it, that is, has a secret to hide.
@@ -129,17 +117,7 @@ pub fn has_secret(text: &str) -> bool {
 /// `value`, the piece of the box that starts `offset` characters in, with every letter from character `from` on shown as `*`
 /// (spaces stay, so you can still see how many passwords you typed).
 pub fn mask(value: &str, from: usize, offset: usize) -> String {
-    value
-        .chars()
-        .enumerate()
-        .map(|(i, c)| {
-            if offset + i >= from && !c.is_whitespace() {
-                '*'
-            } else {
-                c
-            }
-        })
-        .collect()
+    value.chars().enumerate().map(|(i, c)| if offset + i >= from && !c.is_whitespace() { '*' } else { c }).collect()
 }
 
 #[cfg(test)]
@@ -149,11 +127,7 @@ mod tests {
     #[test]
     fn the_secret_starts_after_the_first_space_of_a_covered_command() {
         assert_eq!(secret_start("/login hunter2"), Some(7));
-        assert_eq!(
-            secret_start("/LOGIN hunter2"),
-            Some(7),
-            "case does not matter"
-        );
+        assert_eq!(secret_start("/LOGIN hunter2"), Some(7), "case does not matter");
         assert_eq!(secret_start("/register a b"), Some(10));
         assert_eq!(secret_start("/l pw"), Some(3));
         assert_eq!(secret_start("/login"), None, "no space yet");
@@ -179,11 +153,7 @@ mod tests {
         // The box draws a window of the text: the piece starting 4 characters in.
         assert_eq!(mask("gin hunter2", 7, 4), "gin *******");
         assert_eq!(mask("hunter2", 7, 7), "*******");
-        assert_eq!(
-            mask("/login hunter2", 99, 0),
-            "/login hunter2",
-            "nothing masked before the secret"
-        );
+        assert_eq!(mask("/login hunter2", 99, 0), "/login hunter2", "nothing masked before the secret");
     }
 
     #[test]
@@ -204,7 +174,11 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());

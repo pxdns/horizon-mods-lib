@@ -6,7 +6,7 @@ fn effect_timer_hud(
 ) {
     use crate::game::lib_effect_timer as m;
     use horizon_client::extras::Corner;
-    if game.native_on(m::ID) && (m::is(|k| game.native_setting(m::ID, k), "bars") || m::is(|k| game.native_setting(m::ID, k), "times")) {
+    if game.native_on(m::ID) && m::is(|k| game.native_setting(m::ID, k), "bars") {
         let icons: Vec<m::Icon> = game
             .potions
             .effects
@@ -24,16 +24,8 @@ fn effect_timer_hud(
                 }
             })
             .collect();
-        if m::is(|k| game.native_setting(m::ID, k), "bars") {
-            for (rect, ink) in m::bars(batch.width as i32, &icons) {
-                game.native_fill(batch, rect, ink);
-            }
-        }
-        if m::is(|k| game.native_setting(m::ID, k), "times") {
-            for (text, cx, y, ink) in m::icon_times(batch.width as i32, &icons) {
-                let half = game.native_text_width(&text) / 2.0;
-                game.native_text(batch, &text, [cx - half, y], ink, true);
-            }
+        for (rect, ink) in m::bars(batch.width as i32, &icons) {
+            game.native_fill(batch, rect, ink);
         }
     }
     if !game.native_on(m::ID) || !game.native_corner_shown(Corner::BottomRight) {

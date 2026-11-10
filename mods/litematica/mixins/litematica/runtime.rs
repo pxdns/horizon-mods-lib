@@ -6,13 +6,14 @@
 pub const ID: &str = "litematica";
 pub const NAME: &str = "Litematica";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Read .litematic schematics: info, and the material list of blocks you need.";
+pub const DESCRIPTION: &str = "Read .litematic schematics: info, and the material list of blocks you need.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[("stacks", "Show stacks next to the counts", true)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("stacks", "Show stacks next to the counts", true)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -117,9 +118,7 @@ pub fn request(args: &[&str]) -> Request {
         ["list"] => Request::List,
         ["info", name] => Request::Info((*name).to_owned()),
         ["materials", name] => Request::Materials((*name).to_owned(), 20),
-        ["materials", name, n] => {
-            Request::Materials((*name).to_owned(), n.parse().unwrap_or(20).clamp(1, 500))
-        }
+        ["materials", name, n] => Request::Materials((*name).to_owned(), n.parse().unwrap_or(20).clamp(1, 500)),
         ["export", name] => Request::Export((*name).to_owned()),
         _ => Request::Help,
     }
@@ -128,23 +127,15 @@ pub fn request(args: &[&str]) -> Request {
 /// The file for a typed name: exact, or without the extension, ignoring case.
 pub fn find_file(typed: &str, files: &[String]) -> Option<String> {
     let t = typed.to_lowercase();
-    files
-        .iter()
-        .find(|f| f.to_lowercase() == t || f.to_lowercase() == format!("{t}.litematic"))
-        .cloned()
+    files.iter().find(|f| f.to_lowercase() == t || f.to_lowercase() == format!("{t}.litematic")).cloned()
 }
 
 pub fn list_lines(files: &[String], dir: &str) -> Vec<String> {
-    let found: Vec<&String> = files
-        .iter()
-        .filter(|f| f.to_lowercase().ends_with(".litematic"))
-        .collect();
+    let found: Vec<&String> = files.iter().filter(|f| f.to_lowercase().ends_with(".litematic")).collect();
     if found.is_empty() {
         return vec![format!("No schematics. Put .litematic files in {dir}")];
     }
-    std::iter::once(format!("{} schematics:", found.len()))
-        .chain(found.iter().map(|f| (*f).clone()))
-        .collect()
+    std::iter::once(format!("{} schematics:", found.len())).chain(found.iter().map(|f| (*f).clone())).collect()
 }
 
 /// Bits per block in a region's packed array: enough for the palette, never fewer than 2.
@@ -177,10 +168,7 @@ pub fn volume(size: [i64; 3]) -> u64 {
 
 /// Whether a block name is air.
 pub fn is_air(name: &str) -> bool {
-    matches!(
-        name.strip_prefix("minecraft:").unwrap_or(name),
-        "air" | "cave_air" | "void_air"
-    )
+    matches!(name.strip_prefix("minecraft:").unwrap_or(name), "air" | "cave_air" | "void_air")
 }
 
 /// How many of each block (not air) a schematic needs, by name.
@@ -207,9 +195,7 @@ pub fn title(id: &str) -> String {
         .filter(|w| !w.is_empty())
         .map(|w| {
             let mut c = w.chars();
-            c.next().map_or(String::new(), |f| {
-                f.to_uppercase().collect::<String>() + c.as_str()
-            })
+            c.next().map_or(String::new(), |f| f.to_uppercase().collect::<String>() + c.as_str())
         })
         .collect::<Vec<_>>()
         .join(" ")
@@ -230,13 +216,7 @@ pub fn material_lines(m: &BTreeMap<String, u64>, top: usize, with_stacks: bool) 
     rows.sort_by(|a, b| b.1.cmp(a.1).then(a.0.cmp(b.0)));
     let total: u64 = m.values().sum();
     let mut out = vec![format!("{} kinds, {} blocks:", rows.len(), total)];
-    out.extend(rows.iter().take(top).map(|(name, n)| {
-        if with_stacks && **n >= 64 {
-            format!("{}: {} ({})", title(name), n, stacks(**n))
-        } else {
-            format!("{}: {}", title(name), n)
-        }
-    }));
+    out.extend(rows.iter().take(top).map(|(name, n)| if with_stacks && **n >= 64 { format!("{}: {} ({})", title(name), n, stacks(**n)) } else { format!("{}: {}", title(name), n) }));
     if rows.len() > top {
         out.push(format!("... and {} more kinds", rows.len() - top));
     }
@@ -245,35 +225,12 @@ pub fn material_lines(m: &BTreeMap<String, u64>, top: usize, with_stacks: bool) 
 
 pub fn info_lines(file: &str, s: &Schematic) -> Vec<String> {
     let blocks: u64 = materials(s).values().sum();
-    let mut out = vec![format!(
-        "{file}: {}{}",
-        if s.name.is_empty() {
-            "unnamed"
-        } else {
-            &s.name
-        },
-        if s.author.is_empty() {
-            String::new()
-        } else {
-            format!(" by {}", s.author)
-        }
-    )];
+    let mut out = vec![format!("{file}: {}{}", if s.name.is_empty() { "unnamed" } else { &s.name }, if s.author.is_empty() { String::new() } else { format!(" by {}", s.author) })];
     if !s.description.is_empty() {
         out.push(s.description.clone());
     }
-    out.push(format!(
-        "{} region(s), {blocks} blocks (not air)",
-        s.regions.len()
-    ));
-    out.extend(s.regions.iter().take(8).map(|r| {
-        format!(
-            "{}: {} x {} x {}",
-            r.name,
-            r.size[0].abs(),
-            r.size[1].abs(),
-            r.size[2].abs()
-        )
-    }));
+    out.push(format!("{} region(s), {blocks} blocks (not air)", s.regions.len()));
+    out.extend(s.regions.iter().take(8).map(|r| format!("{}: {} x {} x {}", r.name, r.size[0].abs(), r.size[1].abs(), r.size[2].abs())));
     out
 }
 
@@ -297,27 +254,13 @@ mod tests {
     }
 
     fn sample() -> Schematic {
-        let palette = vec![
-            "minecraft:air".to_owned(),
-            "minecraft:stone".to_owned(),
-            "minecraft:oak_planks".to_owned(),
-        ];
+        let palette = vec!["minecraft:air".to_owned(), "minecraft:stone".to_owned(), "minecraft:oak_planks".to_owned()];
         // A 3 x 3 x 3 region: 27 entries at 2 bits.
         let mut indices = vec![0u64; 27];
         for (i, v) in indices.iter_mut().enumerate() {
             *v = [1, 2, 0][i % 3];
         }
-        Schematic {
-            name: "House".into(),
-            author: "Me".into(),
-            description: String::new(),
-            regions: vec![Region {
-                name: "main".into(),
-                size: [3, 3, 3],
-                palette,
-                states: pack(&indices, 2),
-            }],
-        }
+        Schematic { name: "House".into(), author: "Me".into(), description: String::new(), regions: vec![Region { name: "main".into(), size: [3, 3, 3], palette, states: pack(&indices, 2) }] }
     }
 
     #[test]
@@ -332,9 +275,7 @@ mod tests {
     #[test]
     fn unpacking_follows_the_word_boundaries() {
         for bits in [2usize, 3, 5, 7, 13] {
-            let indices: Vec<u64> = (0..200)
-                .map(|i| (i * 31 + 7) as u64 & ((1 << bits) - 1))
-                .collect();
+            let indices: Vec<u64> = (0..200).map(|i| (i * 31 + 7) as u64 & ((1 << bits) - 1)).collect();
             let longs = pack(&indices, bits);
             for (i, v) in indices.iter().enumerate() {
                 assert_eq!(index_at(&longs, bits, i), *v, "bits {bits} index {i}");
@@ -354,14 +295,7 @@ mod tests {
     #[test]
     fn the_material_list_and_info_read_well() {
         let lines = material_lines(&materials(&sample()), 1, true);
-        assert_eq!(
-            lines,
-            [
-                "2 kinds, 18 blocks:",
-                "Oak Planks: 9",
-                "... and 1 more kinds"
-            ]
-        );
+        assert_eq!(lines, ["2 kinds, 18 blocks:", "Oak Planks: 9", "... and 1 more kinds"]);
         assert_eq!(stacks(64), "1 stacks");
         assert_eq!(stacks(200), "3 stacks + 8");
         assert_eq!(stacks(5), "5");
@@ -377,28 +311,13 @@ mod tests {
     fn requests_and_file_names() {
         assert_eq!(request(&[]), Request::Help);
         assert_eq!(request(&["list"]), Request::List);
-        assert_eq!(
-            request(&["materials", "house", "5"]),
-            Request::Materials("house".into(), 5)
-        );
-        assert_eq!(
-            request(&["materials", "house", "x"]),
-            Request::Materials("house".into(), 20)
-        );
+        assert_eq!(request(&["materials", "house", "5"]), Request::Materials("house".into(), 5));
+        assert_eq!(request(&["materials", "house", "x"]), Request::Materials("house".into(), 20));
         let files = vec!["House.litematic".to_owned(), "notes.txt".to_owned()];
-        assert_eq!(
-            find_file("house", &files),
-            Some("House.litematic".to_owned())
-        );
-        assert_eq!(
-            find_file("HOUSE.litematic", &files),
-            Some("House.litematic".to_owned())
-        );
+        assert_eq!(find_file("house", &files), Some("House.litematic".to_owned()));
+        assert_eq!(find_file("HOUSE.litematic", &files), Some("House.litematic".to_owned()));
         assert_eq!(find_file("castle", &files), None);
-        assert_eq!(
-            list_lines(&files, "dir"),
-            ["1 schematics:", "House.litematic"]
-        );
+        assert_eq!(list_lines(&files, "dir"), ["1 schematics:", "House.litematic"]);
         assert!(list_lines(&[], "dir")[0].starts_with("No schematics"));
     }
 
@@ -406,7 +325,11 @@ mod tests {
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());
