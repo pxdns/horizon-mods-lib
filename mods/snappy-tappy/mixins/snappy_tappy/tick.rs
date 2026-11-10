@@ -1,26 +1,25 @@
-// Once a tick, before movement is read: of two opposite keys held together, only the last pressed counts.
+// Once a tick, before movement is read: of two opposite bound keys held together, only the last pressed counts.
 fn snappy_tappy_tick(game: &mut crate::game::Game<'_>) {
     use crate::game::lib_snappy_tappy as m;
-    use winit::keyboard::KeyCode as K;
+    m::next_tick();
     if !game.native_on(m::ID) || !game.native_window() || !game.native_playing() {
         return;
     }
-    let (sideways, forwards) = {
-        let get = |k: &str| game.native_setting(m::ID, k);
-        (m::is(get, "sideways"), m::is(get, "forwards"))
+    if !m::is(|k| game.native_setting(m::ID, k), "enabled") {
+        return;
+    }
+    // The keys the player bound, as the original reads Options.keyLeft and the rest.
+    let bound = |mapping: &str| {
+        let name = game.settings.keys.get(mapping).to_owned();
+        horizon_client::keybinds::key_code(&name).map(|code| (name, code))
     };
-    let (last_sideways, last_forwards) = m::last();
-    let held = |k: K| game.physical_keys.contains(&k);
-    let pairs = [
-        (sideways, K::KeyA, K::KeyD, held(K::KeyA), held(K::KeyD), last_sideways),
-        (forwards, K::KeyW, K::KeyS, held(K::KeyW), held(K::KeyS), last_forwards),
-    ];
-    for (on, first, second, first_held, second_held, last) in pairs {
-        if !on {
+    for (first, second) in [("key.left", "key.right"), ("key.forward", "key.back")] {
+        let (Some((first_name, first_code)), Some((second_name, second_code))) = (bound(first), bound(second)) else {
             continue;
-        }
-        let (a, b) = m::resolve(first_held, second_held, last);
-        for (key, want) in [(first, a), (second, b)] {
+        };
+        let held = |k| game.physical_keys.contains(&k);
+        let (a, b) = m::resolve(held(first_code), held(second_code), m::press_tick(&first_name), m::press_tick(&second_name));
+        for (key, want) in [(first_code, a), (second_code, b)] {
             if want {
                 game.keys.insert(key);
             } else {

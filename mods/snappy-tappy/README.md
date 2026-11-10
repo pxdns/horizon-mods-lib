@@ -1,18 +1,18 @@
-# Snappy Tappy (Horizon native mod)
+# SnappyTappy (Horizon native mod)
 
-When you hold two opposite movement keys, the one pressed last wins, so you switch direction at once.
+Last-input priority for movement keys: pressing D while holding A moves you right at once, then back to A when you let go.
 
 
-Ported from **SnappyTappy (SnappyTappy)** (see the upstream project) as an independent implementation for Horizon 26.3;
+Ported from **SnappyTappy (snappytappy) by cutebow** (MIT) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/snappy_tappy/`). It edits the `Game`'s held-key set before movement is read, which is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. It assumes the default W A S D movement keys.
+(`mixins/snappy_tappy/`). It edits the `Game`'s held-key set before movement is read, and says ON or OFF through the game's action bar (`Game.titles`), which is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**.
 
 ## Install
 
 Download `snappy_tappy-1.0.0.hnmod` and its `.sha256` from this project's
 [releases](https://github.com/pxdns/horizon-mods-lib/releases?q=snappy-tappy), check the hash, unzip the bundle into a folder and build it
 into a game with `horizon-launcher native-build FOLDER --instance NAME --trust-native-code`. Then switch it on or off in the game
-under Options → Mods → Snappy Tappy. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
+under Options → Mods → SnappyTappy. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
 and Horizon's [native mods](https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md) page says what a build does and trusts.
 
 ## Files

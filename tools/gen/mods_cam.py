@@ -483,130 +483,147 @@ fn freecam_tick(game: &mut crate::game::Game<'_>) {
 
 # ------------------------------------------------------------------------------------------------ snappy_tappy
 CAM.append(dict(
-    usage="Nothing to press: hold A and D (or W and S) together and the key you pressed last decides the direction; let go of it and the other carries on.", slug="snappy-tappy", id="snappy_tappy", name="Snappy Tappy", title="Snappy Tappy", raw=True,
-    description="When you hold two opposite movement keys, the one pressed last wins, so you switch direction at once.",
-    upstream="SnappyTappy (SnappyTappy)", upstream_licence="see the upstream project",
+    usage="| Key | Default | What it does |\n|---|---|---|\n| Toggle Snappy Tappy | `5` | Turns the mod on or off and says `Snappy Tappy: ON` or `OFF` over the hotbar |\n\nHold your left and right keys (or forward and back) together and the one pressed last wins; let go of it and the other carries on. It uses the keys you have bound. The settings page has Enabled.",
+    slug="snappy-tappy", id="snappy_tappy", name="SnappyTappy", title="SnappyTappy", raw=True,
+    description="Last-input priority for movement keys: pressing D while holding A moves you right at once, then back to A when you let go.",
+    upstream="SnappyTappy (snappytappy) by cutebow", upstream_licence="MIT",
     command=None, hooks=["key", "tick", "list", "settings", "click"],
-    options=[("sideways", "A and D", True), ("forwards", "W and S", True)],
-    raw_note=("It edits the `Game`'s held-key set before movement is read, which is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. "
-              "It assumes the default W A S D movement keys."),
+    options=[("enabled", "Enabled", True)],
+    keys_expr='vec![[m::KEY.into(), "Toggle Snappy Tappy".into(), m::DEFAULT_KEY.into()]]',
+    raw_note=("It edits the `Game`'s held-key set before movement is read, and says ON or OFF through the game's action bar (`Game.titles`), which is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**."),
     runtime_extra=r'''
 use std::cell::Cell;
+use std::collections::HashMap;
 
-/// Which key of a pair went down last.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub enum Last {
-    #[default]
-    None,
-    First,
-    Second,
-}
+/// `key.snappy_tappy.toggle`, default `5` (GLFW 53).
+pub const KEY: &str = "toggle";
+pub const DEFAULT_KEY: &str = "key.keyboard.5";
 
 thread_local! {
-    static SIDEWAYS: Cell<Last> = const { Cell::new(Last::None) };
-    static FORWARDS: Cell<Last> = const { Cell::new(Last::None) };
+    /// The tick each key last went down, by its name (`key.keyboard.a`), as `pressTick`.
+    static PRESSED: RefCell<HashMap<String, u64>> = RefCell::new(HashMap::new());
+    static TICK: Cell<u64> = const { Cell::new(0) };
 }
 
-/// A movement key went down or up, by its vanilla name (`key.keyboard.a`).
+/// One game tick passed (`InputInterceptor.tick`).
+pub fn next_tick() {
+    TICK.with(|t| t.set(t.get() + 1));
+}
+
+/// A key went down (`down`) or up: a press records the tick.
 pub fn pressed(key: &str, down: bool) {
-    let (cell, which) = match key {
-        "key.keyboard.a" => (&SIDEWAYS, Last::First),
-        "key.keyboard.d" => (&SIDEWAYS, Last::Second),
-        "key.keyboard.w" => (&FORWARDS, Last::First),
-        "key.keyboard.s" => (&FORWARDS, Last::Second),
-        _ => return,
-    };
-    cell.with(|c| {
+    let tick = TICK.with(Cell::get);
+    PRESSED.with_borrow_mut(|p| {
         if down {
-            c.set(which);
-        } else if c.get() == which {
-            c.set(Last::None);
+            p.entry(key.to_owned()).or_insert(tick);
+        } else {
+            p.remove(key);
         }
     });
 }
 
-/// The last-pressed state of the A/D pair and the W/S pair.
-pub fn last() -> (Last, Last) {
-    (SIDEWAYS.with(Cell::get), FORWARDS.with(Cell::get))
+/// When `key` went down, 0 when it is not known.
+pub fn press_tick(key: &str) -> u64 {
+    PRESSED.with_borrow(|p| p.get(key).copied().unwrap_or(0))
 }
 
-/// Which of a pair counts as held: both held means the last pressed one only.
-pub fn resolve(first: bool, second: bool, last: Last) -> (bool, bool) {
-    match (first, second) {
-        (true, true) => match last {
-            Last::Second => (false, true),
-            _ => (true, false),
-        },
-        other => other,
+/// `resolvePair`: of two opposite keys held together, the one pressed later counts; at the same tick the first (left, forward) does.
+/// Returns (first counts as held, second counts as held). One key held is just held.
+pub fn resolve(first_held: bool, second_held: bool, first_tick: u64, second_tick: u64) -> (bool, bool) {
+    if first_held && second_held {
+        if first_tick >= second_tick { (true, false) } else { (false, true) }
+    } else {
+        (first_held, second_held)
     }
 }
 
-/// Forgets what was pressed (tests only).
+/// Forgets everything (tests only).
 #[cfg(test)]
-pub fn forget_keys() {
-    SIDEWAYS.with(|c| c.set(Last::None));
-    FORWARDS.with(|c| c.set(Last::None));
+pub fn forget() {
+    PRESSED.with_borrow_mut(HashMap::clear);
+    TICK.with(|t| t.set(0));
 }
 ''',
     tests=r'''
     #[test]
-    fn the_last_pressed_of_two_held_keys_wins() {
-        assert_eq!(resolve(true, true, Last::First), (true, false));
-        assert_eq!(resolve(true, true, Last::Second), (false, true));
-        assert_eq!(resolve(true, true, Last::None), (true, false), "unknown order: the first key");
-        assert_eq!(resolve(true, false, Last::Second), (true, false), "one key held is just held");
-        assert_eq!(resolve(false, false, Last::First), (false, false));
+    fn the_later_press_of_two_held_keys_wins() {
+        assert_eq!(resolve(true, true, 5, 9), (false, true));
+        assert_eq!(resolve(true, true, 9, 5), (true, false));
+        assert_eq!(resolve(true, true, 7, 7), (true, false), "the same tick: the first key");
+        assert_eq!(resolve(true, false, 9, 1), (true, false), "one key held is just held");
+        assert_eq!(resolve(false, false, 0, 0), (false, false));
     }
 
     #[test]
-    fn presses_and_releases_are_tracked_per_pair() {
-        forget_keys();
+    fn presses_are_timed_and_a_release_forgets_them() {
+        forget();
+        next_tick();
         pressed("key.keyboard.a", true);
+        next_tick();
+        next_tick();
         pressed("key.keyboard.d", true);
-        assert_eq!(last(), (Last::Second, Last::None));
+        assert_eq!((press_tick("key.keyboard.a"), press_tick("key.keyboard.d")), (1, 3));
         pressed("key.keyboard.d", false);
-        assert_eq!(last().0, Last::None, "releasing the newest leaves the older one to carry on");
-        pressed("key.keyboard.w", true);
-        pressed("key.keyboard.s", true);
+        assert_eq!(press_tick("key.keyboard.d"), 0);
         pressed("key.keyboard.a", true);
-        assert_eq!(last(), (Last::First, Last::Second));
-        pressed("key.keyboard.space", true);
-        assert_eq!(last(), (Last::First, Last::Second), "other keys do not matter");
-        forget_keys();
+        assert_eq!(press_tick("key.keyboard.a"), 1, "a key repeat does not move its press");
+        forget();
+    }
+
+    #[test]
+    fn a_pair_switches_to_the_newer_key_and_back() {
+        forget();
+        next_tick();
+        pressed("key.keyboard.a", true);
+        next_tick();
+        pressed("key.keyboard.d", true);
+        let now = || resolve(true, true, press_tick("key.keyboard.a"), press_tick("key.keyboard.d"));
+        assert_eq!(now(), (false, true), "D pressed last: right");
+        pressed("key.keyboard.d", false);
+        assert_eq!(resolve(true, false, press_tick("key.keyboard.a"), 0), (true, false), "back to A");
+        forget();
+    }
+
+    #[test]
+    fn the_toggle_key_is_five() {
+        assert_eq!(DEFAULT_KEY, "key.keyboard.5");
     }
 ''',
     helpers={
-        "key": '''// A key went down or up: remember which of a pair was pressed last.
+        "key": '''// A key went down or up: time it, and the toggle key turns the mod on or off.
 fn snappy_tappy_key(game: &mut crate::game::Game<'_>, key: &str, pressed: bool) {
     use crate::game::lib_snappy_tappy as m;
-    if game.native_on(m::ID) {
-        m::pressed(key, pressed);
+    m::pressed(key, pressed);
+    if pressed && game.native_playing() && key == game.native_mod_key(m::ID, m::KEY, m::DEFAULT_KEY) {
+        let now = !m::is(|k| game.native_setting(m::ID, k), "enabled");
+        game.native_set_setting(m::ID, "enabled", if now { "true" } else { "false" });
+        let line = format!("Snappy Tappy: {}", if now { "ON" } else { "OFF" });
+        game.titles.set_overlay(horizon_client::text::Text::literal(line), false);
     }
 }
 ''',
-        "tick": '''// Once a tick, before movement is read: of two opposite keys held together, only the last pressed counts.
+        "tick": '''// Once a tick, before movement is read: of two opposite bound keys held together, only the last pressed counts.
 fn snappy_tappy_tick(game: &mut crate::game::Game<'_>) {
     use crate::game::lib_snappy_tappy as m;
-    use winit::keyboard::KeyCode as K;
+    m::next_tick();
     if !game.native_on(m::ID) || !game.native_window() || !game.native_playing() {
         return;
     }
-    let (sideways, forwards) = {
-        let get = |k: &str| game.native_setting(m::ID, k);
-        (m::is(get, "sideways"), m::is(get, "forwards"))
+    if !m::is(|k| game.native_setting(m::ID, k), "enabled") {
+        return;
+    }
+    // The keys the player bound, as the original reads Options.keyLeft and the rest.
+    let bound = |mapping: &str| {
+        let name = game.settings.keys.get(mapping).to_owned();
+        horizon_client::keybinds::key_code(&name).map(|code| (name, code))
     };
-    let (last_sideways, last_forwards) = m::last();
-    let held = |k: K| game.physical_keys.contains(&k);
-    let pairs = [
-        (sideways, K::KeyA, K::KeyD, held(K::KeyA), held(K::KeyD), last_sideways),
-        (forwards, K::KeyW, K::KeyS, held(K::KeyW), held(K::KeyS), last_forwards),
-    ];
-    for (on, first, second, first_held, second_held, last) in pairs {
-        if !on {
+    for (first, second) in [("key.left", "key.right"), ("key.forward", "key.back")] {
+        let (Some((first_name, first_code)), Some((second_name, second_code))) = (bound(first), bound(second)) else {
             continue;
-        }
-        let (a, b) = m::resolve(first_held, second_held, last);
-        for (key, want) in [(first, a), (second, b)] {
+        };
+        let held = |k| game.physical_keys.contains(&k);
+        let (a, b) = m::resolve(held(first_code), held(second_code), m::press_tick(&first_name), m::press_tick(&second_name));
+        for (key, want) in [(first_code, a), (second_code, b)] {
             if want {
                 game.keys.insert(key);
             } else {

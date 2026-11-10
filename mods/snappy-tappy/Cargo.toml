@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "When you hold two opposite movement keys, the one pressed last wins, so you switch direction at once."
+description = "Last-input priority for movement keys: pressing D while holding A moves you right at once, then back to A when you let go."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]

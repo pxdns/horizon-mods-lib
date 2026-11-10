@@ -1,18 +1,19 @@
-// Snappy Tappy, a native Horizon mod: When you hold two opposite movement keys, the one pressed last wins, so you switch direction at once.
+// SnappyTappy, a native Horizon mod: Last-input priority for movement keys: pressing D while holding A moves you right at once, then back to A when you let go.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_snappy_tappy`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
 /// The mod's id: its settings folder and its keys' lines.
 pub const ID: &str = "snappy_tappy";
-pub const NAME: &str = "Snappy Tappy";
+pub const NAME: &str = "SnappyTappy";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str = "When you hold two opposite movement keys, the one pressed last wins, so you switch direction at once.";
+pub const DESCRIPTION: &str = "Last-input priority for movement keys: pressing D while holding A moves you right at once, then back to A when you let go.";
 
 use std::cell::RefCell;
 
 /// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] =
-    &[("sideways", "A and D", true), ("forwards", "W and S", true)];
+pub const OPTIONS: &[(&str, &str, bool)] = &[
+    ("enabled", "Enabled", true)
+];
 
 thread_local! {
     /// Read once through the game's settings files, then kept.
@@ -75,60 +76,55 @@ pub fn forget_options() {
 }
 
 use std::cell::Cell;
+use std::collections::HashMap;
 
-/// Which key of a pair went down last.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub enum Last {
-    #[default]
-    None,
-    First,
-    Second,
-}
+/// `key.snappy_tappy.toggle`, default `5` (GLFW 53).
+pub const KEY: &str = "toggle";
+pub const DEFAULT_KEY: &str = "key.keyboard.5";
 
 thread_local! {
-    static SIDEWAYS: Cell<Last> = const { Cell::new(Last::None) };
-    static FORWARDS: Cell<Last> = const { Cell::new(Last::None) };
+    /// The tick each key last went down, by its name (`key.keyboard.a`), as `pressTick`.
+    static PRESSED: RefCell<HashMap<String, u64>> = RefCell::new(HashMap::new());
+    static TICK: Cell<u64> = const { Cell::new(0) };
 }
 
-/// A movement key went down or up, by its vanilla name (`key.keyboard.a`).
+/// One game tick passed (`InputInterceptor.tick`).
+pub fn next_tick() {
+    TICK.with(|t| t.set(t.get() + 1));
+}
+
+/// A key went down (`down`) or up: a press records the tick.
 pub fn pressed(key: &str, down: bool) {
-    let (cell, which) = match key {
-        "key.keyboard.a" => (&SIDEWAYS, Last::First),
-        "key.keyboard.d" => (&SIDEWAYS, Last::Second),
-        "key.keyboard.w" => (&FORWARDS, Last::First),
-        "key.keyboard.s" => (&FORWARDS, Last::Second),
-        _ => return,
-    };
-    cell.with(|c| {
+    let tick = TICK.with(Cell::get);
+    PRESSED.with_borrow_mut(|p| {
         if down {
-            c.set(which);
-        } else if c.get() == which {
-            c.set(Last::None);
+            p.entry(key.to_owned()).or_insert(tick);
+        } else {
+            p.remove(key);
         }
     });
 }
 
-/// The last-pressed state of the A/D pair and the W/S pair.
-pub fn last() -> (Last, Last) {
-    (SIDEWAYS.with(Cell::get), FORWARDS.with(Cell::get))
+/// When `key` went down, 0 when it is not known.
+pub fn press_tick(key: &str) -> u64 {
+    PRESSED.with_borrow(|p| p.get(key).copied().unwrap_or(0))
 }
 
-/// Which of a pair counts as held: both held means the last pressed one only.
-pub fn resolve(first: bool, second: bool, last: Last) -> (bool, bool) {
-    match (first, second) {
-        (true, true) => match last {
-            Last::Second => (false, true),
-            _ => (true, false),
-        },
-        other => other,
+/// `resolvePair`: of two opposite keys held together, the one pressed later counts; at the same tick the first (left, forward) does.
+/// Returns (first counts as held, second counts as held). One key held is just held.
+pub fn resolve(first_held: bool, second_held: bool, first_tick: u64, second_tick: u64) -> (bool, bool) {
+    if first_held && second_held {
+        if first_tick >= second_tick { (true, false) } else { (false, true) }
+    } else {
+        (first_held, second_held)
     }
 }
 
-/// Forgets what was pressed (tests only).
+/// Forgets everything (tests only).
 #[cfg(test)]
-pub fn forget_keys() {
-    SIDEWAYS.with(|c| c.set(Last::None));
-    FORWARDS.with(|c| c.set(Last::None));
+pub fn forget() {
+    PRESSED.with_borrow_mut(HashMap::clear);
+    TICK.with(|t| t.set(0));
 }
 
 #[cfg(test)]
@@ -136,52 +132,58 @@ mod tests {
     use super::*;
 
     #[test]
-    fn the_last_pressed_of_two_held_keys_wins() {
-        assert_eq!(resolve(true, true, Last::First), (true, false));
-        assert_eq!(resolve(true, true, Last::Second), (false, true));
-        assert_eq!(
-            resolve(true, true, Last::None),
-            (true, false),
-            "unknown order: the first key"
-        );
-        assert_eq!(
-            resolve(true, false, Last::Second),
-            (true, false),
-            "one key held is just held"
-        );
-        assert_eq!(resolve(false, false, Last::First), (false, false));
+    fn the_later_press_of_two_held_keys_wins() {
+        assert_eq!(resolve(true, true, 5, 9), (false, true));
+        assert_eq!(resolve(true, true, 9, 5), (true, false));
+        assert_eq!(resolve(true, true, 7, 7), (true, false), "the same tick: the first key");
+        assert_eq!(resolve(true, false, 9, 1), (true, false), "one key held is just held");
+        assert_eq!(resolve(false, false, 0, 0), (false, false));
     }
 
     #[test]
-    fn presses_and_releases_are_tracked_per_pair() {
-        forget_keys();
+    fn presses_are_timed_and_a_release_forgets_them() {
+        forget();
+        next_tick();
         pressed("key.keyboard.a", true);
+        next_tick();
+        next_tick();
         pressed("key.keyboard.d", true);
-        assert_eq!(last(), (Last::Second, Last::None));
+        assert_eq!((press_tick("key.keyboard.a"), press_tick("key.keyboard.d")), (1, 3));
         pressed("key.keyboard.d", false);
-        assert_eq!(
-            last().0,
-            Last::None,
-            "releasing the newest leaves the older one to carry on"
-        );
-        pressed("key.keyboard.w", true);
-        pressed("key.keyboard.s", true);
+        assert_eq!(press_tick("key.keyboard.d"), 0);
         pressed("key.keyboard.a", true);
-        assert_eq!(last(), (Last::First, Last::Second));
-        pressed("key.keyboard.space", true);
-        assert_eq!(
-            last(),
-            (Last::First, Last::Second),
-            "other keys do not matter"
-        );
-        forget_keys();
+        assert_eq!(press_tick("key.keyboard.a"), 1, "a key repeat does not move its press");
+        forget();
+    }
+
+    #[test]
+    fn a_pair_switches_to_the_newer_key_and_back() {
+        forget();
+        next_tick();
+        pressed("key.keyboard.a", true);
+        next_tick();
+        pressed("key.keyboard.d", true);
+        let now = || resolve(true, true, press_tick("key.keyboard.a"), press_tick("key.keyboard.d"));
+        assert_eq!(now(), (false, true), "D pressed last: right");
+        pressed("key.keyboard.d", false);
+        assert_eq!(resolve(true, false, press_tick("key.keyboard.a"), 0), (true, false), "back to A");
+        forget();
+    }
+
+    #[test]
+    fn the_toggle_key_is_five() {
+        assert_eq!(DEFAULT_KEY, "key.keyboard.5");
     }
 
     #[test]
     fn options_default_then_follow_the_stored_files() {
         forget_options();
         let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
+        assert_eq!(
+            labels(none).len(),
+            OPTIONS.len(),
+            "one button per option"
+        );
         assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
         forget_options();
         let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());
