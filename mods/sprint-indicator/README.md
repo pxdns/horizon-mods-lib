@@ -1,10 +1,9 @@
 # Sprint Indicator (Horizon native mod)
 
-Shows Sprinting, Walking or Sneaking in a corner of the screen while you move.
+Simple UI element showing whether you're currently sprinting, and whether you're crouching too.
 
-- `/sprint` hides or shows it.
 
-Ported from **Sprint Indicator (sprintindicator)** (see the upstream project) as an independent implementation for Horizon 26.3;
+Ported from **Sprint Indicator (sprint-indicator) by Roundaround** (MIT) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
 (`mixins/sprint_indicator/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 

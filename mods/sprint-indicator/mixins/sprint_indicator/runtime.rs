@@ -1,4 +1,4 @@
-// Sprint Indicator, a native Horizon mod: Shows Sprinting, Walking or Sneaking in a corner of the screen while you move.
+// Sprint Indicator, a native Horizon mod: Simple UI element showing whether you're currently sprinting, and whether you're crouching too.
 // This file is both the mod's Cargo library (its tests) and the module the bundle adds to the game
 // (`game::lib_sprint_indicator`). Gameplay logic lives here, testable; the hook helpers only read the game and draw.
 
@@ -6,167 +6,198 @@
 pub const ID: &str = "sprint_indicator";
 pub const NAME: &str = "Sprint Indicator";
 pub const VERSION: &str = "1.0.0";
-pub const DESCRIPTION: &str =
-    "Shows Sprinting, Walking or Sneaking in a corner of the screen while you move.";
+pub const DESCRIPTION: &str = "Simple UI element showing whether you're currently sprinting, and whether you're crouching too.";
 
-use std::cell::RefCell;
+/// The offsets the two Icon offset buttons step through, in GUI pixels (the original takes any whole numbers as `x,y`; the `offset_x`
+/// and `offset_y` files do too).
+pub const STEPS: [i32; 9] = [-20, -10, -5, -2, 0, 2, 5, 10, 20];
+/// `adjustAttackIndicatorX`: how far the hotbar's attack indicator moves out for the icon.
+pub const ATTACK_SHIFT: i32 = 24;
+/// The icon's size and the alpha of the "armed" sprint icon (`ARMED_ALPHA`).
+pub const SIZE: i32 = 18;
+pub const ARMED_ALPHA: f32 = 0.7;
 
-/// The mod's on/off settings: key (the stored file), label and default.
-pub const OPTIONS: &[(&str, &str, bool)] = &[
-    ("shown", "Shown", true),
-    ("walking", "Show walking", true),
-    ("idle", "Show standing still", false),
-];
-
-thread_local! {
-    /// Read once through the game's settings files, then kept.
-    static CHOSEN: RefCell<Option<Vec<bool>>> = const { RefCell::new(None) };
-}
-
-/// A stored value: `true` or `false`, else the default.
-pub fn parse(stored: Option<String>, default: bool) -> bool {
-    stored.map_or(default, |v| match v.trim() {
-        "true" => true,
-        "false" => false,
-        _ => default,
-    })
-}
-
-fn chosen(get: impl Fn(&str) -> Option<String>) -> Vec<bool> {
-    CHOSEN.with_borrow_mut(|c| {
-        c.get_or_insert_with(|| {
-            OPTIONS
-                .iter()
-                .map(|(key, _, default)| parse(get(key), *default))
-                .collect()
-        })
-        .clone()
-    })
-}
-
-/// Whether option `key` is on.
-pub fn is(get: impl Fn(&str) -> Option<String>, key: &str) -> bool {
-    OPTIONS
-        .iter()
-        .position(|o| o.0 == key)
-        .is_some_and(|i| chosen(get)[i])
-}
-
-/// The settings page's buttons.
-pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
-    let on = chosen(get);
-    OPTIONS
-        .iter()
-        .zip(on)
-        .map(|((_, label, _), on)| format!("{label}: {}", if on { "ON" } else { "OFF" }))
-        .collect()
-}
-
-/// A click on button `i`: flips it and returns what to store (key, value).
-pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
-    let mut on = chosen(get);
-    let (key, _, _) = *OPTIONS.get(i)?;
-    on[i] = !on[i];
-    let value = on[i].to_string();
-    CHOSEN.with_borrow_mut(|c| *c = Some(on));
-    Some((key, value))
-}
-
-/// Forgets what was read (tests only).
-#[cfg(test)]
-pub fn forget_options() {
-    CHOSEN.with_borrow_mut(|c| *c = None);
-}
-/// Translucent black box, white text with a shadow, as Horizon's own HUD extras.
-pub const BACKGROUND: u32 = 0x7800_0000;
-#[allow(dead_code)]
-pub const INK: u32 = 0xFF_FFFF;
-
-/// Slash command that hides or shows the box.
-pub const COMMAND: &str = "sprint";
-
-/// What the player is doing, from the held movement keys.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub struct Keys {
-    pub forward: bool,
-    pub left: bool,
-    pub back: bool,
-    pub right: bool,
+/// The settings of `SprintIndicatorConfig`, with its defaults.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Settings {
+    /// `sprintEnabled`: show an icon when sprinting.
     pub sprint: bool,
-    pub sneak: bool,
+    /// `sprintShowWhenActive`: also show the sprint icon, dimmed, while the sprint key is active but you are not sprinting.
+    pub show_when_active: bool,
+    /// `crouchEnabled`: show an icon when crouching.
+    pub crouch: bool,
+    /// `offset`: x and y.
+    pub offset: (i32, i32),
+    /// `adjustAttackIndicator`: shift the hotbar's attack indicator out of the icon's way.
+    pub adjust_attack_indicator: bool,
 }
 
-impl Keys {
-    pub fn moving(&self) -> bool {
-        self.forward || self.left || self.back || self.right
+impl Default for Settings {
+    fn default() -> Self {
+        Self { sprint: true, show_when_active: false, crouch: true, offset: (0, 0), adjust_attack_indicator: true }
     }
 }
 
-/// The label to show, or nothing.
-pub fn status(keys: Keys, walking: bool, idle: bool) -> Option<&'static str> {
-    if keys.sneak {
-        Some("Sneaking")
-    } else if keys.sprint && keys.moving() {
-        Some("Sprinting")
-    } else if keys.moving() {
-        walking.then_some("Walking")
-    } else {
-        idle.then_some("Standing")
+/// What to draw, from `HudMixin.afterRenderHotbar`.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Icon {
+    /// True for the slowness icon (crouching), false for the speed icon.
+    pub crouch: bool,
+    pub alpha: f32,
+}
+
+impl Settings {
+    pub fn read(get: impl Fn(&str) -> Option<String>) -> Self {
+        let d = Self::default();
+        let flag = |key: &str, d: bool| get(key).map_or(d, |v| match v.trim() {
+            "true" => true,
+            "false" => false,
+            _ => d,
+        });
+        let num = |key: &str, d: i32| get(key).and_then(|v| v.trim().parse::<i32>().ok()).unwrap_or(d);
+        Self {
+            sprint: flag("sprint", d.sprint),
+            show_when_active: flag("show_when_active", d.show_when_active),
+            crouch: flag("crouch", d.crouch),
+            offset: (num("offset_x", d.offset.0), num("offset_y", d.offset.1)),
+            adjust_attack_indicator: flag("adjust_attack_indicator", d.adjust_attack_indicator),
+        }
     }
+
+    pub fn labels(&self) -> Vec<String> {
+        let on = |b: bool| if b { "ON" } else { "OFF" };
+        vec![
+            format!("Show sprint indicator: {}", on(self.sprint)),
+            format!("Show when sprint key is active: {}", on(self.show_when_active)),
+            format!("Show crouch indicator: {}", on(self.crouch)),
+            format!("Icon offset X: {}", self.offset.0),
+            format!("Icon offset Y: {}", self.offset.1),
+            format!("Shift attack indicator: {}", on(self.adjust_attack_indicator)),
+        ]
+    }
+
+    pub fn click(&mut self, i: usize) -> Option<(&'static str, String)> {
+        let step = |v: i32| *STEPS.iter().find(|&&s| s > v).unwrap_or(&STEPS[0]);
+        match i {
+            0 => {
+                self.sprint = !self.sprint;
+                Some(("sprint", self.sprint.to_string()))
+            }
+            1 => {
+                self.show_when_active = !self.show_when_active;
+                Some(("show_when_active", self.show_when_active.to_string()))
+            }
+            2 => {
+                self.crouch = !self.crouch;
+                Some(("crouch", self.crouch.to_string()))
+            }
+            3 => {
+                self.offset.0 = step(self.offset.0);
+                Some(("offset_x", self.offset.0.to_string()))
+            }
+            4 => {
+                self.offset.1 = step(self.offset.1);
+                Some(("offset_y", self.offset.1.to_string()))
+            }
+            5 => {
+                self.adjust_attack_indicator = !self.adjust_attack_indicator;
+                Some(("adjust_attack_indicator", self.adjust_attack_indicator.to_string()))
+            }
+            _ => None,
+        }
+    }
+
+    /// The icon to draw, if any: `sprinting` is `isSprinting`, `crouching` is `isCrouching`, `sprint_key` is the sprint key being active.
+    /// Crouching wins and is drawn in full; sprinting is full; an armed sprint key is dimmed.
+    pub fn icon(&self, sprinting: bool, crouching: bool, sprint_key: bool) -> Option<Icon> {
+        let sprint = self.sprint && sprinting;
+        let armed = !sprint && self.sprint && self.show_when_active && sprint_key;
+        let crouch = self.crouch && crouching;
+        if !sprint && !armed && !crouch {
+            return None;
+        }
+        Some(Icon { crouch, alpha: if crouch || sprint { 1.0 } else { ARMED_ALPHA } })
+    }
+
+    /// Where the icon goes, from the screen's size in GUI pixels: beside the hotbar on the off hand's side, 6 pixels out.
+    pub fn position(&self, width: i32, height: i32, main_hand_left: bool) -> (i32, i32) {
+        let x = if main_hand_left { (width - 182) / 2 - 18 - 6 } else { (width + 182) / 2 + 6 };
+        (x + self.offset.0, height - 20 + self.offset.1)
+    }
+
+    /// How far to push the hotbar's attack indicator out (0 when not adjusting).
+    pub fn attack_shift(&self) -> i32 {
+        if self.adjust_attack_indicator && (self.sprint || self.crouch) { ATTACK_SHIFT } else { 0 }
+    }
+}
+
+pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
+    Settings::read(get).labels()
+}
+
+pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
+    Settings::read(get).click(i)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    #[test]
-    fn sneaking_wins_then_sprinting_then_walking() {
-        let k = |forward, sprint, sneak| Keys {
-            forward,
-            sprint,
-            sneak,
-            ..Keys::default()
-        };
-        assert_eq!(status(k(true, true, true), true, true), Some("Sneaking"));
-        assert_eq!(status(k(true, true, false), true, true), Some("Sprinting"));
-        assert_eq!(status(k(true, false, false), true, true), Some("Walking"));
-        assert_eq!(status(k(true, false, false), false, true), None);
+    fn none(_: &str) -> Option<String> {
+        None
     }
 
     #[test]
-    fn sprint_without_moving_is_standing() {
-        let keys = Keys {
-            sprint: true,
-            ..Keys::default()
-        };
-        assert_eq!(status(keys, true, false), None);
-        assert_eq!(status(keys, true, true), Some("Standing"));
-        assert!(!keys.moving());
+    fn defaults_are_the_originals() {
+        let s = Settings::read(none);
+        assert_eq!((s.sprint, s.show_when_active, s.crouch), (true, false, true));
+        assert_eq!((s.offset, s.adjust_attack_indicator), ((0, 0), true));
     }
 
     #[test]
-    fn options_default_then_follow_the_stored_files() {
-        forget_options();
-        let none = |_: &str| None;
-        assert_eq!(labels(none).len(), OPTIONS.len(), "one button per option");
-        assert_eq!(is(none, OPTIONS[0].0), OPTIONS[0].2);
-        forget_options();
-        let stored = |k: &str| (k == OPTIONS[0].0).then(|| "false".to_owned());
-        assert!(!is(stored, OPTIONS[0].0));
-        forget_options();
-        assert!(parse(Some("junk".into()), true));
-        assert!(!parse(Some(" false\n".into()), true));
+    fn sprinting_and_crouching_show_in_full_and_crouching_wins() {
+        let s = Settings::default();
+        assert_eq!(s.icon(true, false, false), Some(Icon { crouch: false, alpha: 1.0 }));
+        assert_eq!(s.icon(false, true, false), Some(Icon { crouch: true, alpha: 1.0 }));
+        assert_eq!(s.icon(true, true, false), Some(Icon { crouch: true, alpha: 1.0 }), "the slowness icon");
+        assert_eq!(s.icon(false, false, true), None, "a held sprint key alone shows nothing by default");
     }
 
     #[test]
-    fn a_click_flips_and_reports_what_to_store() {
-        forget_options();
-        let none = |_: &str| None;
-        let (key, value) = click(none, 0).expect("button 0 exists");
-        assert_eq!(key, OPTIONS[0].0);
-        assert_eq!(value, (!OPTIONS[0].2).to_string());
-        assert_eq!(is(none, key), !OPTIONS[0].2);
-        assert!(click(none, OPTIONS.len()).is_none());
-        forget_options();
+    fn an_armed_sprint_key_is_dimmed_when_asked() {
+        let s = Settings { show_when_active: true, ..Settings::default() };
+        assert_eq!(s.icon(false, false, true), Some(Icon { crouch: false, alpha: 0.7 }));
+        assert_eq!(s.icon(true, false, true).unwrap().alpha, 1.0, "sprinting is not dimmed");
+        let off = Settings { sprint: false, show_when_active: true, ..Settings::default() };
+        assert_eq!(off.icon(false, false, true), None);
+        assert_eq!(off.icon(true, false, false), None);
+        let no_crouch = Settings { crouch: false, ..Settings::default() };
+        assert_eq!(no_crouch.icon(false, true, false), None);
+    }
+
+    #[test]
+    fn the_icon_sits_beside_the_hotbar_on_the_off_hand_side_plus_the_offset() {
+        let s = Settings::default();
+        assert_eq!(s.position(320, 240, false), (251 + 6, 220), "right handed: right of the hotbar");
+        assert_eq!(s.position(320, 240, true), (69 - 18 - 6, 220), "left handed: left of it");
+        let moved = Settings { offset: (3, -4), ..s };
+        assert_eq!(moved.position(320, 240, false), (260, 216));
+    }
+
+    #[test]
+    fn the_attack_indicator_moves_out_only_when_adjusting_and_an_icon_is_on() {
+        assert_eq!(Settings::default().attack_shift(), 24);
+        assert_eq!(Settings { adjust_attack_indicator: false, ..Settings::default() }.attack_shift(), 0);
+        assert_eq!(Settings { sprint: false, crouch: false, ..Settings::default() }.attack_shift(), 0);
+    }
+
+    #[test]
+    fn the_buttons_flip_and_the_offsets_step_and_wrap() {
+        assert_eq!(click(none, 0).unwrap(), ("sprint", "false".to_owned()));
+        assert_eq!(click(none, 3).unwrap(), ("offset_x", "2".to_owned()));
+        let top = |k: &str| (k == "offset_y").then(|| "20".to_owned());
+        assert_eq!(click(top, 4).unwrap().1, "-20");
+        assert!(click(none, 9).is_none());
+        assert_eq!(labels(none).len(), 6);
     }
 }
