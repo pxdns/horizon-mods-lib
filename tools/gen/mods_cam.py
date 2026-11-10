@@ -2287,3 +2287,43 @@ fn potion_counter_tick(game: &mut crate::game::Game<'_>) {
 ''',
     },
 ))
+
+# ------------------------------------------------------------------------------------------------ clumps
+CAM.append(dict(
+    usage="Nothing to press or set (the original has no settings). Experience orbs that lie close together merge into one orb whatever their sizes, the orb remembers how many it holds of each size, and touching it pays all of them at once: no pickup delay, each size repairing Mending items on its own. Orbs that already hold several sizes pay only their first size if you turn the mod off, and a LAN guest's pickup still takes only the first size.",
+    slug="clumps", id="clumps", name="Clumps", title="Clumps", raw=False, needs_api=414,
+    description="Clumps XP orbs together to reduce lag.",
+    upstream="Clumps (clumps) by Jared (blamejared)", upstream_licence="MIT",
+    command=None, hooks=["list", "tick"],
+    options=None,
+    runtime_extra=r'''
+/// The original has no settings: the mod is its switch. The rules live in Horizon (`horizon_client::orb_clumps`, hook API 414).
+/// The orb merge box and the scan interval are the game's own (1 block on spawn, 0.5 every 20 ticks).
+pub const SPAWN_BOX: f64 = 1.0;
+/// `ExperienceOrb.tryMergeToExisting` looks for an orb in a box this wide around where the new one appears.
+pub fn merge_box() -> f64 {
+    SPAWN_BOX
+}
+''',
+    tests=r'''
+    #[test]
+    fn the_spawn_box_is_one_block_as_in_the_original() {
+        assert_eq!(merge_box(), 1.0);
+    }
+
+    #[test]
+    fn the_mod_is_named_and_credited() {
+        assert_eq!(NAME, "Clumps");
+        assert_eq!(ID, "clumps");
+        assert!(DESCRIPTION.starts_with("Clumps XP orbs"));
+    }
+''',
+    helpers={
+        "tick": '''// Once a tick: clumping is on while the mod is.
+fn clumps_tick(game: &mut crate::game::Game<'_>) {
+    use crate::game::lib_clumps as m;
+    game.native_clumps(game.native_on(m::ID));
+}
+''',
+    },
+))

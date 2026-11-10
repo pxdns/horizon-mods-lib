@@ -1,6 +1,6 @@
 // The mod's row in Options > Mods.
 fn clumps_listed(mods: &mut Vec<crate::game::native_hooks::NativeMod>) {
-    use horizon_client::entities::lib_clumps as m;
+    use crate::game::lib_clumps as m;
     mods.push(crate::game::native_hooks::NativeMod {
         id: m::ID.into(),
         title: format!("{} {}", m::NAME, m::VERSION),

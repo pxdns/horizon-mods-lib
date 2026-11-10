@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "Groups nearby experience orbs into a single orb, which cuts the entity count and is collected at once."
+description = "Clumps XP orbs together to reduce lag."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]

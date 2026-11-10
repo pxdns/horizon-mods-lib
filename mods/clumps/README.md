@@ -1,11 +1,11 @@
 # Clumps (Horizon native mod)
 
-Groups nearby experience orbs into a single orb, which cuts the entity count and is collected at once.
+Clumps XP orbs together to reduce lag.
 
 
-Ported from **Clumps (clumps)** (MIT) as an independent implementation for Horizon 26.3;
+Ported from **Clumps (clumps) by Jared (blamejared)** (MIT) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/clumps/`). It replaces `Game::merge_orbs` (in `game.rs`; it was `entities::merge_orbs` before Horizon moved it), the experience-orb merge Horizon runs in single player and as a LAN host, with a cancellable HEAD hook that merges every orb touching another (not only equal sizes at matching ids) into one orb whose value is the sum of theirs, so saving and loading keep the total. It is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**. Experience on a multiplayer server is handled by the server, which this does not change. Unlike the original it does not remember the sizes it merged, so Mending repairs once from the total.
+(`mixins/clumps/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
 ## Install
 
