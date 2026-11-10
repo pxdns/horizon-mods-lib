@@ -4,5 +4,5 @@ fn more_chat_history_tick(game: &mut crate::game::Game<'_>) {
     if !game.native_window() {
         return;
     }
-    m::configure(if game.native_on(m::ID) { m::read(|k| game.native_setting(m::ID, k)) } else { 100 });
+    m::configure(game.native_on(m::ID));
 }

@@ -1,9 +1,9 @@
 # More Chat History (Horizon native mod)
 
-Chat remembers up to 2000 lines instead of 100, so you can scroll back through a long conversation.
+Increases the maximum length of the chat history, from the vanilla 100 messages to 16384.
 
 
-Ported from **More Chat History (morechathistory)** (see the upstream project) as an independent implementation for Horizon 26.3;
+Ported from **More Chat History (morechathistory) by JackFred** (CC0-1.0) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
 (`mixins/more_chat_history/`). It lives in Horizon's chat module (`crates/horizon-client-render/src/chat.rs`): a cancellable HEAD hook on `Chat::push_message` (every message passes through it, a signed player message too) that does what the original does with a longer limit, including the line wrapping (Horizon's `add_lines` has a closure now, so its limit cannot be changed with a constant). It is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**.
 

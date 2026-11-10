@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "Chat remembers up to 2000 lines instead of 100, so you can scroll back through a long conversation."
+description = "Increases the maximum length of the chat history, from the vanilla 100 messages to 16384."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]
