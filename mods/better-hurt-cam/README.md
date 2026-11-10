@@ -1,18 +1,18 @@
-# Better Hurt Cam (Horizon native mod)
+# BetterHurtCam (Horizon native mod)
 
-Tone the camera shake down when you are hit, and switch the death tilt off.
+nohurtcam but better: turn the hurt camera off or change its intensity, with a key or the settings page.
 
 
-Ported from **BetterHurtCam (betterhurtcam), and the death-tilt part of No Death Animation** (see the upstream projects) as an independent implementation for Horizon 26.3;
+Ported from **BetterHurtCam (betterhurtcam) by uku** (MIT) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/better_hurt_cam/`). It replaces Horizon's camera-bob function (`Game::bob_matrix`) with a cancellable HEAD hook that rebuilds the same matrix with a weaker hurt tilt, which is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**.
+(`mixins/better_hurt_cam/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
 ## Install
 
 Download `better_hurt_cam-1.0.0.hnmod` and its `.sha256` from this project's
 [releases](https://github.com/pxdns/horizon-mods-lib/releases?q=better-hurt-cam), check the hash, unzip the bundle into a folder and build it
 into a game with `horizon-launcher native-build FOLDER --instance NAME --trust-native-code`. Then switch it on or off in the game
-under Options → Mods → Better Hurt Cam. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
+under Options → Mods → BetterHurtCam. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
 and Horizon's [native mods](https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md) page says what a build does and trusts.
 
 ## Files

@@ -621,109 +621,134 @@ fn snappy_tappy_tick(game: &mut crate::game::Game<'_>) {
 
 # ------------------------------------------------------------------------------------------------ better_hurt_cam
 CAM.append(dict(
-    usage="Nothing to press: when you take damage the camera shakes at a fraction of Horizon's own strength (the first button cycles 0, 25, 50, 75, 100 %), and the roll over when you die can be switched off.", slug="better-hurt-cam", id="better_hurt_cam", name="Better Hurt Cam", title="Better Hurt Cam", raw=True,
-    description="Tone the camera shake down when you are hit, and switch the death tilt off.",
-    upstream="BetterHurtCam (betterhurtcam), and the death-tilt part of No Death Animation", upstream_licence="see the upstream projects",
-    command=None, hooks=["bob", "list", "settings", "click"],
+    usage="| Key | Default | What it does |\n|---|---|---|\n| Toggle HurtCam | unbound | Turns the hurt camera on or off |\n| Increase HurtCam Strength | unbound | Multiplier +0.1, shown over the hotbar |\n| Decrease HurtCam Strength | unbound | Multiplier -0.1, shown over the hotbar |\n\nThe settings page has Hurtcam Enabled, Hurtcam Multiplier, Health Bar Blinking and Hurtcam Type (Old or Yaw-based).",
+    slug="better-hurt-cam", id="better_hurt_cam", name="BetterHurtCam", title="BetterHurtCam", raw=False, needs_api=402,
+    description="nohurtcam but better: turn the hurt camera off or change its intensity, with a key or the settings page.",
+    upstream="BetterHurtCam (betterhurtcam) by uku", upstream_licence="MIT",
+    command=None, hooks=["key", "list", "settings", "click", "tick"],
     options=None, custom_settings=True,
-    raw_note=("It replaces Horizon's camera-bob function (`Game::bob_matrix`) with a cancellable HEAD hook that rebuilds the same matrix with a weaker hurt tilt, "
-              "which is not part of the stable hook-point contract, so it is **pinned to one Horizon commit**."),
+    keys_expr='vec![[m::KEY_TOGGLE.into(), "Toggle HurtCam".into(), m::DEFAULT_KEY.into()], [m::KEY_PLUS.into(), "Increase HurtCam Strength".into(), m::DEFAULT_KEY.into()], [m::KEY_MINUS.into(), "Decrease HurtCam Strength".into(), m::DEFAULT_KEY.into()]]',
     runtime_extra=r'''
-use std::cell::Cell;
+/// The three keys (`key.betterhurtcam.toggle`, `.plus`, `.minus`) and their default: unbound. The original's bytecode gives
+/// key codes 65, 64 and 63 (an `A`, and two codes GLFW has no key for), which cannot be meant as defaults, so none is bound.
+pub const KEY_TOGGLE: &str = "toggle";
+pub const KEY_PLUS: &str = "plus";
+pub const KEY_MINUS: &str = "minus";
+pub const DEFAULT_KEY: &str = "key.keyboard.unknown";
 
-/// The tilt strengths the first button cycles through, as a percentage of Horizon's own.
-pub const LEVELS: [u32; 5] = [0, 25, 50, 75, 100];
-
-/// The settings, one stored file per key.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+/// The settings of `BHCConfig`, with its defaults.
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Settings {
-    /// The hurt tilt, a percentage of the game's setting; one of `LEVELS`.
-    pub tilt: u32,
-    /// Whether the camera still rolls over when you die.
-    pub death: bool,
+    /// `Hurtcam Enabled`.
+    pub enabled: bool,
+    /// `Hurtcam Multiplier`: any number, shown with two decimals.
+    pub multiplier: f64,
+    /// `Health Bar Blinking`.
+    pub heart_blink: bool,
+    /// `Hurtcam Type`: true is Old (no direction change), false is Yaw-based.
+    pub old_type: bool,
 }
 
 impl Default for Settings {
     fn default() -> Self {
-        Self { tilt: 50, death: false }
+        Self { enabled: true, multiplier: 0.3, heart_blink: true, old_type: false }
     }
+}
+
+fn round(v: f64) -> f64 {
+    (v * 1000.0).round() / 1000.0
 }
 
 impl Settings {
     pub fn read(get: impl Fn(&str) -> Option<String>) -> Self {
         let d = Self::default();
+        let flag = |key: &str, d: bool| get(key).map_or(d, |v| match v.trim() {
+            "true" => true,
+            "false" => false,
+            _ => d,
+        });
         Self {
-            tilt: get("tilt").and_then(|v| v.trim().parse().ok()).filter(|v| LEVELS.contains(v)).unwrap_or(d.tilt),
-            death: get("death").map_or(d.death, |v| match v.trim() {
-                "true" => true,
-                "false" => false,
-                _ => d.death,
+            enabled: flag("enabled", d.enabled),
+            // `convert` takes a comma as a point.
+            multiplier: get("multiplier").and_then(|v| v.trim().replace(',', ".").parse::<f64>().ok()).filter(|v| v.is_finite()).unwrap_or(d.multiplier),
+            heart_blink: flag("heart_blink", d.heart_blink),
+            old_type: get("type").map_or(d.old_type, |v| match v.trim() {
+                "old" => true,
+                "yaw_based" => false,
+                _ => d.old_type,
             }),
         }
     }
 
     pub fn labels(&self) -> Vec<String> {
         vec![
-            format!("Hit shake: {}%", self.tilt),
-            format!("Death tilt: {}", if self.death { "ON" } else { "OFF" }),
+            format!("Hurtcam Enabled: {}", if self.enabled { "ON" } else { "OFF" }),
+            format!("Hurtcam Multiplier: {:.2}", self.multiplier),
+            format!("Health Bar Blinking: {}", if self.heart_blink { "ON" } else { "OFF" }),
+            format!("Hurtcam Type: {}", if self.old_type { "Old" } else { "Yaw-based" }),
         ]
     }
 
+    /// `modifyMultiplier`: no limits.
+    pub fn modify(&mut self, by: f64) {
+        self.multiplier = round(self.multiplier + by);
+    }
+
+    /// The multiplier as the key's overlay message prints it (`%.2f`).
+    pub fn multiplier_text(&self) -> String {
+        format!("{:.2}", self.multiplier)
+    }
+
+    /// A click on the settings page: what to store. The multiplier button adds 0.1 and goes back to 0 after 1.0
+    /// (the original types any number; the `multiplier` file takes any too).
     pub fn click(&mut self, i: usize) -> Option<(&'static str, String)> {
         match i {
             0 => {
-                let at = LEVELS.iter().position(|&l| l == self.tilt).unwrap_or(0);
-                self.tilt = LEVELS[(at + 1) % LEVELS.len()];
-                Some(("tilt", self.tilt.to_string()))
+                self.enabled = !self.enabled;
+                Some(("enabled", self.enabled.to_string()))
             }
             1 => {
-                self.death = !self.death;
-                Some(("death", self.death.to_string()))
+                self.multiplier = if self.multiplier >= 0.95 || self.multiplier < -0.05 { 0.0 } else { round(self.multiplier + 0.1) };
+                Some(("multiplier", self.multiplier.to_string()))
+            }
+            2 => {
+                self.heart_blink = !self.heart_blink;
+                Some(("heart_blink", self.heart_blink.to_string()))
+            }
+            3 => {
+                self.old_type = !self.old_type;
+                Some(("type", (if self.old_type { "old" } else { "yaw_based" }).to_owned()))
             }
             _ => None,
         }
     }
 
-    /// The factor to multiply the game's own damage tilt by.
-    pub fn factor(&self) -> f64 {
-        f64::from(self.tilt) / 100.0
+    /// What a key does to the settings: the key's name, the file to store and its value, and whether to show the multiplier.
+    pub fn key(&mut self, name: &str) -> Option<(&'static str, String, bool)> {
+        match name {
+            KEY_TOGGLE => {
+                self.enabled = !self.enabled;
+                Some(("enabled", self.enabled.to_string(), false))
+            }
+            KEY_PLUS => {
+                self.modify(0.1);
+                Some(("multiplier", self.multiplier.to_string(), true))
+            }
+            KEY_MINUS => {
+                self.modify(-0.1);
+                Some(("multiplier", self.multiplier.to_string(), true))
+            }
+            _ => None,
+        }
     }
-
-    /// Whether the game's own matrix is exactly what these settings give, so the original can run.
-    pub fn is_vanilla(&self) -> bool {
-        self.tilt == 100 && self.death
-    }
-}
-
-thread_local! {
-    static SETTINGS: Cell<Option<Settings>> = const { Cell::new(None) };
-}
-
-/// The settings, read once through `get`.
-pub fn settings(get: impl Fn(&str) -> Option<String>) -> Settings {
-    SETTINGS.with(|s| {
-        let v = s.get().unwrap_or_else(|| Settings::read(get));
-        s.set(Some(v));
-        v
-    })
 }
 
 pub fn labels(get: impl Fn(&str) -> Option<String>) -> Vec<String> {
-    settings(get).labels()
+    Settings::read(get).labels()
 }
 
-/// A click on the settings page: what to store.
 pub fn click(get: impl Fn(&str) -> Option<String>, i: usize) -> Option<(&'static str, String)> {
-    let mut now = settings(get);
-    let stored = now.click(i);
-    SETTINGS.with(|s| s.set(Some(now)));
-    stored
-}
-
-/// Forgets the settings (tests only).
-#[cfg(test)]
-pub fn forget() {
-    SETTINGS.with(|s| s.set(None));
+    Settings::read(get).click(i)
 }
 ''',
     tests=r'''
@@ -732,80 +757,85 @@ pub fn forget() {
     }
 
     #[test]
-    fn defaults_halve_the_shake_and_drop_the_death_tilt() {
-        forget();
-        let s = settings(none);
-        assert_eq!((s.tilt, s.death), (50, false));
-        assert_eq!(s.factor(), 0.5);
-        assert!(!s.is_vanilla());
-        forget();
+    fn defaults_are_the_originals() {
+        let s = Settings::read(none);
+        assert_eq!((s.enabled, s.multiplier, s.heart_blink, s.old_type), (true, 0.3, true, false));
+        assert_eq!(s.multiplier_text(), "0.30");
+        assert_eq!(s.labels(), ["Hurtcam Enabled: ON", "Hurtcam Multiplier: 0.30", "Health Bar Blinking: ON", "Hurtcam Type: Yaw-based"]);
     }
 
     #[test]
-    fn the_shake_button_cycles_and_reports_what_to_store() {
-        forget();
-        let (key, value) = click(none, 0).unwrap();
-        assert_eq!((key, value.as_str()), ("tilt", "75"));
-        click(none, 0);
-        let (_, wrapped) = click(none, 0).unwrap();
-        assert_eq!(wrapped, "0", "100 wraps to 0");
-        assert_eq!(settings(none).factor(), 0.0);
-        let (key, value) = click(none, 1).unwrap();
-        assert_eq!((key, value.as_str()), ("death", "true"));
-        assert_eq!(labels(none), ["Hit shake: 0%", "Death tilt: ON"]);
-        assert!(click(none, 7).is_none());
-        forget();
+    fn the_keys_step_the_multiplier_by_a_tenth_without_limits() {
+        let mut s = Settings::default();
+        let (file, value, show) = s.key(KEY_PLUS).unwrap();
+        assert_eq!((file, value.as_str(), show), ("multiplier", "0.4", true));
+        for _ in 0..10 {
+            s.key(KEY_PLUS);
+        }
+        assert_eq!(s.multiplier_text(), "1.40", "past 1");
+        for _ in 0..20 {
+            s.key(KEY_MINUS);
+        }
+        assert_eq!(s.multiplier_text(), "-0.60", "below 0");
+        let (file, value, show) = s.key(KEY_TOGGLE).unwrap();
+        assert_eq!((file, value.as_str(), show), ("enabled", "false", false));
+        assert!(s.key("other").is_none());
     }
 
     #[test]
-    fn vanilla_settings_let_the_original_run() {
-        assert!(Settings { tilt: 100, death: true }.is_vanilla());
-        assert!(!Settings { tilt: 100, death: false }.is_vanilla());
-    }
-
-    #[test]
-    fn stored_junk_falls_back() {
+    fn a_comma_is_a_point_and_junk_falls_back() {
+        let comma = |k: &str| (k == "multiplier").then(|| "1,5".to_owned());
+        assert_eq!(Settings::read(comma).multiplier, 1.5);
         let junk = |_: &str| Some("banana".to_owned());
         assert_eq!(Settings::read(junk), Settings::default());
-        let stored = |k: &str| match k {
-            "tilt" => Some("25".to_owned()),
-            "death" => Some("true".to_owned()),
-            _ => None,
-        };
-        assert_eq!(Settings::read(stored), Settings { tilt: 25, death: true });
-        let off_list = |_: &str| Some("30".to_owned());
-        assert_eq!(Settings::read(off_list).tilt, 50, "30 is not one of the levels");
+        let nan = |k: &str| (k == "multiplier").then(|| "NaN".to_owned());
+        assert_eq!(Settings::read(nan).multiplier, 0.3);
+    }
+
+    #[test]
+    fn the_buttons_flip_and_the_multiplier_button_cycles_to_zero() {
+        let (key, value) = click(none, 3).unwrap();
+        assert_eq!((key, value.as_str()), ("type", "old"));
+        let (key, value) = click(none, 2).unwrap();
+        assert_eq!((key, value.as_str()), ("heart_blink", "false"));
+        let (_, value) = click(none, 1).unwrap();
+        assert_eq!(value, "0.4");
+        let top = |k: &str| (k == "multiplier").then(|| "1".to_owned());
+        assert_eq!(click(top, 1).unwrap().1, "0", "after 1.0 it goes back to 0");
+        assert!(click(none, 8).is_none());
     }
 ''',
     helpers={
-        "bob": '''// The camera's hurt and bob pose: Horizon's own, rebuilt with the hurt tilt scaled and the death tilt left out when asked.
-fn better_hurt_cam_bob(game: &crate::game::Game<'_>, partial: f32) -> std::ops::ControlFlow<glam::Mat4> {
+        "key": '''// One of the three keys went down: the toggle, or the multiplier up or down by a tenth (shown over the hotbar).
+fn better_hurt_cam_key(game: &mut crate::game::Game<'_>, key: &str, pressed: bool) {
+    use crate::game::lib_better_hurt_cam as m;
+    if !pressed || !game.native_on(m::ID) || !game.native_playing() {
+        return;
+    }
+    for name in [m::KEY_TOGGLE, m::KEY_PLUS, m::KEY_MINUS] {
+        if key != game.native_mod_key(m::ID, name, m::DEFAULT_KEY) {
+            continue;
+        }
+        let mut settings = m::Settings::read(|k| game.native_setting(m::ID, k));
+        if let Some((file, value, show)) = settings.key(name) {
+            game.native_set_setting(m::ID, file, &value);
+            if show {
+                game.native_overlay_message("Hurtcam multiplier modified to ", &settings.multiplier_text());
+            }
+        }
+        return;
+    }
+}
+''',
+        "tick": '''// Once a tick: hand the game the hurt camera these settings give (vanilla when the mod is off).
+fn better_hurt_cam_tick(game: &mut crate::game::Game<'_>) {
     use crate::game::lib_better_hurt_cam as m;
     if !game.native_on(m::ID) {
-        return std::ops::ControlFlow::Continue(());
+        game.native_hurt_cam_clear();
+        return;
     }
-    let settings = m::settings(|k| game.native_setting(m::ID, k));
-    if settings.is_vanilla() {
-        return std::ops::ControlFlow::Continue(());
-    }
-    let Some(p) = game.player.as_ref() else {
-        return std::ops::ControlFlow::Continue(());
-    };
-    let hurt = &p.health.hurt;
-    let state = BobState {
-        living: Some(HurtBob {
-            hurt_time: p.health.hurt_animation_time as f32 - partial,
-            hurt_duration: hurt.hurt_duration,
-            hurt_dir: p.health.hurt_dir,
-            death_time: if settings.death { game.death_time().map(|t| t as f32 + partial) } else { None },
-        }),
-        player: Some((
-            game.avatar.backwards_interpolated_walk_distance(partial),
-            game.avatar.interpolated_bob(partial),
-        )),
-    };
-    let tilt = game.settings.file.double("damageTiltStrength") * settings.factor();
-    std::ops::ControlFlow::Break(glam::Mat4::from_cols_array(&bob_matrix(&state, tilt, game.settings.view_bobbing).m))
+    let s = m::Settings::read(|k| game.native_setting(m::ID, k));
+    game.native_hurt_cam(s.enabled, s.multiplier, s.old_type, s.heart_blink);
 }
 ''',
     },

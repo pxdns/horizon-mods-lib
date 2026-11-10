@@ -15,14 +15,14 @@ name = "lib_better_hurt_cam"
 source = "runtime.rs"
 
 [[injection]]
-id = "bob"
+id = "key"
 kind = "HEAD"
-cancellable = true
-target = "horizon_client::game::fov::Game<'_>::bob_matrix"
-helper = "bob.rs"
+target = "horizon_client::game::native_hooks::Game<'_>::native_key"
+helper = "key.rs"
 bindings = [
-  { name = "game", ty = "&crate::game::Game<'_>", value = "&*self" },
-  { name = "partial", ty = "f32", value = "partial" },
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "key", ty = "&str", value = "key" },
+  { name = "pressed", ty = "bool", value = "pressed" },
 ]
 
 [[injection]]
@@ -54,4 +54,13 @@ bindings = [
   { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
   { name = "mod_id", ty = "&str", value = "mod_id" },
   { name = "button", ty = "usize", value = "button" },
+]
+
+[[injection]]
+id = "tick"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_tick"
+helper = "tick.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
 ]

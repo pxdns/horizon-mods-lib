@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT"
 publish = false
-description = "Tone the camera shake down when you are hit, and switch the death tilt off."
+description = "nohurtcam but better: turn the hurt camera off or change its intensity, with a key or the settings page."
 
 # The mod's logic and its tests: the same file the bundle adds to the game.
 [lib]
