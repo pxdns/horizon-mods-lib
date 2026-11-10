@@ -1,19 +1,18 @@
-# Apple Skin (Horizon native mod)
+# AppleSkin (Horizon native mod)
 
-Your hunger and saturation as numbers and as overlays on the food bar, and what the food in your hand would restore.
+Food/hunger-related HUD improvements.
 
-- `/food` hides or shows it.
 
-Ported from **AppleSkin (appleskin)** (The Unlicense) as an independent implementation for Horizon 26.3;
+Ported from **AppleSkin (appleskin) by squeek502** (Unlicense) as an independent implementation for Horizon 26.3;
 no upstream code is used. It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle
-(`mixins/apple_skin/`). It uses the stable HUD hook point but **reads Horizon's own game state** (inventory, armor, effects, food), which the hook-point contract does not promise. It is therefore **pinned to one Horizon commit** (`ba6344a`) and has to be re-checked whenever Horizon changes those fields; `tools/mods.py check` does that.
+(`mixins/apple_skin/`). It hooks only Horizon's native hook points, so the launcher builds it on any Horizon with `NATIVE_HOOKS_API` 1 or later, together with other native mods.
 
 ## Install
 
 Download `apple_skin-1.0.0.hnmod` and its `.sha256` from this project's
 [releases](https://github.com/pxdns/horizon-mods-lib/releases?q=apple-skin), check the hash, unzip the bundle into a folder and build it
 into a game with `horizon-launcher native-build FOLDER --instance NAME --trust-native-code`. Then switch it on or off in the game
-under Options → Mods → Apple Skin. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
+under Options → Mods → AppleSkin. The [install guide](https://pxdns.github.io/horizon-mods-lib/docs/install.html) has the steps,
 and Horizon's [native mods](https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md) page says what a build does and trusts.
 
 ## Files
