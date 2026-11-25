@@ -24,7 +24,7 @@ fn more_chat_history_add(
             chat.new_since_scroll = true;
             chat.scroll_by(1, focused);
         }
-        chat.lines.insert(0, Line { added: message.added, content: line, tag: message.tag.clone() });
+        chat.lines.insert(0, Line { added: message.added, added_ms: crate::hud_overlays::now_ms(), content: line, tag: message.tag.clone() });
     }
     chat.lines.truncate(lib_more_chat_history::limit());
     chat.messages.insert(0, message);
